@@ -1,0 +1,201 @@
+<?php
+ include "../dbConnect.php";
+ session_start();
+ if(!isset($_SESSION['username'])){
+    header('location: ../login.php');
+ }
+ include("includes/header.php"); ?>
+    
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>MEMBERSHIP OPTIONS</h2>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    
+                           
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="index.php">
+                                        <i class="material-icons">dashboard</i> Dashboard
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    Maintenance - Membership Options
+                                </li>
+                            </ol>
+            </div>
+        </div>
+            <div class="card">
+                <div class="header">
+                    <h2>Membership Options</h2>
+                </div>
+                <div class="body">
+                    <div class="row clearfix js-sweetalert">
+                            <form method="POST" action="actions/membershipAction.php">
+                                        <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" name="type" class="form-control" >
+                                                <label class="form-label">Membership Type</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" name="duration" class="form-control" >
+                                                <label class="form-label">Duration</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" name="price" class="form-control" >
+                                                <label class="form-label">Price</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="action_type" value="add"/>
+                                    <button type="submit" class="btn  waves-effect btn-success pull-right" data-type='success'>Save</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+                              
+            
+                
+            
+                 
+            
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card" style="margin-top:20px">
+
+                        <div class="body">
+                            <div class="table-responsive">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 230px;">Membership Type</th>
+                                                        
+                                                        <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 230px;">Duration (Months)</th>
+                                                        
+                                                        <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 230px;">Price (Per Month)</th>
+                                                        <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 230px;">Actions</th>
+                                                
+                                                      </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                        $pdo = new dbConnect();
+                                                        $member = $pdo->getRows('membership', array('order_by' => 'MS_Code ASC'));
+                                                        if(!empty($member)){
+                                                            $count = 0; 
+                                                                foreach($member as $members){
+                                                                    $count++;?>
+                                                        
+                                         <tr role="row">
+                                            <td class="hidden"><?php echo $members['MS_Code']; ?></td>
+                                            <td ><?php echo $members['MS_Type']; ?></td>
+                                            <td ><?php echo $members['MS_Duration']; ?></td>
+                                            <td ><?php echo $members['MS_Price'];?></td>
+                                            <td ><button type="button" data-toggle="modal"  data-target="#edit-<?php echo $members['MS_Code']; ?>"class="btn bg-green" >Modify</button></td>
+                                               <div class="modal fade" id="edit-<?php echo $members['MS_Code']; ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-sm" role="document">
+                                                   <form method="post" action="actions/membershipAction.php?" id="myform1" >
+                                                    <div class="modal-content">
+                                                    <center>
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="smallModalLabel">EDIT MEMBERSHIP OPTION</h3>
+                                                        </div>
+                                                        
+                                                            <div class="row container-fluid">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <input type="hidden" class="form-control" name="mCode" value="<?php echo $members['MS_Code']; ?>"/>
+                                                                            <h5 class="pull-left">Membership Type</h5>
+                                                                            <input type="text" class="form-control" name="type" value="<?php echo $members['MS_Type']; ?>">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <h5 class="pull-left">Duration</h5>
+                                                                             <input type="text" class="form-control" name="type" value="<?php echo $members['MS_Duration']; ?>">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <h5 class="pull-left">Price</h5>
+                                                                            <input type="number" class="form-control" value="<?php echo $members['MS_Price']; ?>"/>
+
+                                                                        </div>
+                                                                    </div>
+                                                                     
+                                                                </div>
+                                                            </div>
+                                                        </center>
+                                                        <div class="modal-footer">
+                                                            <input type="hidden" name="action_type" value="edit"/>
+                                                            <button type="button" class="btn  bg-green">SAVE CHANGES</button>
+                                                            <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </tr>
+                                        <?php } 
+
+                                        }else { ?>
+                                            <tr><td colspan="6">No Membership Option(s) found...</td></tr>
+                                        <?php } ?>
+                                        
+                                           
+                                      </tbody>
+                                </table>
+                                    </div>
+                                    </div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    </div>
+    </section>
+            <!-- Card 1 -->
+            
+
+
+                                
+                            
+                 
+
+
+        
+       
+  
+    
+    <!-- Jquery Core Js -->
+    <?php include("includes/footer.php"); ?>
+    <script src="../assets/js/pages/dialogsMembershipOptions.js"></script>
+    <!-- Custom Js -->
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/pages/index.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../assets/js/demo.js"></script>
+
+
+    <script src="../assets/js/pages/forms/form-wizard.js"></script>
+
+</body>
+
+</html>
