@@ -28,24 +28,86 @@ include("includes/header.php"); ?>
             </ol>
         </div>
     </div>
-
-        <div class="card">
-            <div class="header">
-                <h2>Towel Monitoring</h2>
-            </div>
-
-            <div class="body">
-                <div class="row">
-                    <div id="full-calendar">              
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div id='calendar'></div>
-                            </div>
-                        </div>
-                    </div>    
+    <div class="row clearfix">
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>Towel Supply Monitoring</h2>
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $pdo = new dbConnect();
+                                    $supplied = $pdo->towels('TI_Supplied',array("order_by" => "TI_Code ASC"));
+                                    if(!empty($supplied)){ 
+                                        $count = 0; 
+                                        foreach($supplied as $supply){ 
+                                        $count++;
+                                ?>
+                                <tr>
+                                    <td><?php echo date("F j, Y", strtotime($supply['TI_Date']))?></td>
+                                    <td><?php echo date("g:i A", strtotime($supply['TI_Time']))?></td>
+                                    <td><?php echo $supply['TI_Supplied']?></td>
+                                </tr>
+                                <?php } }else{ ?>
+                                    <tr><td colspan="6">No Towel Supply found......</td></tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h2>Towel Laundry Monitoring</h2>
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $pdo = new dbConnect();
+                                    $supplied = $pdo->towels('TI_Laundry',array("order_by" => "TI_Code ASC"));
+                                    if(!empty($supplied)){ 
+                                        $count = 0; 
+                                        foreach($supplied as $supply){ 
+                                        $count++;
+                                ?>
+                                <tr>
+                                    <td><?php echo date("F j, Y", strtotime($supply['TI_Date']))?></td>
+                                 
+                                    <td><?php echo date("g:i A", strtotime($supply['TI_Time']))?></td>
+                                    <td><?php echo $supply['TI_Laundry']?></td>
+                                </tr>
+                                <?php } }else{ ?>
+                                    <tr><td colspan="6">No Towel Supply found......</td></tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- Small Size -->
     <div class="row clearfix">
@@ -87,8 +149,9 @@ include("includes/header.php"); ?>
                                             <td><?php echo $equipment['E_Name']; ?></td>
                                             <td><?php echo $equipment['E_Type']; ?></td>
                                             <td><?php echo $equipment['E_Quantity']; ?></td>
-                                            <td><?php echo $equipment['E_Quantity']; ?></td>
-                                            <td><?php echo $equipment['E_Quantity']; ?></td>
+                                            <td><?php echo $equipment['E_DateChecked']; ?></td>
+                                            <td><?php echo $equipment['E_Status']; ?></td>
+                                            
                                             <td>    
                                             <td class="align-center">
                                                 <input type="hidden" name="action_type" value="mod"/>
@@ -126,7 +189,7 @@ include("includes/header.php"); ?>
                                                             <div class="form-group">
                                                                 <div class="form-line">
                                                                     <h5 class="pull-left">Last Checked Date</h5>
-                                                                    <input type="text" class="form-control" placeholder="Last Checked Date" value="Last Checked Date">
+                                                                    <input type="text" class="form-control" placeholder="Last Checked Date"  value="<?php echo $equipment['E_DateChecked']; ?>">
 
                                                                 </div>
                                                             </div>
@@ -135,7 +198,7 @@ include("includes/header.php"); ?>
                                                             <div class="form-group">
                                                                 <div class="form-line">
                                                                     <h5 class="pull-left">Status</h5>
-                                                                    <input type="text" class="form-control" placeholder="Email Address" value="Email Address"/>
+                                                                    <input type="text" class="form-control" placeholder="Email Address"  value="<?php echo $equipment['E_Status']; ?>"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -177,6 +240,10 @@ include("includes/header.php"); ?>
 
 
 <?php include("includes/footer.php"); ?>
+<script type="text/javascript" src="../assets/js/pages/fullcalendar/lib/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="../assets/js/pages/fullcalendar/lib/moment.min.js"></script>
+<script type="text/javascript" src="../assets/js/pages/fullcalendar/js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="../assets/js/pages/fullcalendar/fullcalendar-script.js"></script>
 <!-- Custom Js -->
 <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
 <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
@@ -199,10 +266,7 @@ include("includes/header.php"); ?>
 <!-- Demo Js -->
 <script src="../assets/js/demo.js"></script>
 
-<script type="text/javascript" src="../assets/js/pages/fullcalendar/lib/jquery-ui.custom.min.js"></script>
-<script type="text/javascript" src="../assets/js/pages/fullcalendar/lib/moment.min.js"></script>
-<script type="text/javascript" src="../assets/js/pages/fullcalendar.js"></script>
-<script type="text/javascript" src="../assets/js/pages/fullcalendar/js/fullcalendar.min.js"></script>
+
 
 </body>
 

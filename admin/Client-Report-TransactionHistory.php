@@ -26,119 +26,117 @@
                             </ol>
             </div>
         </div>
-
-        <div class="card">
-            <div class="header">
-                <h2>Report List</h2>
-            </div>
-             <div class="body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="Client-Report-Walkin.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">WALK-IN LIST</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-MemberList.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">MEMBER LIST</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-ClientActivities.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT ACTIVITIES</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-TransactionHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">TRANSACTION HISTORY</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="Client-Trend-ActiveAndNot.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT STATUS</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-Attendance.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT ATTENDANCE</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-UniqueClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">UNIQUE CLIENTS</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-topClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">TOP CLIENTS</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        
+        <?php include("Client-Report-List.php"); ?>
     <div class="card">
         <div class="header">
             <h2>Transaction History Report</h2>
         </div>
                         <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                                    </div>
+                        <form method="POST">
+                            <div class="row clearfix">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <div class="form-line">
+                                        <div class="col-md-6">
+                                         <input type="date" class="form-control"  id="filterstart" name="filter_start"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                         <input type="date" class="form-control" name="filter_end"/>
+                                       </div>
+                                     </div>
+                                    </div>  
+                                </div>
+
+                                <div class="col-md-3">
+                                    <input type="hidden" name="action_type" value="filter"/>
+                                    <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <div id="print">
+                         <table class="table table-bordered table-striped table-hover dataTable" id="reportattendance" name="reportattendance" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Status</th>
                                             <th>Transaction Date</th>
+                                            <th>Client Name</th>
                                             <th>Transaction Type</th>
                                             <th>Total Amount</th>
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                        <!-- Exportable Table -->
-                 
-                                        </tr>
+
+                                        <?php 
+
+                                         $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error()); 
+
+                                         if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
+                                        if($_REQUEST['action_type'] == 'filter'){
+
+                                            $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
+                                            $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
+
+                                         $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+
+                                         while($fth = $th->fetch_array()) { 
+
+                                    ?>
                                         <tr>
-                                            <td>Brix Nessia</td>
-                                            <td>Member</td>
-                                            <td>08/04/2017</td>
-                                            <td>Renewal</td>
-                                            <td>580</td>
+                                            <td><?php echo $fth['TR_Date'] ?></td>
+                                            <td><?php echo $fth['CLIENT_FirstName'] ?> 
+                                                <?php echo $fth['CLIENT_MiddleName'] ?> 
+                                                <?php echo $fth['CLIENT_LastName'] ?> </td>
+                                            <td><?php echo $fth['TR_type'] ?></td>
+                                            <td><?php echo $fth['TR_Price'] ?></td>
                                         </tr>
+                                        <?php 
+                                     }
+                                 }
+                             } else {
+
+                                     $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID ") or die(mysql_error());
+
+                                         while($fth = $th->fetch_array()) { 
+
+                                    ?>
                                         <tr>
-                                            <td>Ivan Buglosa</td>
-                                            <td>Member</td>
-                                            <td>09/20/2017</td>
-                                            <td>Walk-in</td>
-                                            <td>310</td>
+                                            <td><?php echo $fth['TR_Date'] ?></td>
+                                            <td><?php echo $fth['CLIENT_FirstName'] ?> 
+                                                <?php echo $fth['CLIENT_MiddleName'] ?> 
+                                                <?php echo $fth['CLIENT_LastName'] ?> </td>
+                                            <td><?php echo $fth['TR_type'] ?></td>
+                                            <td><?php echo $fth['TR_Price'] ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>Patrick Legislador</td>
-                                            <td>Regular</td>
-                                            <td>07/15/2017</td>
-                                            <td>Studio Class</td>
-                                            <td>1450</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brix Nessia</td>
-                                            <td>Regular</td>
-                                            <td>06/27/2017</td>
-                                            <td>Personal Training</td>
-                                            <td>2200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Erul Ubas</td>
-                                            <td>Member</td>
-                                            <td>08/06/2017</td>
-                                            <td>Studio Class</td>
-                                            <td>900</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Jordan</td>
-                                            <td>Regular</td>
-                                            <td>09/24/2017</td>
-                                            <td>Personal Training</td>
-                                            <td>1200</td>
-                                        </tr>
-                                        
+                                    <?php
+                                        }
+                                    }
+                                            ?>
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- #END# Exportable Table -->
+
+                    <script>
+
+                     function printContent(el) {
+                         var restorepage = document.body.innerHTML;
+                         var printcontent = document.getElementById(el).innerHTML;
+                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Transaction History Report</h2><center><br><br>" +
+                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
+                         window.print();
+                         document.body.innerHTML = restorepage;
+                     }
+
+
+                    </script>
            
     </section>
     <?php include("includes/footer.php"); ?>

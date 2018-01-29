@@ -26,137 +26,119 @@
             </div>
         </div>
 
-        <div class="card">
-            <div class="header">
-             <div class="body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="Client-Report-Walkin.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">WALK-IN LIST</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-MemberList.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">MEMBER LIST</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-ClientActivities.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT ACTIVITIES</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-TransactionHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">TRANSACTION HISTORY</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="Client-Trend-ActiveAndNot.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT STATUS</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-Attendance.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT ATTENDANCE</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-UniqueClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">UNIQUE CLIENTS</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-topClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">TOP CLIENTS</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        
+    <?php include("Client-Report-List.php"); ?>
     <div class="card">
         <div class="header">
             <h2>Member List</h2>
         </div>
                         <div class="body">
-                            <div class="table-responsive">
 
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                                
-                                    </div>
+                        <form method="POST">
+                            <div class="row clearfix">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <div class="form-line">
+                                        <div class="col-md-6">
+                                         <input type="date" class="form-control"  id="filterstart" name="filter_start"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                         <input type="date" class="form-control" name="filter_end"/>
+                                       </div>
+                                     </div>
+                                    </div>  
+                                </div>
+
+                                <div class="col-md-3">
+                                    <input type="hidden" name="action_type" value="filter"/>
+                                    <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <div id="print">
+                         <table class="table table-bordered table-striped table-hover dataTable" id="reportattendance" name="reportattendance" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
                                             <th>Client Name</th>
-                                            <th>Age</th>
                                             <th>Gender</th>
                                             <th>Contact Number</th>
+                                            <th>Email Address</th>
                                             <th>Registration Date</th>
-                                            <th>Membership Type</th>
-                                            <th>Duration</th>
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                        <!-- Exportable Table -->
-                 
-                                        </tr>
+                                        <?php 
+
+                                         $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error()); 
+
+                                         if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
+                                        if($_REQUEST['action_type'] == 'filter'){
+
+                                            $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
+                                            $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
+
+                                         $ml = $conn->query("SELECT * FROM client WHERE CLIENT_RegStatus = 'Member' && CLIENT_regDATE BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+
+                                         while($fml = $ml->fetch_array()) { 
+                                    ?>
                                         <tr>
-                                            <td>Timothy Mooney</td>
-                                            <td>19</td>
-                                            <td>Male</td>
-                                            <td>09123456789</td>
-                                            <td>09/07/2017</td>
-                                            <td>Student</td>
-                                            <td>3 Months</td>
+                                            <td><?php echo $fml['CLIENT_FirstName'] ?> 
+                                                <?php echo $fml['CLIENT_LastName'] ?></td>
+                                            <td><?php echo $fml['CLIENT_Gender'] ?></td>
+                                            <td><?php echo $fml['CLIENT_ContactNumber'] ?></td>
+                                            <td><?php echo $fml['CLIENT_Email'] ?></td>
+                                            <td><?php echo $fml['CLIENT_regDATE'] ?></td>
                                             
                                         </tr>
-                                        <tr>
-                                            <td>Ivan Buglosa</td>
-                                            <td>20</td>
-                                            <td>Male</td>
-                                            <td>09831758491</td>
-                                            <td>08/20/2017</td>
-                                            <td>Regular</td>
-                                            <td>6 Months</td>
-                                            
+                                        <?php 
+                                     }
+                                 }
+                             } else {
+
+                                     $ml = $conn->query("SELECT * FROM client WHERE CLIENT_RegStatus = 'Member' ") or die(mysql_error());
+
+                                         while($fml = $ml->fetch_array()) { 
+
+                                              ?>  
+                                              <tr>
+                                            <td><?php echo $fml['CLIENT_FirstName'] ?> 
+                                                <?php echo $fml['CLIENT_LastName'] ?></td>
+                                            <td><?php echo $fml['CLIENT_Gender'] ?></td>
+                                            <td><?php echo $fml['CLIENT_ContactNumber'] ?></td>
+                                            <td><?php echo $fml['CLIENT_Email'] ?></td>
+                                            <td><?php echo $fml['CLIENT_regDATE'] ?></td>
+
                                         </tr>
-                                        <tr>
-                                            <td>Patrick Legislador</td>
-                                            <td>21</td>
-                                            <td>Male</td>
-                                            <td>09183759182</td>
-                                            <td>08/25/2017</td>
-                                            <td>Regular</td>
-                                            <td>12 Months</td>
-                                           
-                                        </tr>
-                                        <tr>
-                                            <td>Brix Nessia</td>
-                                            <td>22</td>
-                                            <td>Male</td>
-                                            <td>09418271691</td>
-                                            <td>07/30/2017</td>
-                                            <td>Student</td>
-                                            <td>6 Months</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>Erul Ubas</td>
-                                            <td>23</td>
-                                            <td>Male</td>
-                                            <td>09123869181</td>
-                                            <td>08/14/2017</td>
-                                            <td>Student</td>
-                                            <td>3 Months</td>
-                                           
-                                        </tr>
-                                        <tr>
-                                            <td>Mary Francisco</td>
-                                            <td>25</td>
-                                            <td>Female</td>
-                                            <td>09218281961</td>
-                                            <td>09/20/2017</td>
-                                            
-                                            <td>Regular</td>
-                                            <td>6 Months</td>
-                                        </tr>
-                                        
+                                    <?php
+                                        }
+                                    }
+                                            ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    <script>
+
+                     function printContent(el) {
+                         var restorepage = document.body.innerHTML;
+                         var printcontent = document.getElementById(el).innerHTML;
+                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Client Member List</h2><center><br><br>" +
+                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
+                         window.print();
+                         document.body.innerHTML = restorepage;
+                     }
+
+
+                    </script>
+
             </section>
     <?php include("includes/footer.php"); ?>
 

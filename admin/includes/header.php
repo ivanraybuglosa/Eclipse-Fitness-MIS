@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
+    <script src="canvas/jquery.min.js"></script>
+    
+    <script src="canvas/jquery.canvasjs.min.js"></script>
     <!-- Bootstrap Select Css -->
     <link href="../assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
@@ -33,8 +36,8 @@
 
     <!-- Custom Css -->
     <link href="../assets/css/style.css" rel="stylesheet">
-
-    <link href="../assets/js/pages/fullcalendar/css/fullcalendar.min.css" type="text/css" rel="stylesheet" media="screen,projection"> 
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 
     
     <!-- Dropzone Css -->       
@@ -154,7 +157,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                 <img src="../eclipse_logo.png" class="pull-left" style="height: 15%; width: 15%; margin-right: 20px;">
+                 <img src="../logo.png" class="pull-left" style="height: 15%; width: 15%; margin-right: 20px;">
                 <a class="navbar-brand col-light-green" href="index.php"> MANAGEMENT INFORMATION SYSTEM
                 </a>
             </div>
@@ -237,6 +240,10 @@
                                 <i class="material-icons">alarm_add</i>
                                 <span style="margin-top:8px;">Sessions</span>
                                 </a>
+                                <!-- <a href="StudioClass-Schedule.php">
+                                <i class="material-icons">alarm_add</i>
+                                <span style="margin-top:8px;">Schedules</span>
+                                </a> -->
                                 <a href="StudioClass-Report-Menu.php">
                                 <i class="material-icons">view_list</i>
                                 <span style="margin-top:8px;">Class Reports</span>
@@ -252,7 +259,7 @@
                         <ul class="ml-menu">
                             <li>
                                 
-                                <a href="PT-Contracts.php">
+                                <a href="PT-ContractsFinal.php">
                                 <i class="material-icons">perm_contact_calendar</i>
                                 <span style="margin-top:8px;">Contracts</span>
                                 </a>
@@ -294,9 +301,6 @@
                         <ul class="ml-menu">
                                     <li>
                                         <a href="PT-Coaches.php">Coaches</a>
-                                    </li>
-                                    <li>
-                                        <a href="Maintenance-Receptionists.php">Receptionist</a>
                                     </li>
                                     <li>
                                         <a href="Maintenance-StudioClass.php">Studio Class</a>

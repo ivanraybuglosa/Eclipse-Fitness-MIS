@@ -27,71 +27,53 @@
             </div>
         </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-               <div class="card" style="margin-top:20px">
+               <div class="card">
+                 <div class="row">
+                    <div class="body">
+                        <div class="col-md-6">
+                    <a href="backup/export.php" class="btn btn-block btn-danger" style="padding: 10px;">Export Database</a>
+                        </div>
+                        <div class="col-md-6">
+                    <a href="backup/import.php" name="import" class="btn btn-block btn-success" style="padding: 10px;">Import Database</a>
+                        </div>
+                    </div>
+                 </div>
                  <div class="body">
-                    <h4>Export Data</h4>
-                    <div class="row">
-                        <div class="demo-checkbox" style="margin:30px;">
-                            <div class="col-md-4">
-                                <h5>Profiles</h5>
-                                <input type="checkbox" id="md_checkbox_1"/>
-                                <label for="md_checkbox_1">Client</label>
-                                <input type="checkbox" id="md_checkbox_2"/>
-                                <label for="md_checkbox_2">Coach</label>
-                                <input type="checkbox" id="md_checkbox_3"/>
-                                <label for="md_checkbox_3">Receptionist</label>
-                                <input type="checkbox" id="md_checkbox_4" />
-                            </div>
-                            <div class="col-md-4">
-                                <h5>Fitness Programs</h5>
-                                <input type="checkbox" id="md_checkbox_7" />
-                                <label for="md_checkbox_7">Personal Training</label>
-                                <input type="checkbox" id="md_checkbox_8" />
-                                <label for="md_checkbox_8">Studio Class</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="checkbox" id="md_checkbox_9" />
-                                <label for="md_checkbox_9" style="margin-top:30px;">Select All</label>
-                            </div>
-                        </div>
-                    </div>
-             <button type="button" class="btn  btn-success " style="padding:0px; margin-left:13px;" data-toggle="modal" data-target="#addRep">
-                            <form action="/" style="opacity: 0; width: 10%; margin-bottom:-20px;"  id="frmFileUpload" class="drapzawn" method="post" enctype="multipart/form-data">
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple />
-                                </div>
-                            </form>
-                        <h5>Export</h5>
-            </button>
+                   <div class="table-responsive">
 
-             <br>
-             <br>
-             <h4>Import Data</h4>
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>SELECT DATABASE FILE
-                            </h2>
-                        </div>
-                        <div class="body">
-                            <form action="/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
-                                <div class="dz-message">
-                                    <div class="drag-icon-cph">
-                                        <i class="material-icons">touch_app</i>
-                                    </div>
-                                    <h3>Drop files here or click to upload.</h3>
-                                    <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em>
-                                </div>
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             <button type="button" class="btn  btn-success" style="padding:10px 112px; margin-left:13px;" data-toggle="modal" data-target="#addRep"><h5>Import</h5></button>
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    
+                                    <thead>
+                                        <tr>
+                                            <th>Activity</th>
+                                            <th>Description</th>
+                                            <th>Back-up Date</th>
+                                            <th>Back-up Time</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                 <?php
+
+                $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error()); 
+                $maintenance = $conn->query("SELECT * FROM `backuphistory` ") or die(mysql_error());
+
+                                while($fmaint = $maintenance->fetch_array()) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $fmaint['backup_type'] ?></td>
+                                            <td>Successful <?php echo $fmaint['backup_type'] ?> of Database.</td>
+                                            <td><?php echo date("F j, Y", strtotime($fmaint['backup_date'])) ?></td>
+                                            <td><?php echo date('g:i A', strtotime($fmaint['backup_time'])) ?></td>
+                                        </tr>
+                                        
+                                        <?php
+                                    } 
+                                 ?>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
                  </div>
                </div>
             </div>
@@ -104,9 +86,7 @@
     <!-- Jquery Core Js -->
     <?php include("includes/footer.php"); ?>
 
-    <script>
-var FormStuff = {    init: function() {    this.applyConditionalRequired();    this.bindUIActions();  },    bindUIActions: function() {    $("input[type='radio'], input[type='checkbox']").on("change", this.applyConditionalRequired);  },    applyConditionalRequired: function() {        $(".require-if-active").each(function() {      var el = $(this);      if ($(el.data("require-pair")).is(":checked")) {        el.prop("required", true);      } else {        el.prop("required", false);      }    });      }  };FormStuff.init();
-</script>
+    
 
 
     <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>

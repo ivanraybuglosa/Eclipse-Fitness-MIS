@@ -45,7 +45,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <input type="text" name="duration" class="form-control" >
-                                                <label class="form-label">Duration</label>
+                                                <label class="form-label">Duration(Months)</label>
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <input type="text" name="price" class="form-control" >
-                                                <label class="form-label">Price</label>
+                                                <label class="form-label">Price(Per Month)</label>
                                             </div>
                                         </div>
                                     </div>
@@ -83,9 +83,9 @@
                                                     <tr role="row">
                                                         <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 230px;">Membership Type</th>
                                                         
-                                                        <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 230px;">Duration (Months)</th>
+                                                        <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 230px;">Duration</th>
                                                         
-                                                        <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 230px;">Price (Per Month)</th>
+                                                        <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 230px;">Price</th>
                                                         <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 230px;">Actions</th>
                                                 
                                                       </tr>

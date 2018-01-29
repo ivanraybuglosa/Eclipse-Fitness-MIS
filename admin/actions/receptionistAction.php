@@ -17,7 +17,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         );
 
         $insert2 = $pdo->insert($tblName2,$userData2);
-         $returnedVal = $pdo->selectID($id,$tblName2,$username);
+        $returnedVal = $pdo->selectID($id,$tblName2,$username);
         $userData = array(
              
             'Rec_lastName' => $_POST['rlname'],
@@ -25,7 +25,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'Rec_contact' => $_POST['rcontact'],
             'Rec_emailAdd' => $_POST['remailAddress'],
             'Rec_gender' => $_POST['rgender'],
-            'userID' => $returnedVal
+            'userID' => $returnedVal    
         );
         $insert = $pdo->insert($tblName,$userData);
         header("Location:../Maintenance-Receptionists.php");

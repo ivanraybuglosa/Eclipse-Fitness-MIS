@@ -1,4 +1,4 @@
-        <?php
+<?php
  include "../dbConnect.php";
  session_start();
  if(!isset($_SESSION['username'])){
@@ -26,73 +26,9 @@
                             </ol>
                 </div>
         </div>
-            <div class="card">
-                <div class="body">
-                    <div class="body table-responsive">
-									 <form id="form_validation" method="POST" novalidate="novalidate">
-                                <div class="form-group form-float">
-                                    
-                                    <div >
-                                         <div class="col-md-4">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <label>Client Code:</label>
-                                        </span>
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" placeholder="C001">
-                                        </div>
-                                    </div>
-										</div>
-                                        <div class="col-md-3">
-                                         <button type="button" class="btn waves-effect bg-green pull-left" style="padding:7.5px;"> &nbsp; View &nbsp;</button>
-                                        </div>
-                                	</div>
-                                    
-                                </div>
-								
-                                
-                            </form>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Client Name</th>
-                                        <th>Transaction Type</th>
-                                        <th>Date</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Timothy Mooney</th>
-                                        <td>Personal Training</td>
-                                        <td>10-7-2017</td>
-                                        <td>600</td>
-                                    </tr>
-                                    <tr>
-                                         <th>Timothy Mooney</th>
-                                        <td>Walk-In</td>
-                                        <td>10-7-2017</td>
-                                        <td>500</td>
-                                    </tr>
-                                    <tr>
-                                         <th>Timothy Mooney</th>
-                                        <td>Studio Class</td>
-                                        <td>10-7-2017</td>
-                                        <td>60</td>
-                                    </tr>
-									 <tr>
-                                         <th>TOTAL</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td style="color:Green"><b>1,160.00</b></td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                        <button type="button" class="btn  bg-green pull-right" data-dismiss="modal"> &nbsp; Check-Out &nbsp;</button>
-                        </div>
-                </div>
-            </div>
+            <!-- <div class="card">
+               
+            </div> -->
             
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -102,108 +38,83 @@
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                        <table class="table table-bordered table-striped table-hover dataTable ">
                                     <thead>
                                         <tr role="row">
                                                 
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 150px;">Client Name</th>
-                                            
+
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Transaction Type</th>
+                                            
 
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Transaction Date</th>
 											
 											
-											<th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Total Price</th>
+											<th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Bill</th>
+
+                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 40px;">Action</th>
                                             
-                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 40px;">Status</th>
-                                            
-                                            
+                                            <form method="post" action="actions/transactionAction.php">
                                           </tr>
                                     </thead>
-                                    
+                                    <!-- WALK-IN QUERY TRANSACTONS -->
                                     <tbody>
-                                        <tr role="row" class="even">
-                                            
-                                            <td>Ivan Buglosan</td>
-                                            <td>Walk-In</td>
-                                            <td>10-7-2017</td>
-                                           
-                                            <td>500.00</td>
-                                             <td style = "color: Red">Un-Paid</td>
-                                            
-                                        </tr><tr role="row" class="odd">
-                                            
-                                            <td>Hans Patrick Legislador</td>
-                                            <td>Membership</td>
-                                            <td>10-7-2017</td>
-                                           
-                                            <td>1200.00</td>
-                                            <td style = "color: Green">Paid</td>
-                                           
-                                        </tr><tr role="row" class="even">
-                                            
-                                            <td>Hans Patrick Legislador</td>
-                                            <td>Personal Training</td>
-                                            <td>10-7-2017</td>
-                                           
-                                            <td>600.00</td>
-										
-                                             <td style = "color: Green">Paid</td>
-                                        
-										
-										<tr role="row" class="even">
-                                            
-                                            <td>Timothy Mooney</td>
-                                            <td>Walk-In</td>
-                                            <td>10-7-2017</td>
-                                           
-                                            <td>500.00</td>
-                                             <td style = "color: Red">Un-Paid</td>
-                                            
-                                        </tr><tr role="row" class="odd">
-                                            
-                                            <td>Timothy Mooney</td>
-                                            <td>Studio Class</td>
-                                            <td>10-5-2017</td>
-                                           
-                                            <td>60.00</td>
-                                            <td style = "color: Red">Un-Paid</td>
-                                           
-                                        </tr><tr role="row" class="even">
-                                            
-                                            <td>Timothy Mooney</td>
-                                            <td>Personal Training</td>
-                                            <td>10-2-2017</td>
-                                           
-                                            <td>600.00</td>
-											<td style = "color: Red">Un-Paid</td>
-                                           
-                                      </tbody>
-                                </table>
-                                    </div>
-                                    </div>
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Hover Rows -->
-            
-        <!-- Small Size -->
-            
+                                        <?php
+                                            $pdo = new dbConnect();
+                                            $trs = $pdo->transClient(array("order_by" => "TR_ID ASC"));
+                                                if(!empty($trs)){ 
+                                                $count = 0; 
+                                                foreach($trs as $tr){ 
+                                                $count++;
 
-          
-		
-            </div>
-    </section>
+                                        ?>
+                                     
+
+                                      <tr>
+                                        <td><?php $firstname = $tr['CLIENT_FirstName']; $lastname = $tr['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
+                                        <td><?php echo $tr['TR_Type']; ?></td>
+                                        <td><?php echo $tr['TR_TransactionDate']; ?></td>
+                                        <td><?php echo $tr['TR_Bill']; ?></td>
+
+                                        <td class="center">
+                                            <input type="hidden" name="CLIENT_ID" value="<?php echo $tr['CLIENT_ID']?>">
+                                            <input type="hidden" name="TR_ID" value="<?php echo $tr['TR_ID']?>">
+                                            <input type="hidden" name="action_type" value="add"/>
+                                            <button name="submit" type="submit"  class="btn bg-red" >CHECKOUT</button>
+                                        </td>
+                                    </form>
+                               
+                                            
+
+                                </tr>
+                                <?php } }else{ ?>
+
+                                                    <tr><td colspan="6">No transaction(s) found......</td></tr>
+
+                                                    <?php } ?>
+                                 
+                                </tbody>
+
+                                    
+            <!-- #END# Hover Rows -->
+
+
+
+        </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</section>
+
 <?php include("includes/footer.php"); ?>
 
-<script>
-var FormStuff = {    init: function() {    this.applyConditionalRequired();    this.bindUIActions();  },    bindUIActions: function() {    $("input[type='radio'], input[type='checkbox']").on("change", this.applyConditionalRequired);  },    applyConditionalRequired: function() {        $(".require-if-active").each(function() {      var el = $(this);      if ($(el.data("require-pair")).is(":checked")) {        el.prop("required", true);      } else {        el.prop("required", false);      }    });      }  };FormStuff.init();
-</script>
 
 
     <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>

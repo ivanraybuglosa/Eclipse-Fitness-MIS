@@ -10,9 +10,18 @@ include("includes/header.php"); ?>
 
 <section class="content">
     <div class="container-fluid">
-        <div class="block-header">
-            <h2>DASHBOARD</h2>
+            <div class="block-header">
+                <h2>Dashboard</h2>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="material-icons">dashboard</i> Dashboard
+                    </li>
+                </ol>
+                </div>
         </div>
+    
 
         <!-- Widgets -->
         <div class="info-box bg-black ">
@@ -24,7 +33,37 @@ include("includes/header.php"); ?>
                 </div>
                     </div>
         
-        
+        <?php
+        $year = date("Y");
+        $today = date("Y-m-d");
+        $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error()); 
+
+        $date = date('Y-m-d');
+
+        $fetchclients = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` ") or die(mysqli_error());
+        $clients = $fetchclients->fetch_array();
+
+        $fetchcontracts = $conn->query("SELECT COUNT(TL_Code) as total FROM `traininglog` ") or die(mysqli-error());
+        $contracts = $fetchcontracts->fetch_array();
+
+        $fetchparticipants = $conn->query("SELECT COUNT(CA_Code) as total FROM `clientassignment` ") or die(mysql_error());
+        $participants = $fetchparticipants->fetch_array();
+
+        $fetchpresent = $conn->query("SELECT COUNT(A_Code) as total FROM `attendance` WHERE `A_TimeOut` = '' && `A_Date` = '$today' ") or die(mysql_error());
+        $present = $fetchpresent->fetch_array();
+
+        $fetchwalkin = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` WHERE `CLIENT_RegStatus` = 'Walk-in' && year = '$year' ") or die(mysql_error());
+        $walkin = $fetchwalkin->fetch_array();
+
+        $fetchmembers = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` WHERE `CLIENT_RegStatus` = 'Member' && year = '$year'") or die(mysql_error());
+        $members = $fetchmembers->fetch_array();
+
+        $allfetch = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` WHERE year = '$year' ") or die(mysql_error());
+        $all = $allfetch->fetch_array();
+
+        $fetchtransact = $conn->query("SELECT COUNT(TR_ID) as total FROM `transaction` WHERE year = '$year' ") or die(mysql_error());
+        $transact = $fetchtransact->fetch_array();
+        ?>
 
         <div class="row clearfix">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -34,7 +73,7 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="content">
                         <div class="text">Currently Present</div>
-                        <div class="number count-to" data-from="0" data-to="158" data-speed="15" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo $present['total'] ?>" data-speed="15" data-fresh-interval="20"></div>
                     </div>
                 </div>
             </div>
@@ -45,7 +84,7 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="content">
                         <div class="text">Ongoing Contracts</div>
-                        <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo $contracts['total'] ?>" data-speed="1000" data-fresh-interval="20"></div>
                     </div>
                 </div>
             </div>
@@ -56,7 +95,7 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="content">
                         <div class="text">Class Participants</div>
-                        <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo $participants['total'] ?>" data-speed="1000" data-fresh-interval="20"></div>
                     </div>
                 </div>
             </div>
@@ -67,7 +106,7 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="content">
                         <div class="text">Total Clients</div>
-                        <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo $clients['total'] ?>" data-speed="1000" data-fresh-interval="20"></div>
                     </div>
                 </div>
             </div>
@@ -81,49 +120,27 @@ include("includes/header.php"); ?>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pull-right">
                 <div class="card">
                     <div class="body bg-teal">
-                        <div class="font-bold m-b--35">UNIQUE WALK-INS THIS MONTH</div>
+                        <div class="font-bold m-b--35">THE COMPANY THIS YEAR</div>
                         <ul class="dashboard-stat-list">
                             <li>
-                                TODAY
-                                <span class="pull-right"><b>11</b> <small>WALK-INS</small></span>
+                                NEW WALK-INS
+                                <span class="pull-right"><b><?php echo $walkin['total'] ?></b></span>
                             </li>
 
                             <li>
-                                THIS WEEK
-                                <span class="pull-right"><b>29</b> <small>WALK-INS</small></span>
+                                NEW MEMBERSHIPS
+                                <span class="pull-right"><b><?php echo $members['total'] ?></b> </span>
                             </li>
 
                             <li>
-                                TOTAL
-                                <span class="pull-right"><b>140</b> <small>WALK-INS</small></span>
+                                TOTAL TRANSACTIONS
+                                <span class="pull-right"><b><?php echo $transact['total'] ?></b></span>
                             </li>
 
                         </ul>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="body bg-teal">
-                        <div class="font-bold m-b--35">UNIQUE MEMBERS THIS MONTH</div>
-                        <ul class="dashboard-stat-list">
-                            <li>
-                                TODAY
-                                <span class="pull-right"><b>4</b> <small>MEMBERS</small></span>
-                            </li>
-
-                            <li>
-                                THIS WEEK
-                                <span class="pull-right"><b>10</b> <small>MEMBERS</small></span>
-                            </li>
-
-                            <li>
-                                TOTAL
-                                <span class="pull-right"><b>52</b> <small>MEMBERS</small></span>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
             </div>
             <!-- #END# Answered Tickets -->
             <!-- Task Info -->
@@ -134,61 +151,44 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
-                            <table class="table table-hover dashboard-task-infos">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Program</th>
                                         <th>Coach</th>
-                                        <th>Schedule</th>
-                                        <th>Status</th>
+                                        <th>Activity</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php 
+                                        $pdo = new dbConnect;
+                                        $date = date("Y-m-d");
+                                        $acts = $pdo->dashboardActs($date,array("order_by" => "AL_Code ASC"));
+                                                if(!empty($acts)){
+                                                    $count = 0;
+                                                    foreach($acts as $act){
+                                    ?>
+                                    
                                     <tr>
-                                        <td>1</td>
-                                        <td>Training Session</td>
-                                        <td>Mark Benjamin</td>
-                                        <td>8:00 - 8:45 AM</td>
-                                        <td><badge class="label bg-light-green">Completed</badge></td>
+                                        <td><?php $firstname = $act['Coach_FirstName']; $lastname = $act['Coach_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
+                                        <td><?php echo $act['Activity']?></td>
+                                        <td><?php echo date("g:i A", strtotime($act['AL_StartTime'])) ?></td>
+                                        <td><?php echo date("g:i A", strtotime($act['AL_EndTime'])) ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Training Session</td>
-                                        <td>Avrybelle Lu</td>
-                                        <td>9:30 - 10:15 AM</td>
-                                        <td><badge class="label bg-light-green">Completed</badge></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Spinning Class</td>
-                                        <td>Xirb Aissen</td>
-                                        <td>12:00 - 1:00 PM</td>
-                                        <td><badge class="label bg-blue">Ongoing</badge>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Yoga Class</td>
-                                        <td>Rodrigo Duterte</td>
-                                        <td>3:00 - 4:00 PM</td>
-                                        <td><badge class="label bg-red">Incoming</badge></td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Zumba Class</td>
-                                        <td>Mark Benjamin</td>
-                                        <td>6:00 - 7:00 PM</td>
-                                        <td><badge class="label bg-red">Incoming</badge></td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Aquazumba Class</td>
-                                        <td>Manny Pacquiao</td>
-                                        <td>7:30 - 8:30 PM</td>
-                                        <td><badge class="label bg-red">Incoming</badge></td>
-                                    </tr>
+                                    <?php } }else{ ?>
+
+                                                    <tr><td colspan="6">No Personal Training Contract(s) found......</td></tr>
+
+                                                    <?php } ?>
+                                    
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@ include("includes/header.php"); ?>
         var m = date.getMinutes(); 
         var s = date.getSeconds(); 
         var day = date.getDate();
-        var days = ['Sunday', 'Monday', 'Tuesday', 'Wensday', 'Thursday', 'Friday', 'Saturday'];
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var session = "AM";
 
         if(h == 0){
@@ -248,8 +248,11 @@ include("includes/header.php"); ?>
 </script>
 
 <?php include("includes/footer.php"); ?>
+
 <!-- Custom Js -->
 <script src="../assets/js/admin.js"></script>
+<script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+<script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
 <!--index -->
 <script src="../assets/js/pages/index.js"></script>
 <!--form-wizard-->

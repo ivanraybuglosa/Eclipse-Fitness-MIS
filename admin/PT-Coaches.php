@@ -34,7 +34,7 @@ include("includes/header.php");
                 <div class="body">
                 <div class="row container-fluid">
                     <form action="actions/coachAction.php" method="post">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input type="text" name="LastName" class="form-control" >
@@ -42,11 +42,19 @@ include("includes/header.php");
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input type="text" name="FirstName" class="form-control" >
                                             <label class="form-label">First Name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" name="MiddleName" class="form-control" >
+                                            <label class="form-label">Middle Name</label>
                                         </div>
                                     </div>
                                 </div>
@@ -228,19 +236,15 @@ include("includes/header.php");
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="input-group">
-                                    <select class="form-control">
-                                        <option value="">Gender</option>
-                                        <option id=male <?php if($coach['Coach_Gender'] =="Male") echo "checked='true'"; ?> value="Male" name="gendermod">Male</option>
-                                        <option id=female <?php if($coach['Coach_Gender'] == "Female") echo "checked='true'";?> value="Female" name="gendermod">Female</option>
-                                    </select>
-                                </div>       
-                            </div>
+                            <label>Gender:</label>
+                                <input type="radio" name="gendermod" id="cmalemod" class="with-gap" <?php if($coach['Coach_Gender']=="Male") echo "checked='true'";   ?> value="Male">
+                                <label for="cmalemod">Male</label>
+                                <input type="radio" name="gendermod" id="cfemalemod" class="with-gap" <?php if($coach['Coach_Gender']=="Female") echo "checked='true'";   ?> value="Female">
+                                <label for="cfemalemod" class="m-l-20">Female</label>
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="cusername" class="form-control" value="<?php echo $coach['username']; ?>"/>
+                                        <input type="text" name="username" class="form-control" value="<?php echo $coach['username']; ?>"/>
                                         <label class="form-label">Username</label>
                                     </div>
                                 </div>
@@ -248,7 +252,7 @@ include("includes/header.php");
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="password" name="cpassword" class="form-control" value="<?php echo $coach['password']; ?>"/>
+                                        <input type="password" name="password" class="form-control" value="<?php echo $coach['password']; ?>"/>
                                         <label class="form-label">Password</label>
                                     </div>
                                 </div>

@@ -25,21 +25,20 @@
                             </ol>
             </div>
         </div>
+        
+    <?php include("PT-Report-List.php"); ?>
     <div class="card">
     <div class="header">
         <h2>Coach List</h2>
     </div>
                         <div class="body">
-                            <div class="table-responsive">
-
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                                
-                                    
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                               
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Age</th>
                                             <th>Gender</th>
+                                            <th>Specialty</th>
                                             <th>Email Address</th>
                                             <th>Type</th>
                                             <th>Specialty</th>
@@ -48,65 +47,25 @@
                                     </thead>
                                     
                                     <tbody>
-                                        <!-- Exportable Table -->
-                 
-                                        </tr>
+                                        <?php 
+                                        //INCOMPLETE CODE. KULANG PA YEARLY FILTER
+                                            $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());  
+                                            $coach = $conn->query("SELECT * FROM `coach`") or die(mysql_error());
+                                            while($fcoach = $coach->fetch_array()) {
+                                                                    ?> 
                                         <tr>
-                                            <td>Timothy Mooney</td>
-                                            <td>30</td>
-                                            <td>Male</td>
-                                            <td>timothy@gmail.com</td>
-                                            <td>Senior</td>
-                                            <td>Fitness</td>
-                                            
+                                            <td><?php echo $fcoach['Coach_LastName']?> <?php echo $fcoach['Coach_FirstName'] ?></td>
+                                            <td><?php echo $fcoach['Coach_Gender']?></td>
+                                            <td><?php echo $fcoach['Coach_Specialty'] ?></td>
+                                            <td><?php echo $fcoach['Coach_EmailAddress'] ?></td>
+                                            <td><?php echo $fcoach['Coach_Type'] ?></td>
+                                            <td><?php echo $fcoach['Coach_ContactNumber'] ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>Ivan Buglosa</td>
-                                            <td>35</td>
-                                            <td>Male</td>
-                                            <td>ivan@gmail.com</td>
-                                            <td>Junior</td>
-                                            <td>Fitness</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>Patrick Legislador</td>
-                                            <td>32</td>
-                                            <td>Male</td>
-                                            <td>patrick@gmail.com</td>
-                                            <td>Senior</td>
-                                            <td>Boxing</td>
-                                            
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>Brix Nessia</td>
-                                            <td>29</td>
-                                            <td>Male</td>
-                                            <td>brix@gmail.com</td>
-                                            <td>Junior</td>
-                                            <td>Mad Dog</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>Erul Ubas</td>
-                                            <td>28</td>
-                                            <td>Male</td>
-                                            <td>erul@gmail.com</td>
-                                            <td>Senior</td>
-                                            <td>Yoga</td>
-                                         
-                                        </tr>
-                                        <tr>
-                                            <td>Mary Francisco</td>
-                                            <td>31</td>
-                                            <td>Female</td>
-                                            <td>mary@gmail.com</td>
-                                            <td>senior</td>
-                                            <td>Spinning</td>
-                        
-                                        </tr>
-                                        
+
+                                        <?php 
+                                    }
+
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>

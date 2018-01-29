@@ -15,7 +15,6 @@
 });
 
 var realtime = 'on';
-
 function initRealTimeChart() {
     //Real time ==========================================================================================
     var plot = $.plot('#real_time_chart', [getRandomData()], {

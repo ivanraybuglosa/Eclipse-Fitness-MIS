@@ -25,6 +25,8 @@
                             </ol>
             </div>
         </div>
+        
+    <?php include("includes/PT-Report-List.php"); ?>
     <div class="card">
         <div class="header">
         <h2>Client Training History</h2>

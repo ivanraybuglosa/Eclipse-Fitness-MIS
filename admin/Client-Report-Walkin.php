@@ -25,46 +25,8 @@
                             </ol>
             </div>
         </div>
-
-        <div class="card">
-            <div class="header">
-                <h2>Report List</h2>
-            </div>
-            <div class="body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="Client-Report-Walkin.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">WALK-IN LIST</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-MemberList.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">MEMBER LIST</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-ClientActivities.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT ACTIVITIES</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Report-TransactionHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-signup" data-type="success">TRANSACTION HISTORY</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="Client-Trend-ActiveAndNot.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT STATUS</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-Attendance.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">CLIENT ATTENDANCE</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-UniqueClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">UNIQUE CLIENTS</a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="Client-Trend-topClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success">TOP CLIENTS</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-
+    <?php include("Client-Report-List.php"); ?>
     <div class="card">
         <div class="header">
             <h2>Walk-in Client List</h2>

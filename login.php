@@ -29,11 +29,19 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
-<body class="login-page" style="background-color: #2E2E2E;">
-    <div class="login-box">
+<body style="background-color: #000f22;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="col-md-6">
+                <img src="bg.png" style="width: 100%; height: 100%;">
+            </div>
+            <div class="col-md-6">
+    <div class="login-box login-page" style="background-color: #000f22; text-align:center">
         <div class="logo">
-            <a href="login.php" style="color:green;"><img src="eclipse_logo.png" style="width: 80%; height: 80%;"></a>
-            <small style="color:green;"><label>FITNESS MANAGEMENT INFORMATION SYSTEM</label></small>
+            <a href="login.php" style="color:green;">
+                <img src="logo.png" style="width: 80%; height: 80%;"></a>
+            <small style="color:#c9fb5d;"><label>FITNESS MANAGEMENT INFORMATION SYSTEM</label></small>
         </div>
         <div class="card">
             <div class="body">
@@ -59,16 +67,15 @@
                             $_SESSION['userID'] = $id;
                             $_SESSION['userType'] = $type;
                                 if($type =="admin"){ ?>
-                                    <script> window.location.href="admin/index.php"</script>
+                                <script>alert('Successful Login!');window.location.href='admin/index.php';</script>
+                                    
                                     <?php } 
                                         else($type =="coach") 
                                     ?>
-                                <script> window.location.href="coach/index.php"</script>
+                                <script>alert('Successful Login!');window.location.href="coach/index.php"</script>
                         <?php 
                         } else { ?>
-                        <script>
-
-                        window.location.href="login.php"</script>
+                        <script>alert('Login Failed!Incorrect information!');window.location.href='login.php';</script>
                 <?php     }
                 } 
                 ?>
@@ -99,6 +106,11 @@
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
+</div>
+    
 
     <!-- Jquery Core Js -->
     <script src="assets/plugins/jquery/jquery.min.js"></script>

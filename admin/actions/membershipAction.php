@@ -23,7 +23,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'MS_Price' => $_POST['price']
             );
             $condition = array('MS_Code' => $_POST['mCode']);
-            $update = $db->update($tblName,$userData,$condition);
+            $update = $pdo->update($tblName,$userData,$condition);
             $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
             $_SESSION['statusMsg'] = $statusMsg;
             header("Location:../Maintenance-MembershipOptions.php");

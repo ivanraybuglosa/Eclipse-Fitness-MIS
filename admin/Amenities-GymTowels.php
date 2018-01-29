@@ -26,45 +26,6 @@
                                     <i class="material-icons">exposure</i> Amenities - Activities
                                 </li>
                             </ol>
-            
-        <!-- Small Size -->
-			
-			
-			
-			
-			
-            <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-sm" role="document">
-                    <div class="modal-content">
-                    <center>
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="smallModalLabel">Update</h3>
-                        </div>
-                        
-                            <div class="row container-fluid">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <h5 class="pull-left">Towel Count</h5>
-                                            <input type="number" class="form-control" placeholder="Towel Count" value="2"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <h5 class="pull-left">Locker Number</h5>
-                                            <input type="number" class="form-control" placeholder="Locker Number" value="42"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </center>
-                        <div class="modal-footer">
-                            <button type="button" class="btn  bg-green">SAVE CHANGES</button>
-                            <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 			
 			
             <div class="row clearfix">
@@ -77,17 +38,17 @@
                             </h2>
 
                         <div class="col-auto pull-left">
-							<form method="POST" action="actions/towelsAction.php">
+							<form method="POST" action="actions/towelInventoryAction.php">
                            <div class="row container-fluid">
                                 <div class="col-sm-12" style="margin-top: 60px;">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" name ="supplied"class="form-control" placeholder="Supply Towels" />
+                                            <input type="text" name="supply" class="form-control" placeholder="Supply Towels" />
                                         </div>
                                     </div>
-									<input type="hidden" name="action_type" value="supply"/>
+                                    <input type="hidden" name="action_type" value="add"/>
                                     <button type="submit" name ="submit" class="btn btn-success waves-effect" style="margin-top:-20px;">
-                                         <span style="padding: 5px;"> SUPPLY</span>
+                                         <span style="padding: 5px;">SUPPLY</span>
                                      </button>
 									
 									
@@ -95,15 +56,17 @@
                                 </div>
                             </div>
 								</form>
-							<form method="POST" action="actions/towelsAction.php">
+							<form method="POST" action="actions/towelInventoryAction.php">
                                 <div class="col-sm-12" style="margin-top: 20px;">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" name="laundry" class="form-control" placeholder="For laundry" />
+                                            <input type="number" name="laundry" class="form-control" />
                                         </div>
                                     </div>
+                 
+
 									<input type="hidden" name="action_type" value="laundry"/>
-                                     <button name = "submit" type="submit" class="btn bg-red waves-effect" style="margin-top:-20px;">
+                                     <button name ="submit" type="submit" class="btn bg-red waves-effect" style="margin-top:-20px;">
                                          <span>LAUNDRY</span>
                                      </button>
                                 </div>
@@ -112,32 +75,55 @@
                          </div>
                              
                     </div>
+
+
                                                         
-														
-									
+						<?php 
+                            $pdo = new dbConnect();
+                            $towels = $pdo->towels(date("Y-m-d"), array("order_by" => "TI_Code"));
+                            if(!empty($towels)){ 
+                                $count = 0; 
+                                foreach($towels as $towel){ 
+                                $count++;
+                                ?>
                         <div class="body table-responsive">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box-3 bg-green hover-zoom-effect">
-                        <div class="icon">
-                            <i class="material-icons">sort</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">Available</div>
-                            <div class="number">250</div>
-                        </div>
-                    </div>
-                </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="info-box-3 bg-green hover-zoom-effect">
                         <div class="icon">
                             <i class="material-icons">add</i>
                         </div>
                         <div class="content">
                             <div class="text">Supplied</div>
-                            <div class="number">300</div>
+                            <div class="number"><?php echo $towel["supply"] ?></div>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="info-box-3 bg-red hover-zoom-effect">
+                        <div class="icon">
+                            <i class="material-icons">receipt</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Laundry</div>
+                            <div class="number"><?php echo $towel["laundry"] ?>  </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box-3 bg-green hover-zoom-effect">
+                        <div class="icon">
+                            <i class="material-icons">sort</i>
+                        </div>
+                        <div class="content">
+                          
+                            <div class="text">Available</div>
+                            <div class="number"><?php echo $towel["TI_Available"]?></div>
+
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box-3 bg-green hover-zoom-effect">
                         <div class="icon">
@@ -145,7 +131,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Borrowed</div>
-                            <div class="number">50</div>
+                            <div class="number"><?php echo $towel["TI_Borrowed"] ?></div>
                         </div>
                     </div>
                 </div>
@@ -156,23 +142,14 @@
                         </div>
                         <div class="content">
                             <div class="text">Returned</div>
-                            <div class="number">0</div>
+                            <div class="number"><?php echo $towel["TI_Returned"] ?></div>
                         </div>
                     </div>
                 </div>
+                <?php }} ?>
                 
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box-3 bg-green hover-zoom-effect">
-                        <div class="icon">
-                            <i class="material-icons">receipt</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">Used</div>
-                            <div class="number">50</div>
-                        </div>
-                    </div>
-                </div>
-                            
+                
+                          
             </div>
         </div>
 		<div class="card">
@@ -200,6 +177,19 @@
                                     <div class="form-line">
                                         <input type="text" name="quantity" class="form-control" placeholder="Quantity" />
                                     </div>
+                                </div>
+                                <div class="row"> 
+                                    <div class="col-md-4"> 
+                                        <div class="form-group" style="margin-top:20px">
+                                            <label style="margin-top: 9px;">Equipment Status: </label>
+                                            <input type="radio" value="Brand New" name="equip" id="male" class="with-gap" required\">
+                                            <label for="male">Brand New</label>
+
+                                            <input type="radio"  value="Repaired" name="equip" id="female" class="with-gap" required">
+                                            <label for="female" class="m-l-20">Repaired</label>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 <input type="hidden" name="action_type" value="add"/>
                                 <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" style="padding:10px; margin-bottom:10px;">SAVE</button>

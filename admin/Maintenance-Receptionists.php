@@ -34,7 +34,7 @@
                     <div class="body">
                         <div class="row clearfix js-sweetalert">
                             <form method="POST" action="actions/receptionistAction.php">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input type="text" name="rlname" class="form-control" >
@@ -42,11 +42,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input type="text" name="rfname" class="form-control" >
                                             <label class="form-label">First Name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" name="rmname" class="form-control" >
+                                            <label class="form-label">Middle Name</label>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +74,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-12">
                                     <div class="input-group">
                                         <label>Gender:</label>
                                             <input type="radio" name="rgender" id="male" class="with-gap" checked="true" value="Male">
@@ -92,7 +100,7 @@
                                     </div>
                                 </div>
                                     <input type="hidden" name="action_type" value="add">
-                                    <button type="submit" class="btn  waves-effect btn-success pull-right" data-type="success" style="padding:10px;">Save</button>
+                                    <button type="submit" class="btn  waves-effect btn-success pull-right" data-type="success" style="padding-right: :20px; ">Save</button>
                                 </form>    
                             </div>
                             

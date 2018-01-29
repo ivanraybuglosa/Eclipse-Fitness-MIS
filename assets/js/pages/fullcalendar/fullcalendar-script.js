@@ -27,9 +27,9 @@
     -----------------------------------------------------------------*/
     $('#calendar').fullCalendar({
       header: {
-        left: 'prev,next,today',
+        left: 'prev,next ',
         center: 'title',
-        right: 'basicWeek'
+        right: 'month,basicWeek,basicDay'
       },
       defaultDate: 'today',
       editable: true,

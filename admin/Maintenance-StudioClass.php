@@ -34,7 +34,7 @@
                 <div class="body">
                     <div class="row clearfix js-sweetalert">
                         <form method="post" action="actions/studioClassAction.php">
-                                    <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input type="text" name="scname" class="form-control" >
@@ -42,23 +42,32 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="sccapacity" class="form-control" >
-                                            <label class="form-label">Capacity</label>
+                                            <input type="number" name="sccapacity" class="form-control" >
+                                            <label class="form-label">Participant Capacity</label>
                                         </div>
                                     </div>
                                 </div>
-                                     <input type="hidden" name="action_type" value="add"/>
-                               <button type="submit" class="btn  waves-effect btn-success pull-right" data-type="success" style="padding:10px;">Save</button>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" name="venue" class="form-control" >
+                                            <label class="form-label">Venue</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="hidden" name="action_type" value="add"/>
+                                    <button type="submit" class="btn  waves-effect btn-success pull-right" data-type="success" style="padding:10px;">SUBMIT</button>
+                                </div>
                         </form>
                     </div>
 
                 </div>
             </div>
-            <div >
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            
                     <div class="card">
 
                         <div class="body">
@@ -73,6 +82,8 @@
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 150px;">Studio Class Name</th>
                                             
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Capacity</th>
+
+                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Venue</th>
                                             
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Actions</th>
                                           </tr>
@@ -91,8 +102,9 @@
                                         
                                         
                                          <tr role="row" class="odd">
-                                            <td name="Name" class="sorting_1"><?php echo $studioClasses['SC_Name']; ?></td>
-                                            <td name="Capacity"><?php echo $studioClasses['SC_Capacity']; ?></td>
+                                            <td><?php echo $studioClasses['SC_Name']; ?></td>
+                                            <td><?php echo $studioClasses['SC_Capacity']; ?></td>
+                                            <td><?php echo $studioClasses['SC_Venue']; ?></td>
                                               <td class="align-center"><button type="button" data-toggle="modal"  data-target="#edit-<?php echo $studioClasses['SC_Code']; ?>" class="btn bg-green" >Modify</button></td>
 
                                           <div class="modal fade" id="edit-<?php echo $studioClasses['SC_Code']; ?>" tabindex="-1" role="dialog">
@@ -129,8 +141,7 @@
                                                     </div>
                                                     </form>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                
                                            
                                         </tr>
                                         <?php } 

@@ -1,7 +1,7 @@
 $(function () {
     $('.js-sweetalert button').on('click', function () {
         var type = $(this).data('type');
-        if (type === 'error') {
+        if (type === 'basic') {
             showBasicMessage();
         }
         else if (type === 'with-title') {
@@ -36,7 +36,7 @@ $(function () {
 
 //These codes takes from http://t4t5.github.io/sweetalert/
 function showBasicMessage() {
-    swal("Please Fill out The Fields");
+    swal("Here's a message!");
 }
 
 function showWithTitleMessage() {

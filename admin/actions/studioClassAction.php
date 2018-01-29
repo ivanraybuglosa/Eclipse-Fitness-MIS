@@ -9,7 +9,8 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         $userData = array(
 		
             'SC_Name' => $_POST['scname'],
-            'SC_Capacity' => $_POST['sccapacity']
+            'SC_Capacity' => $_POST['sccapacity'],
+            'SC_Venue' => $_POST['venue']
         );
         $insert = $pdo->insert($tblName,$userData);
         $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
