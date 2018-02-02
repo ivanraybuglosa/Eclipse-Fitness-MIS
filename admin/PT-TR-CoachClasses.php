@@ -68,17 +68,21 @@
                             </div>
                             <div class="col-md-3" style="margin-top: 30px;">
                                     <input type="hidden" name="action_type" value="check"/>
-                                    <button type="submit" name= "check" class="btn bg-teal btn-block btn-lg waves-effect">Check</button>
+                                    <button type="submit" name= "check" class="btn bg-teal btn-block btn-lg waves-effect">Submit</button>
                             </div>
+                            <div class="col-md-3"  style="margin-top: 30px;">
+                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
+                                </div>
 
                              </form>
                         </div>
                     <label>Studio Class Records</label>
                     <div class="table-responsive">
-
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                            <div id="print">
+                                <table class="table table-bordered table-striped table-hover dataTable">
                                     <thead>
                                         <tr>
+                                            <th>Coach Name</th>
                                             <th>Class Date</th>
                                             <th>Class Name</th>
                                             <th>Start Time</th>
@@ -97,9 +101,13 @@
 
                             $sc = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code WHERE `COACH_ID` = '$_GET[coachName2]' ") or die(mysql_error());
 
+
                             while($scf = $sc->fetch_array()) {
+                                 $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = '$_GET[coachName2]' ") or die(mysql_error());
+                                 $fetchc = $cname->fetch_array();
                                 ?>
                                         <tr>
+                                            <td><?php echo $fetchc['Coach_FirstName'] ?> <?php echo $fetchc['Coach_LastName'] ?></td>
                                             <td><?php echo $scf['SCS_Date'] ?></td>
                                             <td><?php echo $scf['SC_Name'] ?></td>
                                             <td><?php echo $scf['SCS_StartTime'] ?></td>
@@ -114,10 +122,22 @@
                                 ?>
                                     </tbody>
                                 </table>
+                            </div>
                           </div>
                      </div>
                  </div>
             </section>
+
+            <script>
+
+                     function printContent(el) {
+                         var restorepage = document.body.innerHTML;
+                         var printcontent = document.getElementById(el).innerHTML;
+                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Coach Classes</h2><center><br><br>"+printcontent +"<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
+                         window.print();
+                         document.body.innerHTML = restorepage;
+                     }
+            </script>
     <?php include("includes/footer.php"); ?>
 
     <!-- Jquery DataTable Plugin Js -->

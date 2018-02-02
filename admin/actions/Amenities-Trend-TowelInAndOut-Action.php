@@ -8,79 +8,79 @@ if(isset($_GET['year']))
     $year=$_GET['year'];
 }
 //SUPPLY QUERIES
-$qjan = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Jan' && year = '$year') as zero") or die(mysqli_error());
+$qjan = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Jan' && year = '$year') as zero") or die(mysqli_error());
 $fjan = $qjan->fetch_array();
 
-$qfeb = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Feb' && year = '$year') as zero") or die(mysqli_error());
+$qfeb = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Feb' && year = '$year') as zero") or die(mysqli_error());
 $ffeb = $qfeb->fetch_array();
 
-$qmar = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Mar' && year = '$year') as zero") or die(mysqli_error());
+$qmar = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Mar' && year = '$year') as zero") or die(mysqli_error());
 $fmar = $qmar->fetch_array();
 
-$qapr = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Apr' && year = '$year') as zero") or die(mysqli_error());
+$qapr = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Apr' && year = '$year') as zero") or die(mysqli_error());
 $fapr = $qapr->fetch_array();
 
-$qmay = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'May' && year = '$year') as zero") or die(mysqli_error());
+$qmay = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'May' && year = '$year') as zero") or die(mysqli_error());
 $fmay = $qmay->fetch_array();
 
-$qjune = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Jun' && year = '$year') as zero") or die(mysqli_error());
+$qjune = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Jun' && year = '$year') as zero") or die(mysqli_error());
 $fjune = $qjune->fetch_array();
 
-$qjul = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Jul' && year = '$year') as zero") or die(mysqli_error());
+$qjul = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Jul' && year = '$year') as zero") or die(mysqli_error());
 $fjul = $qjul->fetch_array();
 
-$qaug = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Aug' && year = '$year') as zero") or die(mysqli_error());
+$qaug = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Aug' && year = '$year') as zero") or die(mysqli_error());
 $faug = $qaug->fetch_array();
 
-$qsept = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Sep' && year = '$year') as zero") or die(mysqli_error());
+$qsept = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Sep' && year = '$year') as zero") or die(mysqli_error());
 $fsept = $qsept->fetch_array();
 
-$qoct = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Oct' && year = '$year') as zero") or die(mysqli_error());
+$qoct = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Oct' && year = '$year') as zero") or die(mysqli_error());
 $foct = $qoct->fetch_array();
 
-$qnov = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Nov' && year = '$year') as zero") or die(mysqli_error());
+$qnov = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Nov' && year = '$year') as zero") or die(mysqli_error());
 $fnov = $qnov->fetch_array();
 
-$qdec = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Supply' && `month` = 'Dec' && year = '$year') as zero") or die(mysqli_error());
+$qdec = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Supplied) as total FROM `towelinventory` WHERE TI_Type = 'Supply' && `month` = 'Dec' && year = '$year') as zero") or die(mysqli_error());
 $fdec = $qdec->fetch_array();
 
 
 //LAUNDRY QUERIES
 
-$qqjan = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Jan' && year = '$year') as zero") or die(mysqli_error());
+$qqjan = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Jan' && year = '$year') as zero") or die(mysqli_error());
 $ffjan = $qqjan->fetch_array();
 
-$qqfeb = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Feb' && year = '$year') as zero") or die(mysqli_error());
+$qqfeb = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Feb' && year = '$year') as zero") or die(mysqli_error());
 $fffeb = $qqfeb->fetch_array();
 
-$qqmar = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Mar' && year = '$year') as zero") or die(mysqli_error());
+$qqmar = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Mar' && year = '$year') as zero") or die(mysqli_error());
 $ffmar = $qqmar->fetch_array();
 
-$qqapr = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Apr' && year = '$year') as zero") or die(mysqli_error());
+$qqapr = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Apr' && year = '$year') as zero") or die(mysqli_error());
 $ffapr = $qqapr->fetch_array();
 
-$qqmay = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'May' && year = '$year') as zero") or die(mysqli_error());
+$qqmay = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'May' && year = '$year') as zero") or die(mysqli_error());
 $ffmay = $qqmay->fetch_array();
 
-$qqjune = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Jun' && year = '$year') as zero") or die(mysqli_error());
+$qqjune = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Jun' && year = '$year') as zero") or die(mysqli_error());
 $ffjune = $qqjune->fetch_array();
 
-$qqjul = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Jul' && year = '$year') as zero") or die(mysqli_error());
+$qqjul = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Jul' && year = '$year') as zero") or die(mysqli_error());
 $ffjul = $qqjul->fetch_array();
 
-$qqaug = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Aug' && year = '$year') as zero") or die(mysqli_error());
+$qqaug = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Aug' && year = '$year') as zero") or die(mysqli_error());
 $ffaug = $qqaug->fetch_array();
 
-$qqsept = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Sep' && year = '$year') as zero") or die(mysqli_error());
+$qqsept = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Sep' && year = '$year') as zero") or die(mysqli_error());
 $ffsept = $qqsept->fetch_array();
 
-$qqoct = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Oct' && year = '$year') as zero") or die(mysqli_error());
+$qqoct = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Oct' && year = '$year') as zero") or die(mysqli_error());
 $ffoct = $qqoct->fetch_array();
 
-$qqnov = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Nov' && year = '$year') as zero") or die(mysqli_error());
+$qqnov = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Nov' && year = '$year') as zero") or die(mysqli_error());
 $ffnov = $qqnov->fetch_array();
 
-$qqdec = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(towel_amount) as total FROM `towels` WHERE towel_type = 'Laundry' && `month` = 'Dec' && year = '$year') as zero") or die(mysqli_error());
+$qqdec = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT  SUM(TI_Laundry) as total FROM `towelinventory` WHERE TI_Type = 'Laundry' && `month` = 'Dec' && year = '$year') as zero") or die(mysqli_error());
 $ffdec = $qqdec->fetch_array();
 
 

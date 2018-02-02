@@ -292,6 +292,17 @@ class dbConnect{
         $result = $var[$id];
         return $result;    
     }
+
+    public function selectEquip($type){
+        $sql = "SELECT E_Code FROM equipment WHERE E_Type = '".$type."' ";
+        
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['E_Code'];
+        return $result;    
+    }
+
     public function innerjoin($tblName1,$tblName2,$tblName3,$id2,$id3){
         $sql = "SELECT *";
         $sql .="FROM ((".$tblName1. " ";
@@ -849,15 +860,6 @@ class dbConnect{
         return !empty($data)?$data:false;
     }
 
-    public function walkin(){
-        $sql = "SELECT MS_Price FROM membership WHERE MS_Type = 'Walk-in'";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        $var = $query->fetch();
-        $result = $var['MS_Price'];
-        return $result;    
-    }
-
     public function ptPrice($type,$validity){
         $sql = "SELECT TP_Price FROM trainingpackage WHERE TP_PackageType = '".$type."' AND TP_Validity ='".$validity."' ";
         $query = $this->db->prepare($sql);
@@ -1111,7 +1113,7 @@ class dbConnect{
     }
 
     public function previousAvailable(){
-        $sql = "SELECT TI_Available FROM towelinventory LIMIT 1";
+        $sql = "SELECT TI_Available FROM towelinventory ORDER BY TI_Code DESC LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
@@ -1145,7 +1147,7 @@ class dbConnect{
     }
 
     public function previousBorrowed($date){
-        $sql = "SELECT TI_Borrowed FROM towelinventory WHERE '".$date."' ORDER BY TI_Code DESC LIMIT 1";
+        $sql = "SELECT TI_Borrowed FROM towelinventory ORDER BY TI_Code DESC LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
@@ -1155,7 +1157,7 @@ class dbConnect{
 
 
     public function getReturned($date){
-        $sql = "SELECT TI_Returned FROM towelinventory WHERE '".$date."' ORDER BY TI_Code DESC LIMIT 1";
+        $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
@@ -1173,7 +1175,7 @@ class dbConnect{
     }
 
     public function previousSupplied(){
-        $sql = "SELECT TI_Supplied FROM towelinventory LIMIT 1";
+        $sql = "SELECT TI_Supplied FROM towelinventory ORDER BY TI_Code LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
@@ -1182,7 +1184,7 @@ class dbConnect{
     }
 
     public function previousReturned(){
-        $sql = "SELECT TI_Returned FROM towelinventory LIMIT 1";
+        $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
@@ -1191,7 +1193,7 @@ class dbConnect{
     }
 
     public function borrowed(){
-        $sql = "SELECT TI_Borrowed FROM towelinventory LIMIT 1";
+        $sql = "SELECT TI_Borrowed FROM towelinventory ORDER BY TI_Code LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
@@ -1199,8 +1201,8 @@ class dbConnect{
         return $result;
     }
 
-    public function towels($towel,$conditions = array()){
-        $sql = "SELECT * FROM towelinventory WHERE  ".$towel." IS NOT NULL";
+    public function towels($date,$conditions = array()){
+        $sql = "SELECT SUM(TI_Supplied) as supply, SUM(TI_Laundry) as laundry, TI_Borrowed, TI_Returned FROM towelinventory WHERE TI_Date = '".$date."'  ";
         $query = $this->db->prepare($sql);
         $query->execute();
         
@@ -1222,6 +1224,141 @@ class dbConnect{
         }
         return !empty($data)?$data:false;
     }
+
+    public function towelSupplied($conditions = array()){
+        $sql = "SELECT * FROM towelinventory"; 
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+    }
+
+    public function equipmentRows($conditions = array()){
+        $sql = "SELECT equipment.E_Type, equipment.E_Model, equipmentinventory.EI_Code, equipmentinventory.E_Code, EI_DeliveryDate, EI_DeliveryTime FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code GROUP BY EI_Code DESC LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+    }
+
+    public function transReport($client,$date1,$date2,$conditions = array()){
+        $sql = "SELECT * from transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID WHERE transaction.CLIENT_ID = '".$client."' OR transaction.TR_TransactionDate BETWEEN '".$date1."' AND '".$date2."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+    }
+
+    public function quantity($type,$model){
+        $sql = "SELECT SUM(EI_Quantity) as quantity FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE E_Type='".$type."' AND E_Model='".$model."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['quantity'];
+        return $result;
+    }
+
+    public function equipHistory($code,$conditions = array()){
+        $sql ="SELECT * FROM equipmentinventory WHERE E_Code = '".$code."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+    }
+
+    public function locker($date,$key){
+        $sql = "SELECT A_LockerKey FROM attendance WHERE A_LockerKey = '".$key."' AND A_Date = '".$date."' AND A_TimeOut IS NULL";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['A_LockerKey'];
+        return $result;
+
+    }
+
+    public function penaltyPrice($type){
+        $sql = "SELECT P_Fee FROM penalties WHERE P_Type = '".$type."'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['P_Fee'];
+        return $result;    
+    }
+
+    public function checkTowels($Acode){
+        $sql = "SELECT A_TowelQty FROM attendance WHERE A_Code = '".$Acode."'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['A_TowelQty'];
+        return $result;    
+    }
+
+
 
 
 

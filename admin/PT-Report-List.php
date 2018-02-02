@@ -34,7 +34,7 @@
                  </div>
 
                  <div class="col-md-3">
-                <a href="PT-Trend-HealthCondition.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-uniqueclients" data-type="success">TOP HEALTH CONDITIONS</a>
+                <a href="PT-Trend-Exercise.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-uniqueclients" data-type="success">TOP EXERCISES</a>
                  </div>
              </div>
              </div>

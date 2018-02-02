@@ -3,7 +3,7 @@
 $year = date('Y'); 
 $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
 
-$qc1 = $conn->query("SELECT SUM(TR_Price) as total, client.CLIENT_FirstName as fname, client.CLIENT_MiddleName as mname, client.CLIENT_LastName as lname FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID GROUP BY client.CLIENT_ID ORDER BY SUM(TR_Price) DESC LIMIT 5") or die(mysqli_error());
+$qc1 = $conn->query("SELECT SUM(TR_Bill) as total, client.CLIENT_FirstName as fname, client.CLIENT_MiddleName as mname, client.CLIENT_LastName as lname FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID GROUP BY client.CLIENT_ID ORDER BY SUM(TR_Bill) DESC LIMIT 5") or die(mysqli_error());
 
 ?>
 

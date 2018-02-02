@@ -37,19 +37,16 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'A_Year' => $year,
             'A_Month' => $month,
             'A_Date' => $date,
-            'A_id' => $_POST['sample'],
             'A_status' => $regstat
     
 
         );
          
-
+        $locker = $pdo->locker($date,$_POST['Locker']);
         $check = $pdo->checkAttendance($_POST['clientName'],$date);
-        if($check <> $_POST['clientName'] || empty($check)){
+        if(($check <> $_POST['clientName'] || empty($check)) && ($locker <> $_POST['Locker'] || empty($locker)))  {
             
-                
-
-                $available = $pdo->previousAvailable($date);
+                $available = $pdo->previousAvailable();
                 $borrowed = $pdo->previousBorrowed($date);
                 $userData3 = array(
                     'TI_Borrowed' => ($_POST['towel'] + $borrowed),
@@ -69,7 +66,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
             
             
-        $price = $pdo->walkin();
+        $price = $pdo->penaltyPrice('Walk-in');
         
         
         $userData2 = array(
@@ -92,9 +89,14 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
         $_SESSION['statusMsg'] = $statusMsg;
         // header("Location:../attendance.php");
+
+
+    
+
+
     }else{
         
-        echo "<script>alert('Client Timed-in Failed!');window.location.href='../attendance.php';</script>";
+        echo "<script>alert('Client Time-in Failed!');window.location.href='../attendance.php';</script>";
          $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
         $_SESSION['statusMsg'] = $statusMsg;
     }
@@ -105,18 +107,27 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'A_TowelQty' => $_POST['modifiedTowel'],
             'A_LockerKey' => $_POST['modifiedLocker']
             );
-
-            $condition = array('A_Code' => $_POST['A_Code']);
-            $update = $pdo->update($tblName1,$userData,$condition);
+            $locker = $pdo->locker($date,$_POST['modifiedLocker']);
+            if($locker <> $_POST['modifiedLocker']){
+                $condition = array('A_Code' => $_POST['A_Code']);
+                $update = $pdo->update($tblName1,$userData,$condition);
            
-            echo "<script>alert('Client Attendance Information Successfully Modified!');window.location.href='../attendance.php';</script>";
-             $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;
+                echo "<script>alert('Client Attendance Information Successfully Modified!');window.location.href='../attendance.php';</script>";
+                $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
+                $_SESSION['statusMsg'] = $statusMsg;
+            }else{
+                echo "<script>alert('Client Attendance Information Modification Failed!');window.location.href='../attendance.php';</script>";
+                $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
+                $_SESSION['statusMsg'] = $statusMsg;
+            }
+
+            
         //working
     }elseif($_REQUEST['action_type'] == 'out'){ 
         $userData = array(
             'A_TimeOut' => $time,
-            'A_TowelReturn' => $_POST['returnedTowel']
+            'A_TowelReturn' => $_POST['returnedTowel'],
+            'A_ReturnedKey' =>$_POST['key']
         );
 
         $borrowed = $pdo->previousBorrowed($date);
@@ -126,6 +137,42 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'TI_Borrowed' => ($borrowed - $_POST['returnedTowel'])
 
         );
+
+
+        $towels = $pdo->checkTowels($_POST['A_Code']);
+        if($towels <> $_POST['returnedTowel'] || $_POST['key'] == 'Unreturned'){
+            $lostQty = $towels - $_POST['returnedTowel'];
+            $penaltyPrice = $pdo->penaltyPrice('Lost Towel(s)');
+                $userData1 = array(
+                'CLIENT_ID' => $_POST['CLIENT_ID'],
+                'TR_Type' => 'Lost Towel(s) ',
+                'TR_Bill' => $penaltyPrice * $lostQty,
+                'TR_Status' => 'unpaid',
+                'TR_TransactionDate' => $date,
+                'year' => $year,
+                'month' => $month
+                );
+
+                $fee = $pdo->penaltyPrice('Lost Locker Key');
+                $userData5 = array(
+                    'CLIENT_ID' => $_POST['CLIENT_ID'],
+                    'TR_Type' => 'Lost Locker Key',
+                    'TR_Bill' => $fee,
+                    'TR_Status' => 'unpaid',
+                    'TR_TransactionDate' => $date,
+                    'year' => $year,
+                    'month' => $month
+                );
+         $insert = $pdo->insert($tableName3, $userData1);
+         $insert = $pdo->insert($tableName3, $userData5);
+         echo "<script>alert('Client charged for a penalty. Client Successfully Timed-out. ');window.location.href='../attendance.php';</script>";
+         $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
+            $_SESSION['statusMsg'] = $statusMsg;
+        }else{
+
+
+
+
 
         $condition2 = array('TI_Date' => $date);
         $update4 = $pdo->update($tableTowel,$userData4,$condition2);
@@ -138,7 +185,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
          $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
             $_SESSION['statusMsg'] = $statusMsg;
 
-
+        }
         
 
     }

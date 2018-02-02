@@ -29,16 +29,17 @@ include("includes/header.php"); ?>
         </div>
     </div>
     <div class="row clearfix">
-        <div class="col-lg-6 col-md-6">
+        <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="header">
-                    <h2>Towel Supply Monitoring</h2>
+                    <h2>Towel Monitoring</h2>
                 </div>
                 <div class="body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                             <thead>
                                 <tr>
+                                    <th>Activity</th>
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Quantity</th>
@@ -47,64 +48,33 @@ include("includes/header.php"); ?>
                             <tbody>
                                 <?php
                                     $pdo = new dbConnect();
-                                    $supplied = $pdo->towels('TI_Supplied',array("order_by" => "TI_Code ASC"));
+                                    $supplied = $pdo->towelSupplied(array("order_by" => "TI_Code ASC"));
                                     if(!empty($supplied)){ 
                                         $count = 0; 
                                         foreach($supplied as $supply){ 
                                         $count++;
                                 ?>
                                 <tr>
+                                    <td><?php echo $supply['TI_Type']?></td>
                                     <td><?php echo date("F j, Y", strtotime($supply['TI_Date']))?></td>
                                     <td><?php echo date("g:i A", strtotime($supply['TI_Time']))?></td>
-                                    <td><?php echo $supply['TI_Supplied']?></td>
+                                    <td>
+                                        <?php 
+                                            if($supply['TI_Type'] === "Supply"){
+                                                echo $supply['TI_Supplied'];
+                                            }else{
+                                                echo $supply['TI_Laundry'];
+                                            }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <?php } }else{ ?>
-                                    <tr><td colspan="6">No Towel Supply found......</td></tr>
+                                    <tr><td colspan="6">No Towel Activity found......</td></tr>
                                 <?php } ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6">
-            <div class="card">
-                <div class="header">
-                    <h2>Towel Laundry Monitoring</h2>
-                </div>
-                <div class="body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $pdo = new dbConnect();
-                                    $supplied = $pdo->towels('TI_Laundry',array("order_by" => "TI_Code ASC"));
-                                    if(!empty($supplied)){ 
-                                        $count = 0; 
-                                        foreach($supplied as $supply){ 
-                                        $count++;
-                                ?>
-                                <tr>
-                                    <td><?php echo date("F j, Y", strtotime($supply['TI_Date']))?></td>
-                                 
-                                    <td><?php echo date("g:i A", strtotime($supply['TI_Time']))?></td>
-                                    <td><?php echo $supply['TI_Laundry']?></td>
-                                </tr>
-                                <?php } }else{ ?>
-                                    <tr><td colspan="6">No Towel Supply found......</td></tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -117,105 +87,188 @@ include("includes/header.php"); ?>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>List of Equipment</h2>
+                            <h2>Equipment Monitoring</h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
 
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                                     <thead>
                                         <tr role="row">
-                                            <th align="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 200px;">Type</th>
-
-                                            <th align="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 200px;">Model</th>
-
-                                            <th align="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 200px;">Quantity</th>
-
-                                            <th align="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 200px;">Last Checked Date</th>
-
-                                            <th align="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 200px;">Status</th>
-
-                                            <th align="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">Actions</th>
+                                            <th><center>Type</center></th>
+                                            <th><cemter>Model</cemter></th>
+                                            <th><center>Quantity</center></th>
+                                            <th><center>Latest Delivery Date</center></th>
+                                            <th><center>Latest Delivery Time</center></th>
+                                            <th><center>Actions</center></th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         <?php
                                         $pdo = new dbConnect();
-                                        $eqp = $pdo->getRows('equipment',array('order_by'=>'E_Code ASC'));
-                                        if(!empty($eqp)){ $count = 0; foreach($eqp as $equipment){ $count++;?>
+                                        $eqp = $pdo->equipmentRows(array('order_by'=>'EI_Code ASC'));
+                                            if(!empty($eqp)){ 
+                                                $count = 0; 
+                                                foreach($eqp as $equipment){ 
+                                                $count++;
+                                        $quantity = $pdo->quantity($equipment['E_Type'],$equipment['E_Model']);
+                                        ?>
                                         <tr>
-                                            <td class="hidden"><?php echo $equipment['E_Code']; ?></td>
-                                            <td><?php echo $equipment['E_Name']; ?></td>
                                             <td><?php echo $equipment['E_Type']; ?></td>
-                                            <td><?php echo $equipment['E_Quantity']; ?></td>
-                                            <td><?php echo $equipment['E_DateChecked']; ?></td>
-                                            <td><?php echo $equipment['E_Status']; ?></td>
+                                            <td><?php echo $equipment['E_Model']; ?></td>
+                                            <td><?php echo $quantity ?></td>
+                                            <td><?php echo date("F d, Y", strtotime($equipment['EI_DeliveryDate'])) ?></td>
+                                            <td><?php echo date("g:i A", strtotime($equipment['EI_DeliveryTime'])) ?></td>
+                                            <td>
+                                                <center>
+                                                    <button class="btn btn-success" data-toggle="modal" data-target="#restock-<?php echo $equipment['EI_Code']; ?>" waves-effect btn-success" >Details</button>
+                                                </center>
                                             
-                                            <td>    
-                                            <td class="align-center">
-                                                <input type="hidden" name="action_type" value="mod"/>
-                                                <button type="button" class="btn bg-green" data-toggle="modal"   data-target="#mod-<?php echo $equipment['E_Code']; ?>" 
-                                                        style="height: 30px;">Modify</button></td></td>
-
-
-                                    <div class="modal fade" id="mod-<?php echo $equipment['E_Code']; ?>" tabindex="-1" role="dialog">
-                                        <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal fade" id="restock-<?php echo $equipment['EI_Code']; ?>" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
-
+                                                
+                                                <form method="post" action="actions/equipmentsAction.php">
                                                 <div class="modal-header">
-                                                    <h3 class="modal-title" id="smallModalLabel">Edit Equipment Information</h3>
+                                                    <h3 class="modal-title"><center><?php echo $equipment['E_Type']?> Details</center></h3>
                                                 </div>
-                                                <form method="post" action="actions/equipmentsAction.php?" id="myform1" >
-                                                    <input type="hidden" class="form-control" name="E_Code" value="<?php echo $equipment['E_Code']; ?>"/>
-                                                    <div class="row container-fluid">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <h5 class="pull-left">Type</h5>
-                                                                    <input type="text" class="form-control" name="type" placeholder="Type" value= "<?php echo $equipment['E_Name'];?>"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <h5 class="pull-left">Model</h5>
-                                                                    <input type="text" name="model" class="form-control" placeholder="Model" value="<?php echo $equipment['E_Type']; ?>"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <h5 class="pull-left">Last Checked Date</h5>
-                                                                    <input type="text" class="form-control" placeholder="Last Checked Date"  value="<?php echo $equipment['E_DateChecked']; ?>">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <h5 class="pull-left">Status</h5>
-                                                                    <input type="text" class="form-control" placeholder="Email Address"  value="<?php echo $equipment['E_Status']; ?>"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
+                                                <div class="modal-body">
+                                                    <div class="card">
+                                                    <div class="header">
+                                                        <h2>Restock <?php echo $equipment['E_Type']?></h2>
                                                     </div>
+                                                    <div class="body">
+                                                <div class="row clearfix">
+                            <div class="col-lg-4">
+                                <div class="form-group" >
+                                    <label>Equipment Type</label>
+                                    <div class="form-line">
+                                        <input type="text" name="restockType" class="form-control" placeholder="Type" value="<?php echo $equipment['E_Type']?>" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Model</label>
+                                    <div class="form-line">
+                                        <input type="text" name="restockModel" class="form-control" placeholder="Model" value="<?php echo $equipment['E_Model']?>" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <div class="form-line">
+                                        <input type="number" min="0" name="restockQuantity" class="form-control" placeholder="Quantity" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Delivery Date</label>
+                                    <div class="form-line">
+                                        <input type="date" name="restockDeliveryDate" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Delivery Time</label>
+                                    <div class="form-line">
+                                        <input type="time" name="restockDeliveryTime" min="08:00" max="22:00" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Supplier</label>
+                                    <div class="form-line">
+                                        <input type="text" name="restockSupplier" class="form-control" placeholder="Supplier" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input type="hidden" name="E_Code" value="<?php echo $equipment['E_Code']?>">
+                                <input type="hidden" name="action_type" value="restock"/>
+                                <button type="submit" name ="submit" class="btn pull-right bg-green" data-type='success'>SAVE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            
+                       
+                    
+                            <div class="card">     
+                                <div class="header">
+                                    <h2><?php echo $equipment['E_Type']?> Inventory</h2>
+                                </div>
+                                <div class="body">
+                                    <div class="row clearfix">
+
+                                        <div class="table-responsive">
+
+                                <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
+                                    <thead>
+                                        <tr>
+                                            <th><center>Supplier</center></th>
+                                            <th><center>Quantity</center></th>
+                                            <th><center>Delivery Date</center></th>
+                                            <th><center>Delivery Time</center></th>
+                                             
+                                            
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                            <?php
+                                                $pdo = new dbConnect();
+                                                $equips = $pdo->equipHistory($equipment['E_Code'],array("order_by" => "EI_Code"));
+                                                    if(!empty($equips)){
+                                                        $count = 0;
+                                                        foreach($equips as $equip){
+                                            ?>                         
+                                        <tr>
+                                            <td><?php echo $equip['EI_Supplier'] ?></td>
+                                            <td><?php echo $equip['EI_Quantity']; ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($equip['EI_DeliveryDate'])) ?></td>
+                                            <td><?php echo date("g:i A", strtotime($equip['EI_DeliveryTime'])) ?></td>
+                                            
+                                        
+                                        </tr>
+                                        <?php }} ?>
+                                        </tbody>
+                                    </table>
+                                </div>
 
 
 
-                                                    <div class="modal-footer">
-                                                        <input type="hidden" name="action_type" value="edit"/>
-                                                        <button type="submit" name ="edit" class="btn  bg-green" data-type='success'>SAVE</button>
-                                                        <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
-                                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                        </div>
+                                        <div class="modal-footer">
+
+                                <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
+                                        </div>
                                                 </form>
-                                            </div>      
+                                            </div>
+                                        </div>
+                                    </div>
+                                        </td>
+                                    
+                       
+
+                
+
+                                                  
+
+
+
+                                                    
                                             </tr>
                                         <?php } }else{ ?>
                                         <tr><td colspan="4">No Equipment(s) found......</td>

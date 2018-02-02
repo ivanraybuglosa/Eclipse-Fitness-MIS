@@ -8,40 +8,40 @@ if(isset($_GET['year']))
     $year=$_GET['year'];
 }
 
-$qjan = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Jan' && year = '$year'") or die(mysqli_error());
+$qjan = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Jan' && year = '$year'") or die(mysqli_error());
 $fjan = $qjan->fetch_array();
 
-$qfeb = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Feb' && year = '$year'") or die(mysqli_error());
+$qfeb = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Feb' && year = '$year'") or die(mysqli_error());
 $ffeb = $qfeb->fetch_array();
 
-$qmar = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Mar' && year = '$year'") or die(mysqli_error());
+$qmar = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Mar' && year = '$year'") or die(mysqli_error());
 $fmar = $qmar->fetch_array();
 
-$qapr = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Apr' && year = '$year'") or die(mysqli_error());
+$qapr = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Apr' && year = '$year'") or die(mysqli_error());
 $fapr = $qapr->fetch_array();
 
-$qmay = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'May' && year = '$year'") or die(mysqli_error());
+$qmay = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'May' && year = '$year'") or die(mysqli_error());
 $fmay = $qmay->fetch_array();
 
-$qjun = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Jun' && year = '$year'") or die(mysqli_error());
+$qjun = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Jun' && year = '$year'") or die(mysqli_error());
 $fjun = $qjun->fetch_array();
 
-$qjul = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Jul' && year = '$year'") or die(mysqli_error());
+$qjul = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Jul' && year = '$year'") or die(mysqli_error());
 $fjul = $qjul->fetch_array();
 
-$qaug = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Aug' && year = '$year'") or die(mysqli_error());
+$qaug = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Aug' && year = '$year'") or die(mysqli_error());
 $faug = $qaug->fetch_array();
 
-$qsep = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Sep' && year = '$year'") or die(mysqli_error());
+$qsep = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Sep' && year = '$year'") or die(mysqli_error());
 $fsep = $qsep->fetch_array();
 
-$qoct = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Oct' && year = '$year'") or die(mysqli_error());
+$qoct = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Oct' && year = '$year'") or die(mysqli_error());
 $foct = $qoct->fetch_array();
 
-$qnov = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Nov' && year = '$year'") or die(mysqli_error());
+$qnov = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Nov' && year = '$year'") or die(mysqli_error());
 $fnov = $qnov->fetch_array();
 
-$qdec = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `TL_regMONTH` = 'Dec' && year = '$year'") or die(mysqli_error());
+$qdec = $conn->query("SELECT  COUNT(TL_Code) as total FROM `traininglog` WHERE `month` = 'Dec' && year = '$year'") or die(mysqli_error());
 $fdec = $qdec->fetch_array();
 
 

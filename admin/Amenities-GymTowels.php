@@ -43,7 +43,7 @@
                                 <div class="col-sm-12" style="margin-top: 60px;">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" name="supply" class="form-control" placeholder="Supply Towels" />
+                                            <input type="text" min="1" name="supply" class="form-control" placeholder="Supply Towels" />
                                         </div>
                                     </div>
                                     <input type="hidden" name="action_type" value="add"/>
@@ -78,16 +78,17 @@
 
 
                                                         
-						<?php 
+						
+                        <div class="body table-responsive">
+                        <?php 
                             $pdo = new dbConnect();
-                            $towels = $pdo->towels(date("Y-m-d"), array("order_by" => "TI_Code"));
+                            $available = $pdo->previousAvailable();
+                            $towels = $pdo->towels(date("Y-m-d"),array("order_by" => "TI_Code"));
                             if(!empty($towels)){ 
                                 $count = 0; 
                                 foreach($towels as $towel){ 
                                 $count++;
                                 ?>
-                        <div class="body table-responsive">
-                        
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="info-box-3 bg-green hover-zoom-effect">
                         <div class="icon">
@@ -118,7 +119,7 @@
                         <div class="content">
                           
                             <div class="text">Available</div>
-                            <div class="number"><?php echo $towel["TI_Available"]?></div>
+                            <div class="number"><?php echo $available ?></div>
 
                         </div>
                     </div>
@@ -149,50 +150,72 @@
                 <?php }} ?>
                 
                 
+                
                           
             </div>
         </div>
+
 		<div class="card">
 
                 <div class="header">
                     <h2>
-                        Equipments
+                        Equipment
                     </h2>
                 </div>
                 <div class="body">
                     <form action="actions/equipmentsAction.php" method="POST">
                         <div class="row clearfix">
-                            <div class="col-sm-12">
-                                <div class="form-group" style="margin-top:15px">
+                            <div class="col-lg-6">
+                                <div class="form-group" >
+                                    <label>Equipment Type</label>
                                     <div class="form-line">
                                         <input type="text" name="type" class="form-control" placeholder="Type" />
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
+                                    <label>Model</label>
                                     <div class="form-line">
                                         <input type="text" name="model" class="form-control" placeholder="Model" />
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
+                                    <label>Delivery Date</label>
                                     <div class="form-line">
-                                        <input type="text" name="quantity" class="form-control" placeholder="Quantity" />
+                                        <input type="date" name="deliveryDate" class="form-control"/>
                                     </div>
                                 </div>
-                                <div class="row"> 
-                                    <div class="col-md-4"> 
-                                        <div class="form-group" style="margin-top:20px">
-                                            <label style="margin-top: 9px;">Equipment Status: </label>
-                                            <input type="radio" value="Brand New" name="equip" id="male" class="with-gap" required\">
-                                            <label for="male">Brand New</label>
-
-                                            <input type="radio"  value="Repaired" name="equip" id="female" class="with-gap" required">
-                                            <label for="female" class="m-l-20">Repaired</label>
-                                        </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Delivery Time</label>
+                                    <div class="form-line">
+                                        <input type="time" name="deliveryTime" min="08:00" max="22:00" class="form-control"/>
                                     </div>
-                                    
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <div class="form-line">
+                                        <input type="number" min="0" name="quantity" class="form-control" placeholder="Quantity" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Supplier</label>
+                                    <div class="form-line">
+                                        <input type="text" name="supplier" class="form-control" placeholder="Supplier" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
                                 <input type="hidden" name="action_type" value="add"/>
-                                <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" style="padding:10px; margin-bottom:10px;">SAVE</button>
+                                <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" style="padding:10px; margin-bottom:10px;">SUBMIT</button>
                             </div>
                         </div>
                     </form>

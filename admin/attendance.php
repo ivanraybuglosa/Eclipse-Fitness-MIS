@@ -84,21 +84,32 @@ include("includes/header.php"); ?>
 								<div class="form-group">
 								  <div class="form-line">
 									<h5 class="pull-left">Locker Number </h5>
-									<select class="form-control" name="Locker" style="height:50%">
+									<select id="locker" class="form-control" name="Locker" style="height:50%">
 										<?php echo get_locker() ?>
 									</select>
 								<?php
-								function get_locker(){
 
-								//if clientName.Gender = Male $M range is 1-150, if Female 151-300
-									$var="";
-									for ($m=1; $m<=150; $m++){
-										$var .= '<option value="'.$m.'">'.$m.' </option>';
-									}
-									return $var;
-									//if number is selected to time-in. Remove from choices
-								}
+								
+
+							function get_locker(){
+								
+												//if clientName.Gender = Male $M range is 1-150, if Female 151-300
+													$var="";
+													for ($m=1; $m<=150; $m++){
+															if($locker['A_LockerKey'] == $m){
+															$var .= '<option value="'.$m.'" >'.$m.' </option>';
+														}else{
+															$var .= '<option value="'.$m.'">'.$m.' </option>';
+														}
+
+													}
+													return $var;
+													//if number is selected to time-in. Remove from choices
+												}
+
+										
 								?>
+								
 									</div>
 								</div>
 							</div>
@@ -107,8 +118,8 @@ include("includes/header.php"); ?>
 								<div class="form-group">
 							    	<div class="form-line">
 										<h5 class="pull-left">Towels</h5>
-										<input type="number" class="form-control"  name="towel" value="" required />
-										<input type="hidden"   name="sample" value="1"/>
+										<input type="number" class="form-control"  min="0" max="4" name="towel" value="" required />
+										
 
 								 	</div>
 								 </div>
@@ -116,7 +127,7 @@ include("includes/header.php"); ?>
 
 							<div class="col-md-3" style="margin-top: 20px;">
 								<input type="hidden" name="action_type" value="add"/>
-								<button name="add" type="submit" class="btn bg-green btn-block"><i class="material-icons">access_alarm</i>TIME-IN</button>
+								<button onclick="DeleteValues();" name="add" type="submit" class="btn bg-green btn-block"><i class="material-icons">access_alarm</i>TIME-IN</button>
 							</div>
 							
 						</div>
@@ -133,14 +144,14 @@ include("includes/header.php"); ?>
 
 
 					   <div class="body table-responsive">
-                    	<table class="table table-bordered table-striped table-hover dataTable ">
+                    	<table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                         	<thead>
                             <tr>
                                 <th class="center" aria-label="Name: activate to sort column descending" >Client Name</th>
                                 <th class="center">Time-in</th>
-                                <th class="center">Time-out</th>
+                               
                                 <th class="center">Towels</th>
-                                <th class="center">Locker No.</th>
+                                <th class="center">Locker Number</th>
                                 <th class="center">Actions</th>
                             </tr>
                         	</thead>
@@ -151,8 +162,8 @@ include("includes/header.php"); ?>
                             			if(!empty($attendances)){
                             				$count = 0;
                             				foreach($attendances as $attend){
+
                             	?>
-            
                                  
                                     <tr>
                                         <td> 
@@ -163,17 +174,18 @@ include("includes/header.php"); ?>
                                                 $fullname = $firstname ." ". $midname." ". $lastname; 
                                                     echo $fullname ; ?></td>
                                         <td><?php echo date("g:i A", strtotime($attend['A_TimeIn'])); ?></td>
-                                        <td><?php echo $attend['A_TimeOut'] ?></td>
+                                     
                                         <td><?php echo $attend['A_TowelQty']; ?></td>
                                         <td><?php echo $attend['A_LockerKey']; ?></td>
-                                        <td class="center"><button type="button" class="btn bg-green" style="height: 30px;" data-toggle="modal"  data-target="#smallModal-<?php echo $attend['A_Code']; ?>">Modify</button>
-                                        </td>
-                                        <td class="center"><button type="button" data-toggle="modal"  data-target="#timeout-<?php echo $attend['A_Code']; ?>" class="btn bg-red" >Time-Out</button>
-									
+                                        <td><center><button type="button" class="btn bg-green" style="height: 30px;" data-toggle="modal"  data-target="#smallModal-<?php echo $attend['A_Code']; ?>">Modify</button>
+                                        <button type="button" data-toggle="modal"  data-target="#timeout-<?php echo $attend['A_Code']; ?>" class="btn bg-red" >Time-Out</button>
+										</center>
                                         </td>
 
                                     </tr>
 				  </form>
+
+				  	
 
 	                                   	<!-- TIMEOUT MODAL -->
 	<div class="modal fade" id="timeout-<?php echo $attend['A_Code']; ?>" tabindex="-1" role="dialog">
@@ -189,7 +201,7 @@ include("includes/header.php"); ?>
 								<div class="form-group">
 									<div class="form-line">
 										<h5 class="pull-left">Client Name</h5>
-										<input type="text" class="form-control" placeholder="Client Name" value="<?php 
+										<input type="text" class="form-control" value="<?php 
                                                	$firstname = $attend['CLIENT_FirstName']; 
                                                 $midname = $attend['CLIENT_MiddleName']; 
                                                 $lastname = $attend['CLIENT_LastName']; 
@@ -204,22 +216,23 @@ include("includes/header.php"); ?>
 								<div class="form-group">
 									<div class="form-line">
 										<h5 class="pull-left">Returned Towel Quantity</h5>
-										<input name="returnedTowel" type="number" class="form-control" value="<?php echo $attend['A_TowelQty']; ?>"/>
+										<input name="returnedTowel" type="number" class="form-control" value="<?php echo $attend['A_TowelQty']; ?>" min="0" max="<?php echo $attend['A_TowelQty']?>"/>
 									</div>
 								</div>
 
 								<div class="form-group">
-									<div class="form-line">
-										<h5 class="pull-left">Returned Locker Number</h5>
-										
-										<input type="number" class="form-control" value="<?php echo $attend['A_LockerKey']; ?>"/>
-									</div>
-								</div>
+									<h5>Locker Key Number: <?php echo $attend['A_LockerKey']?></h5>
+                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>returned" class="with-gap"  value="Returned">
+                               <label for="<?php echo $attend['A_LockerKey']?>returned">Returned</label>
+                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>unreturned" class="with-gap"  value="Unreturned">
+                               <label for="<?php echo $attend['A_LockerKey']?>unreturned" class="m-l-20">Unreturned</label>
+                            </div>
 							
 						</div>
 
 					</center>
 					<div class="modal-footer">
+						<input type="hidden" name="CLIENT_ID" value="<?php echo $attend['CLIENT_ID'];?>"/>
 						<input type="hidden" name="A_Code" value="<?php echo $attend['A_Code'];?>"/>
 						<input type="hidden" name="action_type" value="out"/>
 						<button type="submit" name="submit" class="btn  bg-green">TIME-OUT</button>

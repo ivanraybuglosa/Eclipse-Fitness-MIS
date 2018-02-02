@@ -33,10 +33,9 @@
     </div>
                         <div class="body">
                         <form method="POST">
-                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                 <div class="row clearfix">
 
-                                <div class="col-sm-8">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                        <div class="form-line">
                                         <div class="col-md-6">
@@ -49,13 +48,19 @@
                                     </div>  
                                 </div>
 
-                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                                <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
+
+                                <div class="col-md-3">
+                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
+                                </div>
+
                             </div>
                         </form>
-                                
+                            <div id="print">
+                               <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info"> 
                                     <thead>
                                         <tr>
                                             <th>Start Date</th>
@@ -114,11 +119,22 @@
                                 </table>
                             </div>
                         </div>
-</div>
                     </div>
-                </div>
-            </div>
             </section>
+
+            <script>
+
+                     function printContent(el) {
+                         var restorepage = document.body.innerHTML;
+                         var printcontent = document.getElementById(el).innerHTML;
+                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Personal Training Contract History</h2><center><br><br>" +
+                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
+                         window.print();
+                         document.body.innerHTML = restorepage;
+                     }
+
+
+            </script>
     <?php include("includes/footer.php"); ?>
 
     <!-- Jquery DataTable Plugin Js -->

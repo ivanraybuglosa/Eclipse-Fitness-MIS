@@ -22,7 +22,7 @@ var chart = new CanvasJS.Chart("activeclients", {
         text: "Top Participants for the Year <?php echo $year ?>"
     },
     data: [{
-        type: "pyramid",
+        type: "column",
         yValueFormatString: "#''",
         indexLabelFontColor: "black",
         indexLabelFontSize: 15,

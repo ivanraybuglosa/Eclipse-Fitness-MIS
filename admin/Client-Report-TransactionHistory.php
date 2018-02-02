@@ -34,7 +34,7 @@
                         <div class="body">
                         <form method="POST">
                             <div class="row clearfix">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                        <div class="form-line">
                                         <div class="col-md-6">
@@ -48,11 +48,37 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                <select class="form-control show-tick" data-live-search="true" name="clientName">
+                                        <option value="null">Choose Client</option>
+                                            <?php 
+                                            $pdo = new dbConnect();
+
+                                             $client = $pdo->getRows('client',array('order_by'=>'CLIENT_ID ASC'));
+                                                    if(!empty($client)){ 
+                                                        $count = 0; 
+                                                        foreach($client as $clients){
+                                                            $count++;?>
+
+                                        <option id = "<?php echo $clients['CLIENT_ID']; ?>" value="<?php echo $clients['CLIENT_ID']; ?>">
+                                                <?php 
+                                                $firstname = $clients['CLIENT_FirstName']; 
+                                                      $lastname = $clients['CLIENT_LastName']; 
+                                                      $fullname=$firstname." ".$lastname; 
+                                                      echo $fullname ; 
+                                                 ?>
+                                        </option>
+                                            <?php 
+                                                }
+                                            }
+                                            ?>
+                                </select>
+                                </div>
+                                <div class="col-md-2">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                                 </div>
 
@@ -76,46 +102,50 @@
 
                                          $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error()); 
 
-                                         if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
-                                        if($_REQUEST['action_type'] == 'filter'){
+
+                                if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
+                                        if($_REQUEST['action_type'] == 'filter') {
 
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
+                                            $clientName = $_POST['clientName'];
 
-                                         $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                            $th = $conn->query("SELECT * FROM transaction WHERE CLIENT_ID = '$clientName' OR TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
 
-                                         while($fth = $th->fetch_array()) { 
-
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $fth['TR_Date'] ?></td>
-                                            <td><?php echo $fth['CLIENT_FirstName'] ?> 
-                                                <?php echo $fth['CLIENT_MiddleName'] ?> 
-                                                <?php echo $fth['CLIENT_LastName'] ?> </td>
-                                            <td><?php echo $fth['TR_type'] ?></td>
-                                            <td><?php echo $fth['TR_Price'] ?></td>
-                                        </tr>
-                                        <?php 
-                                     }
-                                 }
-                             } else {
-
-                                     $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID ") or die(mysql_error());
-
-                                         while($fth = $th->fetch_array()) { 
-
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $fth['TR_Date'] ?></td>
-                                            <td><?php echo $fth['CLIENT_FirstName'] ?> 
-                                                <?php echo $fth['CLIENT_MiddleName'] ?> 
-                                                <?php echo $fth['CLIENT_LastName'] ?> </td>
-                                            <td><?php echo $fth['TR_type'] ?></td>
-                                            <td><?php echo $fth['TR_Price'] ?></td>
-                                        </tr>
-                                    <?php
+                                            while($fth = $th->fetch_array()) {
+                                                $cid = $fth['CLIENT_ID'];
+                                                $client = $conn->query("SELECT * FROM client WHERE CLIENT_ID = '$cid' ") or die(mysql_error());
+                                                $fc = $client->fetch_array()
+                                             ?>
+                                               <tr>
+                                                   <td><?php echo $fth['TR_TransactionDate'] ?></td>
+                                                   <td><?php echo $fc['CLIENT_FirstName'] ?> 
+                                                       <?php echo $fc['CLIENT_MiddleName'] ?> 
+                                                       <?php echo $fc['CLIENT_LastName'] ?> </td>
+                                                   <td><?php echo $fth['TR_Type'] ?></td>
+                                                   <td><?php echo $fth['TR_Bill'] ?></td>
+                                               </tr>
+                                               <?php
+                                            }
                                         }
-                                    }
+
+                                    }  else {
+
+                                         $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID ") or die(mysql_error());
+
+                                                 while($fth = $th->fetch_array()) { 
+                                                 ?>
+                                                     <tr>
+                                                          <td><?php echo $fth['TR_TransactionDate'] ?></td>
+                                                          <td><?php echo $fth['CLIENT_FirstName'] ?> 
+                                                              <?php echo $fth['CLIENT_MiddleName'] ?> 
+                                                              <?php echo $fth['CLIENT_LastName'] ?></td>
+                                                          <td><?php echo $fth['TR_Type'] ?></td>
+                                                          <td><?php echo $fth['TR_Bill'] ?></td>
+                                                     </tr>
+                                                  <?php
+                                                 }
+                                            }
                                             ?>
 
                                     </tbody>

@@ -113,7 +113,7 @@
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
 
-                                           $pat = $conn->query("SELECT * FROM `attendance` INNER JOIN `client` ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TimeOut != '' && A_fdate BETWEEN '$filterstart' AND '$filterend' ") or die(mysqli_error());
+                                           $pat = $conn->query("SELECT * FROM `attendance` INNER JOIN `client` ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TimeOut != '' && A_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysqli_error());
 
                                            while($fetchF = $pat->fetch_array()) {
                                               
@@ -127,7 +127,7 @@
                                                 <td><?php echo date('g:i A', strtotime($fetchF['A_TimeOut'])) ?></td>
                                                 <td><?php echo $fetchF['A_TowelQty']; ?></td>
                                                 <td><?php echo $fetchF['A_LockerKey']; ?></td>
-                                                <td><?php echo $fetchF['A_fdate'] ?></td>
+                                                <td><?php echo $fetchF['A_Date'] ?></td>
                                             </tr>
                                             <?php 
                                             }
@@ -148,7 +148,7 @@
                                                 <td><?php echo date('g:i A', strtotime($fetchF['A_TimeOut'])) ?></td>
                                                 <td><?php echo $fetchF['A_TowelQty']; ?></td>
                                                 <td><?php echo $fetchF['A_LockerKey']; ?></td>
-                                                <td><?php echo $fetchF['A_fdate'] ?></td>
+                                                <td><?php echo $fetchF['A_Date'] ?></td>
                                             </tr>
                                     <?php
                                         }

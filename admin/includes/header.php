@@ -312,6 +312,9 @@
                                         <a href="Maintenance-TrainingPackage.php">Training Packages</a>
                                     </li>
                                     <li>
+                                        <a href="Maintenance-PenaltiesAndOtherFees.php">Penalties and Other Fees</a>
+                                    </li>
+                                    <li>
                                         <a href="Maintenance-BackupAndRestore.php">Backup and Restore</a>
                                     </li>
                         </ul>

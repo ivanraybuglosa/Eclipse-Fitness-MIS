@@ -67,7 +67,7 @@ var chart = new CanvasJS.Chart("uniqueclient", {
         title: "New Clients"
     },
     data: [{
-        type: "bar",
+        type: "column",
         name: "months",
         axisYType: "secondary",
         color: "#014D65",

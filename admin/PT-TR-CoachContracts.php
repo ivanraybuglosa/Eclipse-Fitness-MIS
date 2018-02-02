@@ -84,10 +84,10 @@
                                     
                                     <thead>
                                         <tr>
+                                            <th>Coach Name</th>
                                             <th>Registration Date</th>
                                             <th>Client Name</th>
                                             <th>Status</th>
-                                            <th>Performance</th>
                                             <th>Sessions</th>
                                             <th>End Date</th>
                                         </tr>
@@ -101,13 +101,15 @@
                 $pt = $conn->query("SELECT * FROM `traininglog` INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE `COACH_ID` = ".$_GET['coachName']." ") or die(mysql_error());
 
                                 while($ptf = $pt->fetch_array()) {
+                                    $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = '$_GET[coachName]' ") or die(mysql_error());
+                                    $fetchc = $cname->fetch_array();
                                     ?>
                                         <tr>
+                                            <td><?php echo $fetchc['Coach_FirstName'] ?> <?php echo $fetchc['Coach_LastName'] ?></td>
                                             <td><?php echo $ptf['TL_RegDate'] ?></td>
                                             <td><?php echo $ptf['CLIENT_FirstName'] ?> 
                                                 <?php echo $ptf['CLIENT_LastName'] ?></td>
                                             <td><?php echo $ptf['CLIENT_RegStatus'] ?></td>
-                                            <td><?php echo $ptf['TL_ClientPerformance'] ?></td>
                                             <td><?php echo $ptf['TP_PackageType'] ?> Sessions</td>
                                             <td><?php echo $ptf['TL_Expiry'] ?></td>
                                         </tr>
@@ -130,9 +132,7 @@
                      function printContent(el) {
                          var restorepage = document.body.innerHTML;
                          var printcontent = document.getElementById(el).innerHTML;
-                         var  e = document.getElementById("coachName");
-                         var  strUser = e.options[e.selectedIndex].text;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Client Personal Training Contracts of "+strUser+"</h2><center><br><br>"+printcontent +"<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
+                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Coach Training Contracts</h2><center><br><br>"+printcontent +"<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
                          window.print();
                          document.body.innerHTML = restorepage;
                      }

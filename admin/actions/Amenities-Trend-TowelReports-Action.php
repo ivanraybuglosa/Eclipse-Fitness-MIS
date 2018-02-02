@@ -64,7 +64,7 @@ var chart = new CanvasJS.Chart("towel", {
     },
     
     data: [{        
-        type: "bar",       
+        type: "column",       
         dataPoints: [   
             { label: "Jan", y: <?php echo $fjan["zero"]?> , indexLabel: "<?php echo $fjan['zero'] ?>"},
             { label: "Feb", y: <?php echo $ffeb["zero"]?> , indexLabel: "<?php echo $ffeb['zero'] ?>"},

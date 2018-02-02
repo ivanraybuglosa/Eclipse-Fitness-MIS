@@ -20,6 +20,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'TI_Supplied' => $_POST['supply'],
             'TI_Date' => $date,
             'TI_Time' => $time,
+            'TI_Type' => 'Supply',
             'month' => $month,
             'year' => $year
             
@@ -51,6 +52,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'TI_Laundry' => $_POST['laundry'],
             'TI_Date' => $date,
             'TI_Time' => $time,
+            'TI_Type' => 'Laundry',
             'month' => $month,
             'year' => $year
          );

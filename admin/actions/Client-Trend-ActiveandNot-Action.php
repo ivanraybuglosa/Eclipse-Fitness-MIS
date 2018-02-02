@@ -10,7 +10,7 @@ if(isset($_GET['year']))
     $year=$_GET['year'];
 }
 
-$ac = $conn->query("SELECT COUNT(*) AS total FROM (SELECT COUNT(CLIENT_ID) as total FROM `attendance` WHERE `A_fdate` BETWEEN '$fromdate' AND '$todate' GROUP BY CLIENT_ID) as sub ") or die(mysqli_error());
+$ac = $conn->query("SELECT COUNT(*) AS total FROM (SELECT COUNT(CLIENT_ID) as total FROM `attendance` WHERE `A_Date` BETWEEN '$fromdate' AND '$todate' GROUP BY CLIENT_ID) as sub ") or die(mysqli_error());
 $fac = $ac->fetch_array();
 
 $inac = $conn->query("SELECT COUNT(*) as total FROM `client` ") or die(mysqli_error());

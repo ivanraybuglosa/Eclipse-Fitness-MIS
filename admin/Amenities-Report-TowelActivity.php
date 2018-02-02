@@ -29,6 +29,9 @@
         </div>
         <?php include("Amenities-Report-List.php"); ?>
         <div class="card">
+            <div class="header">
+                <h2>Supply and Laundry Record</h2>
+            </div>
             <div class="body">
                             <form method="POST">
                              

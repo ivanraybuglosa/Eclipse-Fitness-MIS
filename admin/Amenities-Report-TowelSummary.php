@@ -36,6 +36,9 @@
             }
         ?>
         <div class="card">
+            <div class="header">
+            <h2>Towel Summary for the Year <?php echo $year ?></h2>
+        </div>
             <div class="body">
                 <div class="row">
                     <div class="col-md-8">
@@ -52,7 +55,7 @@
                             ?>
                         </select>
                     </div>
-                    <div class="col-md-4 pull-right">
+                    <div class="col-md-4 pull-right" style="margin-top: -8px;">
                         <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                     </div>
                 </div>
@@ -67,31 +70,19 @@
         </script>
             </div>
             <div class="body">
-                            <div class="table-responsive">
-                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <h4 class="center">Monthly Towel Usage for the Year <?php echo $year ?></h4>
                                          <div id="print">
                             <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                     
                                     
                                     <thead>
                                         <tr role="row">
-                                            <th>
-                                            <th>Jan</th>
-                                            <th>Feb</th>
-                                            <th>Mar</th>
-                                            <th>Apr</th>
-                                            <th>May</th>
-                                            <th>Jun</th>
-                                            <th>Jul</th>
-                                            <th>Aug</th>
-                                            <th>Sept</th>
-                                            <th>Oct</th>
-                                            <th>Nov</th>
-                                            <th>Dec</th>
-                                            <th>Total</th>
+                                            <th>Month</th>
+                                            <th>Borrowed Towels</th>
+                                            <th>Returned Towels</th>
+                                            <th>Lost Towels</th>
                                         </tr>
                                     </thead>
                                     
@@ -182,42 +173,104 @@ $fetchReturned = $returnedTotal->fetch_array();
 ?>
 
                                        <tr>
-                                         <td>Borrowed</td>
+                                         <td>January</td>
                                          <td><?php echo $fjan['zero'] ?></td>
-                                         <td><?php echo $ffeb['zero'] ?></td>
-                                         <td><?php echo $fmar['zero'] ?></td>
-                                         <td><?php echo $fapr['zero'] ?></td>
-                                         <td><?php echo $fmay['zero'] ?></td>
-                                         <td><?php echo $fjune['zero'] ?></td>
-                                         <td><?php echo $fjul['zero'] ?></td>
-                                         <td><?php echo $faug['zero'] ?></td>
-                                         <td><?php echo $fsept['zero'] ?></td>
-                                         <td><?php echo $foct['zero'] ?></td>
-                                         <td><?php echo $fnov['zero'] ?></td>
-                                         <td><?php echo $fdec['zero'] ?></td>
-                                         <td><?php echo $fetchBorrowed['zero'] ?></td>
+                                         <td><?php echo $ffjan['zero'] ?></td>
+                                         <td><?php echo $fjan['zero'] - $ffjan['zero'] ?></td>
+                                       </tr>
 
+                                       <tr>
+                                         <td>February</td>
+                                         <td><?php echo $ffeb['zero'] ?></td>
+                                         <td><?php echo $fffeb['zero'] ?></td>
+                                         <td><?php echo $ffeb['zero'] - $fffeb['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>March</td>
+                                         <td><?php echo $fmar['zero'] ?></td>
+                                         <td><?php echo $ffmar['zero'] ?></td>
+                                         <td><?php echo $fmar['zero'] - $ffmar['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>April</td>
+                                         <td><?php echo $fapr['zero'] ?></td>
+                                         <td><?php echo $ffapr['zero'] ?></td>
+                                         <td><?php echo $fapr['zero'] - $ffapr['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>May</td>
+                                         <td><?php echo $fmay['zero'] ?></td>
+                                         <td><?php echo $ffmay['zero'] ?></td>
+                                         <td><?php echo $fmay['zero'] - $ffmay['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>June</td>
+                                         <td><?php echo $fjune['zero'] ?></td>
+                                         <td><?php echo $ffjune['zero'] ?></td>
+                                         <td><?php echo $fjune['zero'] - $ffjune['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>July</td>
+                                         <td><?php echo $fjul['zero'] ?></td>
+                                         <td><?php echo $ffjul['zero'] ?></td>
+                                         <td><?php echo $fjul['zero'] - $ffjul['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>August</td>
+                                         <td><?php echo $faug['zero'] ?></td>
+                                         <td><?php echo $ffaug['zero'] ?></td>
+                                         <td><?php echo $faug['zero'] - $ffaug['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>September</td>
+                                         <td><?php echo $fsept['zero'] ?></td>
+                                         <td><?php echo $ffsept['zero'] ?></td>
+                                         <td><?php echo $fsept['zero'] - $ffsept['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>October</td>
+                                         <td><?php echo $foct['zero'] ?></td>
+                                         <td><?php echo $ffoct['zero'] ?></td>
+                                         <td><?php echo $foct['zero'] - $ffoct['zero'] ?></td>
+                                       </tr>
+
+                                       <tr>
+                                         <td>November</td>
+                                         <td><?php echo $fnov['zero'] ?></td>
+                                         <td><?php echo $ffnov['zero'] ?></td>
+                                         <td><?php echo $fnov['zero'] - $ffnov['zero'] ?></td>
                                        </tr>
 
 
                                        <tr>
-                                         <td>Returned</td>
-                                         <td><?php echo $ffjan['zero'] ?></td>
-                                         <td><?php echo $fffeb['zero'] ?></td>
-                                         <td><?php echo $ffmar['zero'] ?></td>
-                                         <td><?php echo $ffapr['zero'] ?></td>
-                                         <td><?php echo $ffmay['zero'] ?></td>
-                                         <td><?php echo $ffjune['zero'] ?></td>
-                                         <td><?php echo $ffjul['zero'] ?></td>
-                                         <td><?php echo $ffaug['zero'] ?></td>
-                                         <td><?php echo $ffsept['zero'] ?></td>
-                                         <td><?php echo $ffoct['zero'] ?></td>
-                                         <td><?php echo $ffnov['zero'] ?></td>
+                                         <td>December</td>
+                                         <td><?php echo $fdec['zero'] ?></td>
                                          <td><?php echo $ffdec['zero'] ?></td>
-                                         <td><?php echo $fetchReturned['zero'] ?></td>
-
+                                         <td><?php echo $fdec['zero'] - $ffdec['zero'] ?></td>
                                        </tr>
 
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total</strong></td>
+                                            <td><?php echo $fetchBorrowed['zero'] ?></td>
+                                            <td><?php echo $fetchReturned['zero'] ?></td>
+                                            <td><?php echo $fetchBorrowed['zero'] - $fetchReturned['zero'] ?> 
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                     </div>
@@ -225,7 +278,6 @@ $fetchReturned = $returnedTotal->fetch_array();
                                     </div>
                                     
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <script>

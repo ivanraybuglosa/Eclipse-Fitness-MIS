@@ -2,13 +2,13 @@
 
 $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
 
-$beg = $conn->query("SELECT COUNT(TL_clientLevel) as total FROM `traininglog` WHERE `TL_clientLevel` = 'Beginner' ") or die(mysqli_error());
+$beg = $conn->query("SELECT COUNT(TL_ClientPerformance) as total FROM `traininglog` WHERE `TL_ClientPerformance` = 'Beginner' ") or die(mysqli_error());
 $fbeg = $beg->fetch_array();
 
-$int = $conn->query("SELECT COUNT(TL_clientLevel) as total FROM `traininglog` WHERE `TL_clientLevel` = 'Intermediate' ") or die(mysqli_error());
+$int = $conn->query("SELECT COUNT(TL_ClientPerformance) as total FROM `traininglog` WHERE `TL_ClientPerformance` = 'Intermediate' ") or die(mysqli_error());
 $fint = $int->fetch_array();
 
-$adv = $conn->query("SELECT COUNT(TL_clientLevel) as total FROM `traininglog` WHERE `TL_clientLevel` = 'Advance' ") or die(mysqli_error());
+$adv = $conn->query("SELECT COUNT(TL_ClientPerformance) as total FROM `traininglog` WHERE `TL_ClientPerformance` = 'Advance' ") or die(mysqli_error());
 $fadv = $adv->fetch_array();
 ?>
 <script>
@@ -22,7 +22,7 @@ var chart = new CanvasJS.Chart("clientlevel", {
     data: [{
         type: "pie",
         startAngle: 240,
-        yValueFormatString: "##0.00'%'",
+        yValueFormatString: "- ###",
         indexLabel: "{label} {y}",
         dataPoints: [
             {y: <?php echo $fbeg['total'] ?>, label: "Beginner"},
