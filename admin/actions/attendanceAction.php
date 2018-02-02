@@ -55,7 +55,8 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
                 if($_POST['towel'] <= $available){
                     $insert = $pdo->insert($tblName1,$userData);
-                    echo "<script>alert('Client Successfully Timed-in');window.location.href='../attendance.php';</script>";
+                    echo swal("Good job!", "You clicked the button!", "success");
+                    
                     $condition = array("TI_Date" => $date);
                     $update = $pdo->update($tableTowel,$userData3,$condition);
                 }else{
