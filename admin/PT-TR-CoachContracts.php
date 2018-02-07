@@ -1,9 +1,12 @@
     <?php
  include "../dbConnect.php";
  session_start();
- if(!isset($_SESSION['username'])){
-    header('location: ../login.php');
- }
+ if (!$_SESSION['admin'])  
+{  
+    header('location:../login.php');  
+    exit;  
+}
+ 
  include("includes/header.php"); ?>
 <section class="content">
         <div class="container-fluid">
@@ -97,10 +100,10 @@
             if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                       if($_REQUEST['action_type'] == 'check'){
 
-                $pt = $conn->query("SELECT * FROM `traininglog` INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE `COACH_ID` = '$_POST['coachName']' ") or die(mysql_error());
+                $pt = $conn->query("SELECT * FROM `traininglog` INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE `COACH_ID` = ".$_POST['coachName']." ") or die(mysql_error());
 
                                 while($ptf = $pt->fetch_array()) {
-                                    $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = "$_POST['coachName']" ") or die(mysql_error());
+                                    $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = '$_POST[coachName]' ") or die(mysql_error());
                                     $fetchc = $cname->fetch_array();
                                     ?>
                                         <tr>

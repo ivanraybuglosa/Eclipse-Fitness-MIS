@@ -2,8 +2,10 @@
 <?php
 include "../dbConnect.php";
 session_start();
-if(!isset($_SESSION['username'])){
-	header('location: ../login.php');
+if (!$_SESSION['admin'])  
+{  
+    header('location:../login.php');  
+    exit;  
 }
 include("includes/header.php"); ?>
 
@@ -222,9 +224,9 @@ include("includes/header.php"); ?>
 
 								<div class="form-group">
 									<h5>Locker Key Number: <?php echo $attend['A_LockerKey']?></h5>
-                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>returned" class="with-gap"  value="Returned">
+                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>returned" class="with-gap"  value="Returned" required>
                                <label for="<?php echo $attend['A_LockerKey']?>returned">Returned</label>
-                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>unreturned" class="with-gap"  value="Unreturned">
+                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>unreturned" class="with-gap"  value="Unreturned" required>
                                <label for="<?php echo $attend['A_LockerKey']?>unreturned" class="m-l-20">Unreturned</label>
                             </div>
 							

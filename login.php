@@ -1,6 +1,8 @@
 <?php
     require_once('dbConnectLogin.php');
     require_once('dbConnect.php');
+
+    
  ?>
 <!DOCTYPE html>
 <html>
@@ -69,38 +71,39 @@
                             $_SESSION['userType'] = $type;
                                 if($type =="admin"){ 
 
-                                $pdo = new dbConnect();
-                                $expire = $pdo->membershipExpire();
-                                
-                                $userData = array(
-                                    'M_membershipstatus' => "Expired"
-                                );
-                                if($expire === date("Y-m-d")){
-                                    $condition = array('M_expiryDate' => date("Y-m-d"));
-                                    $update = $pdo->update('membershiptype',$userData,$condition);
-                                }
+                                        $pdo = new dbConnect();
+                                        $expire = $pdo->membershipExpire();
+                                        
+                                        $userData = array(
+                                            'M_membershipstatus' => "Expired"
+                                        );
+                                        if($expire === date("Y-m-d")){
+                                            $condition = array('M_expiryDate' => date("Y-m-d"));
+                                            $update = $pdo->update('membershiptype',$userData,$condition);
+                                        }
 
 
-                                $expiry = $pdo->expire(date("Y-m-d"));
+                                        $expiry = $pdo->expire(date("Y-m-d"));
 
-                                $userData2 = array(
-                                    'TL_TrainingStatus' => "Expired"
-                                );
+                                        $userData2 = array(
+                                            'TL_TrainingStatus' => "Expired"
+                                        );
 
-                                if($expiry === date("Y-m-d")){
-                                    $condition = array("TL_Expiry" => date("Y-m-d"));
-                                    $update =$pdo->update('traininglog',$userData2,$condition);
-                                }
+                                        if($expiry === date("Y-m-d")){
+                                            $condition = array("TL_Expiry" => date("Y-m-d"));
+                                            $update =$pdo->update('traininglog',$userData2,$condition);
+                                            session_start();
+                                        }
 
-                                ?>
+                                        ?>
 
 
                                 <script>alert('Successful Login!');window.location.href='admin/index.php';</script>
-                                    
+                                       
                                     <?php } 
                                         else($type =="coach") 
                                     ?>
-                                <script>alert('Successful Login!');window.location.href="coach/index.php"</script>
+                                <script>alert('Successful Login!');window.location.href='coach/index.php';</script>
                         <?php 
                         } else { ?>
                         <script>alert('Login Failed!Incorrect information!');window.location.href='login.php';</script>

@@ -1,9 +1,11 @@
 <?php
  include "../dbConnect.php";
  session_start();
- if(!isset($_SESSION['username'])){
-    header('location: ../login.php');
- }
+ if (!$_SESSION['admin'])  
+{  
+    header('location:../login.php');  
+    exit;  
+}
  include("includes/header.php");
  include_once("actions/SC-Trend-TopClients-Action.php"); ?>
 <section class="content">
@@ -22,7 +24,7 @@
                                 </li>
                                 <li class="active">
                                     Studio Class - Trends - Top Participants
-                                </li>
+                                </li>   
                             </ol>
             </div>
         </div>

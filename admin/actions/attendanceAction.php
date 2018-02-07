@@ -25,11 +25,7 @@ $time=date("H:i:s", strtotime("+7 HOURS"));
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){ 
         $regstat = $pdo->regStat($_POST['clientName']);
-
-
-
-      
-        $userData = array(
+            $userData = array(
             'CLIENT_ID' => $_POST['clientName'],
             'A_TowelQty' => $_POST['towel'],
             'A_LockerKey' => $_POST['Locker'],
@@ -38,9 +34,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'A_Month' => $month,
             'A_Date' => $date,
             'A_status' => $regstat
-    
-
-        );
+            );
          
 
         // $expiry = $pdo->memExpire($_POST['clientName']);
@@ -51,16 +45,16 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         
 
 
-        $locker = $pdo->locker($date,$_POST['Locker']);
-        $check = $pdo->checkAttendance($_POST['clientName'],$date);
+            $locker = $pdo->locker($date,$_POST['Locker']);
+            $check = $pdo->checkAttendance($_POST['clientName'],$date);
        
-        if(5 < 4){
-            $available = $pdo->previousAvailable();
-                $borrowed = $pdo->previousBorrowed();
-                $userData3 = array(
-                    'TI_Borrowed' => ($_POST['towel'] + $borrowed),
-                    'TI_Available' => ($available - $_POST['towel'])
-                );
+            if(5 < 4){
+                $available = $pdo->previousAvailable();
+                    $borrowed = $pdo->previousBorrowed();
+                    $userData3 = array(
+                        'TI_Borrowed' => ($_POST['towel'] + $borrowed),
+                        'TI_Available' => ($available - $_POST['towel'])
+                    );
 
                 if($_POST['towel'] <= $available){
                     $insert = $pdo->insert($tblName1,$userData);

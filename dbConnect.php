@@ -1418,7 +1418,7 @@ class dbConnect{
     }
 
 
-    public function expire(){
+    public function expire($date){
         $sql = "SELECT TL_Expiry from traininglog WHERE TL_Expiry = '".$date."' ";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -1455,6 +1455,33 @@ class dbConnect{
         $query->execute();
         $var = $query->fetch();
         $result = $var['CLIENT_ID'];
+        return $result;
+    }
+
+    public function countParticipant($scs){
+        $sql = "SELECT COUNT(CLIENT_ID) as participant FROM clientassignment WHERE SCS_Code = '".$scs."'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['participant'];
+        return $result;
+    }
+
+    public function remaining($scs){
+        $sql = "SELECT CA_Remaining from clientassignment WHERE SCS_Code = '".$scs."' ORDER BY CA_Code DESC LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['CA_Remaining'];
+        return $result;
+    }
+
+    public function cap($scs){
+        $sql ="SELECT studioclass.SC_Capacity FROM studioclasssession INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code WHERE SCS_Code = '".$scs."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['SC_Capacity'];
         return $result;
     }
 

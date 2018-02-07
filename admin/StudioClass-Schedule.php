@@ -1,19 +1,13 @@
 <?php
  include "../dbConnect.php";
  session_start();
- if(!isset($_SESSION['username'])){
-    header('location: ../login.php');
- }
+ if (!$_SESSION['admin'])  
+{  
+    header('location:../login.php');  
+    exit;  
+}
  include("includes/header.php"); ?>
-    
-    <section class="content">
-        <div class="container-fluid">
-            <div class="block-header">
-                <h2><strong>STUDIO CLASS</strong></h2>
-            </div>
-        </div>
-
-        <?php 
+    <?php 
             $id = $_GET['id'];
             
             
@@ -25,6 +19,28 @@
             $count++;
            
         ?>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2><strong>STUDIO CLASS</strong></h2>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 contentl-xs-12">
+
+
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index.php">
+                        <i class="material-icons">dashboard</i> Dashboard
+                    </a>
+                </li>
+                <li class="active">
+                    <i class="material-icons">queue</i> Studio Class Sessions - <?php echo $sc['SC_Name']?> Class - Schedule
+                </li>
+            </ol>
+        </div>
+        </div>
+
+        
 
         <div class="card">
             <div class="header">
@@ -154,13 +170,31 @@
                                             </div>
                                         </div>
                                         </div>
+
                                         <div class="col-sm-4">
                                             <input type="hidden" name="SCS_Code" value="<?php echo $sc['SCS_Code']?>">
                                             <input type="hidden" name="scname" value="<?php echo $sc['SC_Name']?>">
                                             <input type="hidden" name="sccapacity" value="<?php echo $sc['SC_Capacity']?>">
                                             <input type="hidden" name="coach" value="<?php echo $_GET['coach']?>">
                                             <input type="hidden" name="action_type" value="add"/>
-                                            <button type="submit" name="submit" class="btn  waves-effect btn-success " data-type='success'>&nbsp; JOIN &nbsp;</button>
+                                            <button type="submit" name="submit" class="btn btn-block waves-effect btn-success " data-type='success'>&nbsp; REGISTER &nbsp;
+                                                <span class="badge">
+                                                    <?php
+                                                        $pdo = new dbConnect(); 
+                                                        $id = $_GET['id'];
+                                                        $remaining = $pdo->remaining($id);
+                                                        $cap = $pdo->cap($id);
+                                                        if($remaining == ''){
+                                                            echo $cap;
+                                                        }else{
+                                                            echo $remaining;
+                                                        }
+                                                        
+
+                                                    ?>
+                                                        
+                                                    </span>
+                                            </button>
                                         </form>
                                         </div>
                                         <div class="col-sm-12">

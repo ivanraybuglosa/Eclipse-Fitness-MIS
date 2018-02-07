@@ -27,13 +27,17 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         
         $scname = $_POST['scname'];
         $sccapacity = $_POST['sccapacity'];
-
+        $count = $pdo->countParticipant($_POST['SCS_Code']);
         $userData = array(
             'CLIENT_ID' => $_POST['clientname'],
             'SCS_Code' => $_POST['SCS_Code'],   
             'CA_RegDate' => $date,
             'year' => $year,
             'month' => $month
+        );
+
+        $userData3 = array(
+            'CA_Remaining' => ($_POST['sccapacity'] - $count) - 1
         );
 
         $checks = $pdo->checkParticipants($_POST['SCS_Code'], array("order_by" => "CA_Code ASC"));
@@ -46,6 +50,8 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                         $participant = $pdo->singleParticipant($_POST['clientname'],$_POST['SCS_Code']);
                         if($participant <> $_POST['clientname']){
                             $insert1 = $pdo->insert($tblName1,$userData);
+                            $condition = array('SCS_Code' => $_POST['SCS_Code']);
+                            $update = $pdo->update($tblName1,$userData3,$condition);
                                 $id = $_POST['SCS_Code'];
                                     echo "<script>alert('Client Successfully Assigned! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";
                                 
