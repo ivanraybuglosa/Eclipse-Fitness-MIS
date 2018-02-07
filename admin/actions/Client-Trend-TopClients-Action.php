@@ -12,15 +12,13 @@ window.onload = function () {
 
 var chart = new CanvasJS.Chart("topclients", {
     animationEnabled: true,
+    exportEnabled: true,
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
-        text: "Yearly Top Clients"
+        text: "Top Clients"
     },
     axisX: {
         interval: 1,
-    },
-    axisY: {
-        title: "Participants"
     },
     data: [{        
         type: "column",
@@ -29,7 +27,7 @@ var chart = new CanvasJS.Chart("topclients", {
 
         while($fc1 = $qc1->fetch_array())  
         { ?>
-            { y: <?php echo $fc1["total"]?> , label: "<?php echo $fc1["fname"]?> " + "<?php echo $fc1["mname"]?> " + "<?php echo $fc1["lname"] ?>", indexLabel: "<?php echo $fc1["total"]?>"},
+            { y: <?php echo $fc1["total"]?> , label: "<?php echo $fc1["fname"]?> " + "<?php echo $fc1["mname"]?> " + "<?php echo $fc1["lname"] ?>",  indexLabel: "<?php echo $fc1["total"]?>"},
             <?php
         } ?>
             

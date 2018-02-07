@@ -26,12 +26,13 @@
                             </ol>
             </div>
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
-                    <h2>Membership Options</h2>
+                    <h2>Membership Option Form</h2>
                 </div>
                 <div class="body">
-                    <div class="row clearfix js-sweetalert">
+                    <div class="row js-sweetalert">
                             <form method="POST" action="actions/membershipAction.php">
                                         <div class="col-sm-4">
                                         <div class="form-group form-float">
@@ -57,12 +58,15 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12">
                                     <input type="hidden" name="action_type" value="add"/>
-                                    <button type="submit" class="btn  waves-effect btn-success pull-right" data-type='success'>Save</button>
+                                    <button type="submit" class="btn waves-effect btn-success pull-right" data-type='success'>SUBMIT</button>
+                                </div>
                             </form>
                     </div>
                 </div>
             </div>
+        </div>
                               
             
                 
@@ -71,14 +75,16 @@
             
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card" style="margin-top:20px">
-
+                    <div class="card">
+                        <div class="header">
+                            <h2>Membership Options List</h2>
+                        </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 230px;">Membership Type</th>
@@ -100,14 +106,14 @@
                                                                     $count++;?>
                                                         
                                          <tr role="row">
-                                            <td class="hidden"><?php echo $members['MS_Code']; ?></td>
+                                            
                                             <td ><?php echo $members['MS_Type']; ?></td>
                                             <td ><?php echo $members['MS_Duration']; ?></td>
                                             <td ><?php echo $members['MS_Price'];?></td>
                                             <td ><button type="button" data-toggle="modal"  data-target="#edit-<?php echo $members['MS_Code']; ?>"class="btn bg-green" >Modify</button></td>
                                                <div class="modal fade" id="edit-<?php echo $members['MS_Code']; ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-sm" role="document">
-                                                   <form method="post" action="actions/membershipAction.php?" id="myform1" >
+                                                   <form method="post" action="actions/membershipAction.php" >
                                                     <div class="modal-content">
                                                     <center>
                                                         <div class="modal-header">
@@ -118,7 +124,7 @@
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
                                                                         <div class="form-line">
-                                                                            <input type="hidden" class="form-control" name="mCode" value="<?php echo $members['MS_Code']; ?>"/>
+                                                                            <
                                                                             <h5 class="pull-left">Membership Type</h5>
                                                                             <input type="text" class="form-control" name="type" value="<?php echo $members['MS_Type']; ?>">
                                                                         </div>
@@ -126,13 +132,13 @@
                                                                     <div class="form-group">
                                                                         <div class="form-line">
                                                                             <h5 class="pull-left">Duration</h5>
-                                                                             <input type="text" class="form-control" name="type" value="<?php echo $members['MS_Duration']; ?>">
+                                                                             <input type="number" class="form-control" name="duration" value="<?php echo $members['MS_Duration']; ?>">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="form-line">
                                                                             <h5 class="pull-left">Price</h5>
-                                                                            <input type="number" class="form-control" value="<?php echo $members['MS_Price']; ?>"/>
+                                                                            <input type="number" name="price" class="form-control" value="<?php echo $members['MS_Price']; ?>"/>
 
                                                                         </div>
                                                                     </div>
@@ -141,8 +147,9 @@
                                                             </div>
                                                         </center>
                                                         <div class="modal-footer">
+                                                            <input type="hidden" class="form-control" name="MS_Code" value="<?php echo $members['MS_Code']; ?>"/>
                                                             <input type="hidden" name="action_type" value="edit"/>
-                                                            <button type="button" class="btn  bg-green">SAVE CHANGES</button>
+                                                            <button type="submit" class="btn  bg-green">SAVE CHANGES</button>
                                                             <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
                                                         </div>
                                                     </div>
@@ -185,6 +192,22 @@
     
     <!-- Jquery Core Js -->
     <?php include("includes/footer.php"); ?>
+    <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="../assets/js/pages/forms/form-wizard.js"></script>
+    <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
     <script src="../assets/js/pages/dialogsMembershipOptions.js"></script>
     <!-- Custom Js -->
     <script src="../assets/js/admin.js"></script>

@@ -38,6 +38,7 @@
                  </div>
                 </div>
     </section>
+
     <?php include("includes/footer.php"); ?>
 
     <!-- Jquery DataTable Plugin Js -->

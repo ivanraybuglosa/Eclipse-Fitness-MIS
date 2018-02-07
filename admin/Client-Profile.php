@@ -55,11 +55,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4"> 
+                                        <div class="form-group">
+                                            <label style="margin-top: 9px;">Gender: </label>
+                                            <input type="radio" value="Male" name="gender" id="male" class="with-gap" required\">
+                                            <label for="male">Male</label>
+
+                                            <input type="radio"  value="Female" name="gender" id="female" class="with-gap" required">
+                                            <label for="female" class="m-l-20">Female</label>
+                                        </div>
+                                </div>
                                 
                                 <div class="col-md-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="email" class="form-control" required>
+                                            <input type="email" name="email" class="form-control" required>
                                             <label class="form-label">Email</label>
                                         </div>
                                     </div>
@@ -67,19 +77,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="contactNumber" required>
+                                            <input type="number" class="form-control" name="contactNumber" required>
                                             <label class="form-label">Contact number</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                
+                                <!-- <div class="col-md-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <input type="text" class="form-control" name="userAccount" required>
                                             <label class="form-label">User Account</label>
                                         </div>
                                     </div>
-                                </div>        
+                                </div>   -->     
+                                <div class="col-md-12">
                                   <div class="form-group form-float">
 									  
                                     <div class="row">
@@ -89,7 +101,7 @@
                                         <div class="col-md-3">
                                 <?php
                                 function get_month()
-                                {
+                                {   
                                     $var="";
                                     for ($m=01; $m<=12; $m++) {
                                         $month=sprintf("%02d", $m);
@@ -98,8 +110,8 @@
                                     return $var;
                                 }
                                 ?>
-                                <select class="form-control show-tick" name = "C_month">
-                                    <option> - Month - </option>
+                                <select class="form-control show-tick" name = "C_month" >
+                                    <option value="month"> - Month - </option>
                                     <?php echo get_month(); ?>
                                 </select>
                             </div>
@@ -115,8 +127,8 @@
                                     return $var;
                                 }
                                 ?>
-                                <select class="form-control show-tick" name = "C_day">
-                                    <option> - Day - </option>
+                                <select class="form-control show-tick" name = "C_day" >
+                                    <option value="day"> - Day - </option>
                                     <?php echo get_day(); ?>
                                 </select>
                                         </div>
@@ -131,27 +143,21 @@
                                     return $var;
                                 }
                                 ?>
-                                <select class="form-control show-tick" name="C_year">
-                                    <option> - Year - </option>
+                                <select class="form-control show-tick" name="C_year" >
+                                    <option value="year"> - Year - </option>
                                     <?php echo get_year(1947,2017); ?>
                                 </select>
                             </div>
                                     </div>
-                                <div class="row"> 
-                                    <div class="col-md-4"> 
-                                        <div class="form-group" style="margin-top:20px">
-                                            <label style="margin-top: 9px;">Gender: </label>
-                                            <input type="radio" value="Male" name="gender" id="male" class="with-gap" required\">
-                                            <label for="male">Male</label>
+                                </div>
+                            </div>
 
-                                            <input type="radio"  value="Female" name="gender" id="female" class="with-gap" required">
-                                            <label for="female" class="m-l-20">Female</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 pull-right js-sweetalert">
+                                <div class="row"> 
+                                    
+                                    <div class="col-md-12 pull-right js-sweetalert">
                                         <input type="hidden" name="action_type" value="add"/>
                                         <input type="hidden" name="status" value="Walk-in"/>
-                                        <button name ="submit"  type="submit" class="btn bg-green pull-right" style="margin-top:30px;" data-type="success">SAVE</button>
+                                        <button name ="submit"  type="submit" class="btn bg-green pull-right"  data-type="success">SUBMIT</button>
                                     </div>
                                 </div>
                             </form>
@@ -166,7 +172,7 @@
                 </div>
 
                         <div class="body">
-                            <div class="table-responsive">
+                            
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -176,7 +182,9 @@
                                             
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">Name</th>
 
-                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 80px;">Birthdate</th>
+                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 80px;">Registration Date</th>
+
+                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 80px;">Status</th>
                                             
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">Email Address</th>
                                             
@@ -208,13 +216,14 @@
                                                     <tr>
                                                         <!--Client Firstname + Lastname Merged -->
                                                         <td>
-                                                <?php 
+                                                    <?php 
                                                     $firstname = $client['CLIENT_FirstName']; 
                                                     $midname = $client['CLIENT_MiddleName']; 
                                                     $lastname = $client['CLIENT_LastName']; 
                                                     $fullname = $firstname ." ". $midname." ". $lastname; 
                                                         echo $fullname ; ?></td>
-                                                        <td><?php echo date("F j, Y", strtotime($client['CLIENT_bday'])); ?></td>
+                                                        <td><?php echo $client['CLIENT_regDATE']?></td>
+                                                        <td><?php echo $client['CLIENT_RegStatus']; ?></td>
 														<td><?php echo $client['CLIENT_Email']; ?></td>
                                                         <td><?php echo $client['CLIENT_Gender']; ?></td>
 														<td><?php echo $client['CLIENT_ContactNumber']; ?></td>

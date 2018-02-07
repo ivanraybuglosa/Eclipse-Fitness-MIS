@@ -6,8 +6,8 @@ $pdo = new dbConnect();
 $tblName1 = "towelInventory";
 $date = date("Y-m-d");
 $time = date("h:i");
-$month = date("m");
-$year = date("Y");
+$month = date("M", strtotime("+8 HOURS"));
+$year = date("Y", strtotime("+8 HOURS"));
 
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){ 
@@ -30,7 +30,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'TI_Available' => ($avail + $_POST['supply']),
             'TI_Borrowed' => $borrowed,
             'TI_Returned' => $returned
-        );
+        );  
 
         $condition = array('TI_Date' => $date);
         $update1 = $pdo->update($tblName1,$userData4,$condition);

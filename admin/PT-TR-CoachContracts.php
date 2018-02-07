@@ -33,7 +33,7 @@
         </div>
                        <div class="body">
                          <div class="row">
-                            <form>
+                            <form method="POST">
                             <div class="col-md-6">
                             <div class="form-group">
                                     <div class="form-line">
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-md-3" style="margin-top: 30px;">
                                     <input type="hidden" name="action_type" value="check"/>
-                                    <button type="submit" name= "check" class="btn bg-teal btn-block btn-lg waves-effect">Submit</button>
+                                    <button type="submit" name= "check" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                             </div>
                             <div class="col-md-3"  style="margin-top: 30px;">
                                     <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
@@ -87,7 +87,6 @@
                                             <th>Coach Name</th>
                                             <th>Registration Date</th>
                                             <th>Client Name</th>
-                                            <th>Status</th>
                                             <th>Sessions</th>
                                             <th>End Date</th>
                                         </tr>
@@ -98,29 +97,42 @@
             if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                       if($_REQUEST['action_type'] == 'check'){
 
-                $pt = $conn->query("SELECT * FROM `traininglog` INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE `COACH_ID` = ".$_GET['coachName']." ") or die(mysql_error());
+                $pt = $conn->query("SELECT * FROM `traininglog` INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE `COACH_ID` = '$_POST['coachName']' ") or die(mysql_error());
 
                                 while($ptf = $pt->fetch_array()) {
-                                    $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = '$_GET[coachName]' ") or die(mysql_error());
+                                    $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = "$_POST['coachName']" ") or die(mysql_error());
                                     $fetchc = $cname->fetch_array();
                                     ?>
                                         <tr>
                                             <td><?php echo $fetchc['Coach_FirstName'] ?> <?php echo $fetchc['Coach_LastName'] ?></td>
-                                            <td><?php echo $ptf['TL_RegDate'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($ptf['TL_RegDate'])) ?></td>
                                             <td><?php echo $ptf['CLIENT_FirstName'] ?> 
                                                 <?php echo $ptf['CLIENT_LastName'] ?></td>
-                                            <td><?php echo $ptf['CLIENT_RegStatus'] ?></td>
                                             <td><?php echo $ptf['TP_PackageType'] ?> Sessions</td>
-                                            <td><?php echo $ptf['TL_Expiry'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($ptf['TL_Expiry'])) ?></td>
                                         </tr>
                                         
                                         <?php
                                     }
                             }
-                        }
-                        
-                        ?>
+                        }   else {
+                            $pt = $conn->query("SELECT * FROM `traininglog` INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code INNER JOIN coach ON traininglog.COACH_ID = coach.COACH_ID") or die(mysql_error());
+
+                                while($ptf = $pt->fetch_array()) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $ptf['Coach_FirstName'] ?> <?php echo $ptf['Coach_LastName'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($ptf['TL_RegDate'])) ?></td>
+                                            <td><?php echo $ptf['CLIENT_FirstName'] ?> 
+                                                <?php echo $ptf['CLIENT_LastName'] ?></td>
+                                            <td><?php echo $ptf['TP_PackageType'] ?> Sessions</td>
+                                            <td><?php echo date("F j, Y", strtotime($ptf['TL_Expiry'])) ?></td>
+                                        </tr>
                                         
+                                        <?php
+                                         }
+                                      } 
+                                ?>              
                                     </tbody>
                                 </table>
                             </div>

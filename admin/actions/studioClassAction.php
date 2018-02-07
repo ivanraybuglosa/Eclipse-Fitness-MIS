@@ -13,18 +13,18 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'SC_Venue' => $_POST['venue']
         );
         $insert = $pdo->insert($tblName,$userData);
-        $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-        $_SESSION['statusMsg'] = $statusMsg;
-        header("Location:../Maintenance-StudioClass.php");
+        echo "<script>alert('Studio Class Information Successfuly saved!');window.location.href='../Maintenance-StudioClass.php';</script>";
+         $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
+            $_SESSION['statusMsg'] = $statusMsg;
     }elseif($_REQUEST['action_type'] == 'edit'){
             $userData = array(
             'SC_Name' => $_POST['scname'],
-            'SC_Capacity' => $_POST['sccapacity']
-            );
+            'SC_Capacity' => $_POST['sccapacity'],
+            'SC_Venue' => $_POSTp['scvenue']
+            ); 
             $condition = array('SC_Code' => $_POST['scCode']);
             $update = $pdo->update($tblName,$userData,$condition);
-            $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;
-            header("Location:../Maintenance-StudioClass.php");
+            echo "<script>alert('Studio Class Information Successfuly Modified!');window.location.href='../Maintenance-StudioClass.php';</script>";
+         $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
         }
 }

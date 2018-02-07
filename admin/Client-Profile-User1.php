@@ -41,12 +41,26 @@
            
 
             
-            <div class="card">
-                <div class="header">
+            
+                <div class="card">
+                        <div class="body bg-green">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h2 class="pull-left"><b><?php $firstname = $client['CLIENT_FirstName']; $lastname = $client['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></b></h2>
+                                </div>
+                                <div class="col-md-3">
+                                    <button name ="submit"  type="button" data-toggle="modal" data-target="#renewmembership-<?php echo $client['CLIENT_ID'] ?>" class="btn bg-light-green pull-right" style="margin-top:10px; margin-left:20px;"><h5>Membership Registration</h5></button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button name ="submit"  type="submit" data-toggle="modal" data-target="#enroltraining" class="btn bg-light-green pull-right" style="margin-top:10px;"><h5>Personal Training Registration</h5></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 
-                <h2 class="pull-left"><b><?php $firstname = $client['CLIENT_FirstName']; $lastname = $client['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></b></h2>
-                <button name ="submit"  type="button" data-toggle="modal" data-target="#renewmembership-<?php echo $client['CLIENT_ID'] ?>" class="btn bg-green pull-right" style="margin-left:20px;">Membership Registration</button>
-                  <!-- MODAL FOR RENEWING MEMBERSHIP -->
+              
+
+            <!-- MODAL FOR RENEWING MEMBERSHIP -->
             <div class="modal fade" id="renewmembership-<?php echo $client['CLIENT_ID'] ?>" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-sm" role="document">
                   <div class="modal-content">
@@ -100,16 +114,7 @@
             </div>
         </div>
 
-            <!-- END OF MODAL FOR RENEWAL -->
-            
-                <button name ="submit"  type="submit" data-toggle="modal" data-target="#enroltraining" class="btn bg-green pull-right">Personal Training Registration</button>
-
-                  <br>
-
-                  
-
-                </div>
-            </div> 
+            <!-- END OF MODAL FOR RENEWAL --> 
            
 
             <!-- START OF CLIENT PERSONAL INFORMATION -->
@@ -140,18 +145,27 @@
                             </div>
                         </div>
                         <div class="col-md-4">
+                        <label>Gender</label>
+                            <div class="form-group">
+                               <input type="radio" name="gender" id="male" class="with-gap" <?php if($client['CLIENT_Gender']=="Male") echo "checked='true'";?> value="Male">
+                               <label for="male">Male</label>
+                               <input type="radio" name="gender" id="female" class="with-gap" <?php if($client['CLIENT_Gender']=="Female") echo "checked='true'";   ?> value="Female">
+                               <label for="female" class="m-l-20">Female</label>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-4">
                             <label for="email">User Account</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" name="userAccount" class="form-control" value="<?php echo $client['CLIENT_userAccount']; ?>">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-4">
                             <label for="email">Email Address</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="Email" class="form-control" value="<?php echo $client['CLIENT_Email']; ?>">
+                                    <input type="email" name="Email" class="form-control" value="<?php echo $client['CLIENT_Email']; ?>">
                                 </div>
                             </div>
                         </div>
@@ -159,7 +173,7 @@
                             <label for="contactnum">Contact Number</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="contactNum" class="form-control" value="<?php echo $client['CLIENT_ContactNumber']; ?>">
+                                    <input type="number" name="contactNum" class="form-control" value="<?php echo $client['CLIENT_ContactNumber']; ?>">
                                 </div>
                             </div>
                         </div>
@@ -170,11 +184,19 @@
                                         <div class="col-md-3">
                                 <?php
                                 function get_month()
-                                {
+                                {      
+                                    $pdo = new dbConnect(); 
+                                    $id = $_GET['id'];
+                                    $getMonth = $pdo->getMonth($id);
                                     $var= "";
                                     for ($m=01; $m<=12; $m++) {
                                         $month=sprintf("%02d", $m);
-                                        $var .= '<option value="'.$month.'">'.date('F', mktime(0,0,0,$m, 1,      date('Y'))).' </option>';
+                                        if($getMonth === $month){
+                                            $var .= '<option value="'.$month.'" selected>'.date('F', mktime(0,0,0,$m, 1,      date('Y'))).' </option>';
+                                        }else{
+                                            $var .= '<option value="'.$month.'">'.date('F', mktime(0,0,0,$m, 1,      date('Y'))).' </option>';
+                                        }
+                                        
                                     }
                                     return $var;
                                 }
@@ -187,11 +209,19 @@
                             <div class="col-md-3">
                                 <?php
                                 function get_day()
-                                {
+                                {   
+                                    $pdo = new dbConnect(); 
+                                    $id = $_GET['id'];
+                                    $getDay = $pdo->getDay($id);
                                     $var="";
                                     for ($i = 1; $i < 31; $i++) {
                                         $num_padded=sprintf("%02d", $i);
-                                        $var .='<option value="'.$num_padded.'">  '.$num_padded.' </option>';
+                                        if($getDay === $num_padded){
+                                            $var .='<option value="'.$num_padded.'" selected>  '.$num_padded.' </option>';
+                                        }else{
+                                            $var .='<option value="'.$num_padded.'">  '.$num_padded.' </option>';
+                                        }
+                                        
                                     }
                                     return $var;
                                 }
@@ -203,31 +233,31 @@
                                         </div>
                             <div class="col-md-3">
                                 <?php
-                                function get_year($start,$end){
-                                    $var="";
-                                    while($start <= $end){
-                                        $var .="<option value=".$start.">".$start."</option>";
-                                        $start++;
+                                function get_year(){
+                                    $pdo = new dbConnect(); 
+                                    $id = $_GET['id'];
+                                    $getYear = $pdo->getYear($id);
+                                    $var = "";
+                                    for($i=1947;$i<2020;$i++){
+                                      
+                                       if($getYear == $i){
+                                            $var .="<option value=".$i." selected>".$i."</option>";
+                                       }else{
+                                            $var .="<option value=".$i.">".$i."</option>";
+                                       }
                                     }
                                     return $var;
+
                                 }
                                 ?>
                                 <select class="form-control show-tick" name="C_year">
                                     <option> - Year - </option>
-                                    <?php echo get_year(1947,2017); ?>
+                                    <?php echo get_year(); ?>
                                 </select>
                             </div>
-                        <div class="col-md-4">
-                        <label>Gender</label>
-                            <div class="form-group">
-                               <input type="radio" name="gender" id="male" class="with-gap" <?php if($client['CLIENT_Gender']=="Male") echo "checked='true'";?> value="Male">
-                               <label for="male">Male</label>
-                               <input type="radio" name="gender" id="female" class="with-gap" <?php if($client['CLIENT_Gender']=="Female") echo "checked='true'";   ?> value="Female">
-                               <label for="female" class="m-l-20">Female</label>
-                            </div>
-                        </div>
+                        
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 pull-right">
                             <input type="hidden" name="action_type" value="edit"/>
                             <button name ="submit"  type="submit" class="btn bg-green pull-right" style="margin-right:20px;">MODIFY</button>
                         </div>
@@ -250,7 +280,7 @@
                 ?>
             <div class="card">
                 <div class="header" style="background:silver;">
-                  <h2>Membership Information</h2>
+                  <h2>Current Membership Information</h2>
                 </div>
                 
                 
@@ -284,7 +314,7 @@
                                         $date2 = date_create($members["M_expiryDate"]);
                                         $days = date_diff($date1,$date2);
                                         echo $days->format('%a days');
-                                        ?>"" disabled>
+                                        ?>" disabled>
                                 </div>
                             </div>
                         </div>
@@ -310,10 +340,173 @@
             </div>
             <?php }} ?>
 
-          
+            <div class="card">
+                <div class="header" style="background:silver;">
+                    <h2>Membership History</h2>
+                </div>
+                    <div class="body">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <td>Membership Type</td>
+                                            <td>Duration</td>
+                                            <td>Registration Date</td>
+                                            <td>Expiry Date</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            $id = $_GET['id'];
+                                            $pdo = new dbConnect();
+                                            $history = $pdo->membershipHistory($id,array("order_by" => "M_Code ASC"));
+                                                if(!empty($history)){
+                                                    $count = 0;
+                                                    foreach($history as $mem){
+                                        ?>
+                                        <tr>    
+                                            <td><?php echo $mem['MS_Type']?></td>
+                                            <td><?php echo $mem['MS_Duration']?></td>
+                                            <td><?php echo date("F j, Y", strtotime($mem['M_regDate']))?></td>
+                                            <td><?php echo date("F j, Y", strtotime($mem['M_expiryDate']))?></td>
+                                        </tr>
+                                        <?php } }else{ ?>
+
+                                                    <tr><td colspan="6">No Membership Information found......</td></tr>
+
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+            
                 
             <!-- END OF CLIENT PROFILE MEMBERSHIP DETAILS -->
+            <?php 
+                $pdo = new dbConnect();
+                $id = $_GET['id'];
+                $contracts = $pdo->contracts($id,array("order_by" => "M_Code ASC"));
+                    if(!empty($contracts)){
+                        $count = 0;
+                        foreach($contracts as $contract){
+                ?>
+            <div class="card">
+                <div class="header" style="background:silver;">
+                  <h2>Personal Training Contract and Sessions</h2>
+                </div>
 
+                
+                    <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Contract #</th>
+                                            <th>Coach Name</th>
+                                            <th>Health Conditions</th>
+                                            <th>Performance Level</th>
+                                            <th>Sessions</th>
+                                            <th>Enrollment Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <tr>
+                                           
+                                            <td><?php echo $contract['ContractNumber']?></td>
+                                            <td><?php $firstname = $contract['COACH_FirstName']; $lastname = $contract['COACH_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
+                                            <td><?php echo $contract['TL_HealthConditions']?></td>
+                                            <td><?php echo $contract['TL_ClientPerformance']?></td>
+                                            <td><?php echo $contract['TP_PackageType'] ?></td>
+
+                                            <td><?php echo date("F j, Y", strtotime($contract['TL_RegDate']))?></td>
+                                            <td><button type="button" class="btn bg-green btn-success" data-toggle="modal" data-target="#sessions-<?php echo $contract['TL_Code']?>">Sessions</button>
+                                             
+                                            <div class="modal fade" id="sessions-<?php echo $contract['TL_Code']?>" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                   <center>
+                    <div class="modal-header">
+                       <div class="block-header">
+                          <h2><strong>Contract <?php echo $contract['ContractNumber']?> Sessions</strong></h2>
+                       </div>
+                    </div>
+                 <div class="modal-body">
+                    <input type="hidden" value="<?php echo $contract['TL_Code']?>" >
+                     <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Session #</th>
+                                            <th>Date</th>
+                                            <th>Exercise</th>
+                                            <th>Sets</th>
+                                            <th>Repetitions</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <?php 
+                                        $pdo = new dbConnect();
+                                        $id = $_GET['id'];
+                                        $sessions = $pdo->sessions($contract['TL_Code'],array ('order_by' => 'TLS_Code ASC'));
+                                        if(!empty($sessions)){ 
+                                            $count = 0; 
+                                            foreach($sessions as $session){ 
+                                            $count++;
+
+                                    ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?php echo $session['SessionNumber']?></td>
+                                            <td><?php echo date("F j, Y", strtotime($session['TLS_Date']))?></td>
+                                            <td><?php echo $session['TLS_Exercise']?></td>
+                                            <td><?php echo $session['TLS_Sets']?></td>
+                                            <td><?php echo $session['TLS_Reps'] ?></td>
+                                            <td><?php echo date("g:i A", strtotime($session['TLS_StartTime']));?></td>
+                                            <td><?php echo date("g:i A", strtotime($session['TLS_EndTime']));?></td>
+                                        </tr>
+                                        <?php } }else{ ?>
+
+                                                    <tr><td colspan="7">No Session(s) found......</td></tr>
+
+                                                    <?php } ?>
+                                        
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+
+                </div>    
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
+                 
+                 </div> 
+                  </center>
+                </div>
+            </div>
+         </div>
+
+
+
+                                            </td>
+                                            
+                                            
+                                            
+                                        </tr>
+                                        <?php }} ?>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                </div>
+            
+        </div>
             <!-- START OF CLIENT ACTIVITY LOG -->
             <div class="card">
                 <div class="header" style="background:silver;">
@@ -321,12 +514,7 @@
                 </div>
 
                 <div class="body">
-                    <div class="body">
-                            <div class="table-responsive">
-                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                           <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr role="row">
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 150px;">Coach</th>
@@ -376,10 +564,8 @@
                                     </div>
                                     
                                     </div>
-                                </div>
-                            </div>
-                </div>
-            </div>
+                                
+            
             <!-- END OF CLIENT ACTIVITY LOG -->
 
             <!-- MODALS MODALS MODALS MODALS MODALS MODALS MODALS MODALS MODALS MODALS MODALS MODALS MODALS MODALS -->
@@ -409,101 +595,7 @@
                                                    <?php } ?>
                                 </select>
 
-                                  <script>
-
-                                      function setval() {
-                                        var package = document.getElementById('packagetype').value;
-                                        var coach = document.getElementById('coachtype').value;
-                                        var validity = document.getElementById('validity');
-                                        var price = document.getElementById('price');
-
-                                        //validity.value = <echo $trainingpackage['TP_Validity']; ?>
-                                        //price.value = <echo $trainingpackage['TP_Price']; ?>
-                                        //and so on and so forth
-
-                                        if(package == "1") { 
-                                          validity.value = "7 Days"; 
-                                            if(coach == "j") {
-                                                price.value = "500"
-                                            } else if (coach == "s") {
-                                                price.value = "600"
-                                            } else {
-                                                price.value = "600"
-                                            }
-                                        } else if(package == "8") {
-                                            validity.value = "56 Days";
-                                            if(coach == "j") {
-                                                price.value = "3500"
-                                            } else if (coach == "s") {
-                                                price.value = "4800"
-                                            } else {
-                                                price.value = "4800"
-                                            }
-                                        } else if(package == "12") {
-                                            validity.value = "84 Days";
-                                            if(coach == "j") {
-                                                price.value = "6000"
-                                            } else if (coach == "s") {
-                                                price.value = "7200"
-                                            } else {
-                                                price.value = "7200"
-                                            }
-                                        } else {
-                                            validity.value = "168 Days";
-                                            if(coach == "j") {
-                                                price.value = "12000"
-                                            } else if (coach == "s") {
-                                                price.value = "14400"
-                                            } else {
-                                                price.value = "14400"
-                                            }
-                                        }
-                                    }
-                                        function setSpecialty() {
-                                            var coach = document.getElementById('assigncoach').value;
-                                            //place specialty input value based on value of coach option and
-                                            //$coach['COACH_SPECIALTY'];
-                                        }
-
-                                        function setMembership() {
-                                            // var memtype = document.getElementById('membershiptype').value;
-                                            // var duration = document.getElementById('durationtype').value;
-                                            
-                                            var price = document.getElementById('renewprice')
-
-                                            <?php 
-                                                $pdo = new dbConnect();
-                                                $member = $pdo->selectMembershipPrice('type','duration',array('order_by'=>'MS_Code ASC'));
-                                                foreach($member as $members){
-                                            ?>
-                                            // if(memtype == <?php echo $members['MS_Type']; ?> && duration == <?php echo $members['MS_duration'];?>){
-                                                price.value = <?php echo $members['MS_Price']?>
-                                            }
-                                            <?php } ?>
-                                            // if(memtype == "regular") {
-                                            //     if(duration == "30") {
-                                            //         price.value = "1,999"
-                                            //     } else if (duration == "90") {
-                                            //         price.value = "1899"
-                                            //     } else if (duration == "180") {
-                                            //         price.value = "1799"
-                                            //     } else  {
-                                            //         price.value = "1699"
-                                            //     }
-
-                                            // } else {
-                                            //     if(duration == "30") {
-                                            //         price.value = "1,299"
-                                            //     } else if (duration == "90") {
-                                            //         price.value = "1199"
-                                            //     } else if (duration == "180") {
-                                            //         price.value = "1099"
-                                            //     } else  {
-                                            //         price.value = "999"
-                                            //     }
-                                            // }
-                                        }
-                                  </script>
+                                  
                             
                             <label style="margin-top: 8px; margin-right:20px;">Coach Type: </label>
                                     <select name="coachType" id="coachtype" onchange="setval();" class="form-control show-tick">

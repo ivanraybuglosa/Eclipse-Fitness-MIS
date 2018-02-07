@@ -97,7 +97,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <p>Session Start Time:</p>
-                                                <input type="time" name="sessionSTime" min="07:00" max="22:00" class="form-control" value="<?php echo $sc['SCS_StartTime'] ?>">
+                                                <input type="time" name="sessionSTime" min="07:00" max="22:00" class="form-control" value="<?php echo date("0g:i", strtotime($sc['SCS_StartTime'])) ?>">
                                                 <label class="form-label"></label>
                                             </div>
                                         </div>
@@ -106,7 +106,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <p>Session End Time:</p>
-                                                <input type="time" name="sessionETime" min="07:00" max="22:00" class="form-control" value="<?php echo $sc['SCS_EndTime'] ?>">
+                                                <input type="time" name="sessionETime" min="07:00" max="22:00" class="form-control" value="<?php echo date("0g:i", strtotime($sc['SCS_EndTime'])) ?>">
                                                 <label class="form-label"></label>
                                             </div>
                                         </div>
@@ -134,7 +134,7 @@
                                 <div class="col-sm-8">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <select class="form-control show-tick" name="clientname">
+                                                <select class="form-control show-tick" data-live-search="true" name="clientname">
                                                     <?php 
                                             $pdo = new dbConnect();
                                             
@@ -164,7 +164,7 @@
                                         </form>
                                         </div>
                                         <div class="col-sm-12">
-                            <div class="table-responsive">
+                                <form method="post" action="actions/clientAssignmentAction.php">
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -187,14 +187,16 @@
                                                         foreach($cas as $ca){
                                                             $count++;
                                             ?>   
-                                                <form method="post" action="actions/clientAssignmentAction.php">
+                                                
                                                 <td><?php echo $ca['ParticipantNumber']?></td>
                                                 <td name="client" value="<?php echo $ca['CLIENT_ID']?>"><?php $firstname = $ca['CLIENT_FirstName']; $lastname = $ca['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
                                                 <td name="regdate" value="<?php echo $ca['CLIENT_ID']?>"><?php echo date("F d, Y",strtotime($ca['CA_RegDate']))?></td>
                                                 <input type="hidden" name="CA_Code" value="<?php echo $ca['CA_Code']?>">
+                                                <input type="hidden" name="CLIENT_ID" value="<?php echo $ca['CLIENT_ID']?>">
                                                 <input type="hidden" name="SCS_Code" value="<?php echo $sc['SCS_Code']?>">
                                                 <input type="hidden" name="action_type" value="delete"/>
-                                                <td><center><button name="submit" type="submit" class="btn bg-red">Remove</button></center></td>
+                                                <td><center><button name="submit" type="submit" class="btn bg-red">Cancel</button></center></td>
+                                            </form>
                                                 </tr>
 
                                                     <?php } }else{ ?>
@@ -206,7 +208,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                </div>
+                           
                             </div>
                         </div>
                                     
@@ -252,11 +254,6 @@
     <!-- Jquery Core Js -->
     <?php include("includes/footer.php"); ?>
     
-    <script type="text/javascript" src="../assets/js/pages/fullcalendar/lib/jquery-ui.custom.min.js"></script>
-    <script type="text/javascript" src="../assets/js/pages/fullcalendar/lib/moment.min.js"></script>
-    <script type="text/javascript" src="../assets/js/pages/fullcalendar/js/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="../assets/js/pages/fullcalendar/fullcalendar-script.js"></script>
-
     <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
@@ -266,19 +263,13 @@
     <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
     <!-- Custom Js -->
     <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/pages/index.js"></script>
-
-    <!-- Demo Js -->
-    <script src="../assets/js/demo.js"></script>
-    
-    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-
+    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
     <script src="../assets/js/pages/forms/form-wizard.js"></script>
     <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
-    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
 
     
 

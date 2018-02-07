@@ -33,7 +33,7 @@
         </div>
                        <div class="body">
                          <div class="row">
-                            <form>
+                            <form method="POST">
                             <div class="col-md-6">
                             <div class="form-group">
                                     <div class="form-line">
@@ -68,8 +68,9 @@
                             </div>
                             <div class="col-md-3" style="margin-top: 30px;">
                                     <input type="hidden" name="action_type" value="check"/>
-                                    <button type="submit" name= "check" class="btn bg-teal btn-block btn-lg waves-effect">Submit</button>
+                                    <button type="submit" name= "check" id="check" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                             </div>
+
                             <div class="col-md-3"  style="margin-top: 30px;">
                                     <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                                 </div>
@@ -99,25 +100,43 @@
             if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                                         if($_REQUEST['action_type'] == 'check'){
 
-                            $sc = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code WHERE `COACH_ID` = '$_GET[coachName2]' ") or die(mysql_error());
+                            $sc = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code WHERE `COACH_ID` = '$_POST[coachName2]' ") or die(mysql_error());
 
 
                             while($scf = $sc->fetch_array()) {
-                                 $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = '$_GET[coachName2]' ") or die(mysql_error());
+                                 $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = '$_POST[coachName2]' ") or die(mysql_error());
                                  $fetchc = $cname->fetch_array();
                                 ?>
                                         <tr>
                                             <td><?php echo $fetchc['Coach_FirstName'] ?> <?php echo $fetchc['Coach_LastName'] ?></td>
-                                            <td><?php echo $scf['SCS_Date'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($scf['SCS_Date'])) ?></td>
                                             <td><?php echo $scf['SC_Name'] ?></td>
-                                            <td><?php echo $scf['SCS_StartTime'] ?></td>
-                                            <td><?php echo $scf['SCS_EndTime'] ?></td>
+                                            <td><?php echo date("g:i A", strtotime($scf['SCS_StartTime']))?></td>
+                                            <td><?php echo date("g:i A", strtotime($scf['SCS_EndTime']))?></td>
                                             <td><?php echo $scf['SCS_Venue'] ?></td>
                                         </tr>
                                         
                                         <?php 
                                         }
                                     }
+                                } else {
+
+                                    $sc = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID") or die(mysql_error());
+
+                            while($scf = $sc->fetch_array()) {
+                                ?>
+                                        <tr>
+                                            <td><?php echo $scf['Coach_FirstName'] ?> <?php echo $scf['Coach_LastName'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($scf['SCS_Date'])) ?></td>
+                                            <td><?php echo $scf['SC_Name'] ?></td>
+                                            <td><?php echo date("g:i A", strtotime($scf['SCS_StartTime']))?></td>
+                                            <td><?php echo date("g:i A", strtotime($scf['SCS_EndTime']))?></td>
+                                            <td><?php echo $scf['SCS_Venue'] ?></td>
+                                        </tr>
+                                        
+                                        <?php 
+                                        }
+
                                 }
                                 ?>
                                     </tbody>

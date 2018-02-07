@@ -32,10 +32,10 @@ var chart = new CanvasJS.Chart("activeandnot", {
         includeZero: true,
     },
     data: [{        
-        type: "bar",
+        type: "column",
         dataPoints: [
-            { y: <?php $inactive = $finac['total'] - $fac['total']; echo $inactive ?>, label: "Inactive Clients", indexLabel: '<?php echo $inactive ?>'},
-            { y: <?php echo $fac['total'] ?>, label: "Active Clients", indexLabel: '<?php echo $fac['total'] ?>' }
+            { y: <?php echo $fac['total'] ?>, label: "Active Clients", indexLabel: '<?php echo $fac['total'] ?>' },
+            { y: <?php $inactive = $finac['total'] - $fac['total']; echo $inactive ?>, label: "Inactive Clients", indexLabel: '<?php echo $inactive ?>'}
         ]
     }]
 });

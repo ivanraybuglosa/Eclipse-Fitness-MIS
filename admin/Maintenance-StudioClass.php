@@ -130,6 +130,12 @@
                                                                         <input type="text" class="form-control" name="sccapacity" value="<?php echo $studioClasses['SC_Capacity']; ?>"/>
                                                                     </div>
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <div class="form-line">
+                                                                        <h5 class="pull-left">Venue</h5>
+                                                                        <input type="text" class="form-control" name="scvenue" value="<?php echo $studioClasses['SC_venue']; ?>"/>
+                                                                    </div>
+                                                                </div>
                                                                  
                                                             </div>
                                                         </div>

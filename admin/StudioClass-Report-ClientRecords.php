@@ -94,10 +94,12 @@
                                     
                                     <tbody>
                  <?php
-            if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
-                      if($_REQUEST['action_type'] == 'check'){
+
 
              $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error()); 
+
+            if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
+                      if($_REQUEST['action_type'] == 'check'){
 
                 $cr = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID WHERE `CLIENT_ID` = ".$_GET['clientName']." ") or die(mysql_error());
 
@@ -118,6 +120,23 @@
                                         <?php
                                     }
                             }
+                        } else {
+                            $cr = $conn->query("SELECT * FROM `clientassignment` INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID") or die(mysql_error());
+
+                                while($fcr = $cr->fetch_array()) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $fcr['CLIENT_FirstName'] ?> <?php echo $fcr['CLIENT_LastName'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fcr['SCS_Date'])) ?></td>
+                                            <td><?php echo $fcr['SC_Name'] ?></td>
+                                            <td><?php echo $fcr['Coach_FirstName'] ?> 
+                                                <?php echo $fcr['Coach_LastName'] ?></td>
+                                            <td><?php echo date("g:i A", strtotime($fcr['SCS_StartTime'])) ?></td>
+                                            <td><?php echo date("g:i A", strtotime($fcr['SCS_EndTime'])) ?></td>
+                                        </tr>
+                                        
+                                        <?php
+                                    }
                         }
                         
                         ?>

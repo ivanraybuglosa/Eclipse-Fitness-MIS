@@ -56,20 +56,15 @@ var chart = new CanvasJS.Chart("uniqueclient", {
     animationEnabled: true,
     exportEnabled: true,
     title:{
-        text:"Monthly Unique Clients of the Year <?php echo $year ?>"
+        text:"New Clients for the Year <?php echo $year ?>"
     },
     axisX:{
         interval: 1
     },
-    axisY2:{
-        interlacedColor: "rgba(1,77,101,.2)",
-        gridColor: "rgba(1,77,101,.1)",
-        title: "New Clients"
-    },
     data: [{
         type: "column",
         name: "months",
-        axisYType: "secondary",
+        axisYType: "primary",
         color: "#014D65",
         dataPoints: [
             { y: <?php echo $fjan["total"]?>, label: "January", indexLabel: "<?php echo $fjan['total']  ?>"},

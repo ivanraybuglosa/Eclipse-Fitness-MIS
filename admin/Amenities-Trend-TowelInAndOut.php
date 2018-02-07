@@ -21,7 +21,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Amenities - Monthly- Reports
+                                    Amenities - Trends - Towel Monthly Reports
                                 </li>
                             </ol>
             </div>

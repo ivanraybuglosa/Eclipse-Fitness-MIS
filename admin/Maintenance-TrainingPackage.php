@@ -28,7 +28,7 @@
         </div>
             <div class="card">
                 <div class="header">
-                    <h2>Membership Options</h2>
+                    <h2>Training Package Form</h2>
                 </div>
                 <div class="body">
                     <div class="row js-sweetalert">
@@ -36,7 +36,7 @@
                                     <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="packageType" class="form-control" >
+                                            <input type="text" name="packageType" class="form-control" required>
                                             <label class="form-label">Package Type</label>
                                         </div>
                                     </div>
@@ -44,7 +44,7 @@
                                     <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="coachType" class="form-control" >
+                                            <input type="text" name="coachType" class="form-control" required>
                                             <label class="form-label">Coach Type</label>
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                     <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" name="price" class="form-control" >
+                                            <input type="number" name="price" class="form-control" required>
                                             <label class="form-label">Price</label>
                                         </div>
                                     </div>
@@ -60,13 +60,15 @@
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" name="validity" class="form-control" >
+                                            <input type="number" name="validity" class="form-control" required >
                                             <label class="form-label">Validity(Days)</label>
                                         </div>
                                     </div>
                                 </div>
-                            <input type="hidden" name="action_type" value="add" />
-                            <button type="submit" class="btn waves-effect btn-success pull-right" style="padding:10px;">Save</button>
+                                <div class="col-sm-12">
+                                    <input type="hidden" name="action_type" value="add" />
+                                    <button type="submit" class="btn waves-effect btn-success pull-right" style="padding:10px;">SUBMIT</button>
+                                </div>
                     </form>
                     </div>
                     
@@ -74,15 +76,17 @@
                 </div>  
             
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card" style="margin-top:20px">
-
+                
+                    <div class="card">
+                        <div class="header">
+                            <h2>Training Package List</h2>
+                        </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="align-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 230px;">Package Type</th>
@@ -105,7 +109,7 @@
                                                         $count = 0; 
                                                         foreach($trainingPackages as $trainingPackagess){ $count++;?>
                                          <tr>
-                                            <td class="align-center"><?php echo $trainingPackagess['TP_PackageType']; ?></td>
+                                            <td class="align-center"><?php echo $trainingPackagess['TP_PackageType'];?> Sessions</td>
                                             <td class="align-center"><?php echo $trainingPackagess['TP_CoachType'];?></td>
                                             <td class="align-center"><?php echo $trainingPackagess['TP_Price']; ?></td>
                                             <td class="align-center"><?php echo $trainingPackagess['TP_Validity']; ?></td>
@@ -159,7 +163,7 @@
                     </center>
                 </div>
             </div>
-        </div>
+        
                         
                         
                                         </tr>
@@ -188,11 +192,9 @@
     <!-- Jquery Core Js -->
     <?php include("includes/footer.php"); ?>
 
-    <script>
-var FormStuff = {    init: function() {    this.applyConditionalRequired();    this.bindUIActions();  },    bindUIActions: function() {    $("input[type='radio'], input[type='checkbox']").on("change", this.applyConditionalRequired);  },    applyConditionalRequired: function() {        $(".require-if-active").each(function() {      var el = $(this);      if ($(el.data("require-pair")).is(":checked")) {        el.prop("required", true);      } else {        el.prop("required", false);      }    });      }  };FormStuff.init();
-</script>
+    
 
-    <script src="../assets/js/pages/dialogsTrainingPackages.js"></script>
+    
     <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
@@ -202,17 +204,13 @@ var FormStuff = {    init: function() {    this.applyConditionalRequired();    t
     <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
     <!-- Custom Js -->
     <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/pages/index.js"></script>
-
-    <!-- Demo Js -->
-    <script src="../assets/js/demo.js"></script>
-
-
+    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
     <script src="../assets/js/pages/forms/form-wizard.js"></script>
-
+    <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
 </body>
 
 </html>

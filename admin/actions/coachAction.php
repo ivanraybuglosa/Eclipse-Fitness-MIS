@@ -5,7 +5,7 @@ $pdo = new dbConnect();
 $tblName = 'coach';
 $tblName2 = 'users';
 $id = "userID";
-$username = $_POST['username'];
+$username = $_POST['cusername'];
 
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
@@ -17,7 +17,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         );
 
         $insert2 = $pdo->insert($tblName2,$userData2);
-         $returnedVal = $pdo->selectID($id,$tblName2,$username);
+         $returnedVal = $pdo->selectID($id,$tblName2,$cusername);
         $userData = array(
              
             'Coach_LastName' => $_POST['LastName'],
@@ -30,28 +30,32 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'userID' => $returnedVal
         );
         $insert = $pdo->insert($tblName,$userData);
-        header("Location:../PT-Coaches.php");
+         echo "<script>alert('Coach Information Successfully Saved!');window.location.href='../PT-Coaches.php';</script>";
+         $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
+        $_SESSION['statusMsg'] = $statusMsg;
+    
     }elseif($_REQUEST['action_type'] == 'edit'){
             $userData = array(
-            'Coach_LastName' => $_POST['Coach_LastName'],
-            'Coach_FirstName' => $_POST['Coach_FirstName'],
-            'Coach_Gender' => $_POST['Coach_Gender'],
-            'Coach_ContactNumber' => $_POST['Coach_ContactNumber'],
-            'Coach_EmailAddress' => $_POST['Coach_EmailAddress'],
-            'Coach_Specialty' => $_POST['Coach_Specialty'],
-            'Coach_Type' => $_POST['Coach_Type'],
+            'Coach_LastName' => $_POST['LastName'],
+            'Coach_FirstName' => $_POST['FirstName'],
+            'Coach_Gender' => $_POST['gendermod'],
+            'Coach_ContactNumber' => $_POST['ContactNumber'],
+            'Coach_EmailAddress' => $_POST['EmailAddress'],
+            'Coach_Specialty' => $_POST['Specialty'],
+            'Coach_Type' => $_POST['Type'],
             );
             $userData2 = array(
             'username' => $_POST['username'],
             'password' => md5($_POST['password']),
             
             );
-            $condition1 = array('userID' => $_POST['user_id']);
+            $condition1 = array('COACH_ID' => $_POST['COACH_ID']);
+            $condition2 = array('userID' => $_POST['userID']);
             $update1 = $pdo->update($tblName,$userData,$condition1);
-            $update2 = $pdo->update($tblName2,$userData2,$condition1);
-            $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;
-            header("Location:../Maintenance-Receptionists.php");
+            $update2 = $pdo->update($tblName2,$userData2,$condition2);
+            echo "<script>alert('Coach Information Successfully Modified!');window.location.href='../PT-Coaches.php';</script>";
+         $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
+        $_SESSION['statusMsg'] = $statusMsg;
         
     }
 }

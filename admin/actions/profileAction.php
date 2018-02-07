@@ -30,7 +30,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'CLIENT_Gender' => $_POST['gender'],
             'CLIENT_Email' => $_POST['email'],
             'CLIENT_ContactNumber' => $_POST['contactNumber'],
-            'CLIENT_userAccount' => $_POST['userAccount'],
+            // 'CLIENT_userAccount' => $_POST['userAccount'],
             'CLIENT_RegStatus' => $_POST['status'],
             'CLIENT_regDATE' => $today,
             'month' => $month,
@@ -55,7 +55,8 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                 'MS_Code' => $compare,
                 'M_regDate' => $today,
                 'CLIENT_ID' => $_POST['client'],
-                'M_expiryDate' => $expiry
+                'M_expiryDate' => $expiry,
+                'M_membershipStatus' => 'Active'
             );
              $expiry = $pdo->checkMembership($_POST['client'],array("order_by" => "M_Code DESC"));
            
@@ -108,7 +109,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'CLIENT_Gender' => $_POST['gender'],
             'CLIENT_Email' => $_POST['Email'],
             'CLIENT_ContactNumber' => $_POST['contactNum'],
-            'CLIENT_userAccount' => $_POST['userAccount']
+            // 'CLIENT_userAccount' => $_POST['userAccount']
             );
             $condition = array('CLIENT_ID' => $_POST['CLIENT_ID']);
             $update = $pdo->update($tblName,$userData,$condition);

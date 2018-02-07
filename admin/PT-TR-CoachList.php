@@ -32,25 +32,12 @@
         <h2>Coach List</h2>
     </div>
                         <div class="body">
-                           <form method="POST">
                                 <div class="row clearfix">
 
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                       <div class="form-line">
-                                        <div class="col-md-6">
-                                         <input type="date" class="form-control"  name="filter_start"/>
-                                        </div>
-                                        <div class="col-md-6">
-                                         <input type="date" class="form-control" name="filter_end"/>
-                                       </div>
-                                     </div>
-                                    </div>  
                                 </div>
 
                                 <div class="col-md-3">
-                                    <input type="hidden" name="action_type" value="filter"/>
-                                    <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
 
                                 <div class="col-md-3">
@@ -58,7 +45,6 @@
                                 </div>
 
                             </div>
-                        </form>
                             <div id="print">
                             <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                                
@@ -68,8 +54,8 @@
                                             <th>Gender</th>
                                             <th>Specialty</th>
                                             <th>Email Address</th>
-                                            <th>Type</th>
-                                            <th>Specialty</th>
+                                            <th>Coach Type</th>
+                                            <th>Contact Number</th>
                                             
                                         </tr>
                                     </thead>

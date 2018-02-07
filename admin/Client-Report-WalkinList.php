@@ -93,7 +93,7 @@
                                                     <td><?php echo $fwl['CLIENT_Gender'] ?></td>
                                                     <td><?php echo $fwl['CLIENT_ContactNumber'] ?></td>
                                                     <td><?php echo $fwl['CLIENT_Email'] ?></td>
-                                                    <td><?php echo $fwl['CLIENT_regDATE'] ?></td>
+                                                    <td><?php echo date("F j, Y", strtotime($fwl['CLIENT_regDATE'])) ?></td>
                                              </tr>
                                             <?php 
                                             }
@@ -110,7 +110,7 @@
                                                     <td><?php echo $fwl['CLIENT_Gender'] ?></td>
                                                     <td><?php echo $fwl['CLIENT_ContactNumber'] ?></td>
                                                     <td><?php echo $fwl['CLIENT_Email'] ?></td>
-                                                    <td><?php echo $fwl['CLIENT_regDATE'] ?></td>
+                                                    <td><?php echo date("F j, Y", strtotime($fwl['CLIENT_regDATE'])) ?></td>
                                              </tr>
                                     <?php
                                         }

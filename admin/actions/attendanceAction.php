@@ -29,7 +29,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
 
       
-         $userData = array(
+        $userData = array(
             'CLIENT_ID' => $_POST['clientName'],
             'A_TowelQty' => $_POST['towel'],
             'A_LockerKey' => $_POST['Locker'],
@@ -42,12 +42,21 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
         );
          
+
+        // $expiry = $pdo->memExpire($_POST['clientName']);
+        // $date1 = date_create(date("Y-m-d"));
+        // $date2 = date_create($expiry);
+        // $days = date_diff($date1,$date2);
+        // $day = date("a", strtotime($days));
+        
+
+
         $locker = $pdo->locker($date,$_POST['Locker']);
         $check = $pdo->checkAttendance($_POST['clientName'],$date);
-        if(($check <> $_POST['clientName'] || empty($check)) && ($locker <> $_POST['Locker'] || empty($locker)))  {
-            
-                $available = $pdo->previousAvailable();
-                $borrowed = $pdo->previousBorrowed($date);
+       
+        if(5 < 4){
+            $available = $pdo->previousAvailable();
+                $borrowed = $pdo->previousBorrowed();
                 $userData3 = array(
                     'TI_Borrowed' => ($_POST['towel'] + $borrowed),
                     'TI_Available' => ($available - $_POST['towel'])
@@ -55,9 +64,21 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
                 if($_POST['towel'] <= $available){
                     $insert = $pdo->insert($tblName1,$userData);
-                    echo swal("Good job!", "You clicked the button!", "success");
+                    $id = $_POST['clientName'];
+                     echo "<script>alert('Client Time-in Success! Client Membership will expire in 3 days!'));window.location.href='../Client-Profile-User1.php?id='".$id."';</script>";
+                    // echo "
+                    //         <script src='../assets/plugins/jquery/jquery.min.js'></script>
+                    //         <link href='../assets/plugins/sweetalert/sweetalert.css' rel='stylesheet' />
+                    //         <script src='../assets/plugins/sweetalert/sweetalert.min.js'></script>
+                    // <script>
+                    //         $(document).ready(function() {
+                    //             swal({'Good job!','You clicked the button!','success'},
+                    //                     function(){
+                    //                     window.location.href = '../attendance.php'
+                    //                 });</script>";
                     
-                    $condition = array("TI_Date" => $date);
+                    
+                    $condition = array("TI_Available" => $available);
                     $update = $pdo->update($tableTowel,$userData3,$condition);
                 }else{
                     echo "<script>alert('Client time-in Failed! Insufficient towels!');window.location.href='../attendance.php';</script>";
@@ -85,8 +106,64 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         }else{
 
         } 
+        $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
+        $_SESSION['statusMsg'] = $statusMsg;
+        // header("Location:../attendance.php");
+
+
+
+        }elseif(($check <> $_POST['clientName'] || empty($check)) && ($locker <> $_POST['Locker'] || empty($locker)))  {
             
-        $inser = $pdo->insert($tableTowel, $userData2);
+                $available = $pdo->previousAvailable();
+                $borrowed = $pdo->previousBorrowed();
+                $userData3 = array(
+                    'TI_Borrowed' => ($_POST['towel'] + $borrowed),
+                    'TI_Available' => ($available - $_POST['towel'])
+                );
+
+                if($_POST['towel'] <= $available){
+                    $insert = $pdo->insert($tblName1,$userData);
+                     echo "<script>alert('Client Time-in Success! ');window.location.href='../attendance.php';</script>";
+                    // echo "
+                    //         <script src='../assets/plugins/jquery/jquery.min.js'></script>
+                    //         <link href='../assets/plugins/sweetalert/sweetalert.css' rel='stylesheet' />
+                    //         <script src='../assets/plugins/sweetalert/sweetalert.min.js'></script>
+                    // <script>
+                    //         $(document).ready(function() {
+                    //             swal({'Good job!','You clicked the button!','success'},
+                    //                     function(){
+                    //                     window.location.href = '../attendance.php'
+                    //                 });</script>";
+                    
+                    
+                    $condition = array("TI_Available" => $available);
+                    $update = $pdo->update($tableTowel,$userData3,$condition);
+                }else{
+                    echo "<script>alert('Client time-in Failed! Insufficient towels!');window.location.href='../attendance.php';</script>";
+                }
+                
+                
+
+            
+            
+        $price = $pdo->penaltyPrice('Walk-in');
+        
+        
+        $userData2 = array(
+            'CLIENT_ID' => $_POST['clientName'],
+            'TR_Type' => 'Walk-in',
+            'TR_Bill' => $price,
+            'TR_Status' => 'unpaid',
+            'TR_TransactionDate' => $date,
+            'year' => $year,
+            'month' => $month
+        );
+        if($regstat == "Walk-in"){
+            $insert1= $pdo->insert($tableName3,$userData2);
+            
+        }else{
+
+        } 
         $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
         $_SESSION['statusMsg'] = $statusMsg;
         // header("Location:../attendance.php");
@@ -114,12 +191,10 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                 $update = $pdo->update($tblName1,$userData,$condition);
            
                 echo "<script>alert('Client Attendance Information Successfully Modified!');window.location.href='../attendance.php';</script>";
-                $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
-                $_SESSION['statusMsg'] = $statusMsg;
+                
             }else{
                 echo "<script>alert('Client Attendance Information Modification Failed!');window.location.href='../attendance.php';</script>";
-                $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
-                $_SESSION['statusMsg'] = $statusMsg;
+               
             }
 
             
@@ -128,11 +203,11 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         $userData = array(
             'A_TimeOut' => $time,
             'A_TowelReturn' => $_POST['returnedTowel'],
-            'A_ReturnedKey' =>$_POST['key']
+            'A_ReturnedKey' => $_POST['key']
         );
 
-        $borrowed = $pdo->previousBorrowed($date);
-        $returned = $pdo->getReturned($date);
+        $borrowed = $pdo->previousBorrowed();
+        $returned = $pdo->getReturned();
         $userData4 = array(
             'TI_Returned' => ($_POST['returnedTowel'] + $returned),
             'TI_Borrowed' => ($borrowed - $_POST['returnedTowel'])
@@ -164,6 +239,9 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                     'year' => $year,
                     'month' => $month
                 );
+            $condition = array('A_Code' => $_POST['A_Code']);
+                $update = $pdo->update($tblName1,$userData,$condition);
+           
          $insert = $pdo->insert($tableName3, $userData1);
          $insert = $pdo->insert($tableName3, $userData5);
          echo "<script>alert('Client charged for a penalty. Client Successfully Timed-out. ');window.location.href='../attendance.php';</script>";

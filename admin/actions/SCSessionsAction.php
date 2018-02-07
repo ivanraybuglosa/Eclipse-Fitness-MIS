@@ -33,17 +33,29 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
         );  
 
+
         $startTime= $pdo->checkStartTime($_POST['Coach'],$_POST['sessionDate']);
         $endTime= $pdo->checkEndTime($_POST['Coach'],$_POST['sessionDate']);
 
                 if(
-                    (($stime > $startTime && $stime < $endTime) ||
-                    ($etime > $startTime && $etime < $endTime) ||
-                    ($stime < $startTime && $etime > $endTime) ||
-                    empty($startTime) && empty($endTime))
+                    (($stime > $startTime && $etime > $endTime) ||
+                    ($stime < $startTime && $etime < $endTime) ||
+                    (empty($startTime) && empty($endTime)))
                 ){
+                    $userData2 = array(
+
+                        'COACH_ID' => $_POST['Coach'],
+                        'Activity' => 'Studio Class Session',
+                        'AL_Date' => $_POST['sessionDate'],
+                        'AL_StartTime' => $stime,
+                        'AL_EndTime' => $etime
+                    );
+                    $insert = $pdo->insert('activitylog', $userData2);
                     $insert = $pdo->insert($tblName1,$userData);
-                            echo "<script>alert('Studio Class Successfully Scheduled');window.location.href='../StudioClass-Sessions.php';</script>";
+                    echo "<script>alert('Studio Class Successfully Scheduled');window.location.href='../StudioClass-Sessions.php';</script>";
+
+
+                            
                                     
                 }else{
                     echo "<script>alert('Studio Class Schedule Failed! ');window.location.href='../StudioClass-Sessions.php';</script>";

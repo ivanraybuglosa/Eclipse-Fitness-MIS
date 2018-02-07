@@ -62,7 +62,8 @@ var chart = new CanvasJS.Chart("monpart", {
     axisY: {
         title: "Participants"
     },
-    data: [{        
+    data: [{
+        color: "green",
         type: "column",
         dataPoints: [      
             { y: <?php echo $fjan["total"]?>,  label: "Jan", indexLabel: "<?php echo $fjan["total"] ?>"},

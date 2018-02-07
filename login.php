@@ -1,5 +1,6 @@
 <?php
     require_once('dbConnectLogin.php');
+    require_once('dbConnect.php');
  ?>
 <!DOCTYPE html>
 <html>
@@ -66,7 +67,34 @@
                             $_SESSION['password'] = $pass;
                             $_SESSION['userID'] = $id;
                             $_SESSION['userType'] = $type;
-                                if($type =="admin"){ ?>
+                                if($type =="admin"){ 
+
+                                $pdo = new dbConnect();
+                                $expire = $pdo->membershipExpire();
+                                
+                                $userData = array(
+                                    'M_membershipstatus' => "Expired"
+                                );
+                                if($expire === date("Y-m-d")){
+                                    $condition = array('M_expiryDate' => date("Y-m-d"));
+                                    $update = $pdo->update('membershiptype',$userData,$condition);
+                                }
+
+
+                                $expiry = $pdo->expire(date("Y-m-d"));
+
+                                $userData2 = array(
+                                    'TL_TrainingStatus' => "Expired"
+                                );
+
+                                if($expiry === date("Y-m-d")){
+                                    $condition = array("TL_Expiry" => date("Y-m-d"));
+                                    $update =$pdo->update('traininglog',$userData2,$condition);
+                                }
+
+                                ?>
+
+
                                 <script>alert('Successful Login!');window.location.href='admin/index.php';</script>
                                     
                                     <?php } 
@@ -79,6 +107,9 @@
                 <?php     }
                 } 
                 ?>
+
+                <!-- Scripts for expiry checking of membership and personal training -->
+                
                 <form id="sign_in" method="POST">
                     <div class="msg">Sign in to start your session</div>
                     <div class="input-group">

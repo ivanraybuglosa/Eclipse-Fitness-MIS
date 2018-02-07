@@ -82,7 +82,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <p>Session Date:</p>
-                                                <input type="date" name="sessionDate" class="form-control" >
+                                                <input type="date" name="sessionDate" class="form-control" required>
                                                 <label class="form-label"></label>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <p>Session Start Time:</p>
-                                                <input type="time" name="sessionSTime" class="form-control" min="07:00" max="22:00">
+                                                <input type="time" name="sessionSTime" class="form-control" min="07:00" max="22:00" required>
                                                 <label class="form-label"></label>
                                             </div>
                                         </div>
@@ -100,7 +100,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <p>Session End Time:</p>
-                                                <input type="time" name="sessionETime" class="form-control" min="07:00" max="22:00" >
+                                                <input type="time" name="sessionETime" class="form-control" min="07:00" max="22:00" required >
                                                 <label class="form-label"></label>
                                             </div>
                                         </div>
@@ -120,7 +120,7 @@
             </div>
 
             <div class="body">
-                            <div class="table-responsive">
+                            
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -139,8 +139,6 @@
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 70px;">End Time</th> 
                                             
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">Venue</th>
-
-                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">Status</th>
                                             
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">Actions</th>
                                           </tr>
@@ -148,7 +146,7 @@
                                         <tbody>
                                                     <?php
                                                     $pdo = new dbConnect();
-                                                    $scs = $pdo->getRowsInnerJoin("SCS_Code","COACH_Firstname","SC_Name",'studioclasssession','coach','studioclass',"COACH_ID","SC_Code",array('order_by'=>'SCS_Code ASC'));
+                                                    $scs = $pdo->getRowsInnerJoin("SCS_Code","COACH_Firstname","SC_Name",'studioclasssession','coach','studioclass',"COACH_ID","SC_Code",array('order_by'=>'SCS_Code DESC'));
                                                     if(!empty($scs)){ 
                                                         $count = 0; foreach($scs as $studioclasssession){ 
                                                             $count++;?>
@@ -158,14 +156,14 @@
                                                         <td><?php echo $studioclasssession['SC_Name']; ?></td>
                                                         <td><?php echo date("F j, Y", strtotime($studioclasssession['SCS_Date'])); ?>
                                                         </td>
-                                                        <td><?php echo date("g:i A", strtotime($studioclasssession['SCS_StartTime'])); ?>
+                                                        <td><?php echo date("0g:i A", strtotime($studioclasssession['SCS_StartTime'])); ?>
                                                         </td>
                                                         <td>
                                                             <?php echo date("g:i A", strtotime($studioclasssession['SCS_EndTime'])); ?>
                                                            
                                                         </td>
                                                         <td><?php echo $studioclasssession['SC_Venue']; ?></td>
-                                                        <td><?php echo $studioclasssession['SCS_Status']; ?></td>
+                                                       
                                                         <td class="align-center"><a type="button" class="btn bg-green" href="StudioClass-Schedule.php?id=<?php echo $studioclasssession['SCS_Code']?>&amp;coach=<?php echo $studioclasssession['COACH_ID'];?>">View</button></td>
 
                                                         </tr>
@@ -204,20 +202,13 @@
     <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
     <!-- Custom Js -->
     <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/pages/index.js"></script>
-
-    <!-- Demo Js -->
-    <script src="../assets/js/demo.js"></script>
-    
-    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-
+    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
     <script src="../assets/js/pages/forms/form-wizard.js"></script>
     <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
-    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
-
     
 
 

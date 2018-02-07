@@ -903,7 +903,7 @@ class dbConnect{
     }
 
     public function profileMembership($id,$conditions= array()){
-        $sql = "SELECT * FROM membershiptype INNER JOIN client ON membershiptype.CLIENT_ID = client.CLIENT_ID INNER JOIN membership on membershiptype.MS_Code = membership.MS_Code WHERE membershiptype.CLIENT_ID = '".$id."' ";
+        $sql = "SELECT * FROM membershiptype INNER JOIN client ON membershiptype.CLIENT_ID = client.CLIENT_ID INNER JOIN membership on membershiptype.MS_Code = membership.MS_Code WHERE membershiptype.CLIENT_ID = '".$id."' AND membershiptype.M_membershipStatus = 'Active' ";
         $query = $this->db->prepare($sql);
         $query->execute();
         
@@ -987,7 +987,7 @@ class dbConnect{
     }
 
     public function dashboardActs($date,$conditions = array()){
-        $sql = "SELECT * FROM activitylog INNER JOIN coach ON activitylog.COACH_ID = coach.COACH_ID WHERE AL_Date = '".$date."' ";
+        $sql = "SELECT * FROM activitylog INNER JOIN coach ON activitylog.COACH_ID = coach.COACH_ID WHERE AL_Date = '".$date."' AND (CLIENT_ID IS NULL &&  Activity = 'Studio Class Session') OR (CLIENT_ID IS NOT NULL && Activity = 'Personal Training Session')";
         $query = $this->db->prepare($sql);
         $query->execute();
         
@@ -1146,7 +1146,7 @@ class dbConnect{
 
     }
 
-    public function previousBorrowed($date){
+    public function previousBorrowed(){
         $sql = "SELECT TI_Borrowed FROM towelinventory ORDER BY TI_Code DESC LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -1156,7 +1156,7 @@ class dbConnect{
     }
 
 
-    public function getReturned($date){
+    public function getReturned(){
         $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -1357,6 +1357,109 @@ class dbConnect{
         $result = $var['A_TowelQty'];
         return $result;    
     }
+
+    public function getMonth($id){
+        $sql = "SELECT CLIENT_month FROM client WHERE CLIENT_ID = '".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['CLIENT_month'];
+        return $result;
+    }
+    public function getDay($id){
+        $sql = "SELECT CLIENT_day FROM client WHERE CLIENT_ID = '".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['CLIENT_day'];
+        return $result;
+    }
+
+    public function getYear($id){
+        $sql = "SELECT CLIENT_year FROM client WHERE CLIENT_ID = '".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['CLIENT_year'];
+        return $result;
+    }
+
+    public function membershipExpire(){
+        $sql = "SELECT M_membershipStatus FROM membershiptype";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['M_membershipStatus'];
+        return $result;
+    }
+
+    public function membershipHistory($id,$conditions = array()){
+        $sql = "SELECT * FROM membershiptype INNER JOIN membership ON membershiptype.MS_Code = membership.MS_Code WHERE membershiptype.CLIENT_ID = '".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+    }
+
+
+    public function expire(){
+        $sql = "SELECT TL_Expiry from traininglog WHERE TL_Expiry = '".$date."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['TL_Expiry'];
+        return $result;
+
+    }
+
+    public function memExpire($id){
+        $sql = "SELECT M_expiryDate FROM membershiptype WHERE CLIENT_ID = '".$id."'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['M_expiryDate'];
+        return $result;
+
+    }
+
+    public function checkInitial($id){
+        $sql = "SELECT TL_Code FROM measurements WHERE TL_Code = ".$id." AND M_MeasurementType = 'Initial' OR M_MeasurementType = 'Final' ";
+
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['TL_Code'];
+        return $result;
+
+    }
+
+    public function singleParticipant($id,$scs){
+        $sql = "SELECT CLIENT_ID FROM clientassignment WHERE CLIENT_ID = '".$id."' AND SCS_CODE = '".$scs."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['CLIENT_ID'];
+        return $result;
+    }
+
+
+
 
 
 

@@ -16,8 +16,6 @@ $tblName4 = 'activitylog';
 $id = 'CLIENT_ID';
 $id2 = 'SCS_Code';
 
-$scname = $_POST['scname'];
-$sccapacity = $_POST['sccapacity'];
 
 $date = date('Y-m-d');
 $year = date('Y');
@@ -27,6 +25,8 @@ $month = date('M');
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
         
+        $scname = $_POST['scname'];
+        $sccapacity = $_POST['sccapacity'];
 
         $userData = array(
             'CLIENT_ID' => $_POST['clientname'],
@@ -43,34 +43,36 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                     $count++;
 
                     if($sccapacity > $check['Participants']){
-                        $insert1 = $pdo->insert($tblName1,$userData);
-                        $id = $_POST['SCS_Code'];
-                        echo "<script>alert('Client Successfully Assigned! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";
-                                    $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-                                    $_SESSION['statusMsg'] = $statusMsg;
-                    $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
+                        $participant = $pdo->singleParticipant($_POST['clientname'],$_POST['SCS_Code']);
+                        if($participant <> $_POST['clientname']){
+                            $insert1 = $pdo->insert($tblName1,$userData);
+                                $id = $_POST['SCS_Code'];
+                                    echo "<script>alert('Client Successfully Assigned! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";
+                                
 
-                        $classDate = $pdo->classDate($_POST['SCS_Code']);
-                    $classStartTime = $pdo->classStartTime($_POST['SCS_Code']);
-                    $classEndTime = $pdo->classEndTime($_POST['SCS_Code']);
-                    $coach = $pdo->classCoach($_POST['SCS_Code']);
-                    $userData2 = array(
-                        'CLIENT_ID' => $_POST['clientname'],
-                        'COACH_ID' => $coach,
-                        'Activity' => 'Studio Class Session',
-                        'AL_Date' => $classDate,
-                        'AL_StartTime' => $classStartTime,
-                        'AL_EndTime' => $classEndTime
-                    );  
+                            $classDate = $pdo->classDate($_POST['SCS_Code']);
+                            $classStartTime = $pdo->classStartTime($_POST['SCS_Code']);
+                            $classEndTime = $pdo->classEndTime($_POST['SCS_Code']);
+                            $coach = $pdo->classCoach($_POST['SCS_Code']);
+                            $userData2 = array(
+                                'CLIENT_ID' => $_POST['clientname'],
+                                'COACH_ID' => $coach,
+                                'Activity' => 'Studio Class Session',
+                                'AL_Date' => $classDate,
+                                'AL_StartTime' => $classStartTime,
+                                'AL_EndTime' => $classEndTime
+                            );  
                     
-                    $insert1 = $pdo->insert($tblName4,$userData2);
+                            $insert1 = $pdo->insert($tblName4,$userData2);
+                        }else{
+                            $id = $_POST['SCS_Code'];
+                            echo "<script>alert('Client has already been registered for this session! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";
+                        }
+                        
                     
                     }else{
                         $id = $_POST['SCS_Code'];
-                        echo "<script>alert('Client Studio Class Session Assignment Failed! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";
-                                    $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-                                    $_SESSION['statusMsg'] = $statusMsg;
-                    $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
+                        echo "<script>alert('Studio Class Session Capacity Exceeded! Client assignment Failed! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";
                     }
 
             }
@@ -84,10 +86,9 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             if(!empty($_POST['CA_Code'])){
             $condition = array('CA_Code' => $_POST['CA_Code']);
             $delete = $pdo->delete($tblName1,$condition);
-            $statusMsg = $delete?'Studio Class Session participant has been deleted successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;
             $id = $_POST['SCS_Code'];
-            header("Location:../StudioClass-Schedule.php?id=$id");
+                        echo "<script>alert('Participant successfully removed from the list! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";
+                    
             }
         }
 }

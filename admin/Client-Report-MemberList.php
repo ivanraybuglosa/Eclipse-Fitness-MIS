@@ -93,7 +93,7 @@
                                             <td><?php echo $fml['CLIENT_Gender'] ?></td>
                                             <td><?php echo $fml['CLIENT_ContactNumber'] ?></td>
                                             <td><?php echo $fml['CLIENT_Email'] ?></td>
-                                            <td><?php echo $fml['CLIENT_regDATE'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fml['CLIENT_regDATE'])) ?></td>
                                             
                                         </tr>
                                         <?php 
@@ -112,7 +112,7 @@
                                             <td><?php echo $fml['CLIENT_Gender'] ?></td>
                                             <td><?php echo $fml['CLIENT_ContactNumber'] ?></td>
                                             <td><?php echo $fml['CLIENT_Email'] ?></td>
-                                            <td><?php echo $fml['CLIENT_regDATE'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fml['CLIENT_regDATE'])) ?></td>
 
                                         </tr>
                                     <?php

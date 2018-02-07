@@ -7,8 +7,8 @@ $tblName2 = 'transaction';
 $packageType = $_POST['packageType'];
 $coachType = $_POST['coachType'];
 $date = date("Y-m-d");
-$year = date("Y");
-$month = date("M");
+$month = date("M", strtotime("+8 HOURS"));
+$year = date("Y", strtotime("+8 HOURS"));
 $duration = "TP_Validity";
 
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){

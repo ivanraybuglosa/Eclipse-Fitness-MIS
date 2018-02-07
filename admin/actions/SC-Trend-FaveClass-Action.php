@@ -8,7 +8,7 @@ if(isset($_GET['year']))
     $year=$_GET['year'];
 }
 
-$top = $conn->query("SELECT SC_Code, COUNT(*) as total FROM studioclasssession GROUP BY SC_Code ORDER BY total DESC LIMIT 10") or die(mysqli_error());
+$top = $conn->query("SELECT SC_Code, COUNT(*) as total FROM studioclasssession WHERE year = '$year' GROUP BY SC_Code ORDER BY total DESC LIMIT 5") or die(mysqli_error());
  ?>
 
 
@@ -20,7 +20,7 @@ var chart = new CanvasJS.Chart("faveclass", {
     exportEnabled: true,
     theme: "light1", // "light1", "light2", "dark1", "dark2"
     title:{
-        text: "All Time Favorite Classes"
+        text: "Top 5 Classes for the Year <?php echo $year ?>"
     },
     axisX: {
         interval: 1,

@@ -2,14 +2,15 @@
 
 $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
 
-$beg = $conn->query("SELECT COUNT(TL_ClientPerformance) as total FROM `traininglog` WHERE `TL_ClientPerformance` = 'Beginner' ") or die(mysqli_error());
-$fbeg = $beg->fetch_array();
 
-$int = $conn->query("SELECT COUNT(TL_ClientPerformance) as total FROM `traininglog` WHERE `TL_ClientPerformance` = 'Intermediate' ") or die(mysqli_error());
-$fint = $int->fetch_array();
+$year = date('Y');
+if(isset($_GET['year']))
+{
+    $year=$_GET['year'];
+}
 
-$adv = $conn->query("SELECT COUNT(TL_ClientPerformance) as total FROM `traininglog` WHERE `TL_ClientPerformance` = 'Advance' ") or die(mysqli_error());
-$fadv = $adv->fetch_array();
+$performance = $conn->query("SELECT TL_ClientPerformance, COUNT(*) as total FROM `traininglog` WHERE year = '$year' GROUP BY TL_ClientPerformance") or die(mysqli_error());
+
 ?>
 <script>
 window.onload = function() {
@@ -17,7 +18,7 @@ window.onload = function() {
 var chart = new CanvasJS.Chart("clientlevel", {
     animationEnabled: true,
     title: {
-        text: "Frequency of Different Client Levels"
+        text: "Different Client Performances for the Year <?php echo $year ?>"
     },
     data: [{
         type: "pie",
@@ -25,9 +26,15 @@ var chart = new CanvasJS.Chart("clientlevel", {
         yValueFormatString: "- ###",
         indexLabel: "{label} {y}",
         dataPoints: [
-            {y: <?php echo $fbeg['total'] ?>, label: "Beginner"},
-            {y: <?php echo $fint['total'] ?>, label: "Intermediate"},
-            {y: <?php echo $fadv['total'] ?>, label: "Advance"},
+
+            <?php 
+
+            while($fper = $performance->fetch_array()) {
+                ?>
+            {y: <?php echo $fper['total'] ?>, label: "<?php echo $fper['TL_ClientPerformance'] ?>"},
+            <?php
+            }
+            ?>
         ]
     }]
 });

@@ -22,7 +22,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Amenities - Reports
+                                    Amenities - Reports - Towel Summary
                                 </li>
                             </ol>
             </div>

@@ -31,7 +31,6 @@
             <h2>Studio Classes</h2>
         </div>
                         <div class="body">
-                            <div class="table-responsive">
                                 <div class="col-md-3 pull-right">
                                     <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                                 </div>
@@ -44,25 +43,19 @@
                                         <tr>
                                             <th align="center">Class Name</th>
                                             <th align="center">Capacity</th>
-                                            <th align="center">Times Held</th>
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
                                         <?php 
-                                            $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());  
-                                            $class = $conn->query("SELECT * FROM `studioclass`") or die(mysql_error());
+                                            $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
+                                            $class = $conn->query("SELECT * FROM `studioclass` ") or die(mysqli_error());
                                             while($fclass = $class->fetch_array()) {
-                                                $sc = $fclass['SC_Code'];
-
-                                                $fc = $conn->query("SELECT COUNT(*) as total FROM `studioclasssession` WHERE SC_Code = '$sc' ") or die(mysql_error());
-                                                $ffc = $fc->fetch_array();
 
                                                                     ?>
                                         <tr>
                                             <td align="center"><?php echo $fclass['SC_Name'] ?></td>
                                             <td align="center"><?php echo $fclass['SC_Capacity'] ?></td>
-                                            <td align="center"><?php echo $ffc['total'] ?></td>
                                         </tr>
 
                                         <?php 
@@ -73,7 +66,6 @@
                             </div>
                             </table>
                         </div>
-                    </div>
                 </div>
             </div>
             <script>

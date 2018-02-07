@@ -29,7 +29,7 @@
       <?php include("Client-Report-List.php"); ?>
              <div class="card">
                     <div class="header">
-                       <h2>Monthly Top Clients</h2>
+                       <h2>Top Clients (Based on Expenses)</h2>
                     </div>
                   <div class="body">
                     <div class="col-s-12">

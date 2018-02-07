@@ -35,7 +35,7 @@ include("includes/header.php"); ?>
                     <h2>Towel Monitoring</h2>
                 </div>
                 <div class="body">
-                    <div class="table-responsive">
+                    
                         <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                             <thead>
                                 <tr>
@@ -73,7 +73,7 @@ include("includes/header.php"); ?>
                                 <?php } ?>
                             </tbody>
                         </table>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -90,7 +90,6 @@ include("includes/header.php"); ?>
                             <h2>Equipment Monitoring</h2>
                         </div>
                         <div class="body">
-                            <div class="table-responsive">
 
                                 <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                                     <thead>

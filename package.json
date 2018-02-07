@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/gurayyarar/AdminBSBMaterialDesign#readme",
   "dependencies": {
+    "material-design-icons": "^3.0.1",
     "sweetalert": "^2.1.0"
   }
 }

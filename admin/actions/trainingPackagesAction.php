@@ -14,9 +14,10 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'TP_Validity' => $_POST['validity']
         );
         $insert = $pdo->insert($tblName,$userData);
-        $statusMsg = $insert?'Membership Options data has been inserted successfully.':'Some problem occurred, please try again.';
-        $_SESSION['statusMsg'] = $statusMsg;
-        header("Location:../Maintenance-TrainingPackage.php");
+        echo "<script>alert('Training Package Information Successfully Saved!');window.location.href='../Maintenance-TrainingPackage.php';</script>";
+         $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
+            $_SESSION['statusMsg'] = $statusMsg;   
+        
     }elseif($_REQUEST['action_type'] == 'edit'){
             $userData = array(
             'TP_Code' => $_POST['tpCode'],
@@ -27,9 +28,9 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             );
             $condition = array('TP_Code' => $_POST['tpCode']);
             $update = $pdo->update($tblName,$userData,$condition);
-            $statusMsg = $update?'Training Package data has been updated successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;
-            header("Location:../Maintenance-TrainingPackage.php");
+            echo "<script>alert('Training Package Information Successfully Modified!');window.location.href='../Maintenance-TrainingPackage.php';</script>";
+         $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
+            $_SESSION['statusMsg'] = $statusMsg;   
         
     }elseif($_REQUEST['action_type'] == 'delete'){
         if(!empty($_GET['TP_Code'])){

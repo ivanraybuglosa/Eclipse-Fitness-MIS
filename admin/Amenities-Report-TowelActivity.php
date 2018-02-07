@@ -22,7 +22,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Amenities - Reports
+                                    Amenities - Reports - Supply and Laundry Record
                                 </li>
                             </ol>
             </div>
@@ -88,32 +88,34 @@
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
 
-                                        $tow = $conn->query("SELECT * FROM `towels` WHERE towel_date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                        $tow = $conn->query("SELECT * FROM `towelinventory` WHERE TI_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+
                                             while($towels = $tow->fetch_array()) { 
 
                                               ?>  
                                               <tr>
                                 
-                                                 <td><?php echo $towels['towel_date']; ?></td>
-                                                 <td><?php echo $towels['towel_type']; ?></td>
-                                                 <td><?php echo $towels['towel_time']; ?></td>
-                                                 <td><?php echo $towels['towel_amount']; ?></td>
+                                                 <td><?php echo date("F j, Y", strtotime($towels['TI_Date'])) ?></td>
+                                                 <td><?php echo $towels['TI_Type']; ?></td>
+                                                 <td><?php echo date("g:i A", strtotime($towels['TI_Time'])) ?></td>
+                                                 <td><?php echo $towels['TI_Supplied'] ?> <?php echo $towels['TI_Laundry'] ?></td>
 
                                               </tr>
                                              <?php 
                                      }
                                  }
                              } else {
-                                     $tow = $conn->query("SELECT * FROM `towels` ") or die(mysql_error());
-                                         while($towels = $tow->fetch_array()) { 
+                                     $tow = $conn->query("SELECT * FROM `towelinventory`") or die(mysql_error());
+
+                                            while($towels = $tow->fetch_array()) { 
 
                                               ?>  
                                               <tr>
                                 
-                                                 <td><?php echo $towels['towel_date']; ?></td>
-                                                 <td><?php echo $towels['towel_type']; ?></td>
-                                                 <td><?php echo $towels['towel_time']; ?></td>
-                                                 <td><?php echo $towels['towel_amount']; ?></td>
+                                                 <td><?php echo date("F j, Y", strtotime($towels['TI_Date'])) ?></td>
+                                                 <td><?php echo $towels['TI_Type']; ?></td>
+                                                 <td><?php echo date("g:i A", strtotime($towels['TI_Time'])) ?></td>
+                                                 <td><?php echo $towels['TI_Supplied'] ?> <?php echo $towels['TI_Laundry'] ?></td>
 
                                               </tr>
                                     <?php

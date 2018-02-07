@@ -32,13 +32,16 @@
             
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-
+                        <div class="header">
+                            <h2>Unpaid Transactions</h2>
+                        </div>
                         <div class="body">
-                            <div class="table-responsive">
+                            
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                    
                                     <div class="row">
                                         <div class="col-sm-12">
-                                        <table class="table table-bordered table-striped table-hover dataTable ">
+                                        <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                                     <thead>
                                         <tr role="row">
                                                 
@@ -54,14 +57,14 @@
 
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 40px;">Action</th>
                                             
-                                            <form method="post" action="actions/transactionAction.php">
+                                            
                                           </tr>
                                     </thead>
                                     <!-- WALK-IN QUERY TRANSACTONS -->
                                     <tbody>
                                         <?php
                                             $pdo = new dbConnect();
-                                            $trs = $pdo->transClient(array("order_by" => "TR_ID ASC"));
+                                            $trs = $pdo->transClient(array("order_by" => "TR_ID DESC"));
                                                 if(!empty($trs)){ 
                                                 $count = 0; 
                                                 foreach($trs as $tr){ 
@@ -73,13 +76,13 @@
                                       <tr>
                                         <td><?php $firstname = $tr['CLIENT_FirstName']; $lastname = $tr['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
                                         <td><?php echo $tr['TR_Type']; ?></td>
-                                        <td><?php echo $tr['TR_TransactionDate']; ?></td>
+                                        <td><?php echo date("F j, Y", strtotime($tr['TR_TransactionDate'])) ?></td>
                                         <td><?php echo $tr['TR_Bill']; ?></td>
 
-                                        <td class="center">
-                                            <input type="hidden" name="CLIENT_ID" value="<?php echo $tr['CLIENT_ID']?>">
+                                        <td>
+                                            <form method="POST" action="actions/transactionAction.php">
                                             <input type="hidden" name="TR_ID" value="<?php echo $tr['TR_ID']?>">
-                                            <input type="hidden" name="action_type" value="add"/>
+                                            <input type="hidden" name="action_type" value="edit">
                                             <button name="submit" type="submit"  class="btn bg-red" >CHECKOUT</button>
                                         </td>
                                     </form>

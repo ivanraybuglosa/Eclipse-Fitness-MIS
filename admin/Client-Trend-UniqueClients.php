@@ -10,7 +10,7 @@
 <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>Unique Clients</h2>
+                <h2>New Clients</h2>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     
@@ -22,7 +22,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Clients - Trends - Unique Clients
+                                    Clients - Trends - New Clients
                                 </li>
                             </ol>
             </div>
@@ -30,7 +30,7 @@
         <?php include("Client-Report-List.php"); ?>
         <div class="card">
             <div class="header">
-                <h2>Monthly Unique Clients</h2>
+                <h2>New Clients</h2>
             </div>
             <div class="body">
                 <select id="filteryear" class="validate[required] select form-control show-tick" style="margin-top: -25px; width: 30%;" data-live-search="true">
@@ -61,14 +61,6 @@
             </div>
             </div>
         </div>
-                            <footer>
-                                 <div class="row">
-                                    <label style="margin-left:30px; margin-right: 5px;">Export:</label>
-                                     <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">Print</button>
-                                      <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">Excel</button>
-                                      <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">PDF</button>
-                                 </div>
-                            </footer>
 </section>
     <?php include("includes/footer.php"); ?>
 

@@ -2,66 +2,16 @@ DROP TABLE activitylog;
 
 CREATE TABLE `activitylog` (
   `AL_Code` int(8) NOT NULL AUTO_INCREMENT,
-  `CLIENT_ID` int(8) NOT NULL,
+  `CLIENT_ID` int(8) DEFAULT NULL,
   `COACH_ID` int(8) NOT NULL,
   `Activity` text NOT NULL,
   `AL_Date` date NOT NULL,
   `AL_StartTime` time NOT NULL,
   `AL_EndTime` time NOT NULL,
   PRIMARY KEY (`AL_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
-INSERT INTO activitylog VALUES("23","68","17","Personal Training Session","2018-01-27","00:31:00","02:13:00"); 
-INSERT INTO activitylog VALUES("24","68","15","Studio Class Session","2018-01-29","00:32:00","00:31:00"); 
-INSERT INTO activitylog VALUES("25","68","15","Studio Class Session","2018-01-29","00:32:00","00:31:00"); 
-INSERT INTO activitylog VALUES("26","68","15","Studio Class Session","2018-01-29","00:32:00","00:31:00"); 
-INSERT INTO activitylog VALUES("27","68","15","Studio Class Session","2018-01-29","00:32:00","00:31:00"); 
-INSERT INTO activitylog VALUES("28","68","15","Studio Class Session","2018-01-29","00:32:00","00:31:00"); 
-INSERT INTO activitylog VALUES("29","68","15","Studio Class Session","2018-01-29","00:32:00","00:31:00"); 
-INSERT INTO activitylog VALUES("30","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("31","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("32","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("33","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("34","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("35","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("36","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("37","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("38","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("39","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("40","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("41","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("42","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("43","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("44","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("45","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("46","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("47","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("48","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("49","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("50","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("51","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("52","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("53","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("54","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("55","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("56","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("57","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("58","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("59","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("60","68","16","Studio Class Session","2018-01-29","00:31:00","03:31:00"); 
-INSERT INTO activitylog VALUES("61","69","15","Personal Training Session","2018-01-27","13:00:00","14:00:00"); 
-INSERT INTO activitylog VALUES("62","69","15","Personal Training Session","2018-01-27","14:01:00","02:01:00"); 
-INSERT INTO activitylog VALUES("63","69","16","Personal Training Session","2018-01-28","13:00:00","13:01:00"); 
-INSERT INTO activitylog VALUES("64","68","15","Studio Class Session","2018-01-28","13:00:00","14:00:00"); 
-INSERT INTO activitylog VALUES("65","68","15","Studio Class Session","2018-01-28","13:00:00","14:00:00"); 
-INSERT INTO activitylog VALUES("66","70","15","Studio Class Session","2018-01-28","14:01:00","14:03:00"); 
-INSERT INTO activitylog VALUES("67","72","15","Studio Class Session","2018-01-28","14:01:00","14:03:00"); 
-INSERT INTO activitylog VALUES("68","72","15","Studio Class Session","2018-01-28","14:01:00","14:03:00"); 
-INSERT INTO activitylog VALUES("69","68","15","Studio Class Session","2018-01-28","14:01:00","14:03:00"); 
-INSERT INTO activitylog VALUES("70","68","15","Studio Class Session","2018-01-28","14:01:00","14:03:00"); 
-INSERT INTO activitylog VALUES("71","68","15","Studio Class Session","2018-01-28","14:01:00","14:03:00"); 
-INSERT INTO activitylog VALUES("72","68","15","Studio Class Session","2018-01-28","14:01:00","14:03:00"); 
-INSERT INTO activitylog VALUES("73","68","15","Studio Class Session","2018-01-28","14:01:00","14:03:00"); 
+INSERT INTO activitylog VALUES("75","","22","Studio Class Session","2018-02-05","16:01:00","18:01:00"); 
 
 
 
@@ -81,15 +31,44 @@ CREATE TABLE `attendance` (
   `A_Date` date NOT NULL,
   `A_status` varchar(10) NOT NULL,
   PRIMARY KEY (`A_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=333 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=410 DEFAULT CHARSET=latin1;
 
-INSERT INTO attendance VALUES("326","68","19:52:33","19:53:05","1","1","1","","2018","Feb","2018-02-01","Member"); 
-INSERT INTO attendance VALUES("327","68","21:07:07","","2","0","1","","2018","Feb","2018-02-01","Member"); 
-INSERT INTO attendance VALUES("328","68","08:52:44","19:46:19","1","1","1","","2018","Feb","2018-02-02","Member"); 
-INSERT INTO attendance VALUES("329","69","18:25:53","19:48:14","3","3","1","Returned","2018","Feb","2018-02-02","Member"); 
-INSERT INTO attendance VALUES("330","72","19:14:07","","2","0","1","","2018","Feb","2018-02-02","Walk-in"); 
-INSERT INTO attendance VALUES("331","73","19:14:18","","2","0","1","","2018","Feb","2018-02-02","Walk-in"); 
-INSERT INTO attendance VALUES("332","75","19:39:25","","4","0","1","","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("374","68","23:05:03","23:09:07","2","2","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("375","71","23:05:17","23:09:03","3","3","5","Returned","2018","Feb","2018-02-02","Walk-in"); 
+INSERT INTO attendance VALUES("376","69","23:07:35","23:08:56","2","2","7","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("377","68","23:09:29","23:09:41","1","1","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("378","68","00:24:16","01:55:07","4","4","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("379","71","00:47:13","01:06:13","3","3","3","Returned","2018","Feb","2018-02-02","Walk-in"); 
+INSERT INTO attendance VALUES("380","69","00:47:21","00:59:56","4","2","8","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("381","69","01:17:03","01:54:52","1","1","2","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("382","70","01:34:20","01:55:04","2","2","3","Returned","2018","Feb","2018-02-02","Walk-in"); 
+INSERT INTO attendance VALUES("383","75","01:36:58","01:54:56","1","1","8","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("384","72","01:41:12","01:55:01","3","3","14","Returned","2018","Feb","2018-02-02","Walk-in"); 
+INSERT INTO attendance VALUES("385","68","01:55:11","01:56:15","2","2","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("386","68","01:56:21","01:56:42","1","1","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("387","68","01:56:45","02:18:02","1","1","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("388","69","02:01:32","","2","0","6","","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("389","70","02:07:16","","2","0","7","","2018","Feb","2018-02-02","Walk-in"); 
+INSERT INTO attendance VALUES("390","73","02:14:59","","2","0","12","","2018","Feb","2018-02-02","Walk-in"); 
+INSERT INTO attendance VALUES("391","75","02:15:20","","2","0","10","","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("392","68","02:18:07","02:18:49","2","2","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("393","68","02:18:55","02:20:08","2","2","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("394","68","02:20:12","02:23:07","1","1","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("395","68","02:23:15","02:23:48","2","2","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("396","68","02:24:05","02:24:54","2","2","1","Returned","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("397","68","02:24:57","","2","0","1","","2018","Feb","2018-02-02","Member"); 
+INSERT INTO attendance VALUES("398","68","20:25:54","20:30:09","2","2","1","","2018","Feb","2018-02-03","Member"); 
+INSERT INTO attendance VALUES("399","69","20:28:47","","2","0","2","","2018","Feb","2018-02-03","Member"); 
+INSERT INTO attendance VALUES("400","68","20:35:16","","2","0","1","","2018","Feb","2018-02-03","Member"); 
+INSERT INTO attendance VALUES("401","70","20:36:23","","3","0","6","","2018","Feb","2018-02-03","Walk-in"); 
+INSERT INTO attendance VALUES("402","72","20:54:23","","4","0","10","","2018","Feb","2018-02-03","Walk-in"); 
+INSERT INTO attendance VALUES("403","68","20:01:31","20:52:01","2","2","1","Returned","2018","Feb","2018-02-04","Member"); 
+INSERT INTO attendance VALUES("404","69","20:46:19","20:49:38","2","2","3","Returned","2018","Feb","2018-02-04","Member"); 
+INSERT INTO attendance VALUES("405","69","20:51:13","20:51:55","2","2","4","Returned","2018","Feb","2018-02-04","Member"); 
+INSERT INTO attendance VALUES("406","68","20:52:07","20:53:17","2","2","1","Returned","2018","Feb","2018-02-04","Member"); 
+INSERT INTO attendance VALUES("407","68","20:53:34","","2","0","1","","2018","Feb","2018-02-04","Member"); 
+INSERT INTO attendance VALUES("408","69","20:53:41","","2","0","5","","2018","Feb","2018-02-04","Member"); 
+INSERT INTO attendance VALUES("409","73","00:26:03","","1","0","7","","2018","Feb","2018-02-04","Walk-in"); 
 
 
 
@@ -101,13 +80,16 @@ CREATE TABLE `backuphistory` (
   `backup_date` date NOT NULL,
   `backup_time` time NOT NULL,
   PRIMARY KEY (`backup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 INSERT INTO backuphistory VALUES("2","Export","2018-01-27","02:14:00"); 
 INSERT INTO backuphistory VALUES("3","Import","2018-01-27","02:19:00"); 
 INSERT INTO backuphistory VALUES("4","Export","2018-01-27","02:20:00"); 
 INSERT INTO backuphistory VALUES("5","Import","2018-01-27","02:49:00"); 
 INSERT INTO backuphistory VALUES("11","Export","2018-01-27","03:25:00"); 
+INSERT INTO backuphistory VALUES("12","Export","2018-02-02","07:51:00"); 
+INSERT INTO backuphistory VALUES("13","Import","2018-02-06","11:53:00"); 
+INSERT INTO backuphistory VALUES("14","Import","2018-02-06","11:53:00"); 
 
 
 
@@ -135,8 +117,8 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 INSERT INTO client VALUES("68","Ivan Ray","Maple","Buglosa","Male","ivanraybuglosa@gmail","Member","","09123456768","ivanbuglosa","1954-08-08","1954","08","08","2018-01-27","",""); 
-INSERT INTO client VALUES("69","Brix Rodman","ads","Nessia","Male","brixaissen@gmail.com","Member","","091231421","brixnessia","1948-02-03","1948","02","03","2018-01-27","",""); 
-INSERT INTO client VALUES("70","dasd","asd","asd","Male","asd","Walk-in","","asd","asd","1948-06-01","1948","06","01","2018-01-28","",""); 
+INSERT INTO client VALUES("69","Brix Rodman","ads","Nessia","Male","brixaissen@gmail.com","Member","","1111","","1955-08-10","1955","10","08","2018-01-27","",""); 
+INSERT INTO client VALUES("70","dasd","asd","asd","Male","asd","Member","","asd","asd","1948-06-01","1948","06","01","2018-01-28","",""); 
 INSERT INTO client VALUES("71","d","d","dsadd","Male","d","Walk-in","","d","d","1955-09-09","1955","09","09","2018-01-28","",""); 
 INSERT INTO client VALUES("72","d","d","d","Male","d","Walk-in","","d","d","1951-02-01","1951","02","01","2018-01-29","",""); 
 INSERT INTO client VALUES("73","d","d","d","Male","d","Walk-in","","d","d","1954-08-07","1954","08","07","2018-01-29","",""); 
@@ -155,7 +137,7 @@ CREATE TABLE `clientassignment` (
   `month` char(3) NOT NULL,
   `year` char(4) NOT NULL,
   PRIMARY KEY (`CA_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
 
 INSERT INTO clientassignment VALUES("75","68","32","2018-01-27","Jan","2018"); 
 INSERT INTO clientassignment VALUES("76","68","32","2018-01-27","Jan","2018"); 
@@ -164,14 +146,6 @@ INSERT INTO clientassignment VALUES("78","68","32","2018-01-27","Jan","2018");
 INSERT INTO clientassignment VALUES("87","68","32","2018-01-27","Jan","2018"); 
 INSERT INTO clientassignment VALUES("88","68","35","2018-01-29","Jan","2018"); 
 INSERT INTO clientassignment VALUES("89","68","35","2018-01-29","Jan","2018"); 
-INSERT INTO clientassignment VALUES("90","70","35","2018-01-29","Jan","2018"); 
-INSERT INTO clientassignment VALUES("91","72","35","2018-01-29","Jan","2018"); 
-INSERT INTO clientassignment VALUES("92","72","35","2018-01-29","Jan","2018"); 
-INSERT INTO clientassignment VALUES("93","68","35","2018-01-29","Jan","2018"); 
-INSERT INTO clientassignment VALUES("94","68","35","2018-01-29","Jan","2018"); 
-INSERT INTO clientassignment VALUES("95","68","35","2018-01-29","Jan","2018"); 
-INSERT INTO clientassignment VALUES("96","68","35","2018-01-29","Jan","2018"); 
-INSERT INTO clientassignment VALUES("97","68","35","2018-01-29","Jan","2018"); 
 
 
 
@@ -183,19 +157,14 @@ CREATE TABLE `coach` (
   `Coach_FirstName` text NOT NULL,
   `Coach_Gender` text NOT NULL,
   `Coach_ContactNumber` int(11) NOT NULL,
-  `Coach_EmailAddress` varchar(20) NOT NULL,
+  `Coach_EmailAddress` varchar(50) NOT NULL,
   `Coach_Specialty` text NOT NULL,
   `Coach_Type` text NOT NULL,
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`COACH_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
-INSERT INTO coach VALUES("15","Benjamin","Mark","Male","2147483647","markbenjamin@gmail.c","fitness coach","Senior","66"); 
-INSERT INTO coach VALUES("16","Ang","Cherniguin","Female","912345678","cherniguinang@gmail.","Fitness Coach","Junior","66"); 
-INSERT INTO coach VALUES("17","Arellano","Nelson","Male","2147483647","nelsonarellano@gmail","Fitness Coach","Senior","66"); 
-INSERT INTO coach VALUES("18","Morales","Paul Jake","Male","2147483647","pauljakemorales@gmai","Fitness Coach","Junior","66"); 
-INSERT INTO coach VALUES("19","Fernandez","Samryl","Female","2147483647","samrylfernandez@gmai","Fitness Coach","Junior","66"); 
-INSERT INTO coach VALUES("21","Buglosa","Ivan","Male","912345667","ivanraybuglosa@gmail","Fitness Coach","Junior","66"); 
+INSERT INTO coach VALUES("22","buglosaaaah","aaa","Male","0","ivanbuglosa@gmail.com","fitness","","66"); 
 
 
 
@@ -222,13 +191,16 @@ CREATE TABLE `equipmentinventory` (
   `EI_DeliveryTime` time NOT NULL,
   `EI_Supplier` text NOT NULL,
   `EI_Status` text NOT NULL,
+  `month` text NOT NULL,
+  `year` int(4) NOT NULL,
   PRIMARY KEY (`EI_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
-INSERT INTO equipmentinventory VALUES("1","18","100","2018-02-15","14:02:00","Korea International",""); 
-INSERT INTO equipmentinventory VALUES("2","18","100","2018-02-23","18:02:00","japan international",""); 
-INSERT INTO equipmentinventory VALUES("3","18","1000","2018-02-24","10:02:00","Ph",""); 
-INSERT INTO equipmentinventory VALUES("7","18","500","2018-02-21","13:01:00","asd",""); 
+INSERT INTO equipmentinventory VALUES("1","18","100","2018-02-15","14:02:00","Korea International","","","0"); 
+INSERT INTO equipmentinventory VALUES("2","18","100","2018-02-23","18:02:00","japan international","","","0"); 
+INSERT INTO equipmentinventory VALUES("3","18","1000","2018-02-24","10:02:00","Ph","","","0"); 
+INSERT INTO equipmentinventory VALUES("7","18","500","2018-02-21","13:01:00","asd","","","0"); 
+INSERT INTO equipmentinventory VALUES("8","18","1000","2018-02-23","15:02:00","alson","","","0"); 
 
 
 
@@ -256,11 +228,15 @@ CREATE TABLE `measurements` (
   `M_DateMeasured` date DEFAULT NULL,
   `M_MeasurementType` text,
   `M_Classification` text NOT NULL,
+  `month` text NOT NULL,
+  `year` int(4) NOT NULL,
   PRIMARY KEY (`M_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 
-INSERT INTO measurements VALUES("48","31","2","2","2","2","2","22","2","2","2","2","2","2","2","2","2","2","2018-01-29","Initial","Underweight"); 
-INSERT INTO measurements VALUES("49","31","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2018-01-29","Final","Underweight"); 
+INSERT INTO measurements VALUES("48","31","2","2","2","2","2","22","2","2","2","2","2","2","2","2","2","2","2018-01-29","Initial","Underweight","","0"); 
+INSERT INTO measurements VALUES("49","31","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2018-01-29","Final","Underweight","","0"); 
+INSERT INTO measurements VALUES("50","33","12","2","3","4","5","1","2","3","31","1","4","1","2","1","12","4","2018-02-04","Initial","Underweight","","0"); 
+INSERT INTO measurements VALUES("51","33","1","2","3","4","3","2","5","6","4","15","6","2","1","2","4","3","2018-02-04","Final","Underweight","","0"); 
 
 
 
@@ -272,7 +248,7 @@ CREATE TABLE `membership` (
   `MS_Duration` varchar(9) NOT NULL,
   `MS_Price` int(5) NOT NULL,
   PRIMARY KEY (`MS_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 INSERT INTO membership VALUES("1","Regular","3","5697"); 
 INSERT INTO membership VALUES("6","Regular","6","10794"); 
@@ -281,7 +257,6 @@ INSERT INTO membership VALUES("9","Student","3","3597");
 INSERT INTO membership VALUES("11","Student","6","7194"); 
 INSERT INTO membership VALUES("12","Student","12","11988"); 
 INSERT INTO membership VALUES("13","sa","5","41"); 
-INSERT INTO membership VALUES("112","Walk-In","0","400"); 
 
 
 
@@ -293,12 +268,30 @@ CREATE TABLE `membershiptype` (
   `MS_Code` int(8) NOT NULL,
   `M_regDate` date NOT NULL,
   `M_expiryDate` date NOT NULL,
+  `M_membershipStatus` text NOT NULL,
   PRIMARY KEY (`M_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
-INSERT INTO membershiptype VALUES("44","68","1","2018-01-28","2018-04-28"); 
-INSERT INTO membershiptype VALUES("45","69","11","2018-01-29","2018-07-29"); 
-INSERT INTO membershiptype VALUES("46","75","11","2018-01-29","2018-07-29"); 
+INSERT INTO membershiptype VALUES("44","68","1","2018-01-28","2018-04-28",""); 
+INSERT INTO membershiptype VALUES("45","69","11","2018-01-29","2017-07-29","Active"); 
+INSERT INTO membershiptype VALUES("46","75","11","2018-01-29","2018-07-29",""); 
+INSERT INTO membershiptype VALUES("47","69","1","2018-02-02","2018-05-02",""); 
+INSERT INTO membershiptype VALUES("48","70","11","2018-02-03","2017-08-03","Active"); 
+
+
+
+DROP TABLE penalties;
+
+CREATE TABLE `penalties` (
+  `P_ID` int(8) NOT NULL,
+  `P_Type` text NOT NULL,
+  `P_Fee` int(4) NOT NULL,
+  PRIMARY KEY (`P_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO penalties VALUES("1","Lost Towel(s)","50"); 
+INSERT INTO penalties VALUES("2","Lost Locker Key","200"); 
+INSERT INTO penalties VALUES("3","Walk-in","400"); 
 
 
 
@@ -335,7 +328,7 @@ CREATE TABLE `studioclass` (
   PRIMARY KEY (`SC_Code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
-INSERT INTO studioclass VALUES("5","Aqua Zumba","5","room1"); 
+INSERT INTO studioclass VALUES("5","aaa","5","room1"); 
 INSERT INTO studioclass VALUES("6","Spinning","39","room2"); 
 INSERT INTO studioclass VALUES("7","HIIT","5",""); 
 INSERT INTO studioclass VALUES("8","Yoga","10",""); 
@@ -346,7 +339,7 @@ INSERT INTO studioclass VALUES("12","Pound Fit","15","");
 INSERT INTO studioclass VALUES("13","Pilates","12",""); 
 INSERT INTO studioclass VALUES("14","Swimming","5",""); 
 INSERT INTO studioclass VALUES("15","Zumba","10",""); 
-INSERT INTO studioclass VALUES("16","Abs Clinic","15",""); 
+INSERT INTO studioclass VALUES("16","aa","15",""); 
 INSERT INTO studioclass VALUES("17","","0",""); 
 
 
@@ -365,7 +358,7 @@ CREATE TABLE `studioclasssession` (
   `year` char(4) NOT NULL,
   `SCS_Status` text NOT NULL,
   PRIMARY KEY (`SCS_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 INSERT INTO studioclasssession VALUES("34","6","17","13:00:00.000000","14:00:00.000000","2018-01-29","","","",""); 
 INSERT INTO studioclasssession VALUES("35","8","15","14:01:00.000000","14:03:00.000000","2018-01-28","","","","On-Going"); 
@@ -378,6 +371,10 @@ INSERT INTO studioclasssession VALUES("41","9","15","14:01:00.000000","15:02:00.
 INSERT INTO studioclasssession VALUES("42","8","15","14:00:00.000000","15:01:00.000000","2018-01-31","","","",""); 
 INSERT INTO studioclasssession VALUES("43","5","15","14:01:00.000000","14:04:00.000000","2018-01-26","","","",""); 
 INSERT INTO studioclasssession VALUES("44","9","15","14:01:00.000000","15:01:00.000000","2018-01-27","","","",""); 
+INSERT INTO studioclasssession VALUES("45","6","22","14:01:00.000000","16:00:00.000000","2018-02-04","","","",""); 
+INSERT INTO studioclasssession VALUES("46","6","22","15:02:00.000000","16:01:00.000000","2018-02-05","","","",""); 
+INSERT INTO studioclasssession VALUES("47","5","22","15:02:00.000000","17:02:00.000000","2018-02-05","","","",""); 
+INSERT INTO studioclasssession VALUES("48","5","22","16:01:00.000000","18:01:00.000000","2018-02-05","","","",""); 
 
 
 
@@ -396,12 +393,9 @@ CREATE TABLE `towelinventory` (
   `month` varchar(3) NOT NULL,
   `year` varchar(4) NOT NULL,
   PRIMARY KEY (`TI_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
 
-INSERT INTO towelinventory VALUES("114","2018-02-01","12:52:00","10","","7","2","0","Supply","02","2018"); 
-INSERT INTO towelinventory VALUES("115","2018-02-01","12:53:00","","1","7","2","0","Laundry","02","2018"); 
-INSERT INTO towelinventory VALUES("116","2018-02-02","12:14:00","10","","17","2","3","Supply","02","2018"); 
-INSERT INTO towelinventory VALUES("117","2018-02-02","12:18:00","14","","17","2","3","Supply","02","2018"); 
+INSERT INTO towelinventory VALUES("124","2018-02-04","01:53:00","100","","95","5","0","Supply","Feb","2018"); 
 
 
 
@@ -440,12 +434,14 @@ CREATE TABLE `traininglogsession` (
   `TLS_Exercise` varchar(15) NOT NULL,
   `TLS_Sets` int(2) NOT NULL,
   `TLS_Reps` int(2) NOT NULL,
+  `month` text NOT NULL,
+  `year` int(4) NOT NULL,
   PRIMARY KEY (`TLS_Code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
-INSERT INTO traininglogsession VALUES("48","29","2018-01-27","00:31:00.0000","02:13:00.0000","pushups","3","15"); 
-INSERT INTO traininglogsession VALUES("49","30","2018-01-27","13:00:00.0000","14:00:00.0000","pushups","3","15"); 
-INSERT INTO traininglogsession VALUES("50","31","2018-01-28","13:00:00.0000","13:01:00.0000","","0","0"); 
+INSERT INTO traininglogsession VALUES("48","29","2018-01-27","00:31:00.0000","02:13:00.0000","pushups","3","15","","0"); 
+INSERT INTO traininglogsession VALUES("49","30","2018-01-27","13:00:00.0000","14:00:00.0000","pushups","3","15","","0"); 
+INSERT INTO traininglogsession VALUES("50","31","2018-01-28","13:00:00.0000","13:01:00.0000","","0","0","","0"); 
 
 
 
@@ -485,34 +481,34 @@ CREATE TABLE `transaction` (
   `month` varchar(10) NOT NULL,
   PRIMARY KEY (`TR_ID`),
   KEY `TR_ID` (`TR_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=latin1;
 
 INSERT INTO transaction VALUES("40","70","Walk-in","400","2018-01-28","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("41","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("42","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("42","71","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("43","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("44","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("45","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("44","71","Walk-in","400","2018-01-29","paid","2018","Jan"); 
+INSERT INTO transaction VALUES("45","71","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("46","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("47","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("47","71","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("48","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("49","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("50","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("50","71","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("51","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("52","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("52","71","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("53","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("54","69","Membership","7194","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("55","75","Membership","7194","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("56","72","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("57","71","Personal Training","600","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("58","73","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("59","74","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("54","69","Membership","7194","2018-01-29","paid","2018","Jan"); 
+INSERT INTO transaction VALUES("55","75","Membership","7194","2018-01-29","paid","2018","Jan"); 
+INSERT INTO transaction VALUES("56","72","Walk-in","400","2018-01-29","paid","2018","Jan"); 
+INSERT INTO transaction VALUES("57","71","Personal Training","600","2018-01-29","paid","2018","Jan"); 
+INSERT INTO transaction VALUES("58","73","Walk-in","400","2018-01-29","paid","2018","Jan"); 
+INSERT INTO transaction VALUES("59","74","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("60","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("61","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("62","72","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("61","71","Walk-in","400","2018-01-29","paid","2018","Jan"); 
+INSERT INTO transaction VALUES("62","72","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("63","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("64","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("65","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("65","71","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("66","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("67","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("68","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
@@ -521,17 +517,45 @@ INSERT INTO transaction VALUES("70","71","Walk-in","400","2018-01-29","unpaid","
 INSERT INTO transaction VALUES("71","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("72","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("73","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("74","73","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("74","73","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("75","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
-INSERT INTO transaction VALUES("76","72","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
+INSERT INTO transaction VALUES("76","72","Walk-in","400","2018-01-29","paid","2018","Jan"); 
 INSERT INTO transaction VALUES("77","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("78","70","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("79","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("80","71","Walk-in","400","2018-01-29","unpaid","2018","Jan"); 
 INSERT INTO transaction VALUES("81","70","Walk-in","400","2018-01-31","unpaid","2018","Feb"); 
 INSERT INTO transaction VALUES("82","70","Walk-in","400","2018-02-01","unpaid","2018","Feb"); 
-INSERT INTO transaction VALUES("83","72","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
-INSERT INTO transaction VALUES("84","73","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("83","72","Walk-in","400","2018-02-02","paid","2018","Feb"); 
+INSERT INTO transaction VALUES("84","73","Walk-in","400","2018-02-02","paid","2018","Feb"); 
+INSERT INTO transaction VALUES("85","70","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("86","71","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("87","70","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("88","71","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("89","74","Walk-in","400","2018-02-02","paid","2018","Feb"); 
+INSERT INTO transaction VALUES("90","70","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("91","70","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("92","70","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("93","70","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("94","71","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("95","69","Membership","5697","2018-02-02","paid","2018","Feb"); 
+INSERT INTO transaction VALUES("96","71","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("97","69","Lost Towel","400","2018-02-02","paid","2018","Feb"); 
+INSERT INTO transaction VALUES("98","71","Lost Towel","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("99","68","Lost Towel(s) ","0","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("100","68","Lost Locker Key","200","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("101","70","Walk-in","400","2018-02-02","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("102","73","Walk-in","400","2018-02-02","paid","2018","Feb"); 
+INSERT INTO transaction VALUES("103","68","Lost Towel(s) ","0","2018-02-03","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("104","68","Lost Locker Key","200","2018-02-03","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("105","68","Lost Towel(s) ","0","2018-02-03","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("106","68","Lost Locker Key","200","2018-02-03","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("107","68","Lost Towel(s) ","50","2018-02-03","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("108","68","Lost Locker Key","200","2018-02-03","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("109","70","Walk-in","400","2018-02-03","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("110","72","Walk-in","400","2018-02-03","paid","2018","Feb"); 
+INSERT INTO transaction VALUES("111","70","Membership","7194","2018-02-03","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("112","73","Walk-in","400","2018-02-04","unpaid","2018","Feb"); 
 
 
 
@@ -543,11 +567,11 @@ CREATE TABLE `users` (
   `password` varchar(50) NOT NULL,
   `userType` enum('admin','receptionist','coach','') NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
 
 INSERT INTO users VALUES("1","aaaa","4c14a808735abb4b205d1c8cb54ec845","admin"); 
 INSERT INTO users VALUES("65","admin","21232f297a57a5a743894a0e4a801fc3","admin"); 
-INSERT INTO users VALUES("66","","1f16a6c017f12c1539c4947e234de78a","coach"); 
+INSERT INTO users VALUES("66","","bf6982fbf3fc390e68ec90ceb101033f","coach"); 
 INSERT INTO users VALUES("67","","d41d8cd98f00b204e9800998ecf8427e","coach"); 
 INSERT INTO users VALUES("68","","d41d8cd98f00b204e9800998ecf8427e","receptionist"); 
 INSERT INTO users VALUES("69","coach1","1bf06497729c4c55cb24a10c99ce4525","coach"); 
@@ -562,6 +586,7 @@ INSERT INTO users VALUES("77","samrylfernandez","81dc9bdb52d04dc20036dbd8313ed05
 INSERT INTO users VALUES("78","","d41d8cd98f00b204e9800998ecf8427e","coach"); 
 INSERT INTO users VALUES("79","","d41d8cd98f00b204e9800998ecf8427e","receptionist"); 
 INSERT INTO users VALUES("80","ivanbuglosa","000f8670aeebb215cb60c2e5ed72b153","coach"); 
+INSERT INTO users VALUES("81","","d41d8cd98f00b204e9800998ecf8427e","coach"); 
 
 
 

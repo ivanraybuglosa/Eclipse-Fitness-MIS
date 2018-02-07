@@ -8,13 +8,18 @@
                 <a href="StudioClass-Report-ClassList.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-walkinlist" data-type="success">CLASS LIST</a>
                  </div>
 
-                 <div class="col-md-3">
-                <a href="StudioClass-Report-SessionList.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-memberlist" data-type="success">SESSION HISTORY</a>
+                 <div class="col-md-3"> 
+                <a href="StudioClass-Report-SessionList.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-memberlist" data-type="success">CLASS SESSION HISTORY</a>
                  </div>
 
                  <div class="col-md-3">
                 <a href="StudioClass-Report-ClassRegistration.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-clientactivities" data-type="success">CLASS REGISTRATIONS</a>
                  </div>
+
+                 <div class="col-md-3">
+                <a href="StudioClass-Report-ClientRecords.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-clientactivities" data-type="success">CLIENT CLASS RECORDS</a>
+                 </div>
+
              </div>
              <div class="row">
 
@@ -23,11 +28,11 @@
                 </div>
 
                 <div class="col-md-3">
-                <a href="StudioClass-Trend-FaveClass.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-classparticipants" data-type="success">TOP 10 CLASSES</a>
+                <a href="StudioClass-Trend-FaveClass.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-classparticipants" data-type="success">TOP 5 CLASSES</a>
                  </div>
 
                  <div class="col-md-3">
-                <a href="StudioClass-Trend-LeastClass.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-classparticipants" data-type="success">LEAST 10 CLASSES</a>
+                <a href="StudioClass-Trend-LeastClass.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-classparticipants" data-type="success">LEAST 5 CLASSES</a>
                  </div>
 
                  <div class="col-md-3">

@@ -20,7 +20,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Studio Class - Reports - Studio Class Registrations
+                                    Studio Class - Reports - Class Registrations
                                 </li>
                             </ol>
             </div>
@@ -28,7 +28,7 @@
     <?php include("StudioClass-Report-List.php"); ?>
     <div class="card">
         <div class="header">
-            <h2>Studio Class Registrations</h2>
+            <h2>Class Registrations</h2>
         </div>
                         <div class="body">
 
@@ -87,11 +87,11 @@
                                             while($freg = $reg->fetch_array()) {
                                                                     ?>
                                         <tr>
-                                            <td align="center"><?php echo $freg['CA_RegDate'] ?></td>
+                                            <td align="center"><?php echo date("F j, Y", strtotime($freg['CA_RegDate'])) ?></td>
                                             <td align="center"><?php echo $freg['CLIENT_FirstName'] ?> <?php echo $freg['CLIENT_LastName'] ?></td>
                                             <td align="center"><?php echo $freg['SC_Name'] ?></td>
-                                            <td align="center"><?php echo $freg['SCS_StartTime'] ?></td>
-                                            <td align="center"><?php echo $freg['SCS_EndTime'] ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_StartTime'])) ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_EndTime'])) ?></td>
                                         </tr>
                                         <?php 
                                      }
@@ -103,11 +103,11 @@
                                             while($freg = $reg->fetch_array()) {
                                                                     ?>
                                         <tr>
-                                            <td align="center"><?php echo $freg['CA_RegDate'] ?></td>
+                                            <td align="center"><?php echo date("F j, Y", strtotime($freg['CA_RegDate'])) ?></td>
                                             <td align="center"><?php echo $freg['CLIENT_FirstName'] ?> <?php echo $freg['CLIENT_LastName'] ?></td>
                                             <td align="center"><?php echo $freg['SC_Name'] ?></td>
-                                            <td align="center"><?php echo $freg['SCS_StartTime'] ?></td>
-                                            <td align="center"><?php echo $freg['SCS_EndTime'] ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_StartTime'])) ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_EndTime'])) ?></td>
                                         </tr>
                                     <?php
                                         }

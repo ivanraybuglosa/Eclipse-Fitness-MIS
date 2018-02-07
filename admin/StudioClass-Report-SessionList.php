@@ -20,7 +20,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Studio Class - Reports - Studio Class Sessions
+                                    Studio Class - Reports - Class Session History
                                 </li>
                             </ol>
             </div>
@@ -28,7 +28,7 @@
     <?php include("StudioClass-Report-List.php"); ?>
     <div class="card">
         <div class="header">
-            <h2>Studio Class Sessions</h2>
+            <h2>Class Session History</h2>
         </div>
                         <div class="body">
 
@@ -93,12 +93,12 @@
 
                                                                     ?>
                                         <tr>
-                                            <td align="center"><?php echo $fsess['SCS_Date'] ?></td>
+                                            <td align="center"><?php echo date("F j, Y", strtotime($fsess['SCS_Date'])) ?></td>
                                             <td align="center"><?php echo $fsess['SC_Name'] ?></td>
                                             <td align="center"><?php echo $fsess['Coach_FirstName'] ?> <?php echo $fsess['Coach_LastName'] ?></td>
                                             <td align="center"><?php echo $ftp['total'] ?></td>
-                                            <td align="center"><?php echo $fsess['SCS_StartTime'] ?></td>
-                                            <td align="center"><?php echo $fsess['SCS_EndTime'] ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($fsess['SCS_StartTime'])) ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($fsess['SCS_EndTime'])) ?></td>
                                             
                                         </tr>
                                         <?php 
@@ -110,20 +110,19 @@
                                             while($fsess = $sess->fetch_array()) {
                                                 $sc = $fsess['SCS_Code'];
 
-
                                                 $tp = $conn->query("SELECT COUNT(*) as total FROM `clientassignment` WHERE SCS_Code = '$sc' ") or die(mysql_error());
                                                 $ftp = $tp->fetch_array();
 
                                                                     ?>
                                         <tr>
-                                            <td align="center"><?php echo $fsess['SCS_Date'] ?></td>
+                                            <td align="center"><?php echo date("F j, Y", strtotime($fsess['SCS_Date'])) ?></td>
                                             <td align="center"><?php echo $fsess['SC_Name'] ?></td>
                                             <td align="center"><?php echo $fsess['Coach_FirstName'] ?> <?php echo $fsess['Coach_LastName'] ?></td>
                                             <td align="center"><?php echo $ftp['total'] ?></td>
-                                            <td align="center"><?php echo $fsess['SCS_StartTime'] ?></td>
-                                            <td align="center"><?php echo $fsess['SCS_EndTime'] ?></td>
-                                            
+                                            <td align="center"><?php echo date("g:i A", strtotime($fsess['SCS_StartTime'])) ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($fsess['SCS_EndTime'])) ?></td>
                                         </tr>
+                                        
                                     <?php
                                         }
                                     }

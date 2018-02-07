@@ -35,7 +35,7 @@
                         <form method="POST">
                                 <div class="row clearfix">
 
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                        <div class="form-line">
                                         <div class="col-md-6">
@@ -49,11 +49,39 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                <select class="form-control show-tick" data-live-search="true" name="clientName">
+                                        <option value="null">Choose Client</option>
+                                            <?php 
+                                            $pdo = new dbConnect();
+
+                                             $client = $pdo->getRows('client',array('order_by'=>'CLIENT_ID ASC'));
+                                                    if(!empty($client)){ 
+                                                        $count = 0; 
+                                                        foreach($client as $clients){
+                                                            $count++;?>
+
+                                        <option id = "<?php echo $clients['CLIENT_ID']; ?>" value="<?php echo $clients['CLIENT_ID']; ?>">
+                                                <?php 
+                                                $firstname = $clients['CLIENT_FirstName']; 
+                                                      $lastname = $clients['CLIENT_LastName']; 
+                                                      $fullname=$firstname." ".$lastname; 
+                                                      echo $fullname ; 
+                                                 ?>
+                                        </option>
+                                            <?php 
+                                                }
+                                            }
+                                            ?>
+                                </select>
+
+                                </div>
+
+                                <div class="col-md-2">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                                 </div>
 
@@ -63,11 +91,12 @@
                                <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info"> 
                                     <thead>
                                         <tr>
-                                            <th>Start Date</th>
+                                            <th>Contract Start Date</th>
                                             <th>Coach Name</th>
                                             <th>Client Name</th>
+                                            <th>Classification</th>
                                             <th>Sessions</th>
-                                            <th>End Date</th>
+                                            <th>Contract End Date</th>
                                         </tr>
                                     </thead>
                                     
@@ -76,40 +105,94 @@
 
                                          $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error()); 
 
-                                         if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
+                                 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                                         if($_REQUEST['action_type'] == 'filter'){
 
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
+                                            $clientName = $_POST['clientName'];
 
-                                         $contract = $conn->query("SELECT * FROM `traininglog` INNER JOIN coach ON traininglog.COACH_ID = coach.COACH_ID INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE TL_RegDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                        if($clientName != "null" && ($filterstart == $_POST['filter_start'] && $filterend = $_POST['filter_end'])) {
+                            
+                                     $contract = $conn->query("SELECT * FROM `traininglog` INNER JOIN coach ON traininglog.COACH_ID = coach.COACH_ID INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE TL_RegDate BETWEEN '$filterstart' AND '$filterend' AND client.CLIENT_ID = '$clientName' ") or die(mysql_error());
+
                                             while($fcon = $contract->fetch_array()) {
-                                                                    ?> 
-                                        <tr>
-                                            <td><?php echo $fcon['TL_RegDate']?></td>
+                                                $tempcode = $fcon['TL_Code'];
+                                                $getmeasure = $conn->query("SELECT M_Classification FROM measurements WHERE TL_Code ='$tempcode' ") or die(mysqli_error());
+                                                $fmeasure = $getmeasure->fetch_array();
+                                        ?> 
+                                            <tr>
+                                            <td><?php echo date("F j, Y", strtotime($fcon['TL_RegDate'])) ?></td>
                                             <td><?php echo $fcon['Coach_FirstName']?> 
                                                 <?php echo $fcon['Coach_LastName']?></td>
                                             <td><?php echo $fcon['CLIENT_FirstName'] ?> 
                                                 <?php echo $fcon['CLIENT_LastName'] ?></td>
+                                            <td><?php echo $fmeasure['M_Classification'] ?></td>
                                             <td><?php echo $fcon['TP_PackageType'] ?></td>
-                                            <td><?php echo $fcon['TL_Expiry'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fcon['TL_Expiry'])) ?></td>
                                         </tr>
                                         <?php 
+                                        }
+
+                                     } else if ($clientName == "null" && ($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end'])) { 
+
+                                        $contract = $conn->query("SELECT * FROM traininglog INNER JOIN coach ON traininglog.COACH_ID = coach.COACH_ID INNER JOIN CLIENT ON traininglog.CLIENT_ID = CLIENT.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code ") or die(mysql_error());
+                                            while($fcon = $contract->fetch_array()) {
+                                                $tempcode = $fcon['TL_Code'];
+                                                $getmeasure = $conn->query("SELECT M_Classification FROM measurements WHERE TL_Code ='$tempcode' ") or die(mysqli_error());
+                                                $fmeasure = $getmeasure->fetch_array();
+                                        ?> 
+                                        <tr>
+                                            <td><?php echo date("F j, Y", strtotime($fcon['TL_RegDate'])) ?></td>
+                                            <td><?php echo $fcon['Coach_FirstName']?> 
+                                                <?php echo $fcon['Coach_LastName']?></td>
+                                            <td><?php echo $fcon['CLIENT_FirstName'] ?> 
+                                                <?php echo $fcon['CLIENT_LastName'] ?></td>
+                                            <td><?php echo $fmeasure['M_Classification'] ?></td>
+                                            <td><?php echo $fcon['TP_PackageType'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fcon['TL_Expiry'])) ?></td>
+                                        </tr>
+                                    <?php
+                                        }
+                                     } else {
+                                        $contract = $conn->query("SELECT * FROM traininglog INNER JOIN coach ON traininglog.COACH_ID = coach.COACH_ID INNER JOIN CLIENT ON traininglog.CLIENT_ID = CLIENT.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE TL_RegDate BETWEEN '$filterstart' AND '$filterend' OR client.CLIENT_ID = '$clientName' ") or die(mysql_error());
+
+                                            while($fcon = $contract->fetch_array()) {
+                                                $tempcode = $fcon['TL_Code'];
+                                                $getmeasure = $conn->query("SELECT M_Classification FROM measurements WHERE TL_Code ='$tempcode' ") or die(mysqli_error());
+                                                $fmeasure = $getmeasure->fetch_array();
+                                                                    ?> 
+                                        <tr>
+                                            <td><?php echo date("F j, Y", strtotime($fcon['TL_RegDate'])) ?></td>
+                                            <td><?php echo $fcon['Coach_FirstName']?> 
+                                                <?php echo $fcon['Coach_LastName']?></td>
+                                            <td><?php echo $fcon['CLIENT_FirstName'] ?> 
+                                                <?php echo $fcon['CLIENT_LastName'] ?></td>
+                                            <td><?php echo $fmeasure['M_Classification'] ?></td>
+                                            <td><?php echo $fcon['TP_PackageType'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fcon['TL_Expiry'])) ?></td>
+                                        </tr>
+                                    <?php
+                                        }
                                      }
                                  }
                              } else {
 
-                                     $contract = $conn->query("SELECT * FROM `traininglog` INNER JOIN coach ON traininglog.COACH_ID = coach.COACH_ID INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code") or die(mysql_error());
+                                     $contract = $conn->query("SELECT * FROM traininglog INNER JOIN coach ON traininglog.COACH_ID = coach.COACH_ID INNER JOIN CLIENT ON traininglog.CLIENT_ID = CLIENT.CLIENT_ID INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code ") or die(mysql_error());
                                             while($fcon = $contract->fetch_array()) {
+                                                $tempcode = $fcon['TL_Code'];
+                                                $getmeasure = $conn->query("SELECT M_Classification FROM measurements WHERE TL_Code ='$tempcode' ") or die(mysqli_error());
+                                                $fmeasure = $getmeasure->fetch_array();
                                                                     ?> 
                                         <tr>
-                                            <td><?php echo $fcon['TL_RegDate']?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fcon['TL_RegDate'])) ?></td>
                                             <td><?php echo $fcon['Coach_FirstName']?> 
                                                 <?php echo $fcon['Coach_LastName']?></td>
                                             <td><?php echo $fcon['CLIENT_FirstName'] ?> 
                                                 <?php echo $fcon['CLIENT_LastName'] ?></td>
+                                            <td><?php echo $fmeasure['M_Classification'] ?></td>
                                             <td><?php echo $fcon['TP_PackageType'] ?></td>
-                                            <td><?php echo $fcon['TL_Expiry'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fcon['TL_Expiry'])) ?></td>
                                         </tr>
                                     <?php
                                         }

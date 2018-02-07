@@ -37,7 +37,7 @@ include("includes/header.php");
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="LastName" class="form-control" >
+                                            <input type="text" name="LastName" class="form-control" required >
                                             <label class="form-label">Last Name</label>
                                         </div>
                                     </div>
@@ -45,7 +45,7 @@ include("includes/header.php");
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="FirstName" class="form-control" >
+                                            <input type="text" name="FirstName" class="form-control" required>
                                             <label class="form-label">First Name</label>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@ include("includes/header.php");
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="MiddleName" class="form-control" >
+                                            <input type="text" name="MiddleName" class="form-control" required>
                                             <label class="form-label">Middle Name</label>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@ include("includes/header.php");
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="EmailAddress" class="form-control" >
+                                            <input type="email" name="EmailAddress" class="form-control" required>
                                             <label class="form-label">Email Address</label>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@ include("includes/header.php");
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="Specialty" class="form-control" >
+                                            <input type="text" name="Specialty" class="form-control" required >
                                             <label class="form-label">Specialty</label>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@ include("includes/header.php");
                                     
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="ContactNumber" class="form-control" >
+                                            <input type="number" name="ContactNumber" class="form-control" required >
                                             <label class="form-label">Contact Number</label>
                                         </div>
                                     </div>
@@ -88,14 +88,14 @@ include("includes/header.php");
                                     
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="Type" class="form-control" >
+                                            <input type="text" name="Type" class="form-control" required>
                                             <label class="form-label">Type</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="input-group">
-                                        <select class="form-control" name="gender">
+                                        <select class="form-control" name="gender" required>
                                             <option value="">Gender</option>
                                             <option id=male value="Male">Male</option>
                                             <option id=female value="Female">Female</option>
@@ -105,7 +105,7 @@ include("includes/header.php");
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="cusername" class="form-control" >
+                                            <input type="text" name="cusername" class="form-control" required>
                                             <label class="form-label">Account Username</label>
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@ include("includes/header.php");
                                 <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="password" name="cpassword" class="form-control" >
+                                            <input type="password" name="cpassword" class="form-control" required >
                                             <label class="form-label">Account Password</label>
                                         </div>
                                     </div>
@@ -128,14 +128,16 @@ include("includes/header.php");
                  
                 </div>
     
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px">
                     <div class="card">
+                        <div class="header">
+                            <h2>Coach List</h2>
+                        </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                                     <thead>
                                                         <tr role="row">
                                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 200px;">First Name</th>
@@ -152,7 +154,7 @@ include("includes/header.php");
                                             
                                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 200px;">Email Address</th>
                                             
-                                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">Update</th>
+                                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">Actions</th>
 
                                                         </tr>
                                                     </thead>
@@ -165,7 +167,6 @@ include("includes/header.php");
                                                                 foreach($coachs as $coach){ 
                                                                     $count++;?>
                                                         <tr>
-                                                        <td class="hidden"><?php echo $coach['COACH_ID']; ?></td>
                                                         <td><?php echo $coach['Coach_FirstName']; ?></td>
                                                         <td><?php echo $coach['Coach_LastName']; ?></td>
                                                         <td><?php echo $coach['Coach_Type']; ?></td>
@@ -181,7 +182,8 @@ include("includes/header.php");
             <div class="modal-content">
                 <center>
                     <form  method="POST" action="actions/coachAction.php" id="myform2">
-                        <input type="hidden" class="form-control" name="user_id" value="<?php echo $coach['userID']; ?>"/>
+                        <input type="hidden" class="form-control" name="COACH_ID" value="<?php echo $coach['COACH_ID']; ?>"/>
+                        <input type="hidden" class="form-control" name="userID" value="<?php echo $coach['userID']; ?>"/>
                         <div class="modal-header">
                             <div class="block-header">
                                 <h2>Update Coach Record</h2>
@@ -299,7 +301,7 @@ include("includes/header.php");
 
  <?php include("includes/footer.php"); ?>
 
-    <!-- Jquery DataTable Plugin Js -->
+    
     <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
@@ -309,16 +311,13 @@ include("includes/header.php");
     <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-      <!-- Bootstrap Material Datetime Picker Plugin Js -->
     <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
     <!-- Custom Js -->
     <script src="../assets/js/admin.js"></script>
     <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="../assets/js/pages/forms/form-wizard.js"></script>
     <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
-
-    <!-- Demo Js -->
-    <script src="../assets/js/demo.js"></script>
 </body>
 
 </html>

@@ -42,42 +42,47 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                                     foreach($compare as $com){
                                         $count++;
 
-                                        if($date > $com['TL_Expiry']){
+                                        if(date("Y-m-d") > $com['TL_Expiry']){
                                             $status = "Expired";
-                                        }elseif($com['Sessions'] == $com['TP_PackageType'] && $com['TL_Expiry'] > $date){
+                                        }elseif(($com['Sessions'] === $com['TP_PackageType']) && ($com['TL_Expiry'] > date("Y-m-d"))){
                                             $status = "Completed";
-                                        }elseif($com['Sessions'] < $com['TP_PackageType'] && $com['TL_Expiry'] > $date){
+                                        }elseif(($com['Sessions'] < $com['TP_PackageType']) && ($com['TL_Expiry'] > date("Y-m-d"))){
                                             $status = "On-Going";
                                         }else{
                                             $status = "Undefined";
                                         }
 
                                 }
+                            }else{
+
                             }
-           
-        $userData2 = array(
-            'TL_TrainingStatus' => $status 
-        );
+                        $userData2 = array(
+                            'TL_TrainingStatus' => $status 
+                        );
 
 
-        $userData3 = array(
-            'CLIENT_ID' => $client,
-            'COACH_ID' => $_POST['coach'],
-            'Activity' => 'Personal Training Session',
-            'AL_Date' => $date,
-            'AL_StartTime' => $st,
-            'AL_EndTime' => $et,
-        );
+                        $userData3 = array(
+                            'CLIENT_ID' => $client,
+                            'COACH_ID' => $_POST['coach'],
+                            'Activity' => 'Personal Training Session',
+                            'AL_Date' => $date,
+                            'AL_StartTime' => $st,
+                            'AL_EndTime' => $et,
+                        );
 
         
-        $condition1 = array('TL_Code' => $_POST['TL_Code']);
-        $update = $pdo->update($table2,$userData2,$condition1);
-        $insert2 = $pdo->insert($table3,$userData3);
-        $statusMsg = $insert?'Training Log data has been inserted successfully.':'Some problem occurred, please try again.';
-        $_SESSION['statusMsg'] = $statusMsg;
-        $id = $_POST['TL_Code'];
-        header("Location:../PT-ContractsInfo.php?id=".$id."");
-    }
+                        $condition1 = array('TL_Code' => $_POST['TL_Code']);
+                        $update = $pdo->update($table2,$userData2,$condition1);
+                        $insert2 = $pdo->insert($table3,$userData3);
+                        $id = $_POST['TL_Code'];
+                        echo "<script>alert('Client Personal Training Session successfully saved');window.location.href='../PT-ContractsInfo.php?id=".$id." ';</script>";
+                        
+           
+        
+                    }else{
+                        $id = $_POST['TL_Code'];
+                        echo "<script>alert('Client Personal Training Session cannot be saved!');window.location.href='../PT-ContractsInfo.php?id=".$id." ';</script>";
+    }   
         }
                 }
                 else{

@@ -30,21 +30,36 @@ include_once("actions/PT-Trend-ClientLevel-Action.php"); ?>
                     <div class="header">
                        <h2>Client Level Frequency</h2>
                     </div>
+                    <div class="body">
+                <select id="filteryear" class="validate[required] select form-control show-tick" style="margin-top: -25px; width: 30%;" data-live-search="true">
+                    <option>Select Year...</option>
+                    <?php
+                    for($year=2013; $year<=2025; $year++){
+                    ?>
+                    <option value="<?php echo $year ?>">
+                        <?php echo $year; ?>
+                    </option>
+                    <?php
+                    }
+                    ?>
+                </select>
+
+        <script>
+            $(document).ready(function(){   
+                $("#filteryear").on('change', function(){
+                    var year=$(this).val();
+                    window.location.href = 'PT-Trend-ClientLevel.php?year='+year;
+                });
+            });
+        </script>
+            </div>
+
                   <div class="body">
                     <div class="col-s-12">
                          <div id="clientlevel" style="width: 100%; height: 400px"></div>
                     </div>
                  </div>
             </div>
- 
-                   <footer>
-                    <div class="row">
-                         <label style="margin-left:30px; margin-right: 5px;">Export:</label>
-                            <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">Print</button>
-                            <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">Excel</button>
-                            <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">PDF</button>
-                      </div>
-                   </footer>
 
             </section>
     <?php include("includes/footer.php"); ?>

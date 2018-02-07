@@ -41,7 +41,7 @@
                                          <input type="date" class="form-control"  id="filterstart" name="filter_start"/>
                                         </div>
                                         <div class="col-md-6">
-                                         <input type="date" class="form-control" name="filter_end"/>
+                                         <input type="date" class="form-control"  id="filterend" name="filter_end"/>
                                        </div>
                                      </div>
                                     </div>  
@@ -72,6 +72,7 @@
                                             }
                                             ?>
                                 </select>
+
                                 </div>
                                 <div class="col-md-2">
                                     <input type="hidden" name="action_type" value="filter"/>
@@ -86,6 +87,7 @@
                         </form>
 
                         <div id="print">
+                        <label>Transaction Records</label>
                          <table class="table table-bordered table-striped table-hover dataTable" id="reportattendance" name="reportattendance" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
@@ -110,6 +112,44 @@
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
                                             $clientName = $_POST['clientName'];
 
+                                            if($clientName != "null" && $filterstart == $_POST['filter_start']) {
+                                                $th = $conn->query("SELECT * FROM transaction WHERE CLIENT_ID = '$clientName' AND TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+
+                                                while($fth = $th->fetch_array()) {
+                                                $cid = $fth['CLIENT_ID'];
+                                                $client = $conn->query("SELECT * FROM client WHERE CLIENT_ID = '$cid' ") or die(mysql_error());
+                                                $fc = $client->fetch_array()
+                                             ?>
+                                               <tr>
+                                                   <td><?php echo date("F j, Y", strtotime($fth['TR_TransactionDate'])) ?></td>
+                                                   <td><?php echo $fc['CLIENT_FirstName'] ?> 
+                                                       <?php echo $fc['CLIENT_MiddleName'] ?> 
+                                                       <?php echo $fc['CLIENT_LastName'] ?> </td>
+                                                   <td><?php echo $fth['TR_Type'] ?></td>
+                                                   <td><?php echo $fth['TR_Bill'] ?></td>
+                                               </tr>
+
+                                               <?php
+                                               } 
+                                            } else if($clientName == "null" && ($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end'])) {
+
+                                                $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID ") or die(mysql_error());
+
+                                                 while($fth = $th->fetch_array()) { 
+                                                 ?>
+                                                     <tr>
+                                                          <td><?php echo date("F j, Y", strtotime($fth['TR_TransactionDate'])) ?></td>
+                                                          <td><?php echo $fth['CLIENT_FirstName'] ?> 
+                                                              <?php echo $fth['CLIENT_MiddleName'] ?> 
+                                                              <?php echo $fth['CLIENT_LastName'] ?></td>
+                                                          <td><?php echo $fth['TR_Type'] ?></td>
+                                                          <td><?php echo $fth['TR_Bill'] ?></td>
+                                                     </tr>
+                                                  <?php
+
+                                            } 
+                                        } else {
+
                                             $th = $conn->query("SELECT * FROM transaction WHERE CLIENT_ID = '$clientName' OR TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
 
                                             while($fth = $th->fetch_array()) {
@@ -118,7 +158,7 @@
                                                 $fc = $client->fetch_array()
                                              ?>
                                                <tr>
-                                                   <td><?php echo $fth['TR_TransactionDate'] ?></td>
+                                                   <td><?php echo date("F j, Y", strtotime($fth['TR_TransactionDate'])) ?></td>
                                                    <td><?php echo $fc['CLIENT_FirstName'] ?> 
                                                        <?php echo $fc['CLIENT_MiddleName'] ?> 
                                                        <?php echo $fc['CLIENT_LastName'] ?> </td>
@@ -126,6 +166,7 @@
                                                    <td><?php echo $fth['TR_Bill'] ?></td>
                                                </tr>
                                                <?php
+                                                 }
                                             }
                                         }
 
@@ -136,7 +177,7 @@
                                                  while($fth = $th->fetch_array()) { 
                                                  ?>
                                                      <tr>
-                                                          <td><?php echo $fth['TR_TransactionDate'] ?></td>
+                                                          <td><?php echo date("F j, Y", strtotime($fth['TR_TransactionDate'])) ?></td>
                                                           <td><?php echo $fth['CLIENT_FirstName'] ?> 
                                                               <?php echo $fth['CLIENT_MiddleName'] ?> 
                                                               <?php echo $fth['CLIENT_LastName'] ?></td>

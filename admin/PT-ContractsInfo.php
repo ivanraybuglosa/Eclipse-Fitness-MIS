@@ -8,9 +8,9 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>Client Training</h2>
+                <h2>Personal Training - Client Profile</h2>
             </div>
-        </div>
+
             <?php
                 $id = $_GET['id'];
                     
@@ -22,12 +22,52 @@
                 foreach($ptClients as $pt){ 
                 $count++;
                 ?>
-            <div class="card">
-                <div class="header">
-                
-                <h2 class="pull-left"><b><?php $firstname = $pt['CLIENT_FirstName']; $lastname = $pt['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></b></h2>
-                <button name ="submit"  type="button" data-toggle="modal" data-target="#measurement-<?php echo $pt['TL_Code'] ?>" class="btn bg-green pull-right" style="margin-left:20px; margin-top:-5px;">Health Conditions</button>
-                  <!-- MODAL FOR RENEWING MEMBERSHIP -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.php">
+                            <i class="material-icons">dashboard</i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php">
+                            <i class="material-icons">perm_contact_calendar</i> Personal Training - Contracts
+                        </a>
+                    </li>
+                    <li class="active">
+                        <i class="material-icons">dashboard</i> Client - <?php $firstname = $pt['CLIENT_FirstName']; $lastname = $pt['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?>
+                    </li>
+                </ol>
+                </div>
+        </div>
+            
+
+
+                <div class="card">
+                        <div class="body bg-green">
+                            <div class="row clearfix">
+                                
+                                    <h2 class="pull-left"><b><?php $firstname = $pt['CLIENT_FirstName']; $lastname = $pt['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></b></h2>
+                                
+                                <button name ="submit"  type="button" data-toggle="modal" data-target="#measurement-<?php echo $pt['TL_Code'] ?>" class="btn bg-light-green pull-right" style="margin-left:15px; margin-top:18px; margin-right:5px;">Health Conditions</button>
+                                <button name ="submit" type="submit" data-toggle="modal" data-target="#finalMeasurement" class="btn bg-light-green pull-right" style="margin-left:20px; margin-top:18px;">Final Body Measurements</button>
+
+                                <button name ="submit"  type="submit" data-toggle="modal" data-target="#initialMeasurement" class="btn bg-light-green pull-right" style="margin-top:18px;">Initial Body Measurements</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+    $(document).ready(function () {
+
+        document.getElementById("FinalMeasurement").onsubmit = function() {   
+            this.children[1].disabled = true;
+            return false; // prevent form from actually posting (only for demo purposes)
+        }
+    });
+</script>
+             
+            <!-- MODAL FOR RENEWING MEMBERSHIP -->
             <div class="modal fade" id="measurement-<?php echo $pt['TL_Code'] ?>" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
@@ -141,32 +181,9 @@
         </div>
 
             <!-- END OF MODAL FOR RENEWAL -->
-            
-                <button name ="submit"  type="submit" data-toggle="modal" data-target="#finalMeasurement" class="btn bg-green pull-right" style="margin-left:20px; margin-top:-5px;">Final Body Measurements</button>
-
-                <button name ="submit"  type="submit" data-toggle="modal" data-target="#initialMeasurement" class="btn bg-green pull-right" style="margin-top:-5px;">Initial Body Measurements</button>
-
-
-
-                  <br>
-
-                  
-
-                </div>
-            </div> 
             <!-- End of health conditions -->
 
-                  <!-- <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Edit Information</a></li>
-                                        <li><a data-toggle="modal" data-target="#trainclient" onclick="setMembership();">Start Training</a></li>
-                                    </ul>
-                                </li>
-                            </ul> -->
+                  
 
             <!-- START OF CLIENT PERSONAL INFORMATION -->
             <div class="card">
@@ -270,7 +287,15 @@
                  <form method="post" action="actions/trainingSessionAction.php">
                 <div class="body">   
                    <div class="row clearfix">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <div class="form-line">
+                                <h5 class="pull-left">Session Date</h5>
+                                <input type="date" name="date" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="col-md-4">
                         <div class="input-group">
                             <div class="form-line">
                                 <h5 class="pull-left">Start Time</h5>
@@ -278,7 +303,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="input-group">
                             <div class="form-line">
                                 <h5 class="pull-left">End Time</h5>
@@ -315,7 +340,7 @@
                         </div>
                                 </div>
                         <div class="pull-right">
-                            <input type="hidden" name="date" value="<?php echo date("Y-m-d")?>">
+                            
                             <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
                             <input type="hidden" name="client" value="<?php echo $pt['CLIENT_ID']?>">
                             <input type="hidden" name="packageType" value="<?php echo $pt['TP_PackageType']?>">
@@ -351,7 +376,7 @@
                             <label for="age">Weight(lbs.)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="weight" class="form-control" value="<?php echo $measurement['M_Weight']?>">
+                                    <input type="text" name="weight" min="0" class="form-control" value="<?php echo $measurement['M_Weight']?>">
                                 </div>
                             </div>
                         </div>
@@ -359,7 +384,7 @@
                             <label for="age">Skeletal Mass(kg)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="skeletalMass" class="form-control" value="<?php echo $measurement['M_SkeletalMass']?>" >
+                                    <input type="text" name="skeletalMass" min="0" class="form-control" value="<?php echo $measurement['M_SkeletalMass']?>" >
                                 </div>
                             </div>
                         </div>
@@ -367,7 +392,7 @@
                             <label for="age">Body Fat Mass(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="bodyFatMass" class="form-control" value="<?php echo $measurement['M_BodyFatMass']?>">
+                                    <input type="text" name="bodyFatMass" min="0" class="form-control" value="<?php echo $measurement['M_BodyFatMass']?>">
                                 </div>
                             </div>
                         </div>
@@ -375,7 +400,7 @@
                             <label for="age">Fat Free Mass(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="fatFreeMass" class="form-control" value="<?php echo $measurement['M_FatFreeMass']?>" >
+                                    <input type="text" name="fatFreeMass" min="0" class="form-control" value="<?php echo $measurement['M_FatFreeMass']?>" >
                                 </div>
                             </div>
                         </div>
@@ -383,7 +408,7 @@
                             <label for="age">Body Mass Index(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="bodyMassIndex" class="form-control"  value="<?php echo $measurement['M_BodyMassIndex']?>">
+                                    <input type="text" name="bodyMassIndex" min="0" class="form-control"  value="<?php echo $measurement['M_BodyMassIndex']?>">
                                 </div>
                             </div>
                         </div>
@@ -391,7 +416,7 @@
                             <label for="age">Percent Body Fat(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="percentBodyFat" class="form-control" value="<?php echo $measurement['M_PercentBodyFat']?>">
+                                    <input type="text" name="percentBodyFat" min="0" class="form-control" value="<?php echo $measurement['M_PercentBodyFat']?>">
                                 </div>
                             </div>
                         </div>
@@ -399,7 +424,7 @@
                             <label for="age">Waist-Hip Ratio(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="waistHipRatio" class="form-control"  value="<?php echo $measurement['M_WaistHipRatio']?>">
+                                    <input type="text" name="waistHipRatio" min="0" class="form-control"  value="<?php echo $measurement['M_WaistHipRatio']?>">
                                 </div>
                             </div>
                         </div>
@@ -407,7 +432,7 @@
                             <label for="age">Basal-Metabolism(J/(h. kg)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="basalMetabolism" class="form-control" value="<?php echo $measurement['M_BasalMetabolicRate']?>">
+                                    <input type="text" name="basalMetabolism" min="0" class="form-control" value="<?php echo $measurement['M_BasalMetabolicRate']?>">
                                 </div>
                             </div>
                         </div>
@@ -418,7 +443,7 @@
                             <label for="age">Left Upper Arm(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="leftUpperArm" class="form-control"  value="<?php echo $measurement['M_LeftUpperArm']?>" >
+                                    <input type="text" name="leftUpperArm" min="0" class="form-control"  value="<?php echo $measurement['M_LeftUpperArm']?>" >
                                 </div>
                             </div>
                         </div>
@@ -426,7 +451,7 @@
                             <label for="age">Right Upper Arm(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="rightUpperArm" class="form-control" value="<?php echo $measurement['M_RightUpperArm']?>" >
+                                    <input type="text" name="rightUpperArm" min="0" class="form-control" value="<?php echo $measurement['M_RightUpperArm']?>" >
                                 </div>
                             </div>
                         </div>
@@ -434,7 +459,7 @@
                             <label for="age">Chest(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="chest" class="form-control" value="<?php echo $measurement['M_Chest']?>">
+                                    <input type="text" name="chest" min="0" class="form-control" value="<?php echo $measurement['M_Chest']?>">
                                 </div>
                             </div>
                         </div>
@@ -442,7 +467,7 @@
                             <label for="age">Waist(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="waist" class="form-control"  value="<?php echo $measurement['M_Waist']?>">
+                                    <input type="text" name="waist" min="0" class="form-control"  value="<?php echo $measurement['M_Waist']?>">
                                 </div>
                             </div>
                         </div>
@@ -450,7 +475,7 @@
                             <label for="age">Hip(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="hip" class="form-control" value="<?php echo $measurement['M_Hips']?>">
+                                    <input type="text" name="hip" min="0" class="form-control" value="<?php echo $measurement['M_Hips']?>">
                                 </div>
                             </div>
                         </div>
@@ -458,7 +483,7 @@
                             <label for="age">Left Upper Thigh(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="leftUpperThigh" class="form-control" value="<?php echo $measurement['M_LeftUpperThigh']?>" >
+                                    <input type="text" name="leftUpperThigh" min="0" class="form-control" value="<?php echo $measurement['M_LeftUpperThigh']?>" >
                                 </div>
                             </div>
                         </div>
@@ -466,7 +491,7 @@
                             <label for="age">Right Upper Thigh(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="rightUpperThigh" class="form-control" value="<?php echo $measurement['M_RightUpperThigh']?>" >
+                                    <input type="text" name="rightUpperThigh" min="0" class="form-control" value="<?php echo $measurement['M_RightUpperThigh']?>" >
                                 </div>
                             </div>
                         </div>
@@ -474,13 +499,14 @@
                             <label for="age">Resting Heart Rate(bpm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="restingHeartRate" class="form-control" value="<?php echo $measurement['M_RestingHR']?>">
+                                    <input type="text" name="restingHeartRate" min="0" class="form-control" value="<?php echo $measurement['M_RestingHR']?>">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
-                            <input type="hidden" name="client" value="<?php echo $pt['CLIENT_ID']?>">
+                            <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
+                            <input type="hidden" name="M_Code" value="<?php echo $measurement['M_Code']?>">
                             <input type="hidden" name="type" value="Initial">
                             <input type="hidden" name="action_type" value="modifyInitial">
                             <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" data-type='success'>&nbsp; MODIFY &nbsp;</button>
@@ -518,7 +544,7 @@
                             <label for="age">Weight(lbs.)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="weight" class="form-control" value="<?php echo $measurement['M_Weight']?>">
+                                    <input type="text" name="weight" min="0" class="form-control" value="<?php echo $measurement['M_Weight']?>">
                                 </div>
                             </div>
                         </div>
@@ -526,7 +552,7 @@
                             <label for="age">Skeletal Mass(kg)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="skeletalMass" class="form-control" value="<?php echo $measurement['M_SkeletalMass']?>" >
+                                    <input type="text" name="skeletalMass" min="0" class="form-control" value="<?php echo $measurement['M_SkeletalMass']?>" >
                                 </div>
                             </div>
                         </div>
@@ -534,7 +560,7 @@
                             <label for="age">Body Fat Mass(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="bodyFatMass" class="form-control" value="<?php echo $measurement['M_BodyFatMass']?>">
+                                    <input type="text" name="bodyFatMass" min="0" class="form-control" value="<?php echo $measurement['M_BodyFatMass']?>">
                                 </div>
                             </div>
                         </div>
@@ -542,7 +568,7 @@
                             <label for="age">Fat Free Mass(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="fatFreeMass" class="form-control" value="<?php echo $measurement['M_FatFreeMass']?>" >
+                                    <input type="text" name="fatFreeMass" min="0" class="form-control" value="<?php echo $measurement['M_FatFreeMass']?>" >
                                 </div>
                             </div>
                         </div>
@@ -550,7 +576,7 @@
                             <label for="age">Body Mass Index(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="bodyMassIndex" class="form-control"  value="<?php echo $measurement['M_BodyMassIndex']?>">
+                                    <input type="text" name="bodyMassIndex" min="0" class="form-control"  value="<?php echo $measurement['M_BodyMassIndex']?>">
                                 </div>
                             </div>
                         </div>
@@ -558,7 +584,7 @@
                             <label for="age">Percent Body Fat(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="percentBodyFat" class="form-control" value="<?php echo $measurement['M_PercentBodyFat']?>">
+                                    <input type="text" name="percentBodyFat" min="0" class="form-control" value="<?php echo $measurement['M_PercentBodyFat']?>">
                                 </div>
                             </div>
                         </div>
@@ -566,7 +592,7 @@
                             <label for="age">Waist-Hip Ratio(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="waistHipRatio" class="form-control"  value="<?php echo $measurement['M_WaistHipRatio']?>">
+                                    <input type="text" name="waistHipRatio" min="0" class="form-control"  value="<?php echo $measurement['M_WaistHipRatio']?>">
                                 </div>
                             </div>
                         </div>
@@ -574,7 +600,7 @@
                             <label for="age">Basal-Metabolism(J/(h. kg)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="basalMetabolism" class="form-control" value="<?php echo $measurement['M_BasalMetabolicRate']?>">
+                                    <input type="text" name="basalMetabolism" min="0" class="form-control" value="<?php echo $measurement['M_BasalMetabolicRate']?>">
                                 </div>
                             </div>
                         </div>
@@ -585,7 +611,7 @@
                             <label for="age">Left Upper Arm(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="leftUpperArm" class="form-control"  value="<?php echo $measurement['M_LeftUpperArm']?>" >
+                                    <input type="text" name="leftUpperArm" min="0" class="form-control"  value="<?php echo $measurement['M_LeftUpperArm']?>" >
                                 </div>
                             </div>
                         </div>
@@ -593,7 +619,7 @@
                             <label for="age">Right Upper Arm(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="rightUpperArm" class="form-control" value="<?php echo $measurement['M_RightUpperArm']?>" >
+                                    <input type="text" name="rightUpperArm" min="0" class="form-control" value="<?php echo $measurement['M_RightUpperArm']?>" >
                                 </div>
                             </div>
                         </div>
@@ -601,7 +627,7 @@
                             <label for="age">Chest(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="chest" class="form-control" value="<?php echo $measurement['M_Chest']?>">
+                                    <input type="text" name="chest" min="0" class="form-control" value="<?php echo $measurement['M_Chest']?>">
                                 </div>
                             </div>
                         </div>
@@ -609,7 +635,7 @@
                             <label for="age">Waist(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="waist" class="form-control"  value="<?php echo $measurement['M_Waist']?>">
+                                    <input type="text" name="waist" min="0" class="form-control"  value="<?php echo $measurement['M_Waist']?>">
                                 </div>
                             </div>
                         </div>
@@ -617,7 +643,7 @@
                             <label for="age">Hip(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="hip" class="form-control" value="<?php echo $measurement['M_Hips']?>">
+                                    <input type="text" name="hip" min="0" class="form-control" value="<?php echo $measurement['M_Hips']?>">
                                 </div>
                             </div>
                         </div>
@@ -625,7 +651,7 @@
                             <label for="age">Left Upper Thigh(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="leftUpperThigh" class="form-control" value="<?php echo $measurement['M_LeftUpperThigh']?>" >
+                                    <input type="text" name="leftUpperThigh" min="0" class="form-control" value="<?php echo $measurement['M_LeftUpperThigh']?>" >
                                 </div>
                             </div>
                         </div>
@@ -633,7 +659,7 @@
                             <label for="age">Right Upper Thigh(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="rightUpperThigh" class="form-control" value="<?php echo $measurement['M_RightUpperThigh']?>" >
+                                    <input type="text" name="rightUpperThigh" min="0" class="form-control" value="<?php echo $measurement['M_RightUpperThigh']?>" >
                                 </div>
                             </div>
                         </div>
@@ -641,12 +667,13 @@
                             <label for="age">Resting Heart Rate(bpm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" name="restingHeartRate" class="form-control" value="<?php echo $measurement['M_RestingHR']?>">
+                                    <input type="text" name="restingHeartRate" min="0" class="form-control" value="<?php echo $measurement['M_RestingHR']?>">
                                 </div>
                             </div>
                         </div>
                         <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
-                        <input type="hidden" name="client" value="<?php echo $pt['CLIENT_ID']?>">
+                        <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
+                        <input type="hidden" name="M_Code" value="<?php echo $measurement['M_Code']?>">
                         <input type="hidden" name="type" value="Final">
                         <input type="hidden" name="action_type" value="modifyFinal"/>
                         <div class="col-md-12">
@@ -666,66 +693,93 @@
                 <?php
                     $id = $_GET['id']; 
                     $pdo = new dbConnect();
-                    $measurements = $pdo->measurementInitial($id,array('order_by'=>'M_Code ASC'));
-                        if(!empty($measurements)){ 
+                    $initialMeasurements = $pdo->measurementInitial($id,array('order_by'=>'M_Code ASC'));
+                        if(!empty($initialMeasurements)){ 
                         $count = 0; 
-                        foreach($measurements as $measurement){ 
+                        foreach($initialMeasurements as $initialMeasurement){ 
                         $count++;
                 ?>
+                <?php
+                    $id = $_GET['id']; 
+                  $pdo = new dbConnect();
+                    $finalMeasurements = $pdo->measurementFinal($id,array('order_by'=>'M_Code ASC'));
+                        if(!empty($finalMeasurements)){ 
+                        $count = 0; 
+                        foreach($finalMeasurements as $finalMeasurement){ 
+                        $count++;
+                ?>
+
+
+                var data = {
+                    "weight": [
+                    
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_Weight'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_Weight'] ?> }
+                        
+                    ],
+                    "skeletalMass": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_SkeletalMass'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_SkeletalMass'] ?> }
+                    ],
+                    "bodyFatMass" : [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_BodyFatMass'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_BodyFatMass'] ?> }
+                    ],
+                    "fatFreeMass" : [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_FatFreeMass'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_FatFreeMass'] ?> }
+                    ],
+                    "bodyMassIndex": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_FatFreeMass'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_FatFreeMass'] ?> }
+                    ],
+                    "percentBodyFat": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_PercentBodyFat'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_PercentBodyFat'] ?> }
+                    ],
+                    "waistHipRatio": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_WaistHipRatio'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_WaistHipRatio'] ?> }
+                    ],
+                    "basalMetabolicRate": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_BasalMetabolicRate'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_BasalMetabolicRate'] ?> }
+                    ],
+                }
+                var dataPoints = [];
                 var bmi = new CanvasJS.Chart("bmi", {            
                 title:{
                 text: "Body Mass Index Difference"              
                 },
-                legend: {
-                 horizontalAlign: "center", // left, center ,right 
-                 verticalAlign: "top",  // top, center, bottom
+                axisY:{ 
+                    valueFormatString: "###.##"
                 },
+                
                 data: [  //array of dataSeries     
                 { //dataSeries - first quarter
                /*** Change type "column" to "bar", "area", "line" or "pie"***/        
-                type: "column",
-                showInLegend: true, 
-                name: "Initial Measurement",
-                dataPoints: [
-                { label: "Weight", y: <?php echo $measurement['M_Weight'] ?> },
-                { label: "Skeletal Mass", y: <?php echo $measurement['M_SkeletalMass'] ?> },
-                { label: "Body Fat Mass", y: <?php echo $measurement['M_BodyFatMass'] ?> },
-                { label: "Fat Free Mass", y: <?php echo $measurement['M_FatFreeMass'] ?> },
-                { label: "Body Mass Index", y: <?php echo $measurement['M_BodyMassIndex'] ?> },
-                { label: "Percent Body Fat", y: <?php echo $measurement['M_PercentBodyFat'] ?> },
-                { label: "Waist Hip Ratio", y: <?php echo $measurement['M_WaistHipRatio'] ?> },
-                { label: "Basal Metabolic Rate", y: <?php echo $measurement['M_BasalMetabolicRate'] ?> }
-                ]
-                 },
-                 <?php }}?>
-                 { //dataSeries - second quarter
-                 <?php
-                    $id = $_GET['id']; 
-                  $pdo = new dbConnect();
-                    $measurements = $pdo->measurementFinal($id,array('order_by'=>'M_Code ASC'));
-                        if(!empty($measurements)){ 
-                        $count = 0; 
-                        foreach($measurements as $measurement){ 
-                        $count++;
-                ?>
-                type: "column",
-                showInLegend: true,
-                name: "Final Measurement",                
-                dataPoints: [
-                { label: "Weight", y: <?php echo $measurement['M_Weight'] ?> },
-                { label: "Skeletal Mass", y: <?php echo $measurement['M_SkeletalMass'] ?> },
-                { label: "Body Fat Mass", y: <?php echo $measurement['M_BodyFatMass'] ?> },
-                { label: "Fat Free Mass", y: <?php echo $measurement['M_FatFreeMass'] ?> },
-                { label: "Body Mass Index", y: <?php echo $measurement['M_BodyMassIndex'] ?> },
-                { label: "Percent Body Fat", y: <?php echo $measurement['M_PercentBodyFat'] ?> },
-                { label: "Waist Hip Ratio", y: <?php echo $measurement['M_WaistHipRatio'] ?> },
-                { label: "Basal Metabolic Rate", y: <?php echo $measurement['M_BasalMetabolicRate'] ?> }
+                type: "bar",
+                
+                dataPoints: dataPoints
+                 
+                }]
+                }); //dataSeries - second quarter
+                
+                $( "#select" ).change(function() {
+                        bmi.options.data[0].dataPoints = [];
+                      var e = document.getElementById("select");
+                        var selected = e.options[e.selectedIndex].value;
+                      dps = data[selected];
+                      for(var i in dps) {
+                      
+                        bmi.options.data[0].dataPoints.push({label: dps[i].label, y: dps[i].y});
+                      }
+                      bmi.render();
+                    });
 
-                <?php }} ?>
-                ]
-            }
-            ]
-              });
+                
+                <?php }}?>
+                 <?php }} ?>
                 var bmd = new CanvasJS.Chart("bmd", {            
                 title:{
                 text: "Body Measurement Difference"              
@@ -791,18 +845,35 @@
             ]
               });
 
-                bmi.render();
+                
                 bmd.render();
               }
   </script>
+
+             
+                
         <div class="card">
                     <div class="header">
                        <h2>Body Mass Index Measurement Difference</h2>
                     
                     </div>
             <div class="body">
-             
-                    <div class="col-s-12">
+
+                <div class="col-md-3">
+                    <select class="form-control show-tick" id="select" name="measurements">
+                        <option value=" " selected="selected">-Choose Measurement-</option>
+                        <option value="weight" >Weight</option>
+                        <option value="skeletalMass">Skeletal Mass</option>
+                        <option value="bodyFatMass">Body Fat Mass</option>
+                        <option value="fatFreeMass">Fat Free Mass</option>
+                        <option value="bodyMassIndex">Body Mass Index</option>
+                        <option value="percentBodyFat">Percent Body Fat</option>
+                        <option value="waistHipRatio">Waist Hip Ratio</option>
+                        <option value="basalMetabolicRate">Basal Metabolic Rate</option>
+
+                    </select>
+                </div>
+                    <div class="col-md-12">
                          <div id="bmi" style="width: 100%; height: 400px"></div>
                     </div>
                     <br>
@@ -860,27 +931,31 @@
             <?php 
             $id = $_GET['id'];
             $pdo = new dbConnect();
-            $classes = $pdo->measurementClassInitial($id,array('order_by' => 'M_Code ASC'));
-                if(!empty($classes)){
+            $IClasses = $pdo->measurementClassInitial($id,array('order_by' => 'M_Code ASC'));
+                if(!empty($IClasses)){
                     $count = 0;
-                    foreach($classes as $class){
+                    foreach($IClasses as $IClass){
                     $count++;
             ?>
             
-                <h4 id="initial">Initial BMI Classification: <?php echo $class['M_Classification']?></h4>
+            
+                <h4 id="initial">Initial BMI Classification: <?php echo $IClass['M_Classification']?></h4>
             <?php }}?>
-            <?php 
+              <?php 
             $id = $_GET['id'];
             $pdo = new dbConnect();
-            $classes = $pdo->measurementClassFinal($id,array('order_by' => 'M_Code ASC'));
-                if(!empty($classes)){
+            $Fclasses = $pdo->measurementClassFinal($id,array('order_by' => 'M_Code ASC'));
+                if(!empty($Fclasses)){
                     $count = 0;
-                    foreach($classes as $class){
+                    foreach($Fclasses as $Fclass){
                     $count++;
-            ?>     
-                   
-                <h4 id="final">Final BMI Classification: <?php echo $class['M_Classification']?></h4>
-            <?php }}?>
+            ?> 
+                
+                <h4 id="final">Final BMI Classification: <?php echo $Fclass['M_Classification']?></h4>
+          
+          
+          <?php }}?>
+
                   
                    
                  
@@ -897,7 +972,10 @@
                     <div class="col-s-12">
                          <div id="bmd" style="width: 100%; height: 400px"></div>
                     </div>
+                  
+
                  </div>
+
         </div>
 
 
@@ -908,129 +986,7 @@
             <!-- END OF CLIENT PROFILE MEMBERSHIP DETAILS -->
 
             <!-- START OF CLIENT ACTIVITY LOG -->
-            <div class="card">
-                <div class="header" style="background:silver;">
-                  <h2>Personal Training Contract and Sessions</h2>
-                </div>
-
-                
-                    <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Contract #</th>
-                                            <th>Coach Name</th>
-                                            <th>Health Conditions</th>
-                                            <th>Performance Level</th>
-                                            <th>Sessions</th>
-                                            <th>Enrollment Date</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                        <tr>
-                                            <?php 
-                                            $pdo = new dbConnect();
-                                            $contracts = $pdo->contracts($pt['CLIENT_ID'],array("order_by" => "M_Code ASC"));
-                                                if(!empty($contracts)){
-                                                    $count = 0;
-                                                    foreach($contracts as $contract){
-                                            ?>
-                                            <td><?php echo $contract['ContractNumber']?></td>
-                                            <td><?php $firstname = $contract['COACH_FirstName']; $lastname = $contract['COACH_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
-                                            <td><?php echo $contract['TL_HealthConditions']?></td>
-                                            <td><?php echo $contract['TL_ClientPerformance']?></td>
-                                            <td><?php echo $contract['TP_PackageType'] ?></td>
-
-                                            <td><?php echo date("F j, Y", strtotime($contract['TL_RegDate']))?></td>
-                                            <td><button type="button" class="btn bg-green btn-success" data-toggle="modal" data-target="#sessions-<?php echo $contract['TL_Code']?>">Sessions</button>
-                                             
-                                            <div class="modal fade" id="sessions-<?php echo $contract['TL_Code']?>" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                   <center>
-                    <div class="modal-header">
-                       <div class="block-header">
-                          <h2><strong>Contract <?php echo $contract['ContractNumber']?> Sessions</strong></h2>
-                       </div>
-                    </div>
-                 <div class="modal-body">
-                    <input type="hidden" value="<?php echo $contract['TL_Code']?>" >
-                     <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Session #</th>
-                                            <th>Date</th>
-                                            <th>Exercise</th>
-                                            <th>Sets</th>
-                                            <th>Repetitions</th>
-                                            <th>Start Time</th>
-                                            <th>End Time</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <?php 
-                                        $pdo = new dbConnect();
-                                        $id = $_GET['id'];
-                                        $sessions = $pdo->sessions($contract['TL_Code'],array ('order_by' => 'TLS_Code ASC'));
-                                        if(!empty($sessions)){ 
-                                            $count = 0; 
-                                            foreach($sessions as $session){ 
-                                            $count++;
-
-                                    ?>
-                                    <tbody>
-                                        <tr>
-                                            <td><?php echo $session['SessionNumber']?></td>
-                                            <td><?php echo date("F j, Y", strtotime($session['TLS_Date']))?></td>
-                                            <td><?php echo $session['TLS_Exercise']?></td>
-                                            <td><?php echo $session['TLS_Sets']?></td>
-                                            <td><?php echo $session['TLS_Reps'] ?></td>
-                                            <td><?php echo date("g:i A", strtotime($session['TLS_StartTime']));?></td>
-                                            <td><?php echo date("g:i A", strtotime($session['TLS_EndTime']));?></td>
-                                        </tr>
-                                        <?php } }else{ ?>
-
-                                                    <tr><td colspan="7">No Session(s) found......</td></tr>
-
-                                                    <?php } ?>
-                                        
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-
-                </div>    
-                 </div>
-                 <div class="modal-footer">
-                     <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
-                 
-                 </div> 
-                  </center>
-                </div>
-            </div>
-         </div>
-
-
-
-                                            </td>
-                                            
-                                            
-                                            
-                                        </tr>
-                                        <?php }} ?>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                </div>
             
-        </div>
 
         
        
@@ -1057,7 +1013,7 @@
                             <label for="age">Weight(kg)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="weight" class="form-control">
+                                    <input type="number" name="weight" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1065,7 +1021,7 @@
                             <label for="age">Skeletal Mass(kg)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="skeletalMass" class="form-control"   >
+                                    <input type="number" name="skeletalMass" min="0" class="form-control"  required >
                                 </div>
                             </div>
                         </div>
@@ -1073,7 +1029,7 @@
                             <label for="age">Body Fat Mass(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="bodyFatMass" class="form-control">
+                                    <input type="number" name="bodyFatMass" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1081,7 +1037,7 @@
                             <label for="age">Fat Free Mass(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="fatFreeMass" class="form-control">
+                                    <input type="number" name="fatFreeMass" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1089,7 +1045,7 @@
                             <label for="age">Body Mass Index(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="bodyMassIndex" class="form-control"  >
+                                    <input type="number" name="bodyMassIndex" min="0" class="form-control" required >
                                 </div>
                             </div>
                         </div>
@@ -1097,7 +1053,7 @@
                             <label for="age">Percent Body Fat(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="percentBodyFat" class="form-control">
+                                    <input type="number" name="percentBodyFat" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1105,7 +1061,7 @@
                             <label for="age">Waist-Hip Ratio(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="waistHipRatio" class="form-control">
+                                    <input type="number" name="waistHipRatio" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1113,7 +1069,7 @@
                             <label for="age">Basal-Metabolism</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="basalMetabolism" class="form-control">
+                                    <input type="number" name="basalMetabolism" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1124,7 +1080,7 @@
                             <label for="age">Left Upper Arm</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="leftUpperArm" class="form-control">
+                                    <input type="number" name="leftUpperArm" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1132,7 +1088,7 @@
                             <label for="age">Right Upper Arm</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="rightUpperArm" class="form-control">
+                                    <input type="number" name="rightUpperArm" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1140,7 +1096,7 @@
                             <label for="age">Chest</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="chest" class="form-control">
+                                    <input type="number" name="chest" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1148,7 +1104,7 @@
                             <label for="age">Waist</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="waist" class="form-control">
+                                    <input type="number" name="waist" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1156,7 +1112,7 @@
                             <label for="age">Hip</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="hip" class="form-control">
+                                    <input type="number" name="hip" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1164,7 +1120,7 @@
                             <label for="age">Left Upper Thigh</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="leftUpperThigh" class="form-control" >
+                                    <input type="number" name="leftUpperThigh" min="0" class="form-control" required >
                                 </div>
                             </div>
                         </div>
@@ -1172,7 +1128,7 @@
                             <label for="age">Right Upper Thigh</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="rightUpperThigh" class="form-control" >
+                                    <input type="number" name="rightUpperThigh" min="0" class="form-control"  required>
                                 </div>
                             </div>
                         </div>
@@ -1180,7 +1136,7 @@
                             <label for="age">Resting Heart Rate</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="restingHeartRate" class="form-control" >
+                                    <input type="number" name="restingHeartRate" min="0" class="form-control"  required>
                                 </div>
                             </div>
                         </div>
@@ -1223,7 +1179,7 @@
                           <div class="row">
                 <div class="col-md-12">
                 
-                    <form method="post" action="actions/measurementAction.php" >
+                    <form method="post" id="FinalMeasurement" action="actions/measurementAction.php" >
              
                 <div class="body">
                     <div class="row clearfix">
@@ -1231,7 +1187,7 @@
                             <label for="age">Weight(kg)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="weight" class="form-control">
+                                    <input type="number" name="weight" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1239,7 +1195,7 @@
                             <label for="age">Skeletal Mass(kg)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="skeletalMass" class="form-control"   >
+                                    <input type="number" name="skeletalMass" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1247,7 +1203,7 @@
                             <label for="age">Body Fat Mass(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="bodyFatMass" class="form-control">
+                                    <input type="number" name="bodyFatMass" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1255,7 +1211,7 @@
                             <label for="age">Fat Free Mass(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="fatFreeMass" class="form-control">
+                                    <input type="number" name="fatFreeMass" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1263,7 +1219,7 @@
                             <label for="age">Body Mass Index(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="bodyMassIndex" class="form-control"  >
+                                    <input type="number" name="bodyMassIndex" min="0" class="form-control" required >
                                 </div>
                             </div>
                         </div>
@@ -1271,7 +1227,7 @@
                             <label for="age">Percent Body Fat(%)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="percentBodyFat" class="form-control">
+                                    <input type="number" name="percentBodyFat" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1279,7 +1235,7 @@
                             <label for="age">Waist-Hip Ratio(cm)</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="waistHipRatio" class="form-control">
+                                    <input type="number" name="waistHipRatio" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1287,7 +1243,7 @@
                             <label for="age">Basal-Metabolism</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="basalMetabolism" class="form-control">
+                                    <input type="number" name="basalMetabolism" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1298,7 +1254,7 @@
                             <label for="age">Left Upper Arm</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="leftUpperArm" class="form-control">
+                                    <input type="number" name="leftUpperArm" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1306,7 +1262,7 @@
                             <label for="age">Right Upper Arm</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="rightUpperArm" class="form-control">
+                                    <input type="number" name="rightUpperArm" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1314,7 +1270,7 @@
                             <label for="age">Chest</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="chest" class="form-control">
+                                    <input type="number" name="chest" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1322,7 +1278,7 @@
                             <label for="age">Waist</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="waist" class="form-control">
+                                    <input type="number" name="waist" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1330,7 +1286,7 @@
                             <label for="age">Hip</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="hip" class="form-control">
+                                    <input type="number" name="hip" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1338,7 +1294,7 @@
                             <label for="age">Left Upper Thigh</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="leftUpperThigh" class="form-control" >
+                                    <input type="number" name="leftUpperThigh" min="0" class="form-control"  required>
                                 </div>
                             </div>
                         </div>
@@ -1346,7 +1302,7 @@
                             <label for="age">Right Upper Thigh</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="rightUpperThigh" class="form-control" >
+                                    <input type="number" name="rightUpperThigh" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1354,7 +1310,7 @@
                             <label for="age">Resting Heart Rate</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="number" name="restingHeartRate" class="form-control" >
+                                    <input type="number" name="restingHeartRate" min="0" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -1372,7 +1328,7 @@
                         <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
                         <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
                         <input type="hidden" name="action_type" value="add" />
-                     <button name="submit" type="submit" class="btn  bg-green">SUBMIT</button>
+                     <button name="submit" id="btnFinal"  type="submit" class="btn  bg-green">SUBMIT</button>
                      
                      <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
                  </form>

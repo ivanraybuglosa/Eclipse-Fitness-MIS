@@ -22,7 +22,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Amenities - Reports
+                                    Amenities - Reports - Lost Towels Record
                                 </li>
                             </ol>
             </div>
@@ -68,7 +68,6 @@
                                             <th>Date</th>
                                             <th>Client Name</th>
                                             <th>Unreturned Towels</th>
-                                            <th>Unreturned Key</th>
                                                 
                                           </tr>
                                     </thead>
@@ -85,16 +84,16 @@
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
 
-                                        $tow = $conn->query("SELECT * FROM `towels` WHERE towel_date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
-                                            while($towels = $tow->fetch_array()) { 
+                                       $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn") or die(mysql_error());
+                                         while($lost = $tow->fetch_array()) { 
 
                                               ?>  
                                               <tr>
                                 
-                                                 <td><?php echo $towels['towel_date']; ?></td>
-                                                 <td><?php echo $towels['towel_type']; ?></td>
-                                                 <td><?php echo $towels['towel_time']; ?></td>
-                                                 <td><?php echo $towels['towel_amount']; ?></td>
+                                                 <td><?php echo date("F j, Y", strtotime($lost['A_Date'])) ?></td>
+                                                 <td><?php echo $lost['CLIENT_FirstName']; ?> <?php echo $lost['CLIENT_LastName']; ?></td>
+                                                 <td><?php echo $lost['A_TowelQty'] - $lost['A_TowelReturn'] ?></td>
+                                                 <td><?php echo $lost['A_ReturnedKey'] ?></td>
 
                                               </tr>
                                              <?php 
@@ -107,7 +106,7 @@
                                               ?>  
                                               <tr>
                                 
-                                                 <td><?php echo $lost['A_Date']; ?></td>
+                                                 <td><?php echo date("F j, Y", strtotime($lost['A_Date'])) ?></td>
                                                  <td><?php echo $lost['CLIENT_FirstName']; ?> <?php echo $lost['CLIENT_LastName']; ?></td>
                                                  <td><?php echo $lost['A_TowelQty'] - $lost['A_TowelReturn'] ?></td>
                                                  <td><?php echo $lost['A_ReturnedKey'] ?></td>

@@ -149,13 +149,13 @@ include("includes/header.php"); ?>
                     <div class="header">
                         <h2>TODAY'S ACTIVITIES</h2>
                     </div>
-                    <div class="body">
-                        <div class="table-responsive">
+                     <div class="body">
+                            
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
                                         <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                                <thead>
+                                    <thead>
                                     <tr>
                                         <th>Coach</th>
                                         <th>Activity</th>
@@ -181,7 +181,7 @@ include("includes/header.php"); ?>
                                     </tr>
                                     <?php } }else{ ?>
 
-                                                    <tr><td colspan="6">No Personal Training Contract(s) found......</td></tr>
+                                                    <tr><td colspan="6">No Activities found......</td></tr>
 
                                                     <?php } ?>
                                     
@@ -249,18 +249,25 @@ include("includes/header.php"); ?>
 
 <?php include("includes/footer.php"); ?>
 
-<!-- Custom Js -->
-<script src="../assets/js/admin.js"></script>
-<script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
-<script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-<!--index -->
-<script src="../assets/js/pages/index.js"></script>
-<!--form-wizard-->
-<script src="../assets/js/pages/forms/form-wizard.js"></script>
-<script src="../assets/plugins/chartjs/Chart.bundle.js"></script>
-<script src="../assets/js/pages/charts/chartjs.js"></script>
 
-<!-- Demo Js -->
-<script src="../assets/js/demo.js"></script>
-<script src="../assets/js/pages/forms/basic-form-elements.js"></script>
 
+    
+    <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="../assets/js/pages/forms/form-wizard.js"></script>
+    <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
+</body>
+
+</html>
