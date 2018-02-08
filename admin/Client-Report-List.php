@@ -21,12 +21,20 @@
                  </div>
 
                  <div class="col-md-3">
+                <a href="Client-Report-ActivityLog.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">CLIENT ACTIVITY LOG</a>
+                 </div>
+
+                 <div class="col-md-3">
                 <a href="Client-Report-MembershipHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">CLIENT MEMBERSHIP HISTORY</a>
                  </div>
 
                  <div class="col-md-3">
-                <a href="Client-Report-ActivityLog.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">CLIENT ACTIVITY LOG</a>
                  </div>
+
+                  <div class="col-md-3">
+                <a href="Client-Trend-MembershipRevenue.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-topclients" data-type="success">MEMBERSHIP REVENUE</a>
+                 </div>
+
              </div>
              <div class="row">
                 <div class="col-md-3">
@@ -44,6 +52,8 @@
                  <div class="col-md-3">
                 <a href="Client-Trend-topClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-topclients" data-type="success">TOP CLIENTS</a>
                  </div>
+
+
              </div>
              </div>
         </div>
