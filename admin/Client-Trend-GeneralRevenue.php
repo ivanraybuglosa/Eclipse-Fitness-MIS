@@ -48,7 +48,7 @@
             $(document).ready(function(){
                 $("#filteryear").on('change', function(){
                     var year=$(this).val();
-                    window.location.href = 'Client-Trend-MembershipRevenue.php?year='+year;
+                    window.location.href = 'Client-Trend-GeneralRevenue.php?year='+year;
                 });
             });
         </script>
@@ -104,13 +104,14 @@ var chart = new CanvasJS.Chart("genrev", {
         type: "column",
         name: "Regulars",
         axisYType: "primary",
-        color: "orange",
+        color: "blue",
         dataPoints: [
             { y: <?php echo $fwalk["zero"]?>, label: "Walk-ins", indexLabel:"<?php echo $fwalk["zero"]?>"},
             { y: <?php echo $fmems["zero"]?>, label: "Memberships", indexLabel:"<?php echo $fmems["zero"]?>"},
             { y: <?php echo $fpts["zero"]?>, label: "Personal Trainings", indexLabel:"<?php echo $fpts["zero"]?>"},
             { y: <?php echo $flostk["zero"]?>, label: "Lost Keys", indexLabel:"<?php echo $flostk["zero"]?>"},
-            { y: <?php echo $flostt["zero"]?>, label: "Lost Towels", indexLabel:"<?php echo $flostt["zero"]?>"}
+            { y: <?php echo $flostt["zero"]?>, label: "Lost Towels", indexLabel:"<?php echo $flostt["zero"]?>"},
+            { y: <?php echo $total = $fwalk['zero'] + $fmems['zero'] + $fpts['zero'] + $flostk['zero'] + $flostt['zero'] ?>, color: "red", label: "Total Revenue", indexLabel: "<?php echo $total ?>"}
 
         ]
     }]

@@ -76,7 +76,7 @@
 
                 date_default_timezone_set('Asia/Manila');
                 $date = date('Y-m-d');
-                $time = date('g:i A');
+                $time = date('g:i s');
 
                  $conn->query("INSERT INTO `backuphistory` VALUES('', 'Import', '$date', '$time')") or die(mysqli_error());
             }
