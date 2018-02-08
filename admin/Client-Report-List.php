@@ -29,6 +29,7 @@
                  </div>
 
                  <div class="col-md-3">
+                <a href="Client-Trend-GeneralRevenue.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-topclients" data-type="success">GENERAL REVENUE</a>
                  </div>
 
                   <div class="col-md-3">

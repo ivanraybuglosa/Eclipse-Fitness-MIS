@@ -147,40 +147,40 @@ $qdec = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(MS_Price) 
 $sfdec = $qdec->fetch_array();
 
 //WALK-INS
-$qjan = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Jan' && year = '$year') as zero ") or die(mysqli_error());
+$qjan = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Jan' && year = '$year') as zero ") or die(mysqli_error());
 $wfjan = $qjan->fetch_array();
 
-$qfeb = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Feb' && year = '$year') as zero ") or die(mysqli_error());
+$qfeb = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Feb' && year = '$year') as zero ") or die(mysqli_error());
 $wffeb = $qfeb->fetch_array();
 
-$qmar = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Mar' && year = '$year') as zero ") or die(mysqli_error());
+$qmar = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Mar' && year = '$year') as zero ") or die(mysqli_error());
 $wfmar = $qmar->fetch_array();
 
-$qapr = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Apr' && year = '$year') as zero ") or die(mysqli_error());
+$qapr = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Apr' && year = '$year') as zero ") or die(mysqli_error());
 $wfapr = $qapr->fetch_array();
 
-$qmay = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'May' && year = '$year') as zero ") or die(mysqli_error());
+$qmay = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'May' && year = '$year') as zero ") or die(mysqli_error());
 $wfmay = $qmay->fetch_array();
 
-$qjune = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Jun' && year = '$year' ) as zero") or die(mysqli_error());
+$qjune = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Jun' && year = '$year' ) as zero") or die(mysqli_error());
 $wfjune = $qjune->fetch_array();
 
-$qjul = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Jul' && year = '$year') as zero ") or die(mysqli_error());
+$qjul = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Jul' && year = '$year') as zero ") or die(mysqli_error());
 $wfjul = $qjul->fetch_array();
 
-$qaug = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Aug' && year = '$year') as zero ") or die(mysqli_error());
+$qaug = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Aug' && year = '$year') as zero ") or die(mysqli_error());
 $wfaug = $qaug->fetch_array();
 
-$qsept = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Sep' && year = '$year' ) as zero") or die(mysqli_error());
+$qsept = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Sep' && year = '$year' ) as zero") or die(mysqli_error());
 $wfsept = $qsept->fetch_array();
 
-$qoct = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Oct' && year = '$year') as zero ") or die(mysqli_error());
+$qoct = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Oct' && year = '$year') as zero ") or die(mysqli_error());
 $wfoct = $qoct->fetch_array();
 
-$qnov = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Nov' && year = '$year') as zero ") or die(mysqli_error());
+$qnov = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Nov' && year = '$year') as zero ") or die(mysqli_error());
 $wfnov = $qnov->fetch_array();
 
-$qdec = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND month = 'Dec' && year = '$year') as zero ") or die(mysqli_error());
+$qdec = $conn->query("SELECT IFNULL(total,0) as zero FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE TR_Type = 'Walk-in' AND TR_Status = 'paid' AND month = 'Dec' && year = '$year') as zero ") or die(mysqli_error());
 $wfdec = $qdec->fetch_array();
 
 ?>
@@ -202,7 +202,7 @@ var chart = new CanvasJS.Chart("revenue", {
         type: "column",
         name: "Regulars",
         axisYType: "primary",
-        color: "#6A55CC",
+        color: "brown",
         legendText: "Regular",
         showInLegend: true,
         dataPoints: [
@@ -224,7 +224,7 @@ var chart = new CanvasJS.Chart("revenue", {
         type: "column",
         name: "Student",
         axisYType: "primary",
-        color: "#5BCCD5",
+        color: "blue",
         legendText: "Student",
         showInLegend: true,
         dataPoints: [
@@ -246,7 +246,7 @@ var chart = new CanvasJS.Chart("revenue", {
         type: "column",
         name: "Walk-In",
         axisYType: "primary",
-        color: "#589CBA",
+        color: "red",
         legendText: "Walk-In",
         showInLegend: true,
         dataPoints: [
