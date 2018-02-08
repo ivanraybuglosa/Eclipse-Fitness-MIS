@@ -1,8 +1,8 @@
 <?php
     require_once('dbConnectLogin.php');
     require_once('dbConnect.php');
-
     
+
  ?>
 <!DOCTYPE html>
 <html>
@@ -64,14 +64,14 @@
                         $id = $row['userID'];
                         $type = $row['userType'];
                         if($username==$user && $password==$pass){
-                            session_start();
+                            
+                            
                             $_SESSION['username'] = $user;
                             $_SESSION['password'] = $pass;
                             $_SESSION['userID'] = $id;
                             $_SESSION['userType'] = $type;
-                                if($type =="admin"){ 
-
-                                        $pdo = new dbConnect();
+                            
+                            $pdo = new dbConnect();
                                         $expire = $pdo->membershipExpire();
                                         
                                         $userData = array(
@@ -94,8 +94,10 @@
                                             $update =$pdo->update('traininglog',$userData2,$condition);
                                             session_start();
                                         }
-
-                                        ?>
+                                        
+                                if($type =="admin"){
+                                   
+                                ?>
 
 
                                 <script>alert('Successful Login!');window.location.href='admin/index.php';</script>

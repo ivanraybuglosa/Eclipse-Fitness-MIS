@@ -49,8 +49,7 @@ if(($expiry <= $date && $trainingStatus === "Completed") || (empty($expiry) && e
                     'month' => $month
                 );
                 $insert = $pdo->insert($tblName2,$userData2);
-                $statusMsg = $insert?'Training Log data has been inserted successfully.':'Some problem occurred, please try again.';
-                $_SESSION['statusMsg'] = $statusMsg;
+                
                 
             }else{
                 $id = $_POST['CLIENT_ID'];

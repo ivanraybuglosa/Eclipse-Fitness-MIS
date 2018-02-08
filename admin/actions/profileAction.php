@@ -42,7 +42,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         $insert = $pdo->insert($tblName,$userData);
         echo "<script>alert('Client Successfully Registered');window.location.href='../Client-Profile.php';</script>";
         $statusMsg = $insert?'User data has been inserted successfully.':'Some problem occurred, please try again.';
-        $_SESSION['statusMsg'] = $statusMsg;
+    
     
 }elseif($_REQUEST['action_type'] == 'enroll'){
             
@@ -64,8 +64,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                             $insert = $pdo->insert($tableMem, $userData2);
                             $id = $_POST['CLIENT_ID'];
                             echo "<script>alert('Client Successfully Enrolled for Membership!');window.location.href='../Client-Profile-User1.php?id=".$id. " '</script>";
-                                    $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-                                    $_SESSION['statusMsg'] = $statusMsg;
+                                    
                             $price = $pdo->selectPrice($type,$duration);
                             $userData3 = array(
                                 'CLIENT_ID' => $_POST['client'],
@@ -83,8 +82,6 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                             $condition = array('CLIENT_ID' => $_POST['CLIENT_ID']);
                             $insert3 = $pdo->update($tblName, $userData4,$condition);
                             
-                            $statusMsg = $insert?'User data has been inserted successfully.':'Some problem occurred, please try again.';
-                            $_SESSION['statusMsg'] = $statusMsg;
                             
           
             
@@ -92,8 +89,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                 
                 $id = $_POST['CLIENT_ID'];
                     echo "<script>alert('Client Membership Enrollment failed!');window.location.href='../Client-Profile-User1.php?id='".$id."';</script>";
-                    $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-                                    $_SESSION['statusMsg'] = $statusMsg;
+                    
             }
 
             

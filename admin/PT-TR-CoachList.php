@@ -1,12 +1,7 @@
 <?php
  include "../dbConnect.php";
  session_start();
- if (!$_SESSION['admin'])  
-{  
-    header('location:../login.php');  
-    exit;  
-}
- 
+
  include("includes/header.php"); ?>
 <section class="content">
         <div class="container-fluid">

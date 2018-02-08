@@ -1485,6 +1485,50 @@ class dbConnect{
         return $result;
     }
 
+    public function payHistory($code,$conditions = array()){
+        $sql ="SELECT * FROM payment WHERE TR_ID = '".$code."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+    }
+
+    public function payment($id){
+        $sql = "SELECT SUM(Pay_amount) as payments FROM payment WHERE TR_ID = '".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['payments'];
+        return $result;
+    }
+
+    public function bill($id){
+        $sql = "SELECT TR_Bill FROM transaction WHERE TR_ID = '".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['TR_Bill'];
+        return $result;
+    }
+
+    
+
 
 
 

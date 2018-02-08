@@ -41,14 +41,14 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         // $date1 = date_create(date("Y-m-d"));
         // $date2 = date_create($expiry);
         // $days = date_diff($date1,$date2);
-        // $day = date("a", strtotime($days));
+        // $day = date("a", strtotime($day));
         
 
 
             $locker = $pdo->locker($date,$_POST['Locker']);
             $check = $pdo->checkAttendance($_POST['clientName'],$date);
        
-            if(5 < 4){
+            if( 5 < 4){
                 $available = $pdo->previousAvailable();
                     $borrowed = $pdo->previousBorrowed();
                     $userData3 = array(

@@ -1,11 +1,7 @@
 <?php
  include "../dbConnect.php";
  session_start();
- if (!$_SESSION['admin'])  
-{  
-    header('location:../login.php');  
-    exit;  
-}
+
  include("includes/header.php"); 
 include_once("actions/PT-Trend-Classification-Action.php"); ?>
 <section class="content">

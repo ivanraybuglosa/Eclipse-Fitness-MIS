@@ -1,11 +1,7 @@
         <?php
  include "../dbConnect.php";
  session_start();
- if (!$_SESSION['admin'])  
-{  
-    header('location:../login.php');  
-    exit;  
-}
+
  
  include("includes/header.php"); ?>
     <section class="content">
@@ -880,58 +876,29 @@
                          <div id="bmi" style="width: 100%; height: 400px"></div>
                     </div>
                     <br>
-                    <div class="container-fluid">
 
-                    <div class="col-sm-4">
-                        <div class="info-box-3 bg-green">
-                            <div class="content">
-                                <div class="text">Underweight</div>
-                                <div class="number">< 18.5(Kg)</div>
-                            </div>
-                        </div>
+                    <div class="container-fluid">
+                        <table class="table table-bordered table-striped table-hover  dataTable" id="DataTables_Table_0">
+                            <thead>
+                                <th><center>Underweight</center></th>
+                                <th><center>Normal Weight</center></th>
+                                <th><center>Overweight</center></th>
+                                <th><center>Class I obesity</center></th>
+                                <th><center>Class II obesity</center></th>
+                                <th><center>Class III obesity</center></th>
+                            </thead>
+                            <tbody>
+                                <td><center>18.5(Kg)</center></td>
+                                <td><center>18.5–24.9(Kg)</center></td>
+                                <td><center>25.0–29.9(Kg)</center></td>
+                                <td><center>30.0–34.9(Kg)</center></td>
+                                <td><center>35.0–39.9(Kg)</center></td>
+                                <td><center>≥ 40.0(Kg)</center></td>
+                            </tbody>
+
+                        </table>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="info-box-3 bg-green">
-                            <div class="content">
-                                <div class="text">Normal Weight</div>
-                                <div class="number">18.5–24.9(Kg)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="info-box-3 bg-green">
-                            <div class="content">
-                                <div class="text">Overweight</div>
-                                <div class="number">25.0–29.9(Kg)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="info-box-3 bg-green">
-                            <div class="content">
-                                <div class="text">Class I obesity</div>
-                                <div class="number">30.0–34.9(Kg)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="info-box-3 bg-green">
-                            <div class="content">
-                                <div class="text">Class II obesity</div>
-                                <div class="number">35.0–39.9(Kg)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="info-box-3 bg-green">
-                            <div class="content">
-                                <div class="text">Class III obesity</div>
-                                <div class="number">≥ 40.0(Kg)</div>
-                            </div>
-                        </div>
-                    </div>
-            </div>  
-            <?php 
+        <?php 
             $id = $_GET['id'];
             $pdo = new dbConnect();
             $IClasses = $pdo->measurementClassInitial($id,array('order_by' => 'M_Code ASC'));
