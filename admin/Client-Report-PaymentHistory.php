@@ -93,6 +93,7 @@
                                             <th>Client Name</th>
                                             <th>Payment Date</th>
                                             <th>Payment Time</th>
+                                            <th>Transaction</th>
                                             <th>Amount Paid</th>
                                         </tr>
                                     </thead>
@@ -125,6 +126,7 @@
                                                               <?php echo $fc['CLIENT_LastName'] ?></td>
                                                           <td><?php echo date("F j, Y", strtotime($fth['Pay_date'])) ?></td>
                                                           <td><?php echo date("g:i A", strtotime($fth['Pay_time'])) ?></td>
+                                                          <td><?php echo $fth['TR_Type'] ?></td>
                                                           <td><?php echo $fth['Pay_amount'] ?></td>
                                                      </tr>
 
@@ -142,6 +144,7 @@
                                                               <?php echo $fth['CLIENT_LastName'] ?></td>
                                                           <td><?php echo date("F j, Y", strtotime($fth['Pay_date'])) ?></td>
                                                           <td><?php echo date("g:i A", strtotime($fth['Pay_time'])) ?></td>
+                                                          <td><?php echo $fth['TR_Type'] ?></td>
                                                           <td><?php echo $fth['Pay_amount'] ?></td>
                                                      </tr>
                                                   <?php
@@ -162,6 +165,7 @@
                                                               <?php echo $fc['CLIENT_LastName'] ?></td>
                                                           <td><?php echo date("F j, Y", strtotime($fth['Pay_date'])) ?></td>
                                                           <td><?php echo date("g:i A", strtotime($fth['Pay_time'])) ?></td>
+                                                          <td><?php echo $fth['TR_Type'] ?></td>
                                                           <td><?php echo $fth['Pay_amount'] ?></td>
                                                      </tr>
                                                <?php
@@ -181,6 +185,7 @@
                                                               <?php echo $fth['CLIENT_LastName'] ?></td>
                                                           <td><?php echo date("F j, Y", strtotime($fth['Pay_date'])) ?></td>
                                                           <td><?php echo date("g:i A", strtotime($fth['Pay_time'])) ?></td>
+                                                          <td><?php echo $fth['TR_Type'] ?></td>
                                                           <td><?php echo $fth['Pay_amount'] ?></td>
                                                      </tr>
                                                   <?php
