@@ -1,9 +1,7 @@
 <?php
  include "../dbConnect.php";
  session_start();
- if(!isset($_SESSION['username'])){
-    header('location: ../login.php');
- }
+ 
  include("includes/header.php"); ?>
 
 <section class="content">
