@@ -6,7 +6,7 @@
             <div class="row">
 
                  <div class="col-md-3">
-                <a href="Amenities-Report-TowelSummary.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachactivity" data-type="success">TOWEL MONTHLY SUMMARY</a>
+                <a href="Amenities-Report-TowelSummary.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachactivity" data-type="success">TOWEL YEARLY SUMMARY</a>
                  </div>
 
                  <div class="col-md-3">
@@ -15,6 +15,10 @@
 
                  <div class="col-md-3">
                 <a href="Amenities-Report-LostTowels.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachlist" data-type="success">LOST TOWELS RECORD</a>
+                 </div>
+
+                 <div class="col-md-3">
+                <a href="Amenities-Report-LostLockers.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachlist" data-type="success">LOST KEYS RECORD</a>
                  </div>
 
                  <div class="col-md-3">

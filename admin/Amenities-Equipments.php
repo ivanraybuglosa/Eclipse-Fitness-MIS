@@ -203,10 +203,6 @@ include("includes/header.php"); ?>
                                     <h2><?php echo $equipment['E_Type']?> Inventory</h2>
                                 </div>
                                 <div class="body">
-                                    <div class="row clearfix">
-
-                                        <div class="table-responsive">
-
                                 <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                                     <thead>
                                         <tr>
@@ -238,11 +234,7 @@ include("includes/header.php"); ?>
                                         <?php }} ?>
                                         </tbody>
                                     </table>
-                                </div>
 
-
-
-                                    </div>
                                 </div>
                             </div>
                             
@@ -256,16 +248,7 @@ include("includes/header.php"); ?>
                                         </div>
                                     </div>
                                         </td>
-                                    
-                       
-
-                
-
-                                                  
-
-
-
-                                                    
+                                                                                        
                                             </tr>
                                         <?php } }else{ ?>
                                         <tr><td colspan="4">No Equipment(s) found......</td>

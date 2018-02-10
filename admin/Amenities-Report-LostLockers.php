@@ -20,7 +20,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Amenities - Reports - Lost Towels Record
+                                    Amenities - Reports - Lost Lockers Record
                                 </li>
                             </ol>
             </div>
@@ -28,7 +28,7 @@
         <?php include("Amenities-Report-List.php"); ?>
         <div class="card">
             <div class="header">
-                <h2>Lost Towels Record</h2>
+                <h2>Lost Lockers Record</h2>
             </div>
             <div class="body">
                             <form method="POST">
@@ -65,7 +65,7 @@
                                             
                                             <th>Date</th>
                                             <th>Client Name</th>
-                                            <th>Unreturned Towels</th>
+                                            <th>Unreturned Locker No.</th>
                                                 
                                           </tr>
                                     </thead>
@@ -82,7 +82,7 @@
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
 
-                                       $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn") or die(mysql_error());
+                                       $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_ReturnedKey = 'Unreturned' AND A_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
                                          while($lost = $tow->fetch_array()) { 
 
                                               ?>  
@@ -97,15 +97,15 @@
                                      }
                                  }
                              } else {
-                                     $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn") or die(mysql_error());
-                                         while($lost = $tow->fetch_array()) { 
+                                     $lock = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_ReturnedKey = 'Unreturned' ") or die(mysql_error());
+                                         while($lost = $lock->fetch_array()) { 
 
                                               ?>  
                                               <tr>
                                 
                                                  <td><?php echo date("F j, Y", strtotime($lost['A_Date'])) ?></td>
                                                  <td><?php echo $lost['CLIENT_FirstName']; ?> <?php echo $lost['CLIENT_LastName']; ?></td>
-                                                 <td><?php echo $lost['A_TowelQty'] - $lost['A_TowelReturn'] ?></td>
+                                                 <td><?php echo $lost['A_LockerKey'] ?></td>
 
                                               </tr>
                                     <?php

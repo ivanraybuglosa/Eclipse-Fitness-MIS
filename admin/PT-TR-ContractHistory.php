@@ -81,13 +81,13 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
+                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('contracthistory')">Print</a>
                                 </div>
 
                             </div>
                         </form>
                             <div id="print">
-                               <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info"> 
+                               <table class="table table-bordered table-striped table-hover dataTable" id="contracthistory" name="contracthistory" role="grid" aria-describedby="DataTables_Table_0_info"> 
                                     <thead>
                                         <tr>
                                             <th>Contract Start Date</th>
@@ -209,8 +209,8 @@
                      function printContent(el) {
                          var restorepage = document.body.innerHTML;
                          var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Personal Training Contract History</h2><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
+                         document.body.innerHTML ="<table class='table table-bordered table-striped'><center><img src='../logo.png' height='70' width='200'></center><center><h2>Personal Training Contract History</h2><center><br><br>" +
+                         printcontent + "</table><br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
                          window.print();
                          document.body.innerHTML = restorepage;
                      }
