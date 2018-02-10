@@ -47,7 +47,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                            <select class="form-control show-tick" data-live-search="true" name="equips">
+                            <select class="form-control show-tick" data-live-search="true" id="equips" name="equips">
                                         <option value="null">Choose Equipment Type</option>
                                             <?php 
                                             $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
@@ -72,14 +72,14 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
+                                    <a id="printer" class="btn bg-green btn-block btn-lg" onclick="printContent('print');">Print</a>
                                 </div>
 
                             </div>
                         </form>
 
                         <div id="print">
-                         <table class="table table-bordered table-striped table-hover dataTable" id="equipmentreport" name="equipmentreport" role="grid" aria-describedby="DataTables_Table_0_info">
+                         <table class="table table-bordered table-striped table-hover dataTable js-basic-example" id="equipmentreport" name="equipmentreport" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
                                             <th>Equipment Type</th>
@@ -183,6 +183,7 @@
                     <script>
 
                      function printContent(el) {
+
                          var restorepage = document.body.innerHTML;
                          var printcontent = document.getElementById(el).innerHTML;
                          document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Equipment Inventory Report</h2><center><br><br>" +

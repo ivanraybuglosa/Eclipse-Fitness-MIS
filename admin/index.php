@@ -43,7 +43,7 @@ include("includes/header.php"); ?>
         $fetchparticipants = $conn->query("SELECT COUNT(CA_Code) as total FROM `clientassignment` ") or die(mysql_error());
         $participants = $fetchparticipants->fetch_array();
 
-        $fetchpresent = $conn->query("SELECT COUNT(A_Code) as total FROM `attendance` WHERE `A_TimeOut` = '' && `A_Date` = '$today' ") or die(mysql_error());
+        $fetchpresent = $conn->query("SELECT COUNT(A_Code) as total FROM `attendance` WHERE `A_TimeOut` IS NULL && `A_Date` = '$today' ") or die(mysql_error());
         $present = $fetchpresent->fetch_array();
 
         $fetchwalkin = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` WHERE `CLIENT_RegStatus` = 'Walk-in' && year = '$year' ") or die(mysql_error());
