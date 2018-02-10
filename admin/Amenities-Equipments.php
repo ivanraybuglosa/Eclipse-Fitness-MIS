@@ -248,16 +248,7 @@ include("includes/header.php"); ?>
                                         </div>
                                     </div>
                                         </td>
-                                    
-                       
-
-                
-
-                                                  
-
-
-
-                                                    
+                                                                                        
                                             </tr>
                                         <?php } }else{ ?>
                                         <tr><td colspan="4">No Equipment(s) found......</td>

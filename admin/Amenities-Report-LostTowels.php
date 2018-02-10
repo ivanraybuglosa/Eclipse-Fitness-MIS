@@ -53,13 +53,13 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
+                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('losttowel')">Print</a>
                                 </div>
 
                             </div>
                         </form>
                         <div id="print">
-                            <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover dataTable js-basic-example" id="losttowel" name="losttowel" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr role="row">
                                             
@@ -91,7 +91,6 @@
                                                  <td><?php echo date("F j, Y", strtotime($lost['A_Date'])) ?></td>
                                                  <td><?php echo $lost['CLIENT_FirstName']; ?> <?php echo $lost['CLIENT_LastName']; ?></td>
                                                  <td><?php echo $lost['A_TowelQty'] - $lost['A_TowelReturn'] ?></td>
-                                                 <td><?php echo $lost['A_ReturnedKey'] ?></td>
 
                                               </tr>
                                              <?php 
@@ -107,7 +106,6 @@
                                                  <td><?php echo date("F j, Y", strtotime($lost['A_Date'])) ?></td>
                                                  <td><?php echo $lost['CLIENT_FirstName']; ?> <?php echo $lost['CLIENT_LastName']; ?></td>
                                                  <td><?php echo $lost['A_TowelQty'] - $lost['A_TowelReturn'] ?></td>
-                                                 <td><?php echo $lost['A_ReturnedKey'] ?></td>
 
                                               </tr>
                                     <?php
@@ -123,13 +121,15 @@
                                 </div>
                             </div>
                         </div>
-                         <script>
+                         <script>   
+
+
 
                      function printContent(el) {
                          var restorepage = document.body.innerHTML;
                          var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h4>Towel Supply and Laundry </h4><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
+                         document.body.innerHTML ="<table class='table table-bordered table-striped'><center><img src='../logo.png' height='70' width='200'></center><center><h4>Towel Supply and Laundry </h4><center><br><br>" +
+                         printcontent + "</table><br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
                          window.print();
                          document.body.innerHTML = restorepage;
                      }
