@@ -32,7 +32,6 @@
                 <a href="Client-Report-PaymentHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">PAYMENT HISTORY</a>
                  </div>
 
-
              </div>
              <div class="row">
                 <div class="col-md-3">

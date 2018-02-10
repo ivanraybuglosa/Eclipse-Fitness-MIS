@@ -72,7 +72,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    <a id="printer" class="btn bg-green btn-block btn-lg" onclick="printContent('print');">Print</a>
+                                    <a id="printer" class="btn bg-green btn-block btn-lg" onclick="javascript:window.print();">Print</a>
                                 </div>
 
                             </div>
@@ -181,7 +181,7 @@
 
                     <script>
                       $(document).ready(function() {
-                        
+
                       });
 
                      function printContent(el) {

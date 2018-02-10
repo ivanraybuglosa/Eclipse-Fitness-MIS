@@ -127,7 +127,7 @@
                                                        <?php echo $fc['CLIENT_LastName'] ?> </td>
                                                    <td><?php echo $fth['TR_Type'] ?></td>
                                                    <td><?php echo $fth['TR_Bill'] ?></td>
-                                               </tr>
+                                                </tr>
 
                                                <?php
                                                } 

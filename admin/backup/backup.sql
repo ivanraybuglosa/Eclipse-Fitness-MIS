@@ -9,7 +9,7 @@ CREATE TABLE `activitylog` (
   `AL_StartTime` time NOT NULL,
   `AL_EndTime` time NOT NULL,
   PRIMARY KEY (`AL_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=latin1;
 
 INSERT INTO activitylog VALUES("75","","22","Studio Class Session","2018-02-06","16:01:00","18:01:00"); 
 INSERT INTO activitylog VALUES("76","69","23","Personal Training Session","2018-02-06","14:00:00","15:59:00"); 
@@ -49,6 +49,13 @@ INSERT INTO activitylog VALUES("109","68","22","Studio Class Session","2018-02-0
 INSERT INTO activitylog VALUES("110","69","22","Studio Class Session","2018-02-04","14:01:00","16:00:00"); 
 INSERT INTO activitylog VALUES("111","70","22","Studio Class Session","2018-02-04","14:01:00","16:00:00"); 
 INSERT INTO activitylog VALUES("112","69","22","Studio Class Session","2018-02-04","14:01:00","16:00:00"); 
+INSERT INTO activitylog VALUES("113","","23","Studio Class Session","2018-02-10","07:00:00","18:00:00"); 
+INSERT INTO activitylog VALUES("114","76","23","Studio Class Session","2018-02-10","07:00:00","18:00:00"); 
+INSERT INTO activitylog VALUES("115","69","23","Studio Class Session","2018-02-10","07:00:00","18:00:00"); 
+INSERT INTO activitylog VALUES("116","78","23","Studio Class Session","2018-02-10","07:00:00","18:00:00"); 
+INSERT INTO activitylog VALUES("117","68","23","Studio Class Session","2018-02-10","07:00:00","18:00:00"); 
+INSERT INTO activitylog VALUES("118","78","23","Studio Class Session","2018-02-10","07:00:00","18:00:00"); 
+INSERT INTO activitylog VALUES("119","77","23","Studio Class Session","2018-02-10","07:00:00","18:00:00"); 
 
 
 
@@ -68,7 +75,7 @@ CREATE TABLE `attendance` (
   `A_Date` date NOT NULL,
   `A_status` varchar(10) NOT NULL,
   PRIMARY KEY (`A_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=450 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=453 DEFAULT CHARSET=latin1;
 
 INSERT INTO attendance VALUES("374","68","23:05:03","23:09:07","2","2","1","Returned","2018","Feb","2018-02-02","Member"); 
 INSERT INTO attendance VALUES("375","71","23:05:17","23:09:03","3","3","5","Returned","2018","Feb","2018-02-02","Walk-in"); 
@@ -126,6 +133,9 @@ INSERT INTO attendance VALUES("446","68","18:48:28","18:48:43","2","1","1","Retu
 INSERT INTO attendance VALUES("447","68","03:53:13","03:53:37","2","1","4","Returned","2018","Feb","2018-02-08","Member"); 
 INSERT INTO attendance VALUES("448","69","03:55:06","03:55:18","4","1","1","Returned","2018","Feb","2018-02-08","Member"); 
 INSERT INTO attendance VALUES("449","79","04:05:31","04:07:13","3","3","7","Returned","2018","Feb","2018-02-08","Walk-in"); 
+INSERT INTO attendance VALUES("450","68","17:08:16","","3","0","1","","2018","Feb","2018-02-10","Member"); 
+INSERT INTO attendance VALUES("451","69","17:09:27","17:10:36","4","4","3","Returned","2018","Feb","2018-02-10","Member"); 
+INSERT INTO attendance VALUES("452","76","17:11:19","23:59:44","2","2","3","Unreturned","2018","Feb","2018-02-10","Member"); 
 
 
 
@@ -137,7 +147,7 @@ CREATE TABLE `backuphistory` (
   `backup_date` date NOT NULL,
   `backup_time` time NOT NULL,
   PRIMARY KEY (`backup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 INSERT INTO backuphistory VALUES("2","Export","2018-01-27","02:14:00"); 
 INSERT INTO backuphistory VALUES("3","Import","2018-01-27","02:19:00"); 
@@ -151,6 +161,7 @@ INSERT INTO backuphistory VALUES("15","Export","2018-02-06","11:53:00");
 INSERT INTO backuphistory VALUES("16","Import","2018-02-06","05:01:00"); 
 INSERT INTO backuphistory VALUES("17","Import","2018-02-06","05:01:00"); 
 INSERT INTO backuphistory VALUES("18","Import","2018-02-06","08:00:00"); 
+INSERT INTO backuphistory VALUES("19","Export","2018-02-09","04:26:00"); 
 
 
 
@@ -203,9 +214,13 @@ CREATE TABLE `clientassignment` (
   `month` char(3) NOT NULL,
   `year` char(4) NOT NULL,
   PRIMARY KEY (`CA_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=latin1;
 
 INSERT INTO clientassignment VALUES("110","68","45","2018-02-07","37","Feb","2018"); 
+INSERT INTO clientassignment VALUES("111","76","49","2018-02-10","35","Feb","2018"); 
+INSERT INTO clientassignment VALUES("112","69","49","2018-02-10","35","Feb","2018"); 
+INSERT INTO clientassignment VALUES("114","68","49","2018-02-10","35","Feb","2018"); 
+INSERT INTO clientassignment VALUES("116","77","49","2018-02-10","35","Feb","2018"); 
 
 
 
@@ -245,11 +260,12 @@ CREATE TABLE `equipment` (
   `E_Type` text NOT NULL,
   `E_Model` varchar(15) NOT NULL,
   PRIMARY KEY (`E_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 INSERT INTO equipment VALUES("18","Barbel","CaptainBarbel10"); 
 INSERT INTO equipment VALUES("19","THREADMIL","trm2018"); 
 INSERT INTO equipment VALUES("20","Fitness Gear","FG001231"); 
+INSERT INTO equipment VALUES("21","Kettlebell","FakeBell"); 
 
 
 
@@ -266,17 +282,19 @@ CREATE TABLE `equipmentinventory` (
   `month` text NOT NULL,
   `year` int(4) NOT NULL,
   PRIMARY KEY (`EI_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
-INSERT INTO equipmentinventory VALUES("1","18","100","2018-02-15","14:02:00","Korea International","","","0"); 
-INSERT INTO equipmentinventory VALUES("2","18","100","2018-02-23","18:02:00","japan international","","","0"); 
-INSERT INTO equipmentinventory VALUES("3","18","1000","2018-02-24","10:02:00","Ph","","","0"); 
-INSERT INTO equipmentinventory VALUES("7","18","500","2018-02-21","13:01:00","asd","","","0"); 
-INSERT INTO equipmentinventory VALUES("8","18","1000","2018-02-23","15:02:00","alson","","","0"); 
-INSERT INTO equipmentinventory VALUES("9","19","5","2018-02-06","15:01:00","korean enterprise","","","0"); 
-INSERT INTO equipmentinventory VALUES("10","19","50","2018-02-08","14:02:00","japan enterprise","","","0"); 
-INSERT INTO equipmentinventory VALUES("11","20","15","2018-02-15","14:01:00","korean enterprise","","","0"); 
-INSERT INTO equipmentinventory VALUES("12","20","100","2018-02-22","14:01:00","japan enterprise","","","0"); 
+INSERT INTO equipmentinventory VALUES("1","18","5","2018-02-15","14:02:00","Korea International","","","2018"); 
+INSERT INTO equipmentinventory VALUES("2","18","5","2018-02-23","18:02:00","japan international","","","2018"); 
+INSERT INTO equipmentinventory VALUES("3","18","10","2018-02-24","10:02:00","Ph","","","2018"); 
+INSERT INTO equipmentinventory VALUES("7","18","15","2018-02-21","13:01:00","asd","","","2018"); 
+INSERT INTO equipmentinventory VALUES("8","18","10","2018-02-23","15:02:00","alson","","","2018"); 
+INSERT INTO equipmentinventory VALUES("9","19","5","2018-02-06","15:01:00","korean enterprise","","","2018"); 
+INSERT INTO equipmentinventory VALUES("10","19","50","2018-02-08","14:02:00","japan enterprise","","","2018"); 
+INSERT INTO equipmentinventory VALUES("11","20","15","2018-02-15","14:01:00","korean enterprise","","","2018"); 
+INSERT INTO equipmentinventory VALUES("12","20","20","2018-02-22","14:01:00","japan enterprise","","","2018"); 
+INSERT INTO equipmentinventory VALUES("13","21","20","2018-12-31","12:59:00","Bornok\'s Kettle Bellzxc","","","0"); 
+INSERT INTO equipmentinventory VALUES("14","21","50","2018-02-11","10:00:00","Bornoks\' Competitor","","","0"); 
 
 
 
@@ -362,16 +380,19 @@ CREATE TABLE `payment` (
   `Pay_amount` float NOT NULL,
   `Pay_date` date NOT NULL,
   `Pay_time` time NOT NULL,
+  `month` char(3) NOT NULL,
+  `year` int(4) NOT NULL,
   PRIMARY KEY (`Pay_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
-INSERT INTO payment VALUES("7","135","400","2018-02-10","14:01:00"); 
-INSERT INTO payment VALUES("8","135","200","2018-02-08","15:01:00"); 
-INSERT INTO payment VALUES("9","138","150","2018-02-09","02:50:00"); 
-INSERT INTO payment VALUES("10","139","100","2018-02-09","03:57:00"); 
-INSERT INTO payment VALUES("11","139","100","2018-02-09","04:50:00"); 
-INSERT INTO payment VALUES("12","140","200","0000-00-00","00:00:00"); 
-INSERT INTO payment VALUES("13","140","200","0000-00-00","00:00:00"); 
+INSERT INTO payment VALUES("7","135","400","2018-02-10","14:01:00","","2018"); 
+INSERT INTO payment VALUES("8","135","200","2018-02-08","15:01:00","","2018"); 
+INSERT INTO payment VALUES("9","138","150","2018-02-09","02:50:00","","2018"); 
+INSERT INTO payment VALUES("10","139","100","2018-02-09","03:57:00","","2018"); 
+INSERT INTO payment VALUES("11","139","100","2018-02-09","04:50:00","","2018"); 
+INSERT INTO payment VALUES("12","140","200","2018-02-09","04:17:00","","2018"); 
+INSERT INTO payment VALUES("13","140","200","2018-02-09","04:53:00","","2018"); 
+INSERT INTO payment VALUES("14","142","200","2018-02-11","12:00:00","","0"); 
 
 
 
@@ -453,23 +474,24 @@ CREATE TABLE `studioclasssession` (
   `year` char(4) NOT NULL,
   `SCS_Status` text NOT NULL,
   PRIMARY KEY (`SCS_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
 
-INSERT INTO studioclasssession VALUES("34","6","17","13:00:00.000000","14:00:00.000000","2018-01-29","","","",""); 
-INSERT INTO studioclasssession VALUES("35","8","15","14:01:00.000000","14:03:00.000000","2018-01-28","","","","On-Going"); 
-INSERT INTO studioclasssession VALUES("36","9","18","14:01:00.000000","14:01:00.000000","2018-01-25","","","","On-Going"); 
-INSERT INTO studioclasssession VALUES("37","6","17","13:00:00.000000","13:02:00.000000","2018-01-25","","","","On-Going"); 
-INSERT INTO studioclasssession VALUES("38","8","15","13:00:00.000000","13:01:00.000000","2018-01-04","","","","On-Going"); 
-INSERT INTO studioclasssession VALUES("39","7","18","13:01:00.000000","13:03:00.000000","2018-01-19","","","","On-Going"); 
-INSERT INTO studioclasssession VALUES("40","8","15","13:01:00.000000","15:01:00.000000","2018-01-31","","","","On-Going"); 
-INSERT INTO studioclasssession VALUES("41","9","15","14:01:00.000000","15:02:00.000000","2018-01-20","","","","On-Going"); 
-INSERT INTO studioclasssession VALUES("42","8","15","14:00:00.000000","15:01:00.000000","2018-01-31","","","",""); 
-INSERT INTO studioclasssession VALUES("43","5","15","14:01:00.000000","14:04:00.000000","2018-01-26","","","",""); 
-INSERT INTO studioclasssession VALUES("44","9","15","14:01:00.000000","15:01:00.000000","2018-01-27","","","",""); 
-INSERT INTO studioclasssession VALUES("45","6","22","14:01:00.000000","16:00:00.000000","2018-02-04","","","",""); 
-INSERT INTO studioclasssession VALUES("46","6","22","15:02:00.000000","16:01:00.000000","2018-02-05","","","",""); 
-INSERT INTO studioclasssession VALUES("47","5","22","15:02:00.000000","17:02:00.000000","2018-02-05","","","",""); 
-INSERT INTO studioclasssession VALUES("48","5","22","16:01:00.000000","18:01:00.000000","2018-02-05","","","",""); 
+INSERT INTO studioclasssession VALUES("34","6","17","13:00:00.000000","14:00:00.000000","2018-01-29","","","2018",""); 
+INSERT INTO studioclasssession VALUES("35","8","15","14:01:00.000000","14:03:00.000000","2018-01-28","","","2018","On-Going"); 
+INSERT INTO studioclasssession VALUES("36","9","18","14:01:00.000000","14:01:00.000000","2018-01-25","","","2018","On-Going"); 
+INSERT INTO studioclasssession VALUES("37","6","17","13:00:00.000000","13:02:00.000000","2018-01-25","","","2018","On-Going"); 
+INSERT INTO studioclasssession VALUES("38","8","15","13:00:00.000000","13:01:00.000000","2018-01-04","","","2018","On-Going"); 
+INSERT INTO studioclasssession VALUES("39","7","18","13:01:00.000000","13:03:00.000000","2018-01-19","","","2018","On-Going"); 
+INSERT INTO studioclasssession VALUES("40","8","15","13:01:00.000000","15:01:00.000000","2018-01-31","","","2018","On-Going"); 
+INSERT INTO studioclasssession VALUES("41","9","15","14:01:00.000000","15:02:00.000000","2018-01-20","","","2018","On-Going"); 
+INSERT INTO studioclasssession VALUES("42","8","15","14:00:00.000000","15:01:00.000000","2018-01-31","","","2018",""); 
+INSERT INTO studioclasssession VALUES("43","5","15","14:01:00.000000","14:04:00.000000","2018-01-26","","","2018",""); 
+INSERT INTO studioclasssession VALUES("44","9","15","14:01:00.000000","15:01:00.000000","2018-01-27","","","2018",""); 
+INSERT INTO studioclasssession VALUES("45","6","22","14:01:00.000000","16:00:00.000000","2018-02-04","","","2018",""); 
+INSERT INTO studioclasssession VALUES("46","6","22","15:02:00.000000","16:01:00.000000","2018-02-05","","","2018",""); 
+INSERT INTO studioclasssession VALUES("47","5","22","15:02:00.000000","17:02:00.000000","2018-02-05","","","2018",""); 
+INSERT INTO studioclasssession VALUES("48","5","22","16:01:00.000000","18:01:00.000000","2018-02-05","","","2018",""); 
+INSERT INTO studioclasssession VALUES("49","6","23","07:00:00.000000","18:00:00.000000","2018-02-10","","","2018",""); 
 
 
 
@@ -493,7 +515,7 @@ CREATE TABLE `towelinventory` (
 INSERT INTO towelinventory VALUES("124","2018-02-04","01:53:00","100","","56","35","0","Supply","Feb","2018"); 
 INSERT INTO towelinventory VALUES("125","2018-02-06","09:10:00","10","","78","57","3","Supply","Feb","2018"); 
 INSERT INTO towelinventory VALUES("126","2018-02-06","12:22:00","50","","78","57","3","Supply","Feb","2018"); 
-INSERT INTO towelinventory VALUES("127","2018-02-08","09:06:00","250","","328","54","3","Supply","Feb","2018"); 
+INSERT INTO towelinventory VALUES("127","2018-02-08","09:06:00","250","","319","63","3","Supply","Feb","2018"); 
 
 
 
@@ -514,8 +536,8 @@ CREATE TABLE `traininglog` (
   PRIMARY KEY (`TL_Code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
-INSERT INTO traininglog VALUES("39","23","68","10","2018-02-14","2018-02-07","Feb","2018","","","Completed"); 
-INSERT INTO traininglog VALUES("40","22","69","10","2018-02-15","2018-02-08","Feb","2018","","","On-Going"); 
+INSERT INTO traininglog VALUES("39","23","68","10","2018-02-14","2018-02-07","Feb","2018","Anemia,Sclerosis,","Beginner","Completed"); 
+INSERT INTO traininglog VALUES("40","22","69","10","2018-02-15","2018-02-08","Feb","2018","","Intermediate","On-Going"); 
 
 
 
@@ -566,7 +588,7 @@ INSERT INTO trainingpackage VALUES("14","12","Senior","6600","84");
 INSERT INTO trainingpackage VALUES("15","12","Junior","5400","84"); 
 INSERT INTO trainingpackage VALUES("16","24","Senior","12000","168"); 
 INSERT INTO trainingpackage VALUES("17","24","Junior","9600","168"); 
-INSERT INTO trainingpackage VALUES("18","30","Senior","5555555","250"); 
+INSERT INTO trainingpackage VALUES("18","30","Senior","10000","250"); 
 
 
 
@@ -583,7 +605,7 @@ CREATE TABLE `transaction` (
   `month` varchar(10) NOT NULL,
   PRIMARY KEY (`TR_ID`),
   KEY `TR_ID` (`TR_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=latin1;
 
 INSERT INTO transaction VALUES("134","69","Membership","5697","2018-02-08","paid","2018","Feb"); 
 INSERT INTO transaction VALUES("135","69","Personal Training","600","2018-02-08","paid","2018","Feb"); 
@@ -592,6 +614,8 @@ INSERT INTO transaction VALUES("137","68","Lost Locker Key","200","2018-02-08","
 INSERT INTO transaction VALUES("138","69","Lost Towel(s) ","150","2018-02-08","paid","2018","Feb"); 
 INSERT INTO transaction VALUES("139","69","Lost Locker Key","200","2018-02-08","paid","2018","Feb"); 
 INSERT INTO transaction VALUES("140","79","Walk-in","400","2018-02-08","paid","2018","Feb"); 
+INSERT INTO transaction VALUES("141","76","Lost Towel(s) ","0","2018-02-10","unpaid","2018","Feb"); 
+INSERT INTO transaction VALUES("142","76","Lost Locker Key","200","2018-02-10","paid","2018","Feb"); 
 
 
 

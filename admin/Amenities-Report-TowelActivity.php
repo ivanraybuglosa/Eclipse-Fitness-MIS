@@ -113,7 +113,7 @@
                                                  <td><?php echo date("F j, Y", strtotime($towels['TI_Date'])) ?></td>
                                                  <td><?php echo $towels['TI_Type']; ?></td>
                                                  <td><?php echo date("g:i A", strtotime($towels['TI_Time'])) ?></td>
-                                                 <td><?php echo $towels['TI_Supplied'] ?> <?php echo $towels['TI_Laundry'] ?></td>
+                                                 <td><?php echo $towels['TI_Supplied'] + $towels['TI_Laundry'] ?></td>
 
                                               </tr>
                                     <?php
