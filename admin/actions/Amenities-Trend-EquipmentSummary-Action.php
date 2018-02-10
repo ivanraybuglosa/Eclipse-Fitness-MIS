@@ -12,7 +12,7 @@ if(isset($_GET['year']))
 $order = $conn->query("SELECT COUNT(EI_Code) as total FROM equipmentinventory WHERE year = '$year' ") or die(mysqli_error());
 $forder = $order->fetch_array();
 
-$eqcount = $conn->query("SELECT COUNT(EI_Quantity) as total FROM equipmentinventory WHERE year = '$year' ") or die(mysqli_error());
+$eqcount = $conn->query("SELECT IFNULL(total,0) as final FROM (SELECT SUM(EI_Quantity) as total FROM equipmentinventory WHERE year = '$year') as initial ") or die(mysqli_error());
 $feqcount = $eqcount->fetch_array();
 
 $types = $conn->query("SELECT COUNT(*) as total FROM (SELECT COUNT(E_Code) as old FROM equipmentinventory WHERE year = '$year' GROUP BY E_Code) as older") or die(mysqli_error());
@@ -43,8 +43,8 @@ var chart = new CanvasJS.Chart("equipment", {
         type: "column",       
         dataPoints: [   
             { label: "Transactions", y: <?php echo $forder["total"]; ?> , indexLabel: "<?php echo $forder["total"]; ?>"},
-            { label: "Equipment Types", y: <?php echo $ftypes["total"]; ?>  , indexLabel: "<?php echo $ftypes["total"]; ?>"},
-            { label: "Equipment Quantity", y: <?php echo $feqcount["total"]?> , indexLabel: "<?php echo $feqcount["total"]?>"},
+            { label: "Equipment", y: <?php echo $ftypes["total"]; ?>  , indexLabel: "<?php echo $ftypes["total"]; ?>"},
+            { label: "Equipment Count", y: <?php echo $feqcount["final"]?> , indexLabel: "<?php echo $feqcount["final"]?>"},
             { label: "Suppliers", y: <?php echo $fsupps["total"]; ?> , indexLabel: "<?php echo $fsupps["total"]; ?>"}
         ]
     }]

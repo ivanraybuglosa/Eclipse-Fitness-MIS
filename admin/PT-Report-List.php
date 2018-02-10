@@ -5,7 +5,7 @@
             <div class="body">
             <div class="row">
                 <div class="col-md-3">
-                <a href="PT-TR-ContractHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-clienttraininghistory" data-type="success">CONTRACT HISTORY</a>
+                <a href="PT-TR-ContractHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-clienttraininghistory" data-type="success">CONTRACTS HISTORY</a>
                  </div>
 
                 <div class="col-md-3">
