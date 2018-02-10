@@ -72,7 +72,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    <a id="printer" class="btn bg-green btn-block btn-lg" onclick="printContent('equipmentreport');">Print</a>
+                                    <a id="printer" class="btn bg-green btn-block btn-lg" onclick="printContent('print');">Print</a>
                                 </div>
 
                             </div>
@@ -180,17 +180,16 @@
                         </div>
 
                     <script>
-
-                      
+                      $(document).ready(function() {
+                        
+                      });
 
                      function printContent(el) {
 
                          var restorepage = document.body.innerHTML;
                          var printcontent = document.getElementById(el).innerHTML;
-                           $('#equipmentreport1').removeClass('js-basic-example');
-                         document.body.innerHTML ="<table class='table table-bordered table-striped js-basic-example' id='equipmentreport1'><center><img src='../logo.png' height='70' width='200'></center><center><h2>Equipment Inventory Report</h2><center><br><br>" +
-                         printcontent + "</table><br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                        
+                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Equipment Inventory Report</h2><center><br><br>" +
+                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
                          window.print();
                          document.body.innerHTML = restorepage;
                      }

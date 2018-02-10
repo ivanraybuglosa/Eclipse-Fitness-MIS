@@ -60,9 +60,10 @@
 
                                         <option id = "<?php echo $clients['CLIENT_ID']; ?>" value="<?php echo $clients['CLIENT_ID']; ?>">
                                                 <?php 
-                                                $firstname = $clients['CLIENT_FirstName']; 
+                                                $firstname = $clients['CLIENT_FirstName'];
+                                                $middlename = $clients['CLIENT_MiddleName'];
                                                       $lastname = $clients['CLIENT_LastName']; 
-                                                      $fullname=$firstname." ".$lastname; 
+                                                      $fullname=$firstname." ".$middlename." ".$lastname; 
                                                       echo $fullname ; 
                                                  ?>
                                         </option>
@@ -112,7 +113,7 @@
                                             $clientName = $_POST['clientName'];
 
                                             if($clientName != "null" && $filterstart == $_POST['filter_start']) {
-                                                $th = $conn->query("SELECT * FROM transaction WHERE CLIENT_ID = '$clientName' AND TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                                $th = $conn->query("SELECT * FROM transaction WHERE CLIENT_ID = '$clientName' AND TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' AND TR_status = 'paid' ") or die(mysql_error());
 
                                                 while($fth = $th->fetch_array()) {
                                                 $cid = $fth['CLIENT_ID'];
@@ -132,7 +133,7 @@
                                                } 
                                             } else if($clientName == "null" && ($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end'])) {
 
-                                                $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID ") or die(mysql_error());
+                                                $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_status = 'paid' ") or die(mysql_error());
 
                                                  while($fth = $th->fetch_array()) { 
                                                  ?>
@@ -149,11 +150,11 @@
                                             } 
                                         } else {
 
-                                            $th = $conn->query("SELECT * FROM transaction WHERE CLIENT_ID = '$clientName' OR TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                            $th = $conn->query("SELECT * FROM transaction WHERE TR_status = 'paid' AND CLIENT_ID = '$clientName' OR TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
 
                                             while($fth = $th->fetch_array()) {
                                                 $cid = $fth['CLIENT_ID'];
-                                                $client = $conn->query("SELECT * FROM client WHERE CLIENT_ID = '$cid' ") or die(mysql_error());
+                                                $client = $conn->query("SELECT * FROM client WHERE CLIENT_ID = '$cid'") or die(mysql_error());
                                                 $fc = $client->fetch_array()
                                              ?>
                                                <tr>
@@ -171,7 +172,7 @@
 
                                     }  else {
 
-                                         $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID ") or die(mysql_error());
+                                         $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_status = 'paid' ") or die(mysql_error());
 
                                                  while($fth = $th->fetch_array()) { 
                                                  ?>

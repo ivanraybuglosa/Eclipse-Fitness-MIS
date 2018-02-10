@@ -18,6 +18,10 @@
                  </div>
 
                  <div class="col-md-3">
+                <a href="Amenities-Report-LostLockers.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachlist" data-type="success">LOST KEYS RECORD</a>
+                 </div>
+
+                 <div class="col-md-3">
                 <a href="Amenities-Report-EquipmentInventory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachlist" data-type="success">EQUIPMENT INVENTORY</a>
                  </div>
 
