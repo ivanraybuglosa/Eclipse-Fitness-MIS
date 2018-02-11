@@ -159,7 +159,7 @@
                                          $equip = $conn->query("SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code ") or die(mysql_error());
 
                                          while($eq = $equip->fetch_array()) { 
-                                              ?>  
+                                              ?>
                                               <tr>
                                                     <td><?php echo $eq['E_Type'] ?></td>
                                                     <td><?php echo $eq['E_Model'] ?></td>
