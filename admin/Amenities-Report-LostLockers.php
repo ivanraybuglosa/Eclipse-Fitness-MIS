@@ -116,10 +116,12 @@
                         </div>
                     </div>
                 </div>
-                         <script>   $(document).ready(function() {
+                         <script>   
+
+  $(document).ready(function() {
     $('#lostlocker').DataTable( {
         dom: 'Bfrtip',
-        buttons: [
+        buttons: [ 'copy', 'csv', 'excel',
             { 
                 extend: 'print',
                 title: '',

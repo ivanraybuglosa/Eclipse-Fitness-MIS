@@ -32,7 +32,7 @@
         </div>
                        <div class="body">
                          <div class="row">
-                            <form>
+                            <form method="POST">
                             <div class="col-md-6">
                             <div class="form-group">
                                     <div class="form-line">
@@ -65,20 +65,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                            </div>
                             <div class="col-md-3" style="margin-top: 30px;">
                                     <input type="hidden" name="action_type" value="check"/>
-                                    <button type="submit" name= "check" class="btn bg-teal btn-block btn-lg waves-effect">Submit</button>
+                                    <button type="submit" name= "check" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                             </div>
-                            <div class="col-md-3"  style="margin-top: 30px;">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
-                                </div>
 
                           </form>
                         </div>
-                            <label>Client Class Records</label>
-                            <div class="table-responsive">
-                                <div id="print">
-                                <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                <table class="table table-bordered table-striped table-hover dataTable" id="clientrecords" role="grid" aria-describedby="DataTables_Table_0_info">
                                     
                                     <thead>
                                         <tr>
@@ -99,11 +95,31 @@
 
             if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                       if($_REQUEST['action_type'] == 'check'){
+                        $cName = $_POST['clientName'];
 
-                $cr = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID WHERE `CLIENT_ID` = ".$_GET['clientName']." ") or die(mysql_error());
+                        if($cName == 'null') {
+                            $cr = $conn->query("SELECT * FROM `clientassignment` INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID") or die(mysql_error());
 
                                 while($fcr = $cr->fetch_array()) {
-                                    $cname = $conn->query("SELECT * FROM `client` WHERE `CLIENT_ID` = '$_GET[clientName]' ") or die(mysql_error());
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $fcr['CLIENT_FirstName'] ?> <?php echo $fcr['CLIENT_LastName'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($fcr['SCS_Date'])) ?></td>
+                                            <td><?php echo $fcr['SC_Name'] ?></td>
+                                            <td><?php echo $fcr['Coach_FirstName'] ?> 
+                                                <?php echo $fcr['Coach_LastName'] ?></td>
+                                            <td><?php echo date("g:i A", strtotime($fcr['SCS_StartTime'])) ?></td>
+                                            <td><?php echo date("g:i A", strtotime($fcr['SCS_EndTime'])) ?></td>
+                                        </tr>
+                                        
+                                        <?php
+                                    }
+
+                        } else {
+                            $cr = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID WHERE `CLIENT_ID` = ".$_POST['clientName']." ") or die(mysql_error());
+
+                                while($fcr = $cr->fetch_array()) {
+                                    $cname = $conn->query("SELECT * FROM `client` WHERE `CLIENT_ID` = '$_POST[clientName]' ") or die(mysql_error());
                                     $fetchc = $cname->fetch_array();
                                     ?>
                                         <tr>
@@ -118,6 +134,8 @@
                                         
                                         <?php
                                     }
+                                }
+                
                             }
                         } else {
                             $cr = $conn->query("SELECT * FROM `clientassignment` INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID") or die(mysql_error());
@@ -144,17 +162,38 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>
                 <script>
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Client Class Records</h2><center><br><br>"+printcontent +"<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                      $(document).ready(function() {
+    $('#clientrecords').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [ 'copy', 'csv', 'excel',
+            { 
+                extend: 'print',
+                title: '',
+                responsive: true,
+                footer: true,
+                className: '',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend('<center><h4>Client Class Record</h4></center>')
+                        .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
+
+                    $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' )
+
+                    $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                }
+
+            }
+        ]
+    } );
+
+
+} );
             </script>
             </section>
     <?php include("includes/footer.php"); ?>

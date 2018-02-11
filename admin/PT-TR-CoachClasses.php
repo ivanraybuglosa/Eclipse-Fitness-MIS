@@ -33,7 +33,7 @@
                        <div class="body">
                          <div class="row">
                             <form method="POST">
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                             <div class="form-group">
                                     <div class="form-line">
                                         <h5 class="pull-left">Coach Name</h5>
@@ -69,17 +69,9 @@
                                     <input type="hidden" name="action_type" value="check"/>
                                     <button type="submit" name= "check" id="check" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                             </div>
-
-                            <div class="col-md-3"  style="margin-top: 30px;">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
-                                </div>
-
                              </form>
                         </div>
-                    <label>Studio Class Records</label>
-                    <div class="table-responsive">
-                            <div id="print">
-                                <table class="table table-bordered table-striped table-hover dataTable">
+                                <table class="table table-bordered table-striped table-hover dataTable" id="coachclass" role="grid" aria-describedby="coachclass">
                                     <thead>
                                         <tr>
                                             <th>Coach Name</th>
@@ -142,19 +134,38 @@
                                 </table>
                             </div>
                           </div>
-                     </div>
-                 </div>
             </section>
 
             <script>
+                $(document).ready(function() {
+                 $('#coachclass').DataTable( {
+                     dom: 'Bfrtip',
+                     buttons: [ 'copy', 'csv', 'excel',
+                          { 
+                              extend: 'print',
+                              title: '',
+                              responsive: true,
+                              footer: true,
+                              customize: function ( win ) {
+                            $(win.document.body)
+                                .prepend('<center><h4>Coach Class Record</h4></center>')
+                                .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Coach Classes</h2><center><br><br>"+printcontent +"<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                            $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                            $(win.document.body).find( 'table' )
+                                .addClass( 'compact' )
+                                .css( 'font-size', 'inherit' )
+
+                            $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                             }
+
+                        }
+                  ]
+               } );
+
+
+            } );
             </script>
     <?php include("includes/footer.php"); ?>
 

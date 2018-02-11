@@ -47,7 +47,7 @@
                                     </div>  
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                 <select class="form-control show-tick" data-live-search="true" name="clientName">
                                         <option value="null">Choose Client</option>
                                             <?php 
@@ -75,15 +75,10 @@
 
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
-
-                                <div class="col-md-2">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('contracthistory')">Print</a>
-                                </div>
-
                             </div>
                         </form>
                             <div id="print">
@@ -206,14 +201,35 @@
 
             <script>
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<table class='table table-bordered table-striped'><center><img src='../logo.png' height='70' width='200'></center><center><h2>Personal Training Contract History</h2><center><br><br>" +
-                         printcontent + "</table><br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                     $(document).ready(function() {
+                 $('#contracthistory').DataTable( {
+                     dom: 'Bfrtip',
+                     buttons: ['copy', 'csv', 'excel',
+                          { 
+                              extend: 'print',
+                              title: '',
+                              responsive: true,
+                              footer: true,
+                              customize: function ( win ) {
+                            $(win.document.body)
+                                .prepend('<center><h4>Contract History Reports</h4></center>')
+                                .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
+
+                            $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                            $(win.document.body).find( 'table' )
+                                .addClass( 'compact' )
+                                .css( 'font-size', 'inherit' )
+
+                            $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                             }
+
+                        }
+                  ]
+               } );
+
+
+            } );
 
 
             </script>

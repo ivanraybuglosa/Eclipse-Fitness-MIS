@@ -282,7 +282,7 @@ $fetchReturned = $returnedTotal->fetch_array();
                      dom: 'Bfrtip',
                      bSort: false,
                      paging: false,
-                     buttons: [
+                     buttons: [ 'copy', 'csv', 'excel',
                           { 
                               extend: 'print',
                               title: '',
