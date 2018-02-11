@@ -218,11 +218,9 @@
                                                     $lastname = $client['CLIENT_LastName']; 
                                                     $fullname = $firstname ." ". $midname." ". $lastname; 
                                                         echo $fullname ; ?></td>
-<<<<<<< HEAD
+
                                                         <td><?php echo date("F j, Y",strtotime($client['CLIENT_regDATE']))?></td>
-=======
-                                                        <td><?php echo date("F j, Y", strtotime($client['CLIENT_regDATE'])) ?></td>
->>>>>>> 643c97904772905a85f8065f63cbfa6467fa9fa5
+
                                                         <td><?php echo $client['CLIENT_RegStatus']; ?></td>
                                                         <td><?php echo $client['CLIENT_Gender']; ?></td>
 														<td><?php echo $client['CLIENT_ContactNumber']; ?></td>

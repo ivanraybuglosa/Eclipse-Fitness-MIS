@@ -1565,6 +1565,15 @@ class dbConnect{
         return $result;
     }
 
+    public function checkBill($id,$date){
+        $sql = "SELECT CLIENT_ID FROM transaction WHERE CLIENT_ID = '".$id."' AND TR_TransactionDate = '".$date."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['CLIENT_ID'];
+        return $result;
+    }
+
 
 
 
