@@ -47,19 +47,16 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                                 </div>
 
                             </div>
                         </form>
 
-                        <div id="print">
-                         <table class="table table-bordered table-striped table-hover dataTable" id="reportattendance" name="reportattendance" role="grid" aria-describedby="DataTables_Table_0_info">
+                         <table class="table table-bordered table-striped table-hover dataTable" id="memlist" name="memlist" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
                                             <th>Client Name</th>
@@ -121,19 +118,38 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
 
                     <script>
+$(document).ready(function() {
+    $('#memlist').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [ 'copy', 'csv', 'excel',
+            { 
+                extend: 'print',
+                title: '',
+                responsive: true,
+                footer: true,
+                className: '',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend('<center><h4>List of Members</h4></center>')
+                        .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Client Member List</h2><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                    $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' )
 
+                    $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                }
+
+            }
+        ]
+    } );
+
+
+} );
 
                     </script>
 

@@ -44,21 +44,16 @@
                                      </div>
                                     </div>  
                                 </div>
-
+                                <div class="col-md-3">
+                                </div>
                                 <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
-
-                                <div class="col-md-3">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
-                                </div>
-
                             </div>
                         </form>
 
-                        <div id="print">
-                         <table class="table table-bordered table-striped table-hover dataTable" id="reportattendance" name="reportattendance" role="grid" aria-describedby="DataTables_Table_0_info">
+                         <table class="table table-bordered table-striped table-hover dataTable" id="sessionlist" name="sessionlist" role="grid" aria-describedby="sessionlist">
                                   
                                     <thead>
                                         <tr>
@@ -82,7 +77,29 @@
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
 
-                                        $sess = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID WHERE SCS_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                        if($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end']) {
+                                                $sess = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID ") or die(mysql_error());
+                                            while($fsess = $sess->fetch_array()) {
+                                                $sc = $fsess['SCS_Code'];
+
+                                                $tp = $conn->query("SELECT COUNT(*) as total FROM `clientassignment` WHERE SCS_Code = '$sc' ") or die(mysql_error());
+                                                $ftp = $tp->fetch_array();
+
+                                                                    ?>
+                                        <tr>
+                                            <td align="center"><?php echo date("F j, Y", strtotime($fsess['SCS_Date'])) ?></td>
+                                            <td align="center"><?php echo $fsess['SC_Name'] ?></td>
+                                            <td align="center"><?php echo $fsess['Coach_FirstName'] ?> <?php echo $fsess['Coach_LastName'] ?></td>
+                                            <td align="center"><?php echo $ftp['total'] ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($fsess['SCS_StartTime'])) ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($fsess['SCS_EndTime'])) ?></td>
+                                        </tr>
+                                        
+                                            <?php
+                                             }
+
+                                    } else {
+                                                $sess = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID WHERE SCS_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
                                             while($fsess = $sess->fetch_array()) {
                                                 $sc = $fsess['SCS_Code'];
 
@@ -101,6 +118,9 @@
                                         </tr>
                                         <?php 
                                      }
+                                            }
+
+                                        
                                  }
                              } else {
 
@@ -134,14 +154,36 @@
 
                     <script>
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Session History Report</h2><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                     $(document).ready(function() {
+    $('#sessionlist').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [ 'copy', 'csv', 'excel',
+            { 
+                extend: 'print',
+                title: '',
+                responsive: true,
+                footer: true,
+                className: '',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend('<center><h4>Session List Report</h4></center>')
+                        .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
+
+                    $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' )
+
+                    $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                }
+
+            }
+        ]
+    } );
+
+
+} );
 
 
                     </script>

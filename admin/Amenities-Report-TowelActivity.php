@@ -153,7 +153,7 @@
                 $(document).ready(function() {
                  $('#towelactivity').DataTable( {
                      dom: 'Bfrtip',
-                     buttons: [
+                     buttons: [ 'copy', 'csv', 'excel',
                           { 
                               extend: 'print',
                               title: '',

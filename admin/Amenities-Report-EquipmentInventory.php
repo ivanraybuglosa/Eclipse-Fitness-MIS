@@ -178,7 +178,7 @@
                       $(document).ready(function() {
     $('#equipmentreport').DataTable( {
         dom: 'Bfrtip',
-        buttons: [
+        buttons: [ 'copy', 'csv', 'excel',
             { 
                 extend: 'print',
                 title: '',

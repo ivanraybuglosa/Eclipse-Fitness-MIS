@@ -140,7 +140,7 @@
                             $(document).ready(function() {
     $('#losttowel').DataTable( {
         dom: 'Bfrtip',
-        buttons: [
+        buttons: [ 'copy', 'csv', 'excel',
             { 
                 extend: 'print',
                 title: '',

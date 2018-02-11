@@ -32,19 +32,9 @@
                         <div class="body">
                                 <div class="row clearfix">
 
-                                <div class="col-md-6">
-                                </div>
-
-                                <div class="col-md-3">
-                                </div>
-
-                                <div class="col-md-3">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
-                                </div>
-
                             </div>
                             <div id="print">
-                            <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover dataTable" id="coachlist" role="grid" aria-describedby="DataTables_Table_0_info">
                                                
                                     <thead>
                                         <tr>
@@ -86,15 +76,34 @@
 
              <script>
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Personal Training Coach List</h2><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                     $(document).ready(function() {
+                 $('#coachlist').DataTable( {
+                     dom: 'Bfrtip',
+                     buttons: [ 'copy', 'csv', 'excel',
+                          { 
+                              extend: 'print',
+                              title: '',
+                              responsive: true,
+                              footer: true,
+                              customize: function ( win ) {
+                            $(win.document.body)
+                                .prepend('<center><h4>List of Coaches</h4></center>')
+                                .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
+                            $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                            $(win.document.body).find( 'table' )
+                                .addClass( 'compact' )
+                                .css( 'font-size', 'inherit' )
+
+                            $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                             }
+
+                        }
+                  ]
+               } );
+
+            } );
 
             </script>
     <?php include("includes/footer.php"); ?>
