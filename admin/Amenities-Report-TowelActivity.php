@@ -48,18 +48,16 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                </div>
+
+                                <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
-                                </div>
-
                             </div>
                         </form>
-                        <div id="print">
-                            <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover dataTable" id="towelactivity" name="towelactivity" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr role="row">
                                             
@@ -86,7 +84,27 @@
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
 
-                                        $tow = $conn->query("SELECT * FROM `towelinventory` WHERE TI_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                            if($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end']) {
+
+                                                $tow = $conn->query("SELECT * FROM `towelinventory`") or die(mysql_error());
+
+                                            while($towels = $tow->fetch_array()) { 
+
+                                              ?>  
+                                              <tr>
+                                
+                                                 <td><?php echo date("F j, Y", strtotime($towels['TI_Date'])) ?></td>
+                                                 <td><?php echo $towels['TI_Type']; ?></td>
+                                                 <td><?php echo date("g:i A", strtotime($towels['TI_Time'])) ?></td>
+                                                 <td><?php echo $towels['TI_Supplied'] + $towels['TI_Laundry'] ?></td>
+
+                                              </tr>
+                                                    <?php
+                                                  }
+
+
+                                            } else {
+                                                $tow = $conn->query("SELECT * FROM `towelinventory` WHERE TI_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
 
                                             while($towels = $tow->fetch_array()) { 
 
@@ -101,6 +119,8 @@
                                               </tr>
                                              <?php 
                                      }
+                                 }
+                                        
                                  }
                              } else {
                                      $tow = $conn->query("SELECT * FROM `towelinventory`") or die(mysql_error());
@@ -129,17 +149,36 @@
                                 </div>
                             </div>
                         </div>
-                         <script>
+             <script>
+                $(document).ready(function() {
+                 $('#towelactivity').DataTable( {
+                     dom: 'Bfrtip',
+                     buttons: [
+                          { 
+                              extend: 'print',
+                              title: '',
+                              responsive: true,
+                              footer: true,
+                              customize: function ( win ) {
+                            $(win.document.body)
+                                .prepend('<center><h4>Supply and Laundry Report</h4></center>')
+                                .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h4>Towel Supply and Laundry </h4><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                            $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                            $(win.document.body).find( 'table' )
+                                .addClass( 'compact' )
+                                .css( 'font-size', 'inherit' )
 
+                            $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                             }
+
+                        }
+                  ]
+               } );
+
+
+            } );
 
             </script>
     </section>
