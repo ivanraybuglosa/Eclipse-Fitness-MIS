@@ -88,7 +88,6 @@
                                             <th>Supplier</th>
                                         </tr>
                                     </thead>
-                                    
                                     <tbody>
                                     <?php 
 
@@ -174,6 +173,7 @@
                                         ?>
 
                                     </tbody>
+                                    <footer></footer>
                                 </table>
                                 </div>
                             </div>
@@ -190,20 +190,19 @@
                 footer: true,
                 customize: function ( win ) {
                     $(win.document.body)
-                        .prepend('<h3>Equipment Inventory</h3>')
+                        .prepend('<h3>Equipment Inventory</h3>');
  
                     $(win.document.body).find( 'table' )
                         .addClass( 'compact' )
-                        .css( 'font-size', 'inherit' )
-                    
+                        .css( 'font-size', 'inherit' );
                 }
+
             }
         ]
     } );
 
 
 } );
-
 
                      function printContent(el) {
 
