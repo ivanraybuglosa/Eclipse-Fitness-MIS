@@ -181,9 +181,10 @@
 
                     <script>
                       $(document).ready(function() {
-                        
+
                       });
 
+                      
                      function printContent(el) {
 
                          var restorepage = document.body.innerHTML;

@@ -32,7 +32,7 @@
 
                          <form method="POST">
                             <div class="row clearfix">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                        <div class="form-line">
                                         <div class="col-md-6">
@@ -44,13 +44,33 @@
                                      </div>
                                     </div>  
                                 </div>
-
                                 <div class="col-md-3">
+                            <select class="form-control show-tick" data-live-search="true" id="className" name="className">
+                                        <option value="null">Choose Class</option>
+                                            <?php 
+                                            $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
+
+                                            $class = $conn->query("SELECT * FROM studioclass") or die(mysql_error());
+
+                                            while($scn = $class->fetch_array()) {
+                                                ?>
+
+                                        <option id = "<?php echo $scn['SC_Code']; ?>" value="<?php echo $scn['SC_Code']; ?>">
+                                                <?php echo $scn['SC_Name']; ?>
+                                        </option>
+                                            <?php 
+                                                }
+                                            ?>
+                                </select>
+
+                                </div>
+
+                                <div class="col-md-2">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                                 </div>
 
@@ -74,13 +94,16 @@
 
                                          $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error()); 
 
-                                         if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
-                                        if($_REQUEST['action_type'] == 'filter'){
+
+                                if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
+                                        if($_REQUEST['action_type'] == 'filter') {
 
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
+                                            $className = $_POST['className'];
 
-                                         $reg = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code WHERE CA_RegDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                            if($className != "null" && $filterstart == $_POST['filter_start']) {
+                                                $reg = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code WHERE CA_RegDate BETWEEN '$filterstart' AND '$filterend' AND studioclasssession.SC_Code = '$className' ") or die(mysql_error());
 
                                             while($freg = $reg->fetch_array()) {
                                                                     ?>
@@ -91,12 +114,45 @@
                                             <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_StartTime'])) ?></td>
                                             <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_EndTime'])) ?></td>
                                         </tr>
-                                        <?php 
-                                     }
-                                 }
-                             } else {
+                                    <?php
+                                        } 
+                                            } else if($className == "null" && ($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end'])) {
 
-                                     $reg = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code") or die(mysql_error());
+                                                $reg = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code") or die(mysql_error());
+
+                                            while($freg = $reg->fetch_array()) {
+                                                                    ?>
+                                        <tr>
+                                            <td align="center"><?php echo date("F j, Y", strtotime($freg['CA_RegDate'])) ?></td>
+                                            <td align="center"><?php echo $freg['CLIENT_FirstName'] ?> <?php echo $freg['CLIENT_LastName'] ?></td>
+                                            <td align="center"><?php echo $freg['SC_Name'] ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_StartTime'])) ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_EndTime'])) ?></td>
+                                        </tr>
+                                                <?php
+                                                 }
+                                                
+                                         } else {
+
+                                            $reg = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code WHERE CA_RegDate BETWEEN '$filterstart' AND '$filterend' OR studioclasssession.SC_Code = '$className' ") or die(mysql_error());
+
+                                            while($freg = $reg->fetch_array()) {
+                                                                    ?>
+                                        <tr>
+                                            <td align="center"><?php echo date("F j, Y", strtotime($freg['CA_RegDate'])) ?></td>
+                                            <td align="center"><?php echo $freg['CLIENT_FirstName'] ?> <?php echo $freg['CLIENT_LastName'] ?></td>
+                                            <td align="center"><?php echo $freg['SC_Name'] ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_StartTime'])) ?></td>
+                                            <td align="center"><?php echo date("g:i A", strtotime($freg['SCS_EndTime'])) ?></td>
+                                        </tr>
+                                    <?php
+                                        }
+                                            }
+                                        }
+
+                                    }  else {
+
+                                         $reg = $conn->query("SELECT * FROM `clientassignment` INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN client ON clientassignment.CLIENT_ID = client.CLIENT_ID INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code") or die(mysql_error());
 
                                             while($freg = $reg->fetch_array()) {
                                                                     ?>
@@ -110,7 +166,7 @@
                                     <?php
                                         }
                                     }
-                                            ?>
+                                        ?>
 
                                     </tbody>
                                 </table>
