@@ -363,7 +363,7 @@
                                         ?>
                                         <tr>    
                                             <td><?php echo $mem['MS_Type']?></td>
-                                            <td><?php echo $mem['MS_Duration']?></td>
+                                            <td><?php echo $mem['MS_Duration']?> Month(s)</td>
                                             <td><?php echo date("F j, Y", strtotime($mem['M_regDate']))?></td>
                                             <td><?php echo date("F j, Y", strtotime($mem['M_expiryDate']))?></td>
                                         </tr>

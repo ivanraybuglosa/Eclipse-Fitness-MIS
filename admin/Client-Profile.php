@@ -220,7 +220,7 @@
                                                     $lastname = $client['CLIENT_LastName']; 
                                                     $fullname = $firstname ." ". $midname." ". $lastname; 
                                                         echo $fullname ; ?></td>
-                                                        <td><?php echo $client['CLIENT_regDATE']?></td>
+                                                        <td><?php echo date("F j, Y",strtotime($client['CLIENT_regDATE']))?></td>
                                                         <td><?php echo $client['CLIENT_RegStatus']; ?></td>
 														<td><?php echo $client['CLIENT_Email']; ?></td>
                                                         <td><?php echo $client['CLIENT_Gender']; ?></td>

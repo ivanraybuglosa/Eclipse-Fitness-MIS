@@ -164,11 +164,36 @@
                     <form action="actions/equipmentsAction.php" method="POST">
                         <div class="row clearfix">
                             <div class="col-lg-6">
-                                <div class="form-group" >
-                                    <label>Equipment Type</label>
-                                    <div class="form-line">
-                                        <input type="text" name="type" class="form-control" placeholder="Type" />
-                                    </div>
+                                <div class="form-group">
+                                    <label>Equipment</label>
+                                        <div class="form-line">
+                                            <select class="form-control show-tick" data-live-search="true" name="type" >
+                                                <option value="SQUAT RACK">SQUAT RACK</option>
+                                                <option value="BARBELLS">BARBELLS</option>
+                                                <option value="BENCH PRESS">BENCH PRESS</option>
+                                                <option value="INCLINE BENCH PRESS">INCLINE BENCH PRESS</option>
+                                                <option value="HAMMER STRENGTH MACHINE">HAMMER STRENGTH MACHINE</option>
+                                                <option value="CABLES AND PULLEYS">CABLES AND PULLEYS</option>
+                                                <option value="DUMBBELLS">DUMBBELLS</option>
+                                                <option value="PULLUP BAR">PULLUP BAR</option>
+                                                <option value="LAT PULLDOWN MACHINE">LAT PULLDOWN MACHINE</option>
+                                                <option value="LEG EXTENSION MACHINE">LEG EXTENSION MACHINE</option>
+                                                <option value="LEG CURL MACHINE">LEG CURL MACHINE</option>
+                                                <option value="HYPER EXTENSION BENCH">HYPER EXTENSION BENCH</option>
+                                                <option value="DIPPING BARS">DIPPING BARS</option>
+                                                <option value="SMITH MACHINE">SMITH MACHINE</option>
+                                                <option value="PREACHER BENCH">PREACHER BENCH</option>
+                                                <option value="ABDOMINAL BENCH">ABDOMINAL BENCH</option>
+                                                <option value="LEG PRESS MACHINE">LEG PRESS MACHINE</option>
+                                                <option value="HACK SQUAT MACHINE">HACK SQUAT MACHINE</option>
+                                                <option value="CALF MACHINE">CALF MACHINE</option>
+                                                <option value="LEG ADDUCTION MACHINE">LEG ADDUCTION MACHINE</option>
+                                                <option value="KETTLEBELLS">KETTLEBELLS</option>
+                                                <option value="WALL BALL">WALL BALL</option>
+                                                <option value="FOAM ROLLER">FOAM ROLLER</option>
+                                                <option value="STABILITY BALL">STABILITY BALL</option>
+                                            </select>
+                                        </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -179,38 +204,32 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Delivery Date</label>
-                                    <div class="form-line">
-                                        <input type="date" name="deliveryDate" class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Delivery Time</label>
-                                    <div class="form-line">
-                                        <input type="time" name="deliveryTime" min="08:00" max="22:00" class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Quantity</label>
                                     <div class="form-line">
-                                        <input type="number" min="0" name="quantity" class="form-control" placeholder="Quantity" />
+                                        <input type="number" required min="0" name="quantity" class="form-control" placeholder="Quantity" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Supplier</label>
+                                    <label>Delivery Date</label>
                                     <div class="form-line">
-                                        <input type="text" name="supplier" class="form-control" placeholder="Supplier" />
+                                        <input type="date" required="true" name="deliveryDate" class="form-control"/>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Delivery Time</label>
+                                    <div class="form-line">
+                                        <input type="time" name="deliveryTime" min="07:00" max="22:00" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            
                             <div class="col-lg-12">
                                 <input type="hidden" name="action_type" value="add"/>
                                 <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" style="padding:10px; margin-bottom:10px;">SUBMIT</button>

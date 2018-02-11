@@ -46,7 +46,7 @@ include("includes/header.php"); ?>
                             <tbody>
                                 <?php
                                     $pdo = new dbConnect();
-                                    $supplied = $pdo->towelSupplied(array("order_by" => "TI_Code ASC"));
+                                    $supplied = $pdo->towelSupplied(array("order_by" => "TI_Date DESC"));
                                     if(!empty($supplied)){ 
                                         $count = 0; 
                                         foreach($supplied as $supply){ 
@@ -104,17 +104,18 @@ include("includes/header.php"); ?>
                                     <tbody>
                                         <?php
                                         $pdo = new dbConnect();
-                                        $eqp = $pdo->equipmentRows(array('order_by'=>'EI_Code ASC'));
+                                        $eqp = $pdo->equipmentRows(array('order_by'=>'E_Model'));
                                             if(!empty($eqp)){ 
                                                 $count = 0; 
                                                 foreach($eqp as $equipment){ 
                                                 $count++;
-                                        $quantity = $pdo->quantity($equipment['E_Type'],$equipment['E_Model']);
+                                        $quantityRestock = $pdo->quantityRestock($equipment['E_Type'],$equipment['E_Model']);
+                                        $quantityDiscard = $pdo->quantityDiscard($equipment['E_Type'],$equipment['E_Model']);
                                         ?>
                                         <tr>
                                             <td><?php echo $equipment['E_Type']; ?></td>
                                             <td><?php echo $equipment['E_Model']; ?></td>
-                                            <td><?php echo $quantity ?></td>
+                                            <td><?php echo $quantityRestock - $quantityDiscard ?></td>
                                             <td><?php echo date("F d, Y", strtotime($equipment['EI_DeliveryDate'])) ?></td>
                                             <td><?php echo date("g:i A", strtotime($equipment['EI_DeliveryTime'])) ?></td>
                                             <td>
@@ -133,7 +134,7 @@ include("includes/header.php"); ?>
                                                 <div class="modal-body">
                                                     <div class="card">
                                                     <div class="header">
-                                                        <h2>Restock <?php echo $equipment['E_Type']?></h2>
+                                                        <h2>Restock/Discard <?php echo $equipment['E_Type']?></h2>
                                                     </div>
                                                     <div class="body">
                                                 <div class="row clearfix">
@@ -157,7 +158,7 @@ include("includes/header.php"); ?>
                                 <div class="form-group">
                                     <label>Quantity</label>
                                     <div class="form-line">
-                                        <input type="number" min="0" name="restockQuantity" class="form-control" placeholder="Quantity" />
+                                        <input type="number" min="0" name="restockQuantity" class="form-control" placeholder="Quantity" required />
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +166,7 @@ include("includes/header.php"); ?>
                                 <div class="form-group">
                                     <label>Delivery Date</label>
                                     <div class="form-line">
-                                        <input type="date" name="restockDeliveryDate" class="form-control"/>
+                                        <input type="date" required="true" name="restockDeliveryDate" class="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -173,17 +174,19 @@ include("includes/header.php"); ?>
                                 <div class="form-group">
                                     <label>Delivery Time</label>
                                     <div class="form-line">
-                                        <input type="time" name="restockDeliveryTime" min="08:00" max="22:00" class="form-control"/>
+                                        <input type="time" required="true" name="restockDeliveryTime" min="07:00" max="22:00" class="form-control"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Supplier</label>
-                                    <div class="form-line">
-                                        <input type="text" name="restockSupplier" class="form-control" placeholder="Supplier" />
-                                    </div>
-                                </div>
+                                <div class="form-group" style="margin-top:20px;">
+                                            <label style="margin-top: 9px;">Activity </label>
+                                            <input type="radio" checked value="Restock" name="activity" id="restock" class="with-gap" required\">
+                                            <label for="restock">Restock</label>
+
+                                            <input type="radio"  value="Discard" name="activity" id="discard" class="with-gap" required">
+                                            <label for="discard" class="m-l-20">Discard</label>
+                                        </div>
                             </div>
                         </div>
                         <div class="row">
@@ -205,16 +208,13 @@ include("includes/header.php"); ?>
                                 <div class="body">
                                     <div class="row clearfix">
 
-                                        <div class="table-responsive">
-
                                 <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                                     <thead>
                                         <tr>
-                                            <th><center>Supplier</center></th>
-                                            <th><center>Quantity</center></th>
-                                            <th><center>Delivery Date</center></th>
-                                            <th><center>Delivery Time</center></th>
-                                             
+                                            <th><center>Activity</center></th>
+                                            <th><center>Date</center></th>
+                                            <th><center>Time</center></th>
+                                            <th><center>Quantity</center></th>                                             
                                             
                                         </tr>
                                     </thead>
@@ -222,20 +222,22 @@ include("includes/header.php"); ?>
                                     <tbody>
                                             <?php
                                                 $pdo = new dbConnect();
-                                                $equips = $pdo->equipHistory($equipment['E_Code'],array("order_by" => "EI_Code"));
+                                                $equips = $pdo->equipHistory($equipment['E_Code'],array("order_by" => "EI_DeliveryDate DESC"));
+
                                                     if(!empty($equips)){
                                                         $count = 0;
                                                         foreach($equips as $equip){
                                             ?>                         
                                         <tr>
-                                            <td><?php echo $equip['EI_Supplier'] ?></td>
-                                            <td><?php echo $equip['EI_Quantity']; ?></td>
-                                            <td><?php echo date("F j, Y", strtotime($equip['EI_DeliveryDate'])) ?></td>
-                                            <td><?php echo date("g:i A", strtotime($equip['EI_DeliveryTime'])) ?></td>
-                                            
-                                        
+                                            <td><center><?php echo $equip['EI_Activity'] ?></center></td>
+                                            <td><center><?php echo date("F j, Y", strtotime($equip['EI_DeliveryDate'])) ?></center></td>
+                                            <td><center><?php echo date("g:i A", strtotime($equip['EI_DeliveryTime'])) ?></center></td>
+                                            <td><center><?php echo $equip['EI_Quantity']; ?></center></td>
+                                             <?php }}?>
                                         </tr>
-                                        <?php }} ?>
+
+
+                                       
                                         </tbody>
                                     </table>
                                 </div>
@@ -244,7 +246,7 @@ include("includes/header.php"); ?>
 
                                     </div>
                                 </div>
-                            </div>
+                         
                             
                                         </div>
                                         <div class="modal-footer">
@@ -256,19 +258,10 @@ include("includes/header.php"); ?>
                                         </div>
                                     </div>
                                         </td>
-                                    
-                       
-
-                
-
-                                                  
-
-
-
-                                                    
+                                          
                                             </tr>
                                         <?php } }else{ ?>
-                                        <tr><td colspan="4">No Equipment(s) found......</td>
+                                        <tr><td colspan="6">No Equipment(s) found......</td>
                                             <?php } ?>
                                         </tr>
 

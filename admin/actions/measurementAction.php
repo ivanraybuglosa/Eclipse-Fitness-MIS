@@ -53,6 +53,9 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         $checkInitial = $pdo->checkInitial($_POST['TL_Code']);
         if($checkInitial <> $_POST['TL_Code'] || empty($checkInitial)){
             $insert = $pdo->insert($tblName,$userData);
+
+
+                    
             $id = $_POST['TL_Code'];
             $client = $_POST['CLIENT_ID'];
                 echo "<script>alert('Client Measurement Successfully Saved!');window.location.href='../PT-ContractsInfo.php?id=".$id."&amp;client=$client ';</script>";

@@ -32,6 +32,12 @@
     <!-- Animation Css -->
     <link href="../assets/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
+    <!-- Wait Me Css -->
+    <link href="../assets/plugins/waitme/waitMe.css" rel="stylesheet" />    
+
     <!-- Sweetalert Css -->
     <link href="../assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
     
@@ -52,8 +58,6 @@
     <link href="../assets/plugins/dropzone/dropzone.css" rel="stylesheet">
         <!-- JQuery DataTable Css -->
     <link href="../assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-
-    <link href="../assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet"/>
    
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../assets/css/themes/all-themes.css" rel="stylesheet" />

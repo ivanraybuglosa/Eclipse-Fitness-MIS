@@ -76,6 +76,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <p>Session Date:</p>
+                                                <input type="text" name="sessionDate"  required class="datepicker form-control" placeholder="Choose a session date">
+                                            </div>
+                                        </div>
+                                    </div> -->
                                     <div class="col-sm-4">
                                         <div class="form-group form-float">
                                             <div class="form-line">
@@ -85,7 +93,14 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-sm-4">
+                                        <!-- <div class="form-group">
+                                        <div class="form-line">
+                                            <p>Session Start Time:</p>
+                                            <input type="text"  name="sessionSTime" min="07:00" max="22:00" required class="timepicker form-control" placeholder="Choose Session Start time...">
+                                        </div>
+                                    </div> -->
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <p>Session Start Time:</p>
@@ -200,7 +215,7 @@
     <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
 
     <!-- Custom Js -->
     <script src="../assets/js/admin.js"></script>

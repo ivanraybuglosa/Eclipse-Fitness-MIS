@@ -293,8 +293,8 @@ class dbConnect{
         return $result;    
     }
 
-    public function selectEquip($type){
-        $sql = "SELECT E_Code FROM equipment WHERE E_Type = '".$type."' ";
+    public function selectEquip($type,$model){
+        $sql = "SELECT E_Code FROM equipment WHERE E_Type = '".$type."' AND E_Model = '".$model."' ";
         
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -837,7 +837,7 @@ class dbConnect{
     }
 
     public function status($id,$conditions= array()){
-        $sql = "SELECT traininglog.TL_Expiry, trainingpackage.TP_PackageType, COUNT(traininglogsession.TLS_Code) as Sessions, traininglog.CLIENT_ID FROM traininglogsession,traininglog INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE traininglog.TL_Code = '".$id."' ";
+        $sql = "SELECT traininglog.TL_Expiry, trainingpackage.TP_PackageType, COUNT(traininglogsession.TLS_Code) as Sessions, traininglog.CLIENT_ID FROM traininglogsession INNER JOIN traininglog ON traininglogsession.TL_Code = traininglog.TL_Code INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE traininglog.TL_Code = '".$id."' ";
         $query = $this->db->prepare($sql);
         $query->execute();
         
@@ -1038,24 +1038,9 @@ class dbConnect{
         $sql = "SELECT COUNT(TLS_Code) as Sessions FROM traininglogsession WHERE TL_Code = '".$id."' ";
         $query = $this->db->prepare($sql);
         $query->execute();
-        
-        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
-            switch($conditions['return_type']){
-                case 'count':
-                    $data = $query->rowCount();
-                    break;
-                case 'single':
-                    $data = $query->fetch(PDO::FETCH_ASSOC);
-                    break;
-                default:
-                    $data = '';
-            }
-        }else{
-            if($query->rowCount() > 0){
-                $data = $query->fetchAll();
-            }
-        }
-        return !empty($data)?$data:false;
+        $var = $query->fetch();
+        $result = $var['Sessions'];
+        return $result;
     }
 
     public function checkMembership($id){
@@ -1250,7 +1235,7 @@ class dbConnect{
     }
 
     public function equipmentRows($conditions = array()){
-        $sql = "SELECT equipment.E_Type, equipment.E_Model, equipmentinventory.EI_Code, equipmentinventory.E_Code, EI_DeliveryDate, EI_DeliveryTime FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code GROUP BY EI_Code DESC LIMIT 1";
+        $sql = "SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code GROUP BY equipment.E_Model";
         $query = $this->db->prepare($sql);
         $query->execute();
         
@@ -1297,8 +1282,17 @@ class dbConnect{
         return !empty($data)?$data:false;
     }
 
-    public function quantity($type,$model){
-        $sql = "SELECT SUM(EI_Quantity) as quantity FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE E_Type='".$type."' AND E_Model='".$model."' ";
+    public function quantityRestock($type,$model){
+        $sql = "SELECT SUM(EI_Quantity) as quantity FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE (equipment.E_Type ='".$type."' AND equipment.E_Model='".$model."') AND equipmentinventory.EI_Activity = 'Restock' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['quantity'];
+        return $result;
+    }
+
+    public function quantityDiscard($type,$model){
+        $sql = "SELECT SUM(EI_Quantity) as quantity FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE (equipment.E_Type ='".$type."' AND equipment.E_Model='".$model."') AND equipmentinventory.EI_Activity = 'Discard' ";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
@@ -1330,7 +1324,7 @@ class dbConnect{
         return !empty($data)?$data:false;
     }
 
-    public function locker($date,$key){
+    public function locker($key,$date){
         $sql = "SELECT A_LockerKey FROM attendance WHERE A_LockerKey = '".$key."' AND A_Date = '".$date."' AND A_TimeOut IS NULL";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -1526,6 +1520,44 @@ class dbConnect{
         $result = $var['TR_Bill'];
         return $result;
     }
+
+    public function checkMeasurement($id){
+        $sql = "SELECT M_Code FROM measurements WHERE TL_Code = '".$id."' AND M_MeasurementType = 'Initial' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['M_Code'];
+        return $result;
+    }
+
+    public function checkFinal($id){
+        $sql = "SELECT M_Code FROM measurements WHERE TL_Code = '".$id."' AND M_MeasurementType = 'Final' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['M_Code'];
+        return $result;
+    }
+
+    public function totalRestock($id){
+        $sql = "SELECT SUM(EI_Quantity) as restock FROM equipmentinventory WHERE EI_Code = '".$id."' AND EI_Activity = 'Restock' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['restock'];
+        return $result;
+    }
+
+    public function totalDiscard($id){
+        $sql = "SELECT SUM(EI_Quantity) as discard FROM equipmentinventory WHERE EI_Code = '".$id."' AND EI_Activity = 'Discard' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['discard'];
+        return $result;
+    }
+
+
 
     
 

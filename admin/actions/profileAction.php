@@ -56,7 +56,9 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                 'M_regDate' => $today,
                 'CLIENT_ID' => $_POST['client'],
                 'M_expiryDate' => $expiry,
-                'M_membershipStatus' => 'Active'
+                'M_membershipStatus' => 'Active',
+                'month' => $month,
+                'year' => $year  
             );
              $expiry = $pdo->checkMembership($_POST['client'],array("order_by" => "M_Code DESC"));
            

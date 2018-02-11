@@ -4,7 +4,8 @@ include '../../dbConnect.php';
 $pdo = new dbConnect();
 
 $tblName2 = 'payment';
-
+$month = date("M", strtotime("+8 HOURS"));
+$year = date("Y", strtotime("+8 HOURS"));
 
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
@@ -13,7 +14,10 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'TR_ID' => $_POST['TR_ID'],
             'Pay_amount' => $_POST['paymentAmount'],
             'Pay_date' => $_POST['paymentDate'],
-            'Pay_time' => $_POST['paymentTime']
+            'Pay_time' => $_POST['paymentTime'],
+            'month' => $month,
+            'year' => $year
+
         );
         $insert = $pdo->insert($tblName2,$userData);
 

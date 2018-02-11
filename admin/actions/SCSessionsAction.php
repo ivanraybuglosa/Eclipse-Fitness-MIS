@@ -14,7 +14,8 @@ $lastname = 'Coach_LastName';
 $fullname = $firstname. " " .$lastname;
 $column2 = $fullname;
 $column3 =  "SC_Name";
-
+$month = date("M", strtotime("+8 HOURS"));
+$year = date("Y", strtotime("+8 HOURS"));
 $stime = $_POST['sessionSTime'];
 $etime = $_POST['sessionETime'];
 
@@ -29,6 +30,8 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'SCS_StartTime' => $stime,
             'SCS_EndTime' => $etime,
             'SCS_Date' => $_POST['sessionDate'],
+            'month' => $month,
+            'year' => $year
             
 
         );  

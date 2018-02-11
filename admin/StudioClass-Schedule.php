@@ -137,13 +137,18 @@
 </div>
 <div class="card">
                             <div class="header">
-                                <h2>Add Studio Class Session's Participants</h2>
-                                <h2 class="pull-right" style="margin-top:-15px;"><?php echo $sc['SC_Name']?> Class Participant Capacity: <?php echo $sc['SC_Capacity']?></h2>
-                            </div>
+                               
+                                    
+                                        <h2><?php echo $sc['SC_Name']?> Participants</h2>
+                                    
+                                        </div>
+                           
+
                             <form method="post" action="actions/clientAssignmentAction.php">
                             <div class="body">
+
                                 <div class="row container-fluid">
-                                <div class="col-sm-8">
+                                <div class="col-sm-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <select class="form-control show-tick" data-live-search="true" name="clientname">
@@ -167,32 +172,47 @@
                                         </div>
                                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                             <input type="hidden" name="SCS_Code" value="<?php echo $sc['SCS_Code']?>">
                                             <input type="hidden" name="scname" value="<?php echo $sc['SC_Name']?>">
                                             <input type="hidden" name="sccapacity" value="<?php echo $sc['SC_Capacity']?>">
                                             <input type="hidden" name="coach" value="<?php echo $_GET['coach']?>">
                                             <input type="hidden" name="action_type" value="add"/>
                                             <button type="submit" name="submit" class="btn btn-block waves-effect btn-success " data-type='success'>&nbsp; REGISTER &nbsp;
-                                                <span class="badge">
-                                                    <?php
-                                                        $pdo = new dbConnect(); 
-                                                        $id = $_GET['id'];
-                                                        $remaining = $pdo->remaining($id);
-                                                        $cap = $pdo->cap($id);
-                                                        if($remaining == ''){
-                                                            echo $cap;
-                                                        }else{
-                                                            echo $remaining;
-                                                        }
-                                                        
-
-                                                    ?>
-                                                        
-                                                    </span>
+                                                
                                             </button>
                                         </form>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-block waves-effect btn-success" disabled >&nbsp; Remaining &nbsp;<span class="badge">
+                                                        <?php
+                                                            $pdo = new dbConnect(); 
+                                                            $id = $_GET['id'];
+                                                            $remaining = $pdo->remaining($id);
+                                                            $cap = $pdo->cap($id);
+                                                            if($remaining == ''){
+                                                                echo $cap;
+                                                            }else{
+                                                                echo $remaining;
+                                                            }
+                                                            
+
+                                                        ?>
+                                                    </span>
+                                                
+                                            </button>
+                                            
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-block waves-effect btn-success " disabled>&nbsp; Capacity &nbsp;<span class="badge">
+                                                        <?php echo $sc['SC_Capacity']?>
+                                                                    
+                                                    </span>
+                                                
+                                            </button>
+                                            
+                                        </div>
+
                                         <div class="col-sm-12">
                                 <form method="post" action="actions/clientAssignmentAction.php">
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

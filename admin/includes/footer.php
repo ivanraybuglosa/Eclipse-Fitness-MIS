@@ -5,10 +5,7 @@
     <!-- Bootstrap Core Js -->
     <script src="../assets/plugins/bootstrap/js/bootstrap.js"></script>
 
-    <script type="text/javascript" src="../assets/js/pages/fullcalendar/lib/jquery-ui.custom.min.js"></script>
-    <script type="text/javascript" src="../assets/js/pages/fullcalendar/lib/moment.min.js"></script>
-    <script type="text/javascript" src="../assets/js/pages/fullcalendar/js/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="../assets/js/pages/fullcalendar/fullcalendar-script.js"></script>
+    
 
 
     <!-- Select Plugin Js -->
@@ -19,6 +16,17 @@
 
     <!-- Waves Effect Plugin Js -->
     <script src="../assets/plugins/node-waves/waves.js"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="../assets/plugins/autosize/autosize.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="../assets/plugins/momentjs/moment.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
 
     <!-- Jquery CountTo Plugin Js -->
     <script src="../assets/plugins/jquery-countto/jquery.countTo.js"></script>

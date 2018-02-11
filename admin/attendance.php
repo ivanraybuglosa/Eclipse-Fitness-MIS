@@ -82,7 +82,7 @@ include("includes/header.php"); ?>
 								<div class="form-group">
 								  <div class="form-line">
 									<h5 class="pull-left">Locker Number </h5>
-									<select id="locker" class="form-control" name="Locker" style="height:50%">
+									<select id="locker" data-live-search="true" class="form-control" name="Locker" style="height:50%">
 										<?php echo get_locker() ?>
 									</select>
 								<?php
@@ -94,8 +94,10 @@ include("includes/header.php"); ?>
 												//if clientName.Gender = Male $M range is 1-150, if Female 151-300
 													$var="";
 													for ($m=1; $m<=150; $m++){
-															if($locker['A_LockerKey'] == $m){
-															$var .= '<option value="'.$m.'" >'.$m.' </option>';
+														$pdo = new dbConnect();
+														$locker = $pdo->locker($m,date("Y-m-d"));
+															if($locker == $m){
+															$var .= '';
 														}else{
 															$var .= '<option value="'.$m.'">'.$m.' </option>';
 														}
@@ -125,22 +127,11 @@ include("includes/header.php"); ?>
 
 							<div class="col-md-3" style="margin-top: 20px;">
 								<input type="hidden" name="action_type" value="add"/>
-								<button onclick="DeleteValues();" name="add" type="submit" class="btn bg-green btn-block"><i class="material-icons">access_alarm</i>TIME-IN</button>
+								<button type="submit" class="btn bg-green btn-block"><i class="material-icons">access_alarm</i>TIME-IN</button>
 							</div>
 							
 						</div>
-						
-
-
-
-
-
-
-
-
-
-
-
+					
 					   <div class="body table-responsive">
                     	<table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                         	<thead>
@@ -220,9 +211,9 @@ include("includes/header.php"); ?>
 
 								<div class="form-group">
 									<h5>Locker Key Number: <?php echo $attend['A_LockerKey']?></h5>
-                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>returned" class="with-gap"  value="Returned" required>
+                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>returned" class="with-gap"  value="Returned" checked>
                                <label for="<?php echo $attend['A_LockerKey']?>returned">Returned</label>
-                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>unreturned" class="with-gap"  value="Unreturned" required>
+                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>unreturned" class="with-gap"  value="Unreturned">
                                <label for="<?php echo $attend['A_LockerKey']?>unreturned" class="m-l-20">Unreturned</label>
                             </div>
 							

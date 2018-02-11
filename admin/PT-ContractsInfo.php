@@ -49,23 +49,36 @@
                                     <h2 class="pull-left"><b><?php $firstname = $pt['CLIENT_FirstName']; $lastname = $pt['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></b></h2>
                                 
                                 <button name ="submit"  type="button" data-toggle="modal" data-target="#measurement-<?php echo $pt['TL_Code'] ?>" class="btn bg-light-green pull-right" style="margin-left:15px; margin-top:18px; margin-right:5px;">Health Conditions</button>
-                                <button name ="submit" type="submit" data-toggle="modal" data-target="#finalMeasurement" class="btn bg-light-green pull-right" style="margin-left:20px; margin-top:18px;">Final Body Measurements</button>
+                                
 
-                                <button name ="submit"  type="submit" data-toggle="modal" data-target="#initialMeasurement" class="btn bg-light-green pull-right" style="margin-top:18px;">Initial Body Measurements</button>
+                                <?php
+                                        $pdo = new dbConnect();
+                                        $id = $_GET['id'];
+                                        $measure = $pdo->checkFinal($id);
+                                            if(!empty($measure)){
+                                                echo ""; 
+                                            }else{
+                                                echo '<button id="final" name ="submit" type="submit" data-toggle="modal" data-target="#finalMeasurement" class="btn bg-light-green pull-right" style="margin-left:20px; margin-top:18px;">Final Body Measurements</button>';        
+                                            }
+                                    ?>
+
+
+                                <?php
+                                        $pdo = new dbConnect();
+                                        $id = $_GET['id'];
+                                        $measure = $pdo->checkMeasurement($id);
+                                            if(!empty($measure)){
+                                                echo ""; 
+                                            }else{
+                                                echo '<button id="initial" name ="submit" type="submit" data-toggle="modal" data-target="#initialMeasurement" class="btn bg-light-green pull-right" style="margin-top:18px; ">Initial Body Measurements</button>';        
+                                            }
+                                    ?>
+                                
                             </div>
                         </div>
                     </div>
-
-                    <script>
-    $(document).ready(function () {
-
-        document.getElementById("FinalMeasurement").onsubmit = function() {   
-            this.children[1].disabled = true;
-            return false; // prevent form from actually posting (only for demo purposes)
-        }
-    });
-</script>
-             
+                    
+                            
             <!-- MODAL FOR RENEWING MEMBERSHIP -->
             <div class="modal fade" id="measurement-<?php echo $pt['TL_Code'] ?>" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
@@ -849,7 +862,25 @@
               }
   </script>
 
-             
+        <?php 
+            $id = $_GET['id'];
+            $pdo = new dbConnect();
+            $IClasses = $pdo->measurementClassInitial($id,array('order_by' => 'M_Code ASC'));
+                if(!empty($IClasses)){
+                    $count = 0;
+                    foreach($IClasses as $IClass){
+                    $count++;
+            ?>
+            
+              <?php 
+            $id = $_GET['id'];
+            $pdo = new dbConnect();
+            $Fclasses = $pdo->measurementClassFinal($id,array('order_by' => 'M_Code ASC'));
+                if(!empty($Fclasses)){
+                    $count = 0;
+                    foreach($Fclasses as $Fclass){
+                    $count++;
+            ?>       
                 
         <div class="card">
                     <div class="header">
@@ -880,12 +911,15 @@
                     <div class="container-fluid">
                         <table class="table table-bordered table-striped table-hover  dataTable" id="DataTables_Table_0">
                             <thead>
-                                <th><center>Underweight</center></th>
-                                <th><center>Normal Weight</center></th>
-                                <th><center>Overweight</center></th>
-                                <th><center>Class I obesity</center></th>
-                                <th><center>Class II obesity</center></th>
-                                <th><center>Class III obesity</center></th>
+                        
+                                <tr>
+                                    <th><center>Underweight</center></th>
+                                    <th><center>Normal Weight</center></th>
+                                    <th><center>Overweight</center></th>
+                                    <th><center>Class I obesity</center></th>
+                                    <th><center>Class II obesity</center></th>
+                                    <th><center>Class III obesity</center></th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <td><center>18.5(Kg)</center></td>
@@ -898,33 +932,16 @@
 
                         </table>
                     </div>
-        <?php 
-            $id = $_GET['id'];
-            $pdo = new dbConnect();
-            $IClasses = $pdo->measurementClassInitial($id,array('order_by' => 'M_Code ASC'));
-                if(!empty($IClasses)){
-                    $count = 0;
-                    foreach($IClasses as $IClass){
-                    $count++;
-            ?>
+       
             
             
                 <h4 id="initial">Initial BMI Classification: <?php echo $IClass['M_Classification']?></h4>
-            <?php }}?>
-              <?php 
-            $id = $_GET['id'];
-            $pdo = new dbConnect();
-            $Fclasses = $pdo->measurementClassFinal($id,array('order_by' => 'M_Code ASC'));
-                if(!empty($Fclasses)){
-                    $count = 0;
-                    foreach($Fclasses as $Fclass){
-                    $count++;
-            ?> 
+            
                 
                 <h4 id="final">Final BMI Classification: <?php echo $Fclass['M_Classification']?></h4>
           
           
-          <?php }}?>
+          
 
                   
                    
@@ -947,7 +964,8 @@
                  </div>
 
         </div>
-
+        <?php }}?>
+        <?php }}?>
 
 
 
@@ -1124,7 +1142,7 @@
                             <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
                             <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
                             <input type="hidden" name="action_type" value="add" />
-                     <button name="submit" type="submit" class="btn  bg-green">SUBMIT</button>
+                     <button  name="InitialSubmit" type="submit" class="btn  bg-green">SUBMIT</button>
                      
                      <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
                  </form>
@@ -1298,7 +1316,7 @@
                         <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
                         <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
                         <input type="hidden" name="action_type" value="add" />
-                     <button name="submit" id="btnFinal"  type="submit" class="btn  bg-green">SUBMIT</button>
+                     <button onsubmit="removeFinal();" name="submit" id="btnFinal"  type="submit" class="btn  bg-green">SUBMIT</button>
                      
                      <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
                  </form>
