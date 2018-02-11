@@ -12,14 +12,14 @@ if(isset($_GET['year']))
 $order = $conn->query("SELECT COUNT(EI_Code) as total FROM equipmentinventory WHERE year = '$year' ") or die(mysqli_error());
 $forder = $order->fetch_array();
 
-$eqcount = $conn->query("SELECT IFNULL(total,0) as final FROM (SELECT SUM(EI_Quantity) as total FROM equipmentinventory WHERE year = '$year') as initial ") or die(mysqli_error());
-$feqcount = $eqcount->fetch_array();
+$eqcount = $conn->query("SELECT IFNULL(total,0) as final FROM (SELECT SUM(EI_Quantity) as total FROM equipmentinventory WHERE EI_Activity = 'Restock' AND year = '$year') as initial ") or die(mysqli_error());
+$frestock = $eqcount->fetch_array();
 
 $types = $conn->query("SELECT COUNT(*) as total FROM (SELECT COUNT(E_Code) as old FROM equipmentinventory WHERE year = '$year' GROUP BY E_Code) as older") or die(mysqli_error());
 $ftypes = $types->fetch_array();
 
-$supps = $conn->query("SELECT COUNT(*) as total FROM (SELECT COUNT(EI_Supplier) as old FROM equipmentinventory WHERE year = '$year' GROUP BY EI_Supplier) as older") or die(mysqli_error());
-$fsupps = $supps->fetch_array();
+$discard = $conn->query("SELECT IFNULL(total,0) as final FROM (SELECT SUM(EI_Quantity) as total FROM equipmentinventory WHERE EI_Activity = 'Discard' AND year = '$year') as initial ") or die(mysqli_error());
+$fdiscard = $discard->fetch_array();
 ?>
 
 <script>
@@ -44,8 +44,8 @@ var chart = new CanvasJS.Chart("equipment", {
         dataPoints: [   
             { label: "Transactions", y: <?php echo $forder["total"]; ?> , indexLabel: "<?php echo $forder["total"]; ?>"},
             { label: "Equipment", y: <?php echo $ftypes["total"]; ?>  , indexLabel: "<?php echo $ftypes["total"]; ?>"},
-            { label: "Equipment Count", y: <?php echo $feqcount["final"]?> , indexLabel: "<?php echo $feqcount["final"]?>"},
-            { label: "Suppliers", y: <?php echo $fsupps["total"]; ?> , indexLabel: "<?php echo $fsupps["total"]; ?>"}
+            { label: "Equipment Restocks", y: <?php echo $frestock["final"]?> , indexLabel: "<?php echo $frestock["final"]?>"},
+            { label: "Equipment Discards", y: <?php echo $fdiscard["final"]; ?> , indexLabel: "<?php echo $fdiscard["final"]; ?>"}
         ]
     }]
 });
