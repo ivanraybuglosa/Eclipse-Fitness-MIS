@@ -52,12 +52,12 @@
                                             <?php 
                                             $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
 
-                                            $equip = $conn->query("SELECT * FROM equipment") or die(mysql_error());
+                                            $equip = $conn->query("SELECT DISTINCT E_Type FROM equipment") or die(mysql_error());
 
                                             while($eq = $equip->fetch_array()) {
                                                 ?>
 
-                                        <option id = "<?php echo $eq['E_Code']; ?>" value="<?php echo $eq['E_Code']; ?>">
+                                        <option id = "<?php echo $eq['E_Type']; ?>" value="<?php echo $eq['E_Type']; ?>">
                                                 <?php echo $eq['E_Type']; ?>
                                         </option>
                                             <?php 
@@ -80,7 +80,6 @@
                                             <th>Equipment Model</th>
                                             <th>Delivery Date</th>
                                             <th>Quantity</th>
-                                            <th>Supplier</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,7 +96,7 @@
                                             $equipName = $_POST['equips'];
 
                                             if($equipName != "null" && $filterstart == $_POST['filter_start']) {
-                                                $equip = $conn->query("SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE EI_DeliveryDate BETWEEN '$filterstart' AND '$filterend' AND equipment.E_Code = '$equipName' ") or die(mysql_error());
+                                                $equip = $conn->query("SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE EI_DeliveryDate BETWEEN '$filterstart' AND '$filterend' AND equipment.E_Type = '$equipName' ") or die(mysql_error());
 
                                          while($eq = $equip->fetch_array()) { 
                                               ?>  
@@ -106,7 +105,6 @@
                                                     <td><?php echo $eq['E_Model'] ?></td>
                                                     <td><?php echo date("F j, Y", strtotime($eq['EI_DeliveryDate'])) ?></td>
                                                     <td><?php echo $eq['EI_Quantity'] ?></td>
-                                                    <td><?php echo $eq['EI_Supplier'] ?></td>
                                              </tr>
                                                  <?php
                                               } 
@@ -122,7 +120,6 @@
                                                     <td><?php echo $eq['E_Model'] ?></td>
                                                     <td><?php echo date("F j, Y", strtotime($eq['EI_DeliveryDate'])) ?></td>
                                                     <td><?php echo $eq['EI_Quantity'] ?></td>
-                                                    <td><?php echo $eq['EI_Supplier'] ?></td>
                                                 </tr>
 
                                                     <?php
@@ -131,7 +128,7 @@
                                                 
                                          } else {
 
-                                            $equip = $conn->query("SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE EI_DeliveryDate BETWEEN '$filterstart' AND '$filterend' OR equipment.E_Code = '$equipName' ") or die(mysql_error());
+                                            $equip = $conn->query("SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE EI_DeliveryDate BETWEEN '$filterstart' AND '$filterend' OR equipment.E_Type = '$equipName' ") or die(mysql_error());
 
                                          while($eq = $equip->fetch_array()) { 
                                               ?>  
@@ -140,7 +137,6 @@
                                                     <td><?php echo $eq['E_Model'] ?></td>
                                                     <td><?php echo date("F j, Y", strtotime($eq['EI_DeliveryDate'])) ?></td>
                                                     <td><?php echo $eq['EI_Quantity'] ?></td>
-                                                    <td><?php echo $eq['EI_Supplier'] ?></td>
                                              </tr>
                                              <?php
 
@@ -159,7 +155,6 @@
                                                     <td><?php echo $eq['E_Model'] ?></td>
                                                     <td><?php echo date("F j, Y", strtotime($eq['EI_DeliveryDate'])) ?></td>
                                                     <td><?php echo $eq['EI_Quantity'] ?></td>
-                                                    <td><?php echo $eq['EI_Supplier'] ?></td>
                                              </tr>
                                          <?php
 

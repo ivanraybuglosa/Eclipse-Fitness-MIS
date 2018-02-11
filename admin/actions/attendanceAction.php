@@ -42,23 +42,70 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         
 
 
-            $locker = $pdo->locker($date,$_POST['Locker']);
+            
             $check = $pdo->checkAttendance($_POST['clientName'],$date);
             $available = $pdo->previousAvailable();
             $borrowed = $pdo->previousBorrowed();
+            $expiry = $pdo->memExpire($_POST['clientName']);
+
+            $date1 = new DateTime(date("Y-m-d"));
+            $date2 = new DateTime($expiry);
+            $diff = $date2->diff($date1)->format("%a");
+
+            $date3 = new DateTime('2018-02-12');
+            $date4 = new DateTime('2018-02-16');
+            $testDiff = $date4->diff($date3)->format("%a");
+            
                 if($_POST['towel'] > $available){
 
                     echo "<script>alert('Insufficient towels! Time-in Failed ');window.location.href='../attendance.php';</script>";
                             
+                // }elseif(strtotime($diff) < strtotime($testDiff)){
+                //     //insert time-in information to attendance
+                //         $insert = $pdo->insert($tblName1,$userData);
+                //         echo "<script>alert('Client Time-in Success! Client membership expires in '".$diff."' days! ');window.location.href='../attendance.php';</script>";
+                //         //update towel information
+                        
+                //         $userData7 = array(
+                //             'TI_Borrowed' => ($_POST['towel'] + $borrowed),
+                //             'TI_Available' => ($available - $_POST['towel'])
+                //         );
+                //         $condition = array("TI_Available" => $available);
+                //         $update = $pdo->update($tableTowel,$userData7,$condition);
+
+
+                //         //bill client for walk-in fee
+                //         $bill = $pdo->checkBill($_POST['clientName'],date("Y-m-d"));
+                //         $price = $pdo->penaltyPrice('Walk-in');
+
+                //         //check if client has already been billed for walk-in in the same date
+                //         if($bill <> $_POST['clientName'] || empty($bill)){
+                //             $userData2 = array(
+                //                 'CLIENT_ID' => $_POST['clientName'],
+                //                 'TR_Type' => 'Walk-in',
+                //                 'TR_Bill' => $price,
+                //                 'TR_Status' => 'unpaid',
+                //                 'TR_TransactionDate' => $date,
+                //                 'year' => $year,
+                //                 'month' => $month
+                //             );
+                //             if($regstat == "Walk-in"){
+                //                 $insert1= $pdo->insert($tableName3,$userData2);
+                                
+                //             }
+                //         }else{
+
+                //         }
+
                 }elseif($check == $_POST['clientName']){
 
                     echo "<script>alert('Client has already been Timed-in! Time-in Failed ');window.location.href='../attendance.php';</script>";
 
                 }else{
+                       
                         //insert time-in information to attendance
                         $insert = $pdo->insert($tblName1,$userData);
                         echo "<script>alert('Client Time-in Success! ');window.location.href='../attendance.php';</script>";
-
                         //update towel information
                         
                         $userData7 = array(
@@ -66,7 +113,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                             'TI_Available' => ($available - $_POST['towel'])
                         );
                         $condition = array("TI_Available" => $available);
-                        $update = $pdo->update($tableTowel,$userData3,$condition);
+                        $update = $pdo->update($tableTowel,$userData7,$condition);
 
 
                         //bill client for walk-in fee
@@ -91,6 +138,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                         }else{
 
                         }
+
                         
                 }
 
