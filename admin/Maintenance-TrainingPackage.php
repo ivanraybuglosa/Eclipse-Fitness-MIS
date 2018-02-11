@@ -35,8 +35,8 @@
                                     <div class="col-sm-6">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="packageType" class="form-control" required>
-                                            <label class="form-label">Package Type</label>
+                                            <input type="number" name="packageType" class="form-control" required>
+                                            <label class="form-label">Session Quantity</label>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
                             <div class="form-group">
                                 <div class="form-line"> 
                                     <h5 class="pull-left">Sessions</h5>
-                                    <input type="text" class="form-control" value="<?php echo $trainingPackagess['TP_PackageType']; ?>" name="packageType"/>
+                                    <input type="number" class="form-control" value="<?php echo $trainingPackagess['TP_PackageType']; ?>" name="packageType"/>
                                 </div>
                             </div>
                                 <div class="form-group">

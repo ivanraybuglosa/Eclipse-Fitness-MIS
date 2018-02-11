@@ -153,6 +153,11 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                 );
                 $condition = array('A_Code' => $_POST['A_Code']);
                 $update = $pdo->update($tblName1,$userData,$condition);
+
+                $condition2 = array('TI_Date' => $date);
+                $update4 = $pdo->update($tableTowel,$userData4,$condition2);
+            
+
            
          $insert = $pdo->insert($tableName3, $userData1);
          $insert = $pdo->insert($tableName3, $userData5);
@@ -171,6 +176,13 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                 );
 
                 $insert = $pdo->insert($tableName3, $userData1);
+
+                $condition2 = array('TI_Date' => $date);
+                $update4 = $pdo->update($tableTowel,$userData4,$condition2);
+                
+
+                $condition1 = array('A_Code' => $_POST['A_Code']);
+                $update1 = $pdo->update($tblName1,$userData,$condition1);
                 echo "<script>alert('".$lostQty." towel(s) lost. Client Successfully Timed-out. ');window.location.href='../attendance.php';</script>";
         
 
@@ -189,23 +201,30 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                 $condition = array('A_Code' => $_POST['A_Code']);
                 $update = $pdo->update($tblName1,$userData,$condition);
 
+                $condition2 = array('TI_Date' => $date);
+                $update4 = $pdo->update($tableTowel,$userData4,$condition2);
+                
+
+                $condition1 = array('A_Code' => $_POST['A_Code']);
+                $update1 = $pdo->update($tblName1,$userData,$condition1);
+
 
         }else{
-
-
-
-
-
-        $condition2 = array('TI_Date' => $date);
-        $update4 = $pdo->update($tableTowel,$userData4,$condition2);
+            $condition2 = array('TI_Date' => $date);
+            $update4 = $pdo->update($tableTowel,$userData4,$condition2);
             
 
-        $condition1 = array('A_Code' => $_POST['A_Code']);
-        $update1 = $pdo->update($tblName1,$userData,$condition1);
+            $condition1 = array('A_Code' => $_POST['A_Code']);
+            $update1 = $pdo->update($tblName1,$userData,$condition1);
         
         echo "<script>alert('Client Successfully timed-out');window.location.href='../attendance.php';</script>";
-         $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;
+
+
+
+
+
+        
+         
 
         }
         

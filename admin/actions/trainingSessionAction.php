@@ -33,42 +33,48 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
         
 
-                    
-                $compare = $pdo->status($_POST['TL_Code'],array("order_by" => "TLS_Code ASC"));
-                    if(!empty($compare)){   
-                        $count = 0;
-                            foreach($compare as $com){
-                                $count++;
-                                if($packageType > $com['Sessions'] || empty($com['Sessions'])){
-                                        
-                                        if(date("Y-m-d") > $com['TL_Expiry']){
-                                            $status = "Expired";   
-                                        }elseif($com['Sessions'] < $packageType){
-                                            $status = "Going";
-                                        }elseif($com['Sessions'] == $packageType){
-                                            $status = "Completed";
-                                        }else{
+        $check = $pdo->checkTrainingSessions($_POST['TL_Code']);
+        $expiry = $pdo->checkPTExpiry($_POST['TL_Code']);
+        $package = $pdo->checkPackageType($_POST['TL_Code']);
+            
+            if($package > $check || empty($check)){
+                if(date("Y-m-d") == $expiry){
+                    $userData2 = array(
+                        'TL_TrainingStatus' => "Expired"
+                    );
+                    $condition1 = array('TL_Code' => $_POST['TL_Code']);
+                    $update = $pdo->update($table2,$userData2,$condition1);   
+                
+                }elseif($check !=  $package){
+                    $userData2 = array(
+                        'TL_TrainingStatus' => "On-Going"
+                    );
+                    $condition1 = array('TL_Code' => $_POST['TL_Code']);
+                    $update = $pdo->update($table2,$userData2,$condition1);
+                }elseif($check == $package){
+                    $userData2 = array(
+                        'TL_TrainingStatus' => "Completed"
+                    );
+                    $condition1 = array('TL_Code' => $_POST['TL_Code']);
+                    $update = $pdo->update($table2,$userData2,$condition1);
+                }else{
 
-                                        }
-                                    $userData2 = array(
-                                        'TL_TrainingStatus' => $status
+                }
+                                    
+
+                                        $userData3 = array(
+                                            'CLIENT_ID' => $client,
+                                            'COACH_ID' => $_POST['coach'],
+                                            'Activity' => 'Personal Training Session',
+                                            'AL_Date' => $date,
+                                            'AL_StartTime' => $st,
+                                            'AL_EndTime' => $et,
                                         );
-                                        $condition1 = array('TL_Code' => $_POST['TL_Code']);
-                                        $update = $pdo->update($table2,$userData2,$condition1);
 
-                                    $userData3 = array(
-                                        'CLIENT_ID' => $client,
-                                        'COACH_ID' => $_POST['coach'],
-                                        'Activity' => 'Personal Training Session',
-                                        'AL_Date' => $date,
-                                        'AL_StartTime' => $st,
-                                        'AL_EndTime' => $et,
-                                    );
-
-                                    $insert = $pdo->insert($table1,$userData);
-                                    $insert2 = $pdo->insert($table3,$userData3);
-                                    $id = $_POST['TL_Code'];
-                                    echo "<script>alert('Client Personal Training Session successfully saved');window.location.href='../PT-ContractsInfo.php?id=".$id." '</script>";
+                                        $insert = $pdo->insert($table1,$userData);
+                                        $insert2 = $pdo->insert($table3,$userData3);
+                                        $id = $_POST['TL_Code'];
+                                        echo "<script>alert('Client Personal Training Session successfully saved');window.location.href='../PT-ContractsInfo.php?id=".$id." '</script>";
                                     
                        
                     
@@ -78,9 +84,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                                     }
 
 
-                                    }
-                                
-                                }
+                                   
                             }
                         }
 

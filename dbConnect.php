@@ -837,7 +837,7 @@ class dbConnect{
     }
 
     public function status($id,$conditions= array()){
-        $sql = "SELECT traininglog.TL_Expiry, trainingpackage.TP_PackageType, COUNT(traininglogsession.TLS_Code) as Sessions, traininglog.CLIENT_ID FROM traininglogsession INNER JOIN traininglog ON traininglogsession.TL_Code = traininglog.TL_Code INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE traininglog.TL_Code = '".$id."' ";
+        $sql = "SELECT traininglog.TL_Expiry, trainingpackage.TP_PackageType, COUNT(traininglogsession.TLS_Code) as Sessions FROM traininglogsession INNER JOIN traininglog ON traininglogsession.TL_Code = traininglog.TL_Code INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code WHERE traininglog.TL_Code = '".$id."' ";
         $query = $this->db->prepare($sql);
         $query->execute();
         
@@ -1034,7 +1034,7 @@ class dbConnect{
         return !empty($data)?$data:false;
     }
 
-    public function checkTrainingSessions($id,$conditions = array()){
+    public function checkTrainingSessions($id){
         $sql = "SELECT COUNT(TLS_Code) as Sessions FROM traininglogsession WHERE TL_Code = '".$id."' ";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -1043,6 +1043,14 @@ class dbConnect{
         return $result;
     }
 
+    public function checkPackageType($id){
+        $sql = "SELECT trainingpackage.TP_PackageType FROM traininglog INNER JOIN trainingpackage ON traininglog.TP_Code = trainingpackage.TP_Code  WHERE TL_Code = '".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['TP_PackageType'];
+        return $result;
+    }
     public function checkMembership($id){
         $sql = "SELECT M_expiryDate FROM membershiptype WHERE CLIENT_ID = '".$id."' ORDER BY M_Code DESC LIMIT 1";
         $query = $this->db->prepare($sql);
@@ -1556,6 +1564,10 @@ class dbConnect{
         $result = $var['discard'];
         return $result;
     }
+
+
+
+
 
 
 
