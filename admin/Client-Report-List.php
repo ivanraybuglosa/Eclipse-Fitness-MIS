@@ -17,7 +17,7 @@
                  </div>
 
                  <div class="col-md-3">
-                <a href="Client-Report-TransactionHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">COMPLETED TRANSACTIONS</a>
+                <a href="Client-Report-TransactionHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">TRANSACTION HISTORY</a>
                  </div>
 
                  <div class="col-md-3">

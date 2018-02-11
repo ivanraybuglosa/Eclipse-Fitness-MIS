@@ -87,7 +87,7 @@
                               footer: true,
                               customize: function ( win ) {
                             $(win.document.body)
-                                .prepend('<center><h4>Coach List Report</h4></center>')
+                                .prepend('<center><h4>List of Coaches</h4></center>')
                                 .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
                             $(win.document.body).find('h3').css('font-family','Impact'); 

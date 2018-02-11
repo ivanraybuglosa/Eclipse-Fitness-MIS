@@ -46,7 +46,7 @@
                                     </div>  
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                 <select class="form-control show-tick" data-live-search="true" name="clientName">
                                         <option value="null">Choose Client</option>
                                             <?php 
@@ -74,21 +74,15 @@
                                 </select>
 
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                                 </div>
 
                             </div>
                         </form>
 
-                        <div id="print">
-                        <label>Transaction Records</label>
-                         <table class="table table-bordered table-striped table-hover dataTable" id="reportattendance" name="reportattendance" role="grid" aria-describedby="DataTables_Table_0_info">
+                         <table class="table table-bordered table-striped table-hover dataTable" id="transhistory" name="transhistory" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
                                             <th>Transaction Date</th>
@@ -192,19 +186,40 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div>
+                        </div>  
 
                     <script>
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Transaction History Report</h2><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                     $(document).ready(function() {
+    $('#transhistory').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [ 'copy', 'csv', 'excel',
+            { 
+                extend: 'print',
+                title: '',
+                responsive: true,
+                footer: true,
+                className: '',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend('<center><h4>Transaction History Report</h4></center>')
+                        .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
+
+                    $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' )
+
+                    $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                }
+
+            }
+        ]
+    } );
+
+
+} );
 
 
                     </script>
