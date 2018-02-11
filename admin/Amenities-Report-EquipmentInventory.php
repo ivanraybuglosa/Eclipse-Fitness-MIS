@@ -78,7 +78,7 @@
                             </div>
                         </form>
                         <div id="print">
-                         <table class="table table-bordered table-striped table-hover dataTables js-basic-example" id="equipmentreport" name="equipmentreport" role="grid" aria-describedby="DataTables_Table_0_info">
+                         <table class="table table-bordered table-striped table-hover dataTables js-exportable" id="equipmentreport" name="equipmentreport" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
                                             <th>Equipment Type</th>
@@ -181,10 +181,30 @@
 
                     <script>
                       $(document).ready(function() {
+    $('#equipmentreport').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                title: '',
+                footer: true,
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend('<h3>Equipment Inventory</h3>')
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' )
+                    
+                }
+            }
+        ]
+    } );
 
-                      });
 
-                      
+} );
+
+
                      function printContent(el) {
 
                          var restorepage = document.body.innerHTML;
