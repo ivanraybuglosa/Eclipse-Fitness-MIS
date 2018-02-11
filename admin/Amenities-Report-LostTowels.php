@@ -46,20 +46,16 @@
                                      </div>
                                     </div>  
                                 </div>
-
+                                <div class="col-md-3">
+                                </div>
                                 <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
-
-                                <div class="col-md-3">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('losttowel')">Print</a>
-                                </div>
-
                             </div>
                         </form>
                         <div id="print">
-                            <table class="table table-bordered table-striped table-hover dataTable js-basic-example" id="losttowel" name="losttowel" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover dataTable" id="losttowel" name="losttowel" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr role="row">
                                             
@@ -82,7 +78,23 @@
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
 
-                                       $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn") or die(mysql_error());
+                                            if($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end']) {
+                                                $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn") or die(mysql_error());
+                                         while($lost = $tow->fetch_array()) { 
+
+                                              ?>  
+                                              <tr>
+                                
+                                                 <td><?php echo date("F j, Y", strtotime($lost['A_Date'])) ?></td>
+                                                 <td><?php echo $lost['CLIENT_FirstName']; ?> <?php echo $lost['CLIENT_LastName']; ?></td>
+                                                 <td><?php echo $lost['A_TowelQty'] - $lost['A_TowelReturn'] ?></td>
+
+                                              </tr>
+                                            <?php
+                                                    }
+
+                                            } else {
+                                                $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn AND A_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
                                          while($lost = $tow->fetch_array()) { 
 
                                               ?>  
@@ -94,7 +106,9 @@
 
                                               </tr>
                                              <?php 
-                                     }
+                                             }
+                                       }
+                                    
                                  }
                              } else {
                                      $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn") or die(mysql_error());
@@ -123,19 +137,37 @@
                         </div>
                          <script>   
 
+                            $(document).ready(function() {
+    $('#losttowel').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            { 
+                extend: 'print',
+                title: '',
+                responsive: true,
+                footer: true,
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend('<center><h4>Lost Towels Report</h4></center>')
+                        .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
+
+                    $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' )
+
+                    $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                }
+
+            }
+        ]
+    } );
 
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<table class='table table-bordered table-striped'><center><img src='../logo.png' height='70' width='200'></center><center><h4>Towel Supply and Laundry </h4><center><br><br>" +
-                         printcontent + "</table><br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+} );
 
-
-            </script>
+                        </script>
     </section>
     <?php include("includes/footer.php"); ?>
 

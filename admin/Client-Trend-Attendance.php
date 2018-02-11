@@ -60,14 +60,6 @@
                     </div>
                  </div>
             </div>
-                        <footer>
-                            <div class="row">
-                              <label style="margin-left:30px; margin-risght: 5px;">Export:</label>
-                               <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">Print</button>
-                               <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">Excel</button>
-                               <button type="button" class="btn btn-success waves-effect" style="padding:8px 30px;">PDF</button>
-                            </div>
-                        </footer>
             </section>
     <?php include("includes/footer.php"); ?>
 

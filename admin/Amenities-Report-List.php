@@ -36,6 +36,10 @@
                  </div>
 
                  <div class="col-md-3">
+                <a href="Amenities-Trend-LostAmenities.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-clientattendance" data-type="success">LOST AMENITIES</a>
+                 </div>
+
+                 <div class="col-md-3">
                 <a href="Amenities-Trend-EquipmentSummary.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-clientattendance" data-type="success">EQUIPMENT SUMMARY</a>
                  </div>
              </div>

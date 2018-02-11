@@ -20,7 +20,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Amenities - Reports - Lost Lockers Record
+                                    Amenities - Reports - Lost Keys Record
                                 </li>
                             </ol>
             </div>
@@ -28,7 +28,7 @@
         <?php include("Amenities-Report-List.php"); ?>
         <div class="card">
             <div class="header">
-                <h2>Lost Lockers Record</h2>
+                <h2>Lost Keys Record</h2>
             </div>
             <div class="body">
                             <form method="POST">
@@ -46,20 +46,16 @@
                                      </div>
                                     </div>  
                                 </div>
-
+                                <div class="col-md-3">
+                                </div>
                                 <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('losttowel')">Print</a>
-                                </div>
-
                             </div>
                         </form>
-                        <div id="print">
-                            <table class="table table-bordered table-striped table-hover dataTable js-basic-example" id="losttowel" name="losttowel" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover dataTable" id="lostlocker" name="lostlocker" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr role="row">
                                             
@@ -115,27 +111,44 @@
                                       </tbody>
                                 </table>
                                     </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                 </div>
                             </div>
                         </div>
-                         <script>   
+                    </div>
+                </div>
+                         <script>   $(document).ready(function() {
+    $('#lostlocker').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            { 
+                extend: 'print',
+                title: '',
+                responsive: true,
+                footer: true,
+                className: '',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend('<center><h4>Lost Keys Report</h4></center>')
+                        .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
+
+                    $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' )
+
+                    $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                }
+
+            }
+        ]
+    } );
 
 
+} );
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<table class='table table-bordered table-striped'><center><img src='../logo.png' height='70' width='200'></center><center><h4>Towel Supply and Laundry </h4><center><br><br>" +
-                         printcontent + "</table><br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                    </script>
 
-
-            </script>
     </section>
     <?php include("includes/footer.php"); ?>
 
