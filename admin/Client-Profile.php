@@ -183,9 +183,7 @@
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 80px;">Registration Date</th>
 
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 80px;">Status</th>
-                                            
-                                            <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">Email Address</th>
-                                            
+
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 70px;">Gender</th> 
                                             
                                             <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100px;">Contact Number</th>
@@ -220,9 +218,12 @@
                                                     $lastname = $client['CLIENT_LastName']; 
                                                     $fullname = $firstname ." ". $midname." ". $lastname; 
                                                         echo $fullname ; ?></td>
+<<<<<<< HEAD
                                                         <td><?php echo date("F j, Y",strtotime($client['CLIENT_regDATE']))?></td>
+=======
+                                                        <td><?php echo date("F j, Y", strtotime($client['CLIENT_regDATE'])) ?></td>
+>>>>>>> 643c97904772905a85f8065f63cbfa6467fa9fa5
                                                         <td><?php echo $client['CLIENT_RegStatus']; ?></td>
-														<td><?php echo $client['CLIENT_Email']; ?></td>
                                                         <td><?php echo $client['CLIENT_Gender']; ?></td>
 														<td><?php echo $client['CLIENT_ContactNumber']; ?></td>
 														<td class="align-center"><a type="button" href="Client-Profile-User1.php?id=<?php echo $client['CLIENT_ID'];?>" class="btn bg-green" >View</button></td>

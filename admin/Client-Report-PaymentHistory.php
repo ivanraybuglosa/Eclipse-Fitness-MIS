@@ -8,7 +8,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>Transaction History</h2>
+                <h2>Payment History</h2>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     
@@ -20,7 +20,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Clients - Reports - Transaction History
+                                    Clients - Reports - Payment History
                                 </li>
                             </ol>
             </div>
@@ -28,7 +28,7 @@
         <?php include("Client-Report-List.php"); ?>
     <div class="card">
         <div class="header">
-            <h2>Transaction History Report</h2>
+            <h2>Payment History Report</h2>
         </div>
                         <div class="body">
                         <form method="POST">
@@ -60,10 +60,9 @@
 
                                         <option id = "<?php echo $clients['CLIENT_ID']; ?>" value="<?php echo $clients['CLIENT_ID']; ?>">
                                                 <?php 
-                                                $firstname = $clients['CLIENT_FirstName'];
-                                                $middlename = $clients['CLIENT_MiddleName'];
+                                                $firstname = $clients['CLIENT_FirstName']; 
                                                       $lastname = $clients['CLIENT_LastName']; 
-                                                      $fullname=$firstname." ".$middlename." ".$lastname; 
+                                                      $fullname=$firstname." ".$lastname; 
                                                       echo $fullname ; 
                                                  ?>
                                         </option>
@@ -87,14 +86,15 @@
                         </form>
 
                         <div id="print">
-                        <label>Transaction Records</label>
+                        <label>Payment Records</label>
                          <table class="table table-bordered table-striped table-hover dataTable" id="reportattendance" name="reportattendance" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
-                                            <th>Transaction Date</th>
                                             <th>Client Name</th>
-                                            <th>Transaction Type</th>
-                                            <th>Total Amount</th>
+                                            <th>Payment Date</th>
+                                            <th>Payment Time</th>
+                                            <th>Transaction</th>
+                                            <th>Amount Paid</th>
                                         </tr>
                                     </thead>
                                     
@@ -113,58 +113,61 @@
                                             $clientName = $_POST['clientName'];
 
                                             if($clientName != "null" && $filterstart == $_POST['filter_start']) {
-                                                $th = $conn->query("SELECT * FROM transaction WHERE CLIENT_ID = '$clientName' AND TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' AND TR_status = 'paid' ") or die(mysql_error());
+                                                $th = $conn->query("SELECT * FROM payment INNER JOIN transaction ON payment.TR_ID = transaction.TR_ID WHERE CLIENT_ID = '$clientName' AND Pay_date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
 
                                                 while($fth = $th->fetch_array()) {
                                                 $cid = $fth['CLIENT_ID'];
                                                 $client = $conn->query("SELECT * FROM client WHERE CLIENT_ID = '$cid' ") or die(mysql_error());
                                                 $fc = $client->fetch_array()
                                              ?>
-                                               <tr>
-                                                   <td><?php echo date("F j, Y", strtotime($fth['TR_TransactionDate'])) ?></td>
-                                                   <td><?php echo $fc['CLIENT_FirstName'] ?> 
-                                                       <?php echo $fc['CLIENT_MiddleName'] ?> 
-                                                       <?php echo $fc['CLIENT_LastName'] ?> </td>
-                                                   <td><?php echo $fth['TR_Type'] ?></td>
-                                                   <td><?php echo $fth['TR_Bill'] ?></td>
-                                                </tr>
+                                                     <tr>
+                                                          <td><?php echo $fc['CLIENT_FirstName'] ?> 
+                                                              <?php echo $fc['CLIENT_MiddleName'] ?> 
+                                                              <?php echo $fc['CLIENT_LastName'] ?></td>
+                                                          <td><?php echo date("F j, Y", strtotime($fth['Pay_date'])) ?></td>
+                                                          <td><?php echo date("g:i A", strtotime($fth['Pay_time'])) ?></td>
+                                                          <td><?php echo $fth['TR_Type'] ?></td>
+                                                          <td><?php echo $fth['Pay_amount'] ?></td>
+                                                     </tr>
 
                                                <?php
                                                } 
                                             } else if($clientName == "null" && ($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end'])) {
 
-                                                $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_status = 'paid' ") or die(mysql_error());
+                                                $th = $conn->query("SELECT * FROM payment INNER JOIN transaction ON payment.TR_ID = transaction.TR_ID INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID") or die(mysql_error());
 
                                                  while($fth = $th->fetch_array()) { 
                                                  ?>
                                                      <tr>
-                                                          <td><?php echo date("F j, Y", strtotime($fth['TR_TransactionDate'])) ?></td>
                                                           <td><?php echo $fth['CLIENT_FirstName'] ?> 
                                                               <?php echo $fth['CLIENT_MiddleName'] ?> 
                                                               <?php echo $fth['CLIENT_LastName'] ?></td>
+                                                          <td><?php echo date("F j, Y", strtotime($fth['Pay_date'])) ?></td>
+                                                          <td><?php echo date("g:i A", strtotime($fth['Pay_time'])) ?></td>
                                                           <td><?php echo $fth['TR_Type'] ?></td>
-                                                          <td><?php echo $fth['TR_Bill'] ?></td>
+                                                          <td><?php echo $fth['Pay_amount'] ?></td>
                                                      </tr>
                                                   <?php
+                                                 }
 
-                                            } 
                                         } else {
 
-                                            $th = $conn->query("SELECT * FROM transaction WHERE TR_status = 'paid' AND CLIENT_ID = '$clientName' OR TR_TransactionDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                            $th = $conn->query("SELECT * FROM payment INNER JOIN transaction ON payment.TR_ID = transaction.TR_ID WHERE CLIENT_ID = '$clientName' OR Pay_date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
 
                                             while($fth = $th->fetch_array()) {
                                                 $cid = $fth['CLIENT_ID'];
-                                                $client = $conn->query("SELECT * FROM client WHERE CLIENT_ID = '$cid'") or die(mysql_error());
+                                                $client = $conn->query("SELECT * FROM client WHERE CLIENT_ID = '$cid' ") or die(mysql_error());
                                                 $fc = $client->fetch_array()
                                              ?>
-                                               <tr>
-                                                   <td><?php echo date("F j, Y", strtotime($fth['TR_TransactionDate'])) ?></td>
-                                                   <td><?php echo $fc['CLIENT_FirstName'] ?> 
-                                                       <?php echo $fc['CLIENT_MiddleName'] ?> 
-                                                       <?php echo $fc['CLIENT_LastName'] ?> </td>
-                                                   <td><?php echo $fth['TR_Type'] ?></td>
-                                                   <td><?php echo $fth['TR_Bill'] ?></td>
-                                               </tr>
+                                                      <tr>
+                                                          <td><?php echo $fc['CLIENT_FirstName'] ?> 
+                                                              <?php echo $fc['CLIENT_MiddleName'] ?> 
+                                                              <?php echo $fc['CLIENT_LastName'] ?></td>
+                                                          <td><?php echo date("F j, Y", strtotime($fth['Pay_date'])) ?></td>
+                                                          <td><?php echo date("g:i A", strtotime($fth['Pay_time'])) ?></td>
+                                                          <td><?php echo $fth['TR_Type'] ?></td>
+                                                          <td><?php echo $fth['Pay_amount'] ?></td>
+                                                     </tr>
                                                <?php
                                                  }
                                             }
@@ -172,17 +175,18 @@
 
                                     }  else {
 
-                                         $th = $conn->query("SELECT * FROM transaction INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_status = 'paid' ") or die(mysql_error());
+                                         $th = $conn->query("SELECT * FROM payment INNER JOIN transaction ON payment.TR_ID = transaction.TR_ID INNER JOIN client ON transaction.CLIENT_ID = client.CLIENT_ID") or die(mysql_error());
 
                                                  while($fth = $th->fetch_array()) { 
                                                  ?>
                                                      <tr>
-                                                          <td><?php echo date("F j, Y", strtotime($fth['TR_TransactionDate'])) ?></td>
                                                           <td><?php echo $fth['CLIENT_FirstName'] ?> 
                                                               <?php echo $fth['CLIENT_MiddleName'] ?> 
                                                               <?php echo $fth['CLIENT_LastName'] ?></td>
+                                                          <td><?php echo date("F j, Y", strtotime($fth['Pay_date'])) ?></td>
+                                                          <td><?php echo date("g:i A", strtotime($fth['Pay_time'])) ?></td>
                                                           <td><?php echo $fth['TR_Type'] ?></td>
-                                                          <td><?php echo $fth['TR_Bill'] ?></td>
+                                                          <td><?php echo $fth['Pay_amount'] ?></td>
                                                      </tr>
                                                   <?php
                                                  }

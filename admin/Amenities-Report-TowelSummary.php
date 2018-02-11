@@ -39,7 +39,7 @@
         </div>
             <div class="body">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <select id="filteryear" class="validate[required] select form-control show-tick" style="margin-top: -25px; width: 30%;" data-live-search="true">
                             <option>Select Year...</option>
                             <?php
@@ -52,9 +52,6 @@
                             }
                             ?>
                         </select>
-                    </div>
-                    <div class="col-md-4 pull-right" style="margin-top: -8px;">
-                        <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
                     </div>
                 </div>
 
@@ -72,7 +69,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                          <div id="print">
-                            <table class="table table-bordered table-striped table-hover dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover dataTable" id="towelsummary" name="towelsummary" role="grid" aria-describedby="DataTables_Table_0_info">
                                     
                                     
                                     <thead>
@@ -280,15 +277,34 @@ $fetchReturned = $returnedTotal->fetch_array();
                         </div>
                         <script>
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h4>Monthly Towel Usage for the Year <?php echo $year ?> </h4><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+            $(document).ready(function() {
+                 $('#towelsummary').DataTable( {
+                     dom: 'Bfrtip',
+                     bSort: false,
+                     paging: false,
+                     buttons: [
+                          { 
+                              extend: 'print',
+                              title: '',
+                              footer: true,
+                              customize: function ( win ) {
+                            $(win.document.body)
+                                .prepend('<center><h4>Towel Summary Report</h4></center>')
+                                .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
+                            $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                            $(win.document.body).find( 'table' )
+                                .addClass( 'compact' )
+                                .css( 'font-size', 'inherit' )
+
+                            $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                             }
+
+                        }
+                  ]
+               } );
+            } );
 
             </script>
     </section>

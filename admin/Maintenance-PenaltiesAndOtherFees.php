@@ -33,8 +33,7 @@
                             <h2>Penalties and Other Fees</h2>
                         </div>
                             <div class="body">
-
-                            <div class="table-responsive">
+                                
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -104,8 +103,8 @@
                         <input type="hidden" name="action_type" value="edit"/>
                         <button type="submit" name="submit" class="btn  bg-green">SAVE CHANGES</button>
                         <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
-                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -117,7 +116,6 @@
                                         <?php } ?>
                                       </tbody>
                                 </table>
-                                    </div>
                                     </div>
                                     
                                     </div>

@@ -20,7 +20,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Amenities - Reports - Lost Towels Record
+                                    Amenities - Reports - Lost Keys Record
                                 </li>
                             </ol>
             </div>
@@ -28,7 +28,7 @@
         <?php include("Amenities-Report-List.php"); ?>
         <div class="card">
             <div class="header">
-                <h2>Lost Towels Record</h2>
+                <h2>Lost Keys Record</h2>
             </div>
             <div class="body">
                             <form method="POST">
@@ -52,16 +52,16 @@
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
+
                             </div>
                         </form>
-                        <div id="print">
-                            <table class="table table-bordered table-striped table-hover dataTable" id="losttowel" name="losttowel" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover dataTable" id="lostlocker" name="lostlocker" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr role="row">
                                             
                                             <th>Date</th>
                                             <th>Client Name</th>
-                                            <th>Unreturned Towels</th>
+                                            <th>Unreturned Locker No.</th>
                                                 
                                           </tr>
                                     </thead>
@@ -78,23 +78,7 @@
                                             $filterstart = date('Y-m-d', strtotime($_POST['filter_start']));
                                             $filterend = date('Y-m-d', strtotime($_POST['filter_end']));
 
-                                            if($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end']) {
-                                                $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn") or die(mysql_error());
-                                         while($lost = $tow->fetch_array()) { 
-
-                                              ?>  
-                                              <tr>
-                                
-                                                 <td><?php echo date("F j, Y", strtotime($lost['A_Date'])) ?></td>
-                                                 <td><?php echo $lost['CLIENT_FirstName']; ?> <?php echo $lost['CLIENT_LastName']; ?></td>
-                                                 <td><?php echo $lost['A_TowelQty'] - $lost['A_TowelReturn'] ?></td>
-
-                                              </tr>
-                                            <?php
-                                                    }
-
-                                            } else {
-                                                $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn AND A_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                       $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_ReturnedKey = 'Unreturned' AND A_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
                                          while($lost = $tow->fetch_array()) { 
 
                                               ?>  
@@ -106,20 +90,18 @@
 
                                               </tr>
                                              <?php 
-                                             }
-                                       }
-                                    
+                                     }
                                  }
                              } else {
-                                     $tow = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_TowelQty != A_TowelReturn") or die(mysql_error());
-                                         while($lost = $tow->fetch_array()) { 
+                                     $lock = $conn->query("SELECT * FROM `attendance` INNER JOIN client ON attendance.CLIENT_ID = client.CLIENT_ID WHERE A_ReturnedKey = 'Unreturned' ") or die(mysql_error());
+                                         while($lost = $lock->fetch_array()) { 
 
                                               ?>  
                                               <tr>
                                 
                                                  <td><?php echo date("F j, Y", strtotime($lost['A_Date'])) ?></td>
                                                  <td><?php echo $lost['CLIENT_FirstName']; ?> <?php echo $lost['CLIENT_LastName']; ?></td>
-                                                 <td><?php echo $lost['A_TowelQty'] - $lost['A_TowelReturn'] ?></td>
+                                                 <td><?php echo $lost['A_LockerKey'] ?></td>
 
                                               </tr>
                                     <?php
@@ -129,16 +111,13 @@
                                       </tbody>
                                 </table>
                                     </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                 </div>
                             </div>
                         </div>
-                         <script>   
-
-                            $(document).ready(function() {
-    $('#losttowel').DataTable( {
+                    </div>
+                </div>
+                         <script>   $(document).ready(function() {
+    $('#lostlocker').DataTable( {
         dom: 'Bfrtip',
         buttons: [
             { 
@@ -146,9 +125,10 @@
                 title: '',
                 responsive: true,
                 footer: true,
+                className: '',
                 customize: function ( win ) {
                     $(win.document.body)
-                        .prepend('<center><h4>Lost Towels Report</h4></center>')
+                        .prepend('<center><h4>Lost Keys Report</h4></center>')
                         .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
                     $(win.document.body).find('h3').css('font-family','Impact'); 
@@ -167,7 +147,8 @@
 
 } );
 
-                        </script>
+                    </script>
+
     </section>
     <?php include("includes/footer.php"); ?>
 

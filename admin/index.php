@@ -9,15 +9,8 @@ include("includes/header.php"); ?>
 <section class="content">
     <div class="container-fluid">
             <div class="block-header">
-                <h2>Dashboard</h2>
+                <center><h2><label>Eclipse Dashboard</label></h2></center>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="material-icons">dashboard</i> Dashboard
-                    </li>
-                </ol>
-                </div>
         </div>
     
 
@@ -41,13 +34,16 @@ include("includes/header.php"); ?>
         $fetchclients = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` ") or die(mysqli_error());
         $clients = $fetchclients->fetch_array();
 
+        $yearclients = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` WHERE year = '$year' ") or die(mysqli_error());
+        $fyclients = $yearclients->fetch_array();
+
         $fetchcontracts = $conn->query("SELECT COUNT(TL_Code) as total FROM `traininglog` ") or die(mysqli-error());
         $contracts = $fetchcontracts->fetch_array();
 
         $fetchparticipants = $conn->query("SELECT COUNT(CA_Code) as total FROM `clientassignment` ") or die(mysql_error());
         $participants = $fetchparticipants->fetch_array();
 
-        $fetchpresent = $conn->query("SELECT COUNT(A_Code) as total FROM `attendance` WHERE `A_TimeOut` = '' && `A_Date` = '$today' ") or die(mysql_error());
+        $fetchpresent = $conn->query("SELECT COUNT(A_Code) as total FROM `attendance` WHERE `A_TimeOut` IS NULL && `A_Date` = '$today' ") or die(mysql_error());
         $present = $fetchpresent->fetch_array();
 
         $fetchwalkin = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` WHERE `CLIENT_RegStatus` = 'Walk-in' && year = '$year' ") or die(mysql_error());
@@ -59,8 +55,30 @@ include("includes/header.php"); ?>
         $allfetch = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` WHERE year = '$year' ") or die(mysql_error());
         $all = $allfetch->fetch_array();
 
+        //TRANSACTIONS
+        $fetchtran= $conn->query("SELECT COUNT(TR_ID) as total FROM `transaction` WHERE TR_status = 'paid' && year = '$year' ") or die(mysql_error());
+        $comtran = $fetchtran->fetch_array();
+
         $fetchtransact = $conn->query("SELECT COUNT(TR_ID) as total FROM `transaction` WHERE year = '$year' ") or die(mysql_error());
         $transact = $fetchtransact->fetch_array();
+
+        $fetchbill = $conn->query("SELECT IFNULL(total,0) as final FROM (SELECT SUM(TR_Bill) as total FROM `transaction` WHERE year = '$year') as initial ") or die(mysql_error());
+        $bill = $fetchbill->fetch_array();
+
+        $fetchpayment = $conn->query("SELECT IFNULL(total,0) as final FROM (SELECT SUM(Pay_amount) as total FROM `payment` WHERE year = '$year') as initial ") or die(mysql_error());
+        $payment = $fetchpayment->fetch_array();
+
+        //COMPANY
+
+        $coach = $conn->query("SELECT COUNT(COACH_ID) as total FROM `coach`") or die(mysql_error());
+        $fcoach = $coach->fetch_array();
+
+        $equip = $conn->query("SELECT IFNULL(total,0) as final FROM (SELECT SUM(EI_Quantity) as total FROM `equipmentinventory`) as initial ") or die(mysql_error());
+        $fequip = $equip->fetch_array();
+
+        $sc = $conn->query("SELECT COUNT(SC_Code) as total FROM `studioclass` ") or die(mysql_error());
+        $fsc = $sc->fetch_array();
+
         ?>
 
         <div class="row clearfix">
@@ -71,7 +89,7 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="content">
                         <div class="text">Currently Present</div>
-                        <div class="number count-to" data-from="0" data-to="<?php echo $present['total'] ?>" data-speed="15" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo $present['total'] ?>" data-speed="15" data-fresh-interval="20"><?php echo $present['total'] ?></div>
                     </div>
                 </div>
             </div>
@@ -82,7 +100,7 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="content">
                         <div class="text">Ongoing Contracts</div>
-                        <div class="number count-to" data-from="0" data-to="<?php echo $contracts['total'] ?>" data-speed="1000" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo $contracts['total'] ?>" data-speed="1000" data-fresh-interval="20"><?php echo $contracts['total'] ?></div>
                     </div>
                 </div>
             </div>
@@ -93,7 +111,7 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="content">
                         <div class="text">Class Participants</div>
-                        <div class="number count-to" data-from="0" data-to="<?php echo $participants['total'] ?>" data-speed="1000" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo $participants['total'] ?>" data-speed="1000" data-fresh-interval="20"><?php echo $participants['total'] ?></div>
                     </div>
                 </div>
             </div>
@@ -104,7 +122,7 @@ include("includes/header.php"); ?>
                     </div>
                     <div class="content">
                         <div class="text">Total Clients</div>
-                        <div class="number count-to" data-from="0" data-to="<?php echo $clients['total'] ?>" data-speed="1000" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="<?php echo $clients['total'] ?>" data-speed="1000" data-fresh-interval="20"><?php echo $clients['total'] ?></div>
                     </div>
                 </div>
             </div>
@@ -118,7 +136,7 @@ include("includes/header.php"); ?>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pull-right">
                 <div class="card">
                     <div class="body bg-teal">
-                        <div class="font-bold m-b--35">THE COMPANY THIS YEAR</div>
+                        <div class="font-bold m-b--35">NEW CLIENTS THIS YEAR</div>
                         <ul class="dashboard-stat-list">
                             <li>
                                 NEW WALK-INS
@@ -131,6 +149,34 @@ include("includes/header.php"); ?>
                             </li>
 
                             <li>
+                                TOTAL NEW CLIENTS
+                                <span class="pull-right"><b><?php echo $fyclients['total'] ?></b></span>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="body bg-teal">
+                        <div class="font-bold m-b--35">TRANSACTIONS THIS YEAR</div>
+                        <ul class="dashboard-stat-list">
+                            <li>
+                                PAYMENTS RECEIVED
+                                <span class="pull-right"><b><?php echo $payment['final'] ?></b> </span>
+                            </li>
+
+                            <li>
+                                UNSETTLED ACCOUNTS
+                                <span class="pull-right"><b><?php echo $bill['final'] - $payment['final'] ?> </b> </span>
+                            </li>
+
+                            <li>
+                                COMPLETED TRANSACTIONS
+                                <span class="pull-right"><b><?php echo $comtran['total'] ?></b></span>
+                            </li>
+
+                            <li>
                                 TOTAL TRANSACTIONS
                                 <span class="pull-right"><b><?php echo $transact['total'] ?></b></span>
                             </li>
@@ -139,6 +185,28 @@ include("includes/header.php"); ?>
                     </div>
                 </div>
 
+                <div class="card">
+                    <div class="body bg-teal">
+                        <div class="font-bold m-b--35">THE COMPANY THIS YEAR</div>
+                        <ul class="dashboard-stat-list">
+                            <li>
+                                COACHES
+                                <span class="pull-right"><b><?php echo $fcoach['total'] ?></b></span>
+                            </li>
+
+                            <li>
+                                EQUIPMENT
+                                <span class="pull-right"><b><?php echo $fequip['final'] ?></b> </span>
+                            </li>
+
+                            <li>
+                                CLASSES OFFERED
+                                <span class="pull-right"><b><?php echo $fsc['total'] ?></b></span>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
             </div>
             <!-- #END# Answered Tickets -->
             <!-- Task Info -->
@@ -247,9 +315,6 @@ include("includes/header.php"); ?>
 
 <?php include("includes/footer.php"); ?>
 
-
-
-    
     <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>

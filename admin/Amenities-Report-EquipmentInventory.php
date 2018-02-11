@@ -46,8 +46,8 @@
                                     </div>  
                                 </div>
 
-                                <div class="col-md-3">
-                            <select class="form-control show-tick" data-live-search="true" name="equips">
+                                <div class="col-md-4">
+                            <select class="form-control show-tick" data-live-search="true" id="equips" name="equips">
                                         <option value="null">Choose Equipment Type</option>
                                             <?php 
                                             $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
@@ -66,20 +66,14 @@
                                 </select>
 
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <input type="hidden" name="action_type" value="filter"/>
                                     <button type="submit" name= "filter" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
                                 </div>
-
-                                <div class="col-md-2">
-                                    <a class="btn bg-green btn-block btn-lg" onclick="printContent('print')">Print</a>
-                                </div>
-
                             </div>
                         </form>
-
                         <div id="print">
-                         <table class="table table-bordered table-striped table-hover dataTable" id="equipmentreport" name="equipmentreport" role="grid" aria-describedby="DataTables_Table_0_info">
+                         <table class="table table-bordered table-striped table-hover dataTables" id="equipmentreport" name="equipmentreport" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr>
                                             <th>Equipment Type</th>
@@ -89,7 +83,6 @@
                                             <th>Supplier</th>
                                         </tr>
                                     </thead>
-                                    
                                     <tbody>
                                     <?php 
 
@@ -160,7 +153,7 @@
                                          $equip = $conn->query("SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code ") or die(mysql_error());
 
                                          while($eq = $equip->fetch_array()) { 
-                                              ?>  
+                                              ?>
                                               <tr>
                                                     <td><?php echo $eq['E_Type'] ?></td>
                                                     <td><?php echo $eq['E_Model'] ?></td>
@@ -175,23 +168,43 @@
                                         ?>
 
                                     </tbody>
+                                    <footer></footer>
                                 </table>
                                 </div>
                             </div>
                         </div>
 
                     <script>
+                      $(document).ready(function() {
+    $('#equipmentreport').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            { 
+                extend: 'print',
+                title: '',
+                responsive: true,
+                footer: true,
+                className: '',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .prepend('<center><h4>Equipment Inventory Report</h4></center>')
+                        .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
-                     function printContent(el) {
-                         var restorepage = document.body.innerHTML;
-                         var printcontent = document.getElementById(el).innerHTML;
-                         document.body.innerHTML ="<center><img src='../logo.png' height='70' width='200'></center><center><h2>Equipment Inventory Report</h2><center><br><br>" +
-                         printcontent + "<br><br><br><span>PRINTED BY: ____________ </span>" + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>SIGNED BY: ____________";
-                         window.print();
-                         document.body.innerHTML = restorepage;
-                     }
+                    $(win.document.body).find('h3').css('font-family','Impact'); 
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' )
+
+                    $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                }
+
+            }
+        ]
+    } );
 
 
+} );
                     </script>
 
             </section>

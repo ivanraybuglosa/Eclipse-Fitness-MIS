@@ -17,7 +17,11 @@
                  </div>
 
                  <div class="col-md-3">
-                <a href="Client-Report-TransactionHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">TRANSACTION HISTORY</a>
+                <a href="Client-Report-TransactionHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">COMPLETED TRANSACTIONS</a>
+                 </div>
+
+                 <div class="col-md-3">
+                <a href="Client-Report-ActivityLog.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">CLIENT ACTIVITY LOG</a>
                  </div>
 
                  <div class="col-md-3">
@@ -25,8 +29,9 @@
                  </div>
 
                  <div class="col-md-3">
-                <a href="Client-Report-ActivityLog.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">CLIENT ACTIVITY LOG</a>
+                <a href="Client-Report-PaymentHistory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-transacthistory" data-type="success">PAYMENT HISTORY</a>
                  </div>
+
              </div>
              <div class="row">
                 <div class="col-md-3">
@@ -43,6 +48,14 @@
 
                  <div class="col-md-3">
                 <a href="Client-Trend-topClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-topclients" data-type="success">TOP CLIENTS</a>
+                 </div>
+
+                <div class="col-md-3">
+                <a href="Client-Trend-GeneralRevenue.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-topclients" data-type="success">GENERAL REVENUE</a>
+                 </div>
+
+                  <div class="col-md-3">
+                <a href="Client-Trend-MembershipRevenue.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-topclients" data-type="success">MEMBERSHIP REVENUE</a>
                  </div>
              </div>
              </div>
