@@ -20,7 +20,7 @@
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Amenities - Reports - Supply and Laundry Record
+                                    Amenities - Reports - Equipment Activity
                                 </li>
                             </ol>
             </div>
@@ -28,7 +28,7 @@
         <?php include("Amenities-Report-List.php"); ?>
         <div class="card">
             <div class="header">
-                <h2>Supply and Laundry Record</h2>
+                <h2>Equipment Activity</h2>
             </div>
             <div class="body">
                             <form method="POST">
@@ -57,17 +57,21 @@
 
                             </div>
                         </form>
-                            <table class="table table-bordered table-striped table-hover dataTable" id="towelactivity" name="towelactivity" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover dataTable" id="eqactivity" name="eqactivity" role="grid" aria-describedby="DataTables_Table_0_info">
                                     <thead>
                                         <tr role="row">
                                             
-                                            <th>Date</th>
+                                            <th>Equipment Type</th>
 
-                                            <th>Type</th>
+                                            <th>Equipment Model</th>
+
+                                            <th>Date</th>
 
                                             <th>Time</th>
                                             
-                                            <th>Amount</th>
+                                            <th>Activity</th>
+
+                                            <th>Quantity</th>
                                                 
                                           </tr>
                                     </thead>
@@ -86,54 +90,57 @@
 
                                             if($filterstart != $_POST['filter_start'] || $filterend != $_POST['filter_end']) {
 
-                                                $tow = $conn->query("SELECT * FROM `towelinventory`") or die(mysql_error());
+                                                $equips = $conn->query("SELECT * FROM `equipmentinventory` INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code ") or die(mysql_error());
 
-                                            while($towels = $tow->fetch_array()) { 
+                                            while($eq = $equips->fetch_array()) { 
 
                                               ?>  
                                               <tr>
-                                
-                                                 <td><?php echo date("F j, Y", strtotime($towels['TI_Date'])) ?></td>
-                                                 <td><?php echo $towels['TI_Type']; ?></td>
-                                                 <td><?php echo date("g:i A", strtotime($towels['TI_Time'])) ?></td>
-                                                 <td><?php echo $towels['TI_Supplied'] + $towels['TI_Laundry'] ?></td>
+                                                 <td><?php echo $eq['E_Type'] ?></td>
+                                                 <td><?php echo $eq['E_Model'] ?></td>
+                                                 <td><?php echo date("F j, Y", strtotime($eq['EI_DeliveryDate'])) ?></td>
+                                                 <td><?php echo date("g:i A", strtotime($eq['EI_DeliveryTime'])) ?></td>
+                                                 <td><?php echo $eq['EI_Activity']; ?></td>
+                                                 <td><?php echo $eq['EI_Quantity'] ?></td>
 
                                               </tr>
-                                                    <?php
-                                                  }
+                                    <?php
+                                        }
 
 
                                             } else {
-                                                $tow = $conn->query("SELECT * FROM `towelinventory` WHERE TI_Date BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
+                                                $equips = $conn->query("SELECT * FROM `equipmentinventory` INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code WHERE EI_DeliveryDate BETWEEN '$filterstart' AND '$filterend' ") or die(mysql_error());
 
-                                            while($towels = $tow->fetch_array()) { 
+                                            while($eq = $equips->fetch_array()) { 
 
                                               ?>  
                                               <tr>
-                                
-                                                 <td><?php echo date("F j, Y", strtotime($towels['TI_Date'])) ?></td>
-                                                 <td><?php echo $towels['TI_Type']; ?></td>
-                                                 <td><?php echo date("g:i A", strtotime($towels['TI_Time'])) ?></td>
-                                                 <td><?php echo $towels['TI_Supplied'] ?> <?php echo $towels['TI_Laundry'] ?></td>
+                                                 <td><?php echo $eq['E_Type'] ?></td>
+                                                 <td><?php echo $eq['E_Model'] ?></td>
+                                                 <td><?php echo date("F j, Y", strtotime($eq['EI_DeliveryDate'])) ?></td>
+                                                 <td><?php echo date("g:i A", strtotime($eq['EI_DeliveryTime'])) ?></td>
+                                                 <td><?php echo $eq['EI_Activity']; ?></td>
+                                                 <td><?php echo $eq['EI_Quantity'] ?></td>
 
                                               </tr>
-                                             <?php 
-                                     }
+                                    <?php
+                                        }
                                  }
                                         
                                  }
                              } else {
-                                     $tow = $conn->query("SELECT * FROM `towelinventory`") or die(mysql_error());
+                                     $equips = $conn->query("SELECT * FROM `equipmentinventory` INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code ") or die(mysql_error());
 
-                                            while($towels = $tow->fetch_array()) { 
+                                            while($eq = $equips->fetch_array()) { 
 
                                               ?>  
                                               <tr>
-                                
-                                                 <td><?php echo date("F j, Y", strtotime($towels['TI_Date'])) ?></td>
-                                                 <td><?php echo $towels['TI_Type']; ?></td>
-                                                 <td><?php echo date("g:i A", strtotime($towels['TI_Time'])) ?></td>
-                                                 <td><?php echo $towels['TI_Supplied'] + $towels['TI_Laundry'] ?></td>
+                                                 <td><?php echo $eq['E_Type'] ?></td>
+                                                 <td><?php echo $eq['E_Model'] ?></td>
+                                                 <td><?php echo date("F j, Y", strtotime($eq['EI_DeliveryDate'])) ?></td>
+                                                 <td><?php echo date("g:i A", strtotime($eq['EI_DeliveryTime'])) ?></td>
+                                                 <td><?php echo $eq['EI_Activity']; ?></td>
+                                                 <td><?php echo $eq['EI_Quantity'] ?></td>
 
                                               </tr>
                                     <?php
@@ -143,16 +150,15 @@
                                       </tbody>
                                 </table>
                                     </div>
-                                    </div>
-                                    </div>
-                                    </div>
+                                  </div>
                                 </div>
                             </div>
                         </div>
              <script>
               
                 $(document).ready(function() {
-                 $('#towelactivity').DataTable( {
+
+                 $('#eqactivity').DataTable( {
                      dom: 'Bfrtip',
                      buttons: [ 'copy', 'csv', 'excel',
                           { 
@@ -162,7 +168,7 @@
                               footer: true,
                               customize: function ( win ) {
                             $(win.document.body)
-                                .prepend('<center><h4>Supply and Laundry Report</h4></center>')
+                                .prepend('<center><h4>Equipment Activity Report</h4></center>')
                                 .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
                             $(win.document.body).find('h3').css('font-family','Impact'); 

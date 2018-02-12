@@ -25,6 +25,10 @@
                 <a href="Amenities-Report-EquipmentInventory.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachlist" data-type="success">EQUIPMENT INVENTORY</a>
                  </div>
 
+                 <div class="col-md-3">
+                <a href="Amenities-Report-EquipmentActivity.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachlist" data-type="success">EQUIPMENT ACTIVITY</a>
+                 </div>
+
              </div>
              <div class="row">
                 <div class="col-md-3">
