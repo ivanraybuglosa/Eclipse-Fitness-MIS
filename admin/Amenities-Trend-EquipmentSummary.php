@@ -1,7 +1,10 @@
 <?php
  include "../dbConnect.php";
  session_start();
- 
+if (!isset($_SESSION['loggedIn'])) {
+        $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
+        echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
+    }
  include("includes/header.php"); 
  include_once("actions/Amenities-Trend-EquipmentSummary-Action.php");?>
 
