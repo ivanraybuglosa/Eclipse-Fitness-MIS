@@ -292,6 +292,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="card">
                 <div class="header" style="background:silver;">
                     <h2>Personal Training Session</h2>
