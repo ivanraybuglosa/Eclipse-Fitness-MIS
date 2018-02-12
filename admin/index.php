@@ -1,8 +1,11 @@
 
 <?php
 include "../dbConnect.php";
-session_start();
-   
+ session_start();
+if (!isset($_SESSION['loggedIn'])) {
+        $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
+        echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
+    }
 include("includes/header.php"); ?>
 
 
@@ -246,10 +249,12 @@ include("includes/header.php"); ?>
                                     <?php 
                                         $pdo = new dbConnect();
                                         $date = date("Y-m-d");
-                                        $exprs = $pdo->expiry($date,array("order_by" => "M_Code ASC"));
+                                        $week = $pdo->getExpire($date);
+                                        $exprs = $pdo->expiry($date,$week,array("order_by" => "M_Code ASC"));
                                                 if(!empty($exprs)){
                                                     $count = 0;
                                                     foreach($exprs as $exp){
+                                                        $count++;
                                     ?>
                                     
                                     <tr>
@@ -267,7 +272,7 @@ include("includes/header.php"); ?>
                                     </tr>
                                     <?php } }else{ ?>
 
-                                                    <tr><td colspan="6">No Activities found......</td></tr>
+                                                    <tr><td colspan="6">No Client found......</td></tr>
 
                                                     <?php } ?>
                                     

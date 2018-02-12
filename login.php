@@ -49,7 +49,7 @@
         <div class="card">
             <div class="body">
                <?php
-
+                    session_start();
                     if(isset($_POST['username'])&& isset($_POST['password'])){
                         
                         $username = $_POST['username'];
@@ -70,6 +70,9 @@
                             $_SESSION['password'] = $pass;
                             $_SESSION['userID'] = $id;
                             $_SESSION['userType'] = $type;
+                            $_SESSION['loggedIn'] = TRUE;
+
+                            
                             
                             $pdo = new dbConnect();
                                         $expire = $pdo->membershipExpire();
@@ -107,7 +110,9 @@
                                     ?>
                                 <script>alert('Successful Login!');window.location.href='coach/index.php';</script>
                         <?php 
-                        } else { ?>
+                        } else 
+                        { ?>
+
                         <script>alert('Login Failed!Incorrect information!');window.location.href='login.php';</script>
                 <?php     }
                 } 

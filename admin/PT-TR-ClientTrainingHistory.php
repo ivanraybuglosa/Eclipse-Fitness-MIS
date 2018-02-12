@@ -1,7 +1,11 @@
 <?php
  include "../dbConnect.php";
  session_start();
+if (isset($_SESSION['user'])) {
 
+}else{
+        echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
+         }
  include("includes/header.php"); ?>
 <section class="content">
         <div class="container-fluid">

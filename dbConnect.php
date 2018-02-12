@@ -1575,8 +1575,8 @@ class dbConnect{
     }
 
 
-    public function expiry($date,$conditions = array()){
-        $sql = "SELECT * FROM membershiptype INNER JOIN client ON membershiptype.CLIENT_ID = client.CLIENT_ID WHERE (DATE(M_expiryDate) = date_sub(date('".$date."'), INTERVAL 1 week)); ";
+    public function expiry($today,$date2,$conditions = array()){
+        $sql = "SELECT * FROM membershiptype INNER JOIN client ON membershiptype.CLIENT_ID = client.CLIENT_ID WHERE M_expiryDate BETWEEN '".$today."' AND '".$date2."' ";
         $query = $this->db->prepare($sql);
         $query->execute();
         
@@ -1599,6 +1599,19 @@ class dbConnect{
         return !empty($data)?$data:false;
 
     }
+
+    public function getExpire($date){
+        $sql = "SELECT DATE_SUB('".$date."', INTERVAL 1 WEEK) as week;";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['week'];
+        return $result;
+    }
+
+
+            
+        
 
 
 
