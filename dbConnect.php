@@ -1575,6 +1575,32 @@ class dbConnect{
     }
 
 
+    public function expiry($date,$conditions = array()){
+        $sql = "SELECT * FROM membershiptype INNER JOIN client ON membershiptype.CLIENT_ID = client.CLIENT_ID WHERE (DATE(M_expiryDate) = date_sub(date('".$date."'), INTERVAL 1 week)); ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+
+    }
+
+
 
 
 

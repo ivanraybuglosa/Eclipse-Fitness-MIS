@@ -37,6 +37,9 @@ include("includes/header.php"); ?>
         $yearclients = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `client` WHERE year = '$year' ") or die(mysqli_error());
         $fyclients = $yearclients->fetch_array();
 
+        $ptclients = $conn->query("SELECT COUNT(CLIENT_ID) as total FROM `traininglog` WHERE year = '$year' ") or die(mysqli_error());
+        $trainClients = $ptclients->fetch_array();
+
         $fetchcontracts = $conn->query("SELECT COUNT(TL_Code) as total FROM `traininglog` ") or die(mysqli-error());
         $contracts = $fetchcontracts->fetch_array();
 
@@ -78,6 +81,9 @@ include("includes/header.php"); ?>
 
         $sc = $conn->query("SELECT COUNT(SC_Code) as total FROM `studioclass` ") or die(mysql_error());
         $fsc = $sc->fetch_array();
+
+        $scs = $conn->query("SELECT COUNT(SCS_Code) as total FROM `studioclasssession` ") or die(mysql_error());
+        $fscs = $scs->fetch_array();
 
         ?>
 
@@ -133,30 +139,36 @@ include("includes/header.php"); ?>
         <div class="row clearfix">
 
             <!-- Answered Tickets -->
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pull-right">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="body bg-teal">
-                        <div class="font-bold m-b--35">NEW CLIENTS THIS YEAR</div>
+                        <div class="font-bold m-b--35">CLIENTS THIS YEAR</div>
                         <ul class="dashboard-stat-list">
                             <li>
-                                NEW WALK-INS
+                                WALK-INS
                                 <span class="pull-right"><b><?php echo $walkin['total'] ?></b></span>
                             </li>
 
                             <li>
-                                NEW MEMBERSHIPS
+                                MEMBERSHIPS
                                 <span class="pull-right"><b><?php echo $members['total'] ?></b> </span>
                             </li>
 
                             <li>
-                                TOTAL NEW CLIENTS
+                                TRAINING CONTRACTS
+                                <span class="pull-right"><b><?php echo $trainClients['total'] ?></b></span>
+                            </li>
+
+                            <li>
+                                TOTAL CLIENTS
                                 <span class="pull-right"><b><?php echo $fyclients['total'] ?></b></span>
                             </li>
 
                         </ul>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="body bg-teal">
                         <div class="font-bold m-b--35">TRANSACTIONS THIS YEAR</div>
@@ -184,7 +196,8 @@ include("includes/header.php"); ?>
                         </ul>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="body bg-teal">
                         <div class="font-bold m-b--35">THE COMPANY THIS YEAR</div>
@@ -204,23 +217,75 @@ include("includes/header.php"); ?>
                                 <span class="pull-right"><b><?php echo $fsc['total'] ?></b></span>
                             </li>
 
+                            <li>
+                                CLASSES SESSIONS
+                                <span class="pull-right"><b><?php echo $fscs['total'] ?></b></span>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- #END# Answered Tickets -->
             <!-- Task Info -->
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        
+                <div class="card">
+                    <div class="header">
+                        <h2>THIS WEEK'S MEMBERSHIP EXPIRY</h2>
+                    </div>
+                     <div class="body">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Days Remaining</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $pdo = new dbConnect();
+                                        $date = date("Y-m-d");
+                                        $exprs = $pdo->expiry($date,array("order_by" => "M_Code ASC"));
+                                                if(!empty($exprs)){
+                                                    $count = 0;
+                                                    foreach($exprs as $exp){
+                                    ?>
+                                    
+                                    <tr>
+                                        <td><?php 
+                                                    $firstname = $exp['CLIENT_FirstName']; 
+                                                    $midname = $exp['CLIENT_MiddleName']; 
+                                                    $lastname = $exp['CLIENT_LastName']; 
+                                                    $fullname = $firstname ." ". $midname." ". $lastname; 
+                                                        echo $fullname ; 
+                                            ?>
+
+                                        </td>
+                                        <td><?php echo $date - $exp['M_expiryDate']?></td>
+                                        
+                                    </tr>
+                                    <?php } }else{ ?>
+
+                                                    <tr><td colspan="6">No Activities found......</td></tr>
+
+                                                    <?php } ?>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                        
+                    </div>
+                </div>
+
+        
                 <div class="card">
                     <div class="header">
                         <h2>TODAY'S ACTIVITIES</h2>
                     </div>
                      <div class="body">
-                            
-                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                     <tr>
                                         <th>Coach</th>
@@ -255,14 +320,13 @@ include("includes/header.php"); ?>
                             </table>
                         </div>
                     </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                     
+            
             <!-- #END# Task Info -->
         </div>
     </div>
 </section>
+
 <script type="text/javascript">
 
     function showTime(){
@@ -314,8 +378,7 @@ include("includes/header.php"); ?>
 </script>
 
 <?php include("includes/footer.php"); ?>
-
-    <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+<script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
@@ -331,6 +394,8 @@ include("includes/header.php"); ?>
     <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
     <script src="../assets/js/pages/forms/form-wizard.js"></script>
     <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
+
+    
 </body>
 
 </html>
