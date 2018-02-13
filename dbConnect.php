@@ -1609,6 +1609,24 @@ class dbConnect{
         return $result;
     }
 
+    public function getRemaining($id){
+        $sql = "SELECT SUM(Pay_amount) as payment FROM payment WHERE TR_ID ='".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['payment'];
+        return $result;
+    }
+
+    public function getBill($id){
+        $sql = "SELECT TR_Bill FROM transaction WHERE TR_ID ='".$id."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['TR_Bill'];
+        return $result;
+    }
+
 
             
         
