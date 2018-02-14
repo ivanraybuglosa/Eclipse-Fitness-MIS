@@ -36,7 +36,6 @@ if (!isset($_SESSION['loggedIn'])) {
         
 
                         <div class="body">
-                            <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         
@@ -95,7 +94,7 @@ if (!isset($_SESSION['loggedIn'])) {
                 </div>
             </div>
          </div>
-     </div>
+     
     </section>
     <?php include("includes/footer.php"); ?>
 <script>

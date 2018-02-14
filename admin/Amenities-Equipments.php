@@ -161,7 +161,7 @@ include("includes/header.php"); ?>
                                 <div class="form-group">
                                     <label>Quantity</label>
                                     <div class="form-line">
-                                        <input type="number" min="0" name="restockQuantity" class="form-control" placeholder="Quantity" required />
+                                        <input type="number" max="<?php echo $equipment['EI_Quantity']?>" name="restockQuantity" class="form-control" placeholder="Quantity" required />
                                     </div>
                                 </div>
                             </div>

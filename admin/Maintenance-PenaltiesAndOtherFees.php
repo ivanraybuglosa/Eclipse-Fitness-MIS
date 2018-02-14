@@ -11,7 +11,7 @@ if (!isset($_SESSION['loggedIn'])) {
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>Studio Class</h2>
+                <h2>Penalties and Other Fees</h2>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     

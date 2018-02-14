@@ -129,19 +129,27 @@
                     <div class="body">
                     <fieldset>
                     <div class="row clearfix">
-                        <div class="col-md-6">
-                            <label for="lastname">Last Name</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" name="lastName" class="form-control" value="<?php echo $client['CLIENT_LastName']; ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="firstname">First Name</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" name="firstName" class="form-control" value="<?php echo $client['CLIENT_FirstName']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lastname">Last Name</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" name="midName" class="form-control" value="<?php echo $client['CLIENT_MiddleName']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lastname">Last Name</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" name="lastName" class="form-control" value="<?php echo $client['CLIENT_LastName']; ?>">
                                 </div>
                             </div>
                         </div>

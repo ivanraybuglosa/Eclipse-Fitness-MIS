@@ -1,4 +1,5 @@
     <!-- Jquery Core Js -->
+
     <script src="../assets/plugins/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
@@ -16,6 +17,17 @@
     <!-- Waves Effect Plugin Js -->
     <script src="../assets/plugins/node-waves/waves.js"></script>
 
+    <!-- Autosize Plugin Js -->
+    <script src="../assets/plugins/autosize/autosize.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="../assets/plugins/momentjs/moment.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
+
     <!-- Jquery CountTo Plugin Js -->
     <script src="../assets/plugins/jquery-countto/jquery.countTo.js"></script>
 
@@ -25,6 +37,9 @@
 
     <!-- ChartJs -->
     <script src="../assets/plugins/chartjs/Chart.bundle.js"></script>
+
+    <!-- Bootstrap Notify Plugin Js -->
+    <script src="../assets/plugins/bootstrap-notify/bootstrap-notify.js"></script>
 
     <!-- Sweet Alert Plugin Js -->
     <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>

@@ -10,9 +10,16 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"> -->
 
+    <!-- Local Fonts and Icons -->
+    <link href="../material-design-icons-master/iconfont/material-icons.css" rel="stylesheet"/>
+
+    <script src="canvas/jquery.min.js"></script>
+    
+    <script src="canvas/jquery.canvasjs.min.js"></script>
     <!-- Bootstrap Select Css -->
     <link href="../assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
@@ -25,13 +32,25 @@
     <!-- Animation Css -->
     <link href="../assets/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
+    <!-- Wait Me Css -->
+    <link href="../assets/plugins/waitme/waitMe.css" rel="stylesheet" />    
+
+    <!-- Sweetalert Css -->
+    <link href="../assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    
     <!-- Morris Chart Css-->
     <link href="../assets/plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="../assets/css/style.css" rel="stylesheet">
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 
     
+    <!-- Dropzone Css -->       
 
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
@@ -39,12 +58,13 @@
     <link href="../assets/plugins/dropzone/dropzone.css" rel="stylesheet">
         <!-- JQuery DataTable Css -->
     <link href="../assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-
-    <link href="../assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet"/>
    
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../assets/css/themes/all-themes.css" rel="stylesheet" />
     <style type="text/css">
+        @font-face {
+            font-family: TickingTimebomBB;
+        }
         .reveal-if-active {
                   opacity: 0;
                   max-height: 0;
@@ -70,6 +90,43 @@
                           transform: scale(1);
                   overflow: visible;
                 }
+        
+        .clockdate-wrapper {
+    background-color: #333;
+    padding:0px;
+    height: 100px;
+    width:1000px;
+    text-align:center;
+    border-radius:5px;
+    padding-bottom: 15px;
+            
+    
+    
+}
+#clock{
+    background-color:#333;
+    
+    font-family: ;
+    font-size:30px;
+    text-shadow:0px 0px 1px #fff;
+    color:#7FFF00;
+    padding: 5px;
+}
+#clock span {
+    color:#888;
+    text-shadow:0px 0px 1px #333;
+    font-size:10px;
+    position:relative;
+    top:-27px;
+    left:-10px;
+}
+#date {
+    letter-spacing:5px;
+    font-size:15px;
+    font-family:arial,sans-serif;
+    color:#00FF00;
+}
+        
 
     </style>
 
@@ -82,7 +139,7 @@
 
 <body class="theme-black">
     <!-- Page Loader -->
-  <div class="page-loader-wrapper">
+  <!-- <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
                 <div class="spinner-layer pl-red">
@@ -96,7 +153,7 @@
             </div>
             <p>Please wait...</p>
         </div>
-    </div>
+    </div> -->
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
@@ -108,8 +165,8 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                 
-                <a class="navbar-brand col-light-green" href="index.php">ECLIPSE GYM FITNESS MANAGEMENT INFORMATION SYSTEM
+                 <img src="../logo.png" class="pull-left" style="height: 15%; width: 15%; margin-right: 20px;">
+                <a class="navbar-brand col-light-green" href="index.php"> MANAGEMENT INFORMATION SYSTEM
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -126,23 +183,23 @@
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
-            <div class="user-info">
+            <div class="user-info" style="height:15%;">
                 <div class="image">
                     <img src="../assets/images/user.png" width="48" height="48" alt="User" />
                 </div>
-                <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">RECEPTIONIST</div>
+                <div class="info-container pull-right">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: 25px;">RECEPTIONIST</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                         <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- #User Info -->
             <!-- Menu -->
-            <div class="menu">
+            <div class="menu" style="height: 85%;">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active hidden">
@@ -153,139 +210,98 @@
                         </a>
                     </li>
                     <li>
-                        <a href="gymAmenitiesAndAttendance.php">
-                            <i class="material-icons">assignment</i>
-                            <span>Amenities and Attendance</span>
-                        </a>
-                    </li>
-                    <li >
-                        <a href="registration.php">
-                            <i class="material-icons">person_add</i>
-                            <span>Registration</span>
+                        <a href="attendance.php">
+                            <i class="material-icons">queue</i>
+                            <span>Attendance</span>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">person</i>
-                            <span>Profiles</span>
+                        <a href="javascript:void(0);" class="menu-toggle";>
+                            <i class="material-icons">group</i>
+                            <span>Clients</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                            
-                                <a href="regular.php" >
+                                <a href="Client-Profile.php">
                                 <i class="material-icons">verified_user</i>
-                                <span style="margin-top:8px;">Clients</span>
+                                <span style="margin-top:8px;">Profiles</span>
                                 </a>
-                                
-                            </li>
-                            <li>
-                                <a href="receptionists.php">
-                                <i class="material-icons">person</i>
-                                <span style="margin-top:8px;">Receptionists</span>
+                                <a href="Client-Transaction.php">
+                                <i class="material-icons">credit_card</i>
+                                <span style="margin-top:8px;">Transaction</span>
                                 </a>
-
-                            </li>
-                            <li>
-                                <a href="coaches.php">
-                                <i class="material-icons">person_pin</i>
-                                <span style="margin-top:8px;">Coaches</span>
-                                </a>
+                                <a href="Client-Report-Menu.php">
+                                <i class="material-icons">view_list</i>
+                                <span style="margin-top:8px;">Client Reports</span>
+                                </a>                
                             </li>
                         </ul>
                     </li>
-                            <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle";>
                             <i class="material-icons">event_note</i>
                             <span>Studio Class</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="newClass.php">Studio Class</a>
-                            </li>
-                            <li>
-                                <a href="studioClass.php">Studio Class Sessions</a>
+                                <a href="StudioClass-Sessions.php">
+                                <i class="material-icons">alarm_add</i>
+                                <span style="margin-top:8px;">Sessions</span>
+                                </a>
+                                <!-- <a href="StudioClass-Schedule.php">
+                                <i class="material-icons">alarm_add</i>
+                                <span style="margin-top:8px;">Schedules</span>
+                                </a> -->
+                                <a href="StudioClass-Report-Menu.php">
+                                <i class="material-icons">view_list</i>
+                                <span style="margin-top:8px;">Class Reports</span>
+                                </a>                        
                             </li>
                         </ul>
                     </li>
-                    <li class="hidden">
-                        <a href="javascript:void(0);" class="menu-toggle">
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle";>
                             <i class="material-icons">fitness_center</i>
                             <span>Personal Training</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="newContracts.php">New Contract</a>
-                            </li>
-                            <li>
-                                <a href="myTrainee.php">My Trainee</a>
+                                
+                                <a href="PT-ContractsFinal.php">
+                                <i class="material-icons">perm_contact_calendar</i>
+                                <span style="margin-top:8px;">Contracts</span>
+                                </a>
+                                <a href="PT-Report-Menu.php">
+                                <i class="material-icons">view_list</i>
+                                <span style="margin-top:8px;">Personal Training Reports</span>
+                                </a>
+                                                         
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                        <a href="javascript:void(0);" class="menu-toggle";>
                             <i class="material-icons">assignment</i>
-                            <span>Reports</span>
+                            <span>Amenities</span>
                         </a>
-                         <ul class="ml-menu">
+                        <ul class="ml-menu">
                             <li>
-                                <a href="javascript:void(0);" class="menu-toggle">
-                                    <i class="material-icons">build</i>
-                                    <span style="margin-top:8px;">Activity Reports</span>
+                                <a href="Amenities-GymTowels.php">
+                                <i class="material-icons">exposure</i>
+                                <span style="margin-top:8px;">Activities</span>
                                 </a>
-                                 <ul class="ml-menu">
-                                 <li>
-                                        <a href="clientReport.php">
-                                        <span style="margin-top:8px;">Client Activity<span>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="coachReport.php">
-                                        <span style="margin-top:8px;">Coach Activity</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="amenityReport.php">
-                                        <span style="margin-top:8px;">Towel Activity</span>
-                                        </a>
-
-                                </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle">
-                                    <i class="material-icons">accessibility</i>
-                                    <span style="margin-top:8px;">Profile Reports</span>
+                                <a href="Amenities-Equipments.php"> 
+                                <i class="material-icons">lock</i>
+                                <span style="margin-top:8px;">Records</span>
                                 </a>
-                                 <ul class="ml-menu">
-                                 <li>
-                                        <a href="clientList.php">
-                                        <span style="margin-top:8px;">List of Clients</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="memberList.php">
-                                        <span style="margin-top:8px;">List of Members</span> 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="coachList.php">
-                                        <span style="margin-top:8px;">List of Coaches</span>
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="receptionistList.php">
-                                        <span style="margin-top:8px;">List of Receptionists</span>
-                                        </a>
-                                </li>
-                                </ul>
+                                <a href="Amenities-Report-Menu.php">
+                                <i class="material-icons">view_list</i>
+                                <span style="margin-top:8px;">Amenity Reports</span>
+                                </a>
                             </li>
-                            <li>
-                                <a href="amenityReport.php">Client Gym Amenity</a>
-                            </li>
-                            
                         </ul>
                     </li>
+                 
                 </ul>
                 
             </div>
@@ -301,9 +317,17 @@
         <!-- #END# Left Sidebar -->
         <!-- Right Sidebar -->
         <aside id="rightsidebar" class="right-sidebar">
-            
-            
-                    
+            <div class="body">
+                            <div class="alert bg-blue alert-dismissable" style="margin:5px;">
+                                Coach Mark Benjamin just started a personal training contract!
+                            </div>
+                            <div class="alert bg-blue" style="margin:5px;">
+                                Zumba Class is starting in 10 minutes!
+                            </div>
+                            <div class="alert bg-blue" style="margin:5px;">
+                                A spinning class is scheduled
+                            </div>
+                        </div>
         </aside>                       
                          
   

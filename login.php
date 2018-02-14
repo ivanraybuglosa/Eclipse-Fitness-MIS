@@ -49,78 +49,75 @@
         <div class="card">
             <div class="body">
                <?php
-                    session_start();
-                    if(isset($_POST['username'])&& isset($_POST['password'])){
+                $localhost = "localhost";
+           $username = "root";
+               $password = "";
+               $dbname = "eclipse_db";
+
+               $connect = new mysqli($localhost, $username, $password, $dbname);
+                if($connect->connect_error) {
+               die("Connection Failed : " . $connect->connect_error);
+            } else {
+
+             }
+             session_start();
+             if(isset($_POST['username'])&& isset($_POST['password'])){
+                $sta = $connect->query("SELECT * FROM `users`") or die(mysqli_error());
+                 while($check = $sta->fetch_array()){
+                    $u = $check['username'];
+                    $p = $check['password'];
+              
+                $username = $_POST['username'];
+                $password = md5($_POST['password']);
+                $stmt = $pdo->prepare("SELECT * FROM users WHERE username=? AND password=?");
+                $stmt->bindParam(1, $username);
+                $stmt->bindParam(2, $password);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $user = $row['username'];
+                $pass = $row['password'];
+                $id = $row['userID'];
+                $type = $row['userType'];
+                if($username==$user && $password==$pass){
+
+
+                    $_SESSION['username'] = $user;
+                    $_SESSION['password'] = $pass;
+                    $_SESSION['userID'] = $id;
+                    $_SESSION['userType'] = $type;
+                    $_SESSION['loggedIn'] = TRUE;
+
+
+
+
+
+                    if($type =="admin"  ){
+
+                        mysqli_query($connect, "UPDATE users SET  stat= '1' WHERE username = '$username' AND password = '$password' ") or die(mysqli_error($connect));
+                        ?>
+                        <script>alert('Successful Login!');window.location.href='admin/index.php';</script>
                         
-                        $username = $_POST['username'];
-                        $password = md5($_POST['password']);
-                        $stmt = $pdo->prepare("SELECT * FROM users WHERE username=? AND password=?");
-                        $stmt->bindParam(1, $username);
-                        $stmt->bindParam(2, $password);
-                        $stmt->execute();
-                        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                        $user = $row['username'];
-                        $pass = $row['password'];
-                        $id = $row['userID'];
-                        $type = $row['userType'];
-                        if($username==$user && $password==$pass){
-                            
-                            
-                            $_SESSION['username'] = $user;
-                            $_SESSION['password'] = $pass;
-                            $_SESSION['userID'] = $id;
-                            $_SESSION['userType'] = $type;
-                            $_SESSION['loggedIn'] = TRUE;
+                        <?php }elseif ($type == "receptionist") {?>
 
-                            
-                            
-                            $pdo = new dbConnect();
-                                        $expire = $pdo->membershipExpire();
-                                        
-                                        $userData = array(
-                                            'M_membershipstatus' => "Expired"
-                                        );
-                                        if($expire === date("Y-m-d")){
-                                            $condition = array('M_expiryDate' => date("Y-m-d"));
-                                            $update = $pdo->update('membershiptype',$userData,$condition);
-                                        }
+                        <script>alert('Successful Login!');window.location.href='receptionist/index.php';</script>
 
-
-                                        $expiry = $pdo->expire(date("Y-m-d"));
-
-                                        $userData2 = array(
-                                            'TL_TrainingStatus' => "Expired"
-                                        );
-
-                                        if($expiry === date("Y-m-d")){
-                                            $condition = array("TL_Expiry" => date("Y-m-d"));
-                                            $update =$pdo->update('traininglog',$userData2,$condition);
-                                            session_start();
-                                        }
-                                        
-                                if($type =="admin"){
-                                   
-                                ?>
-
-
-                                <script>alert('Successful Login!');window.location.href='admin/index.php';</script>
-                                       
-                                    <?php } 
-                                        else($type =="coach") 
-                                    ?>
+                        <?php }  elseif($type =="coach") {
+                             mysqli_query($connect, "UPDATE users SET  stat= '1' WHERE username = '$username' AND password = '$password' ") or die(mysqli_error($connect));
+                            ?>
                                 <script>alert('Successful Login!');window.location.href='coach/index.php';</script>
                         <?php 
-                        } else 
-                        { ?>
+                        } elseif($u != $username || $p != $password) { ?>
 
                         <script>alert('Login Failed!Incorrect information!');window.location.href='login.php';</script>
                 <?php     }
                 } 
+            }
+        }
                 ?>
 
                 <!-- Scripts for expiry checking of membership and personal training -->
                 
-                <form id="sign_in" method="POST">
+                <form id="sign_in" method="POST" >
                     <div class="msg">Sign in to start your session</div>
                     <div class="input-group">
                         <span class="input-group-addon">
