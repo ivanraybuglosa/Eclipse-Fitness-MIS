@@ -122,8 +122,9 @@ include("includes/header.php");
                                   
                                     <input type="hidden" name="action_type" value="add"/>
                                     <button name ="submit"  type="submit" class="btn bg-green pull-right">SAVE</button>
-                            </form>
+                            
                         </div>
+                        </form>
                    
                     </div>
                  

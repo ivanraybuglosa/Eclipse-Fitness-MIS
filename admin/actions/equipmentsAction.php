@@ -46,7 +46,12 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 			'year' => $year
 		);
 		$insert = $pdo->insert($tblName1,$userData3);
-		echo "<script>alert('Equipment Successfully restock!');window.location.href='../Amenities-Equipments.php';</script>";
+		if($_POST['activity'] == 'restock' ){
+			echo "<script>alert('Equipment Successfully restocked!');window.location.href='../Amenities-Equipments.php';</script>";
+		}else{
+			echo "<script>alert('Equipment Successfully discarded!');window.location.href='../Amenities-Equipments.php';</script>";
+		}
+		
 
 	}
 }

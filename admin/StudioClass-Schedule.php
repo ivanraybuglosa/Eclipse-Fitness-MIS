@@ -141,9 +141,7 @@
 </div>
 <div class="card">
                             <div class="header">
-                               
-                                    
-                                        <h2><?php echo $sc['SC_Name']?> Participants</h2>
+                               <h2><?php echo $sc['SC_Name']?> Participants</h2>
                                     
                                         </div>
                            

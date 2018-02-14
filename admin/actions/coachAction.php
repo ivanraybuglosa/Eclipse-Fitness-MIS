@@ -17,7 +17,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         );
 
         $insert2 = $pdo->insert($tblName2,$userData2);
-         $returnedVal = $pdo->selectID($id,$tblName2,$cusername);
+         $returnedVal = $pdo->selectID($id,$tblName2,$username);
         $userData = array(
              
             'Coach_LastName' => $_POST['LastName'],

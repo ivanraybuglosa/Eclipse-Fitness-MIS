@@ -155,6 +155,7 @@ include("includes/header.php"); ?>
                             			if(!empty($attendances)){
                             				$count = 0;
                             				foreach($attendances as $attend){
+                            					
 
                             	?>
                                  
@@ -164,8 +165,8 @@ include("includes/header.php"); ?>
                                                	$firstname = $attend['CLIENT_FirstName']; 
                                                 $midname = $attend['CLIENT_MiddleName']; 
                                                 $lastname = $attend['CLIENT_LastName']; 
-                                                $fullname = $firstname ." ". $midname." ". $lastname; 
-                                                    echo $fullname ; ?></td>
+                                                echo $fullname = $firstname ." ". $midname." ". $lastname; 
+                                                     ?></td>
                                         <td><?php echo date("g:i A", strtotime($attend['A_TimeIn'])); ?></td>
                                      
                                         <td><?php echo $attend['A_TowelQty']; ?></td>

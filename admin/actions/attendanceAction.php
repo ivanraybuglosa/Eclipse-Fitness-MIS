@@ -264,6 +264,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
                 $condition1 = array('A_Code' => $_POST['A_Code']);
                 $update1 = $pdo->update($tblName1,$userData,$condition1);
+                echo "<script>alert('Client Successfully timed-out');window.location.href='../attendance.php';</script>";
 
 
         }else{

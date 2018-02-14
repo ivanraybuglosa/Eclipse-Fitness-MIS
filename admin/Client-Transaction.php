@@ -96,6 +96,13 @@ if (!isset($_SESSION['loggedIn'])) {
                                                     <div class="card">
                                                         <div class="header">
                                                             <h2>Payment Form</h2>
+                                                             <h2 class="pull-right" style="margin-top:-18px;">Remaining Balance: 
+                                                            <?php 
+                                                                $remaining = $pdo->getRemaining($tr['TR_ID']);
+                                                                $bill = $pdo->getBill($tr['TR_ID']); 
+                                                                echo $bill - $remaining;
+
+                                                            ?></h2>
                                                         </div>
                                             <div class="body">
                                                 <div class="row clearfix">
@@ -142,6 +149,7 @@ if (!isset($_SESSION['loggedIn'])) {
                         <div class="card">     
                                 <div class="header">
                                     <h2>Payment History</h2>
+
                                 </div>
                                 <div class="body">
                                     <div class="row clearfix">
