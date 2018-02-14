@@ -27,7 +27,7 @@ if (!isset($_SESSION['loggedIn'])) {
                             </ol>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        
             <div class="card">
                 <div class="header">
                     <h2>Membership Option Form</h2>
@@ -38,7 +38,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                         <div class="col-sm-4">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" name="type" class="form-control" >
+                                                <input type="text" name="type" class="form-control" required >
                                                 <label class="form-label">Membership Type</label>
                                             </div>
                                         </div>
@@ -46,7 +46,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                         <div class="col-sm-4">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" name="duration" class="form-control" >
+                                                <input type="number" min="0" name="duration" class="form-control" required >
                                                 <label class="form-label">Duration(Months)</label>
                                             </div>
                                         </div>
@@ -54,7 +54,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                         <div class="col-sm-4">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" name="price" class="form-control" >
+                                                <input type="text" name="price" class="form-control"  required>
                                                 <label class="form-label">Price(Per Month)</label>
                                             </div>
                                         </div>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['loggedIn'])) {
                     </div>
                 </div>
             </div>
-        </div>
+        
                               
             
                 
@@ -75,13 +75,12 @@ if (!isset($_SESSION['loggedIn'])) {
                  
             
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                
                     <div class="card">
                         <div class="header">
                             <h2>Membership Options List</h2>
                         </div>
                         <div class="body">
-                            <div class="table-responsive">
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -109,9 +108,9 @@ if (!isset($_SESSION['loggedIn'])) {
                                          <tr role="row">
                                             
                                             <td ><?php echo $members['MS_Type']; ?></td>
-                                            <td ><?php echo $members['MS_Duration']; ?></td>
+                                            <td ><?php echo $members['MS_Duration']; ?> Months</td>
                                             <td ><?php echo $members['MS_Price'];?></td>
-                                            <td ><button type="button" data-toggle="modal"  data-target="#edit-<?php echo $members['MS_Code']; ?>"class="btn bg-green" >Modify</button></td>
+                                            <td ><button type="button" data-toggle="modal"  data-target="#edit-<?php echo $members['MS_Code']; ?>" class="btn bg-green" >Modify</button></td>
                                                <div class="modal fade" id="edit-<?php echo $members['MS_Code']; ?>" tabindex="-1" role="dialog">
                                                 <div class="modal-dialog modal-sm" role="document">
                                                    <form method="post" action="actions/membershipAction.php" >
@@ -125,7 +124,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
                                                                         <div class="form-line">
-                                                                            <
+                                                                            
                                                                             <h5 class="pull-left">Membership Type</h5>
                                                                             <input type="text" class="form-control" name="type" value="<?php echo $members['MS_Type']; ?>">
                                                                         </div>

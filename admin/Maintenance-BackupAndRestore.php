@@ -164,7 +164,7 @@ if (!isset($_SESSION['loggedIn'])) {
                  <div class="body">
                    <div class="table-responsive">
 
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <table class="table table-bordered table-striped table-hover dataTable js-basic-example ">
                                     
                                     <thead>
                                         <tr>
@@ -220,17 +220,13 @@ if (!isset($_SESSION['loggedIn'])) {
     <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
     <!-- Custom Js -->
     <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/pages/index.js"></script>
-
-    <script src="../../plugins/dropzone/dropzone.js"></script>
-    <!-- Demo Js -->
-    <script src="../assets/js/demo.js"></script>
-
-
+    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
     <script src="../assets/js/pages/forms/form-wizard.js"></script>
+    <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
 
 </body>
 

@@ -216,7 +216,7 @@ include("includes/header.php"); ?>
 
 								<div class="form-group">
 									<h5>Locker Key Number: <?php echo $attend['A_LockerKey']?></h5>
-                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>returned" class="with-gap"  value="Returned" checked>
+                               <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>returned" class="with-gap"  value="Returned" required checked>
                                <label for="<?php echo $attend['A_LockerKey']?>returned">Returned</label>
                                <input type="radio" name="key" id="<?php echo $attend['A_LockerKey']?>unreturned" class="with-gap"  value="Unreturned">
                                <label for="<?php echo $attend['A_LockerKey']?>unreturned" class="m-l-20">Unreturned</label>

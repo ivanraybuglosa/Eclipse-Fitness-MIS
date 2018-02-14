@@ -5,11 +5,11 @@ $pdo = new dbConnect();
 $tblName = 'coach';
 $tblName2 = 'users';
 $id = "userID";
-$username = $_POST['cusername'];
+
 
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
-       
+       $username = $_POST['cusername'];
         $userData2 = array(
             'username' => $_POST['cusername'],
             'password' => md5($_POST['cpassword']),
@@ -31,8 +31,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         );
         $insert = $pdo->insert($tblName,$userData);
          echo "<script>alert('Coach Information Successfully Saved!');window.location.href='../PT-Coaches.php';</script>";
-         $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-        $_SESSION['statusMsg'] = $statusMsg;
+         
     
     }elseif($_REQUEST['action_type'] == 'edit'){
             $userData = array(
@@ -54,8 +53,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $update1 = $pdo->update($tblName,$userData,$condition1);
             $update2 = $pdo->update($tblName2,$userData2,$condition2);
             echo "<script>alert('Coach Information Successfully Modified!');window.location.href='../PT-Coaches.php';</script>";
-         $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-        $_SESSION['statusMsg'] = $statusMsg;
+       
         
     }
 }

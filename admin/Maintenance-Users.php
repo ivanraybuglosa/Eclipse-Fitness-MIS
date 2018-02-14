@@ -2,7 +2,7 @@
  include "../dbConnect.php";
  session_start();
 if (!isset($_SESSION['loggedIn'])) {
-        $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
+        
         echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
     }
  include("includes/header.php"); ?>
@@ -27,7 +27,7 @@ if (!isset($_SESSION['loggedIn'])) {
                             </ol>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+       
             <div class="card">
                 <div class="header">
                     <h2>User Access Form</h2>
@@ -76,7 +76,7 @@ if (!isset($_SESSION['loggedIn'])) {
                     </div>
                 </div>
             </div>
-        </div>
+        
                               
             
                 
@@ -84,7 +84,7 @@ if (!isset($_SESSION['loggedIn'])) {
                  
             
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                
                     <div class="card">
                         <div class="header">
                             <h2>User Access List</h2>
@@ -181,7 +181,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+
     </div>
     </section>
             <!-- Card 1 -->

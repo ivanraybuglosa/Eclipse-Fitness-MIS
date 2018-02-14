@@ -170,7 +170,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                 <div class="form-group">
                                     <label>Equipment</label>
                                         <div class="form-line">
-                                            <select class="form-control show-tick" data-live-search="true" name="type" >
+                                            <select class="form-control show-tick" data-live-search="true" name="type" required>
                                                 <option value="SQUAT RACK">SQUAT RACK</option>
                                                 <option value="BARBELLS">BARBELLS</option>
                                                 <option value="BENCH PRESS">BENCH PRESS</option>
@@ -203,7 +203,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                 <div class="form-group">
                                     <label>Model</label>
                                     <div class="form-line">
-                                        <input type="text" name="model" class="form-control" placeholder="Model" />
+                                        <input type="text" name="model" class="form-control" placeholder="Model" required/>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                 <div class="form-group">
                                     <label>Quantity</label>
                                     <div class="form-line">
-                                        <input type="number" required min="0" name="quantity" class="form-control" placeholder="Quantity" />
+                                        <input type="number" required min="0" name="quantity" class="form-control" placeholder="Quantity" required />
                                     </div>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                 <div class="form-group">
                                     <label>Delivery Date</label>
                                     <div class="form-line">
-                                        <input type="date" required="true" name="deliveryDate" class="form-control"/>
+                                        <input type="date" required="true" name="deliveryDate" class="form-control" required/>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                 <div class="form-group">
                                     <label>Delivery Time</label>
                                     <div class="form-line">
-                                        <input type="time" name="deliveryTime" min="07:00" max="22:00" class="form-control"/>
+                                        <input type="time" name="deliveryTime" min="07:00" max="22:00" class="form-control" required/>
                                     </div>
                                 </div>
                             </div>
