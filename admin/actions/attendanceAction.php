@@ -59,43 +59,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                 if($_POST['towel'] > $available){
 
                     echo "<script>alert('Insufficient towels! Time-in Failed ');window.location.href='../attendance.php';</script>";
-                            
-                // }elseif(strtotime($diff) < strtotime($testDiff)){
-                //     //insert time-in information to attendance
-                //         $insert = $pdo->insert($tblName1,$userData);
-                //         echo "<script>alert('Client Time-in Success! Client membership expires in '".$diff."' days! ');window.location.href='../attendance.php';</script>";
-                //         //update towel information
-                        
-                //         $userData7 = array(
-                //             'TI_Borrowed' => ($_POST['towel'] + $borrowed),
-                //             'TI_Available' => ($available - $_POST['towel'])
-                //         );
-                //         $condition = array("TI_Available" => $available);
-                //         $update = $pdo->update($tableTowel,$userData7,$condition);
-
-
-                //         //bill client for walk-in fee
-                //         $bill = $pdo->checkBill($_POST['clientName'],date("Y-m-d"));
-                //         $price = $pdo->penaltyPrice('Walk-in');
-
-                //         //check if client has already been billed for walk-in in the same date
-                //         if($bill <> $_POST['clientName'] || empty($bill)){
-                //             $userData2 = array(
-                //                 'CLIENT_ID' => $_POST['clientName'],
-                //                 'TR_Type' => 'Walk-in',
-                //                 'TR_Bill' => $price,
-                //                 'TR_Status' => 'unpaid',
-                //                 'TR_TransactionDate' => $date,
-                //                 'year' => $year,
-                //                 'month' => $month
-                //             );
-                //             if($regstat == "Walk-in"){
-                //                 $insert1= $pdo->insert($tableName3,$userData2);
-                                
-                //             }
-                //         }else{
-
-                //         }
+                
 
                 }elseif($check == $_POST['clientName']){
 
@@ -255,6 +219,8 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                     'year' => $year,
                     'month' => $month
                 );
+
+                $insert = $pdo->insert($tableName3, $userData5);
                 $condition = array('A_Code' => $_POST['A_Code']);
                 $update = $pdo->update($tblName1,$userData,$condition);
 
@@ -264,7 +230,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
                 $condition1 = array('A_Code' => $_POST['A_Code']);
                 $update1 = $pdo->update($tblName1,$userData,$condition1);
-                echo "<script>alert('Client Successfully timed-out');window.location.href='../attendance.php';</script>";
+                echo "<script>alert('Locker key unreturned!Client Successfully timed-out!');window.location.href='../attendance.php';</script>";
 
 
         }else{

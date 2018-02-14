@@ -47,7 +47,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                 <div class="col-sm-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" name="sccapacity" class="form-control" >
+                                            <input type="number" min="0" name="sccapacity" class="form-control" >
                                             <label class="form-label">Participant Capacity</label>
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                                                 <div class="form-group">
                                                                     <div class="form-line">
                                                                         <h5 class="pull-left">Venue</h5>
-                                                                        <input type="text" class="form-control" name="scvenue" value="<?php echo $studioClasses['SC_venue']; ?>"/>
+                                                                        <input type="text" class="form-control" name="scvenue" value="<?php echo $studioClasses['SC_Venue']; ?>"/>
                                                                     </div>
                                                                 </div>
                                                                  

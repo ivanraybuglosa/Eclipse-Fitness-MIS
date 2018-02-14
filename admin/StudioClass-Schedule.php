@@ -243,9 +243,10 @@
                                                 <td><?php echo $ca['ParticipantNumber']?></td>
                                                 <td name="client" value="<?php echo $ca['CLIENT_ID']?>"><?php $firstname = $ca['CLIENT_FirstName']; $lastname = $ca['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
                                                 <td name="regdate" value="<?php echo $ca['CLIENT_ID']?>"><?php echo date("F d, Y",strtotime($ca['CA_RegDate']))?></td>
-                                                <input type="hidden" name="CA_Code" value="<?php echo $ca['CA_Code']?>">
+                                                
                                                 <input type="hidden" name="CLIENT_ID" value="<?php echo $ca['CLIENT_ID']?>">
                                                 <input type="hidden" name="SCS_Code" value="<?php echo $sc['SCS_Code']?>">
+                                                <input type="hidden" name="CA_Code" value="<?php echo $ca['CA_Code']?>">
                                                 <input type="hidden" name="action_type" value="delete"/>
                                                 <td><center><button name="submit" type="submit" class="btn bg-red">Cancel</button></center></td>
                                             </form>
