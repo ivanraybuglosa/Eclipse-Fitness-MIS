@@ -169,13 +169,7 @@
                 <a class="navbar-brand col-light-green" href="index.php"> MANAGEMENT INFORMATION SYSTEM
                 </a>
             </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    
-                    
-                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
-                </ul>
-            </div>
+            
         </div>
     </nav>
     <!-- #Top Bar -->

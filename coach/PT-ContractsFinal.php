@@ -52,18 +52,22 @@ if (!isset($_SESSION['loggedIn'])) {
                                     </thead>
                                     
                                     <tbody>
-                                        <?php 
-                                            $pdo = new dbConnect();
-                                            
-                                            $ptClients = $pdo->rowsjoin('traininglog','client','coach','trainingpackage','CLIENT_ID','COACH_ID','TP_Code',array('order_by'=>'TL_Code ASC'));
+                                        
 
-                                            if(!empty($ptClients)){ 
-                                                $count = 0; 
-                                                foreach($ptClients as $pt){ 
-                                                $count++;
-                                               
+                                         <?php
+                                                    include"includes/dbConnect.php";
+                                                      $sta1 = $connect->query("SELECT COACH_ID FROM `users` INNER JOIN `coach` on coach.userID = users.userID  WHERE stat = '1' ") or die(mysqli_error());
+                                                             while($user1 = $sta1->fetch_array()){ 
+                                                                $userF = $user1['COACH_ID'];
 
-                                        ?>
+                                                                $date = date('Y-m-d');
+
+                                                    $sta = $connect->query("SELECT * FROM `traininglog` INNER JOIN `client` on traininglog.CLIENT_ID = client.CLIENT_ID INNER JOIN `coach` on coach.COACH_ID = traininglog.COACH_ID INNER JOIN `trainingpackage` on traininglog.TP_Code = trainingpackage.TP_Code WHERE traininglog.COACH_ID = '$userF' AND traininglog.TL_RegDate = '$date' ") or die(mysqli_error());
+                                                     }
+                                                             while($pt = $sta->fetch_array()){  
+                                                  ?>
+
+
                                         <tr>
                                             <td><?php $firstname = $pt['CLIENT_FirstName']; $lastname = $pt['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
                                             
@@ -79,11 +83,11 @@ if (!isset($_SESSION['loggedIn'])) {
                                             
                                              </td>
                                         </tr>
-                                        <?php } }else{ ?>
+                                        <?php } ?>
 
-                                                    <tr><td colspan="6">No Personal Training Contract(s) found......</td></tr>
+                                                   
 
-                                                    <?php } ?>
+                                                    
                                         
                                         
                                         

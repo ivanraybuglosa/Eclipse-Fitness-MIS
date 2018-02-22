@@ -97,14 +97,15 @@
                         ?>
                         <script>alert('Successful Login!');window.location.href='admin/index.php';</script>
                         
-                        <?php }elseif ($type == "receptionist") {?>
+                        <?php }elseif ($type == "coach") {  mysqli_query($connect, "UPDATE users SET  stat= '1' WHERE username = '$username' AND password = '$password' ") or die(mysqli_error($connect));?>
 
-                        <script>alert('Successful Login!');window.location.href='receptionist/index.php';</script>
+                      <script>alert('Successful Login!');window.location.href='coach/index.php';</script>
 
-                        <?php }  elseif($type =="coach") {
-                             mysqli_query($connect, "UPDATE users SET  stat= '1' WHERE username = '$username' AND password = '$password' ") or die(mysqli_error($connect));
+                        <?php }  elseif($type =="receptionist") {
+                           
                             ?>
-                                <script>alert('Successful Login!');window.location.href='coach/index.php';</script>
+                              <script>alert('Successful Login!');window.location.href='receptionist/index.php';</script>
+                                
                         <?php 
                         } elseif($u != $username || $p != $password) { ?>
 

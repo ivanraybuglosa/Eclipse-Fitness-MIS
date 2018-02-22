@@ -58,35 +58,41 @@ if (!isset($_SESSION['loggedIn'])) {
                                           </tr>
                                     </thead>
                                         <tbody>
-                                                    <?php
-                                                    $pdo = new dbConnect();
-                                                    $scs = $pdo->getRowsInnerJoin("SCS_Code","COACH_Firstname","SC_Name",'studioclasssession','coach','studioclass',"COACH_ID","SC_Code",array('order_by'=>'SCS_Code DESC'));
-                                                    if(!empty($scs)){ 
-                                                        $count = 0; foreach($scs as $studioclasssession){ 
-                                                            $count++;?>
+                                                 <?php
+                                                    include"includes/dbConnect.php";
+                                                      $sta1 = $connect->query("SELECT COACH_ID FROM `users` INNER JOIN `coach` on coach.userID = users.userID  WHERE stat = '1' ") or die(mysqli_error());
+                                                             while($user1 = $sta1->fetch_array()){ 
+                                                                $userF = $user1['COACH_ID'];
+
+                                                                $date = date('Y-m-d');
+
+                                                    $sta = $connect->query("SELECT * FROM `users` INNER JOIN `coach` on coach.userID = users.userID INNER JOIN studioclasssession on studioclasssession.COACH_ID = coach.COACH_ID INNER JOIN `studioclass` on studioclasssession.SC_Code = studioclass.SC_Code WHERE studioclasssession.COACH_ID = '$userF' AND studioclasssession.SCS_Date = '$date' ") or die(mysqli_error());
+                                                     }
+                                                             while($user = $sta->fetch_array()){  
+                                                  ?>
+
                                                     <tr>
                                                         <!--Client Firstname + Lastname Merged -->
-                                                        <td><?php $firstname = $studioclasssession['Coach_FirstName']; $lastname = $studioclasssession['Coach_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
-                                                        <td><?php echo $studioclasssession['SC_Name']; ?></td>
-                                                        <td><?php echo date("F j, Y", strtotime($studioclasssession['SCS_Date'])); ?>
+                                                        <td><?php $firstname = $user['Coach_FirstName']; $lastname = $user['Coach_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
+                                                        <td><?php echo $user['SC_Name']; ?></td>
+                                                        <td><?php echo date("F j, Y", strtotime($user['SCS_Date'])); ?>
                                                         </td>
-                                                        <td><?php echo date("0g:i A", strtotime($studioclasssession['SCS_StartTime'])); ?>
+                                                        <td><?php echo date("0g:i A", strtotime($user['SCS_StartTime'])); ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo date("g:i A", strtotime($studioclasssession['SCS_EndTime'])); ?>
+                                                            <?php echo date("g:i A", strtotime($user['SCS_EndTime'])); ?>
                                                            
                                                         </td>
-                                                        <td><?php echo $studioclasssession['SC_Venue']; ?></td>
+                                                        <td><?php echo $user['SC_Venue']; ?></td>
                                                        
                                                         <!-- <td class="align-center"><a type="button" class="btn bg-green" href="StudioClass-Schedule.php?id=<?php echo $studioclasssession['SCS_Code']?>&amp;coach=<?php echo $studioclasssession['COACH_ID'];?>">View</button></td> -->
 
                                                         </tr>
+<?php } ?>
+                                                   
 
-                                                    <?php } }else{ ?>
-
-                                                    <tr><td colspan="6">No Studio Class Session(s) found......</td></tr>
-
-                                                    <?php } ?>
+                                                  
+                                                    
                                                 </tbody>
                                       
                                 </table>

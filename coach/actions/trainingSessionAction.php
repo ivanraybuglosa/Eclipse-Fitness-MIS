@@ -51,7 +51,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                     );
                     $condition1 = array('TL_Code' => $_POST['TL_Code']);
                     $update = $pdo->update($table2,$userData2,$condition1);
-                }elseif($check <= $package){
+                }elseif($check === $package){
                     $userData2 = array(
                         'TL_TrainingStatus' => "Completed"
                     );

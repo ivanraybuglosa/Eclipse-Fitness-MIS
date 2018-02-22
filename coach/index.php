@@ -233,7 +233,7 @@ include("includes/header.php"); ?>
             <!-- #END# Answered Tickets -->
             <!-- Task Info -->
         
-                <div class="card">
+                <!-- <div class="card">
                     <div class="header">
                         <h2>THIS WEEK'S MEMBERSHIP EXPIRY</h2>
                     </div>
@@ -279,7 +279,7 @@ include("includes/header.php"); ?>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> -->
                         
                     </div>
                 </div>
