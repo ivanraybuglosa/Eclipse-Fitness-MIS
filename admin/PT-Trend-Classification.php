@@ -4,7 +4,7 @@
 if (!isset($_SESSION['loggedIn'])) {
         $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
         echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
-    }
+    }   
  include("includes/header.php"); 
 include_once("actions/PT-Trend-Classification-Action.php"); ?>
 <section class="content">
@@ -29,7 +29,7 @@ include_once("actions/PT-Trend-Classification-Action.php"); ?>
     <?php include("PT-Report-List.php"); ?>
            <div class="card">
                     <div class="header">
-                       <h2>Client Classifications</h2>
+                       <h2>Measurement Classifications</h2>
                     </div>
                     <div class="body">
                 <select id="filteryear" class="validate[required] select form-control show-tick" style="margin-top: -25px; width: 30%;" data-live-search="true">

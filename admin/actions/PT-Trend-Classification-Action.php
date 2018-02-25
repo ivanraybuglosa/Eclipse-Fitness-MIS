@@ -8,7 +8,7 @@ if(isset($_GET['year']))
 
 $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());
 
-$exe = $conn->query("SELECT M_Classification, COUNT(*) as total FROM measurements WHERE year = '$year' GROUP BY M_Classification ORDER BY total DESC LIMIT 5") or die(mysqli_error());
+$exe = $conn->query("SELECT M_Classification, COUNT(*) as total FROM measurements INNER JOIN traininglog ON measurements.TL_Code = traininglog.TL_Code WHERE measurements.year = '$year' AND M_MeasurementType = 'Final' GROUP BY M_Classification ORDER BY total DESC") or die(mysqli_error());
 ?>
 
 <script>
@@ -18,7 +18,7 @@ var chart = new CanvasJS.Chart("exercise", {
     animationEnabled: true,
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title:{
-        text: "Common Client Classifications for the Year <?php echo $year ?>"
+        text: "Measurement Classifications for the Year <?php echo $year ?>"
     },
     axisY: { valueFormatString: "#,##0" },
     data: [{        
@@ -28,7 +28,7 @@ var chart = new CanvasJS.Chart("exercise", {
 
         while($fexe = $exe->fetch_array())
          { ?>
-            { y: <?php echo $fexe["total"] ?>, label: "<?php echo $fexe["M_Classification"] ?>"},
+            { y: <?php echo $fexe["total"] ?>, label: "<?php echo $fexe["M_Classification"] ?>", indexLabel: "<?php echo $fexe["total"] ?>"},
          <?php
         } ?>
         ]

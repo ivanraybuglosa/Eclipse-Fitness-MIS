@@ -10,7 +10,7 @@ if (!isset($_SESSION['loggedIn'])) {
 <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>Coach Classes</h2>
+                <h2>Client Measurements</h2>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     
@@ -22,7 +22,7 @@ if (!isset($_SESSION['loggedIn'])) {
                                     </a>
                                 </li>
                                 <li class="active">
-                                    Personal Training - Reports - Coach Classes
+                                    Personal Training - Reports - Client Measurements
                                 </li>
                             </ol>
             </div>
@@ -31,7 +31,7 @@ if (!isset($_SESSION['loggedIn'])) {
     <?php include("PT-Report-List.php"); ?>
     <div class="card">
         <div class="header">
-        <h2>Coach Classes</h2>
+        <h2>Client Measurements</h2>
         </div>
                        <div class="body">
                          <div class="row">
@@ -39,24 +39,25 @@ if (!isset($_SESSION['loggedIn'])) {
                             <div class="col-md-9">
                             <div class="form-group">
                                     <div class="form-line">
-                                        <h5 class="pull-left">Coach Name</h5>
+                                        <h5 class="pull-left">Client Name</h5>
 
-                                        <select class="form-control show-tick" data-live-search="true" id="coachName2" name="coachName2">
+                                        <select class="form-control show-tick" data-live-search="true" id="clientName" name="clientName">
                                             <?php 
                                             $pdo = new dbConnect();
                                             $conn = new mysqli("localhost", "root", "", "eclipse_db") or die(mysqli_error());  
 
-                                             $coaches = $pdo->getRows('coach',array('order_by'=>'COACH_ID ASC'));
-                                                    if(!empty($coaches)){ 
+                                             $clients = $pdo->getRows('client',array('order_by'=>'CLIENT_ID ASC'));
+                                                    if(!empty($clients)){ 
                                                         $count = 0; 
-                                                        foreach($coaches as $coach){ 
+                                                        foreach($clients as $client){ 
                                                             $count++;?>
 
-                                        <option id = "myUL<?php echo $coach['COACH_ID']; ?>" value="<?php echo $coach['COACH_ID']; ?>">
+                                        <option id = "myUL<?php echo $client['CLIENT_ID']; ?>" value="<?php echo $client['CLIENT_ID']; ?>">
                                                 <?php 
-                                                $firstname = $coach['Coach_FirstName']; 
-                                                      $lastname = $coach['Coach_LastName']; 
-                                                      $fullname=$firstname." ".$lastname; 
+                                                $firstname = $client['CLIENT_FirstName']; 
+                                                $middlename = $client['CLIENT_MiddleName'];
+                                                      $lastname = $client['CLIENT_LastName']; 
+                                                      $fullname=$firstname." ".$middlename." ".$lastname; 
                                                       echo $fullname ; 
                                                  ?>
                                         </option>
@@ -74,15 +75,13 @@ if (!isset($_SESSION['loggedIn'])) {
                             </div>
                              </form>
                         </div>
-                                <table class="table table-bordered table-striped table-hover dataTable" id="coachclass" role="grid" aria-describedby="coachclass">
+                                <table class="table table-bordered table-striped table-hover dataTable" id="clientmeasure" role="grid" aria-describedby="clientmeasure">
                                     <thead>
                                         <tr>
-                                            <th>Coach Name</th>
-                                            <th>Class Date</th>
-                                            <th>Class Name</th>
-                                            <th>Start Time</th>
-                                            <th>End Time</th>
-                                            <th>Venue</th>
+                                            <th>Client Name</th>
+                                            <th>Measurement Date</th>
+                                            <th>Measurement Type</th>
+                                            <th>Classification</th>
                                         </tr>
                                     </thead>
                                     
@@ -94,20 +93,20 @@ if (!isset($_SESSION['loggedIn'])) {
             if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                                         if($_REQUEST['action_type'] == 'check'){
 
-                            $sc = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code WHERE `COACH_ID` = '$_POST[coachName2]' ") or die(mysql_error());
+                            $sc = $conn->query("SELECT * FROM `measurements` INNER JOIN traininglog ON measurements.TL_Code = traininglog.TL_Code") or die(mysql_error());
 
 
                             while($scf = $sc->fetch_array()) {
-                                 $cname = $conn->query("SELECT * FROM `coach` WHERE `COACH_ID` = '$_POST[coachName2]' ") or die(mysql_error());
+                                 $cname = $conn->query("SELECT * FROM `client` WHERE `CLIENT_ID` = '$_POST[clientName]' ") or die(mysql_error());
                                  $fetchc = $cname->fetch_array();
                                 ?>
                                         <tr>
-                                            <td><?php echo $fetchc['Coach_FirstName'] ?> <?php echo $fetchc['Coach_LastName'] ?></td>
-                                            <td><?php echo date("F j, Y", strtotime($scf['SCS_Date'])) ?></td>
-                                            <td><?php echo $scf['SC_Name'] ?></td>
-                                            <td><?php echo date("g:i A", strtotime($scf['SCS_StartTime']))?></td>
-                                            <td><?php echo date("g:i A", strtotime($scf['SCS_EndTime']))?></td>
-                                            <td><?php echo $scf['SCS_Venue'] ?></td>
+                                            <td><?php echo $fetchc['CLIENT_FirstName'] ?> 
+                                                <?php echo $fetchc['CLIENT_MiddleName'] ?>
+                                                <?php echo $fetchc['CLIENT_LastName'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($scf['M_DateMeasured'])) ?></td>
+                                            <td><?php echo $scf['M_MeasurementType'] ?></td>
+                                            <td><?php echo $scf['M_Classification'] ?></td>
                                         </tr>
                                         
                                         <?php 
@@ -115,17 +114,17 @@ if (!isset($_SESSION['loggedIn'])) {
                                     }
                                 } else {
 
-                                    $sc = $conn->query("SELECT * FROM `studioclasssession` INNER JOIN studioclass ON studioclasssession.SC_Code = studioclass.SC_Code INNER JOIN coach ON studioclasssession.COACH_ID = coach.COACH_ID") or die(mysql_error());
+                                    $sc = $conn->query("SELECT * FROM `measurements` INNER JOIN traininglog ON measurements.TL_Code = traininglog.TL_Code INNER JOIN client ON traininglog.CLIENT_ID = client.CLIENT_ID") or die(mysql_error());
 
                             while($scf = $sc->fetch_array()) {
                                 ?>
                                         <tr>
-                                            <td><?php echo $scf['Coach_FirstName'] ?> <?php echo $scf['Coach_LastName'] ?></td>
-                                            <td><?php echo date("F j, Y", strtotime($scf['SCS_Date'])) ?></td>
-                                            <td><?php echo $scf['SC_Name'] ?></td>
-                                            <td><?php echo date("g:i A", strtotime($scf['SCS_StartTime']))?></td>
-                                            <td><?php echo date("g:i A", strtotime($scf['SCS_EndTime']))?></td>
-                                            <td><?php echo $scf['SC_Venue'] ?></td>
+                                            <td><?php echo $scf['CLIENT_FirstName'] ?> 
+                                                <?php echo $scf['CLIENT_MiddleName'] ?>
+                                                <?php echo $scf['CLIENT_LastName'] ?></td>
+                                            <td><?php echo date("F j, Y", strtotime($scf['M_DateMeasured'])) ?></td>
+                                            <td><?php echo $scf['M_MeasurementType'] ?></td>
+                                            <td><?php echo $scf['M_Classification'] ?></td>
                                         </tr>
                                         
                                         <?php 
@@ -141,7 +140,7 @@ if (!isset($_SESSION['loggedIn'])) {
 
             <script>
                 $(document).ready(function() {
-                 $('#coachclass').DataTable( {
+                 $('#clientmeasure').DataTable( {
                      dom: 'Bfrtip',
                      buttons: [ 'copy', 'csv', 'excel',
                           { 
@@ -151,7 +150,7 @@ if (!isset($_SESSION['loggedIn'])) {
                               footer: true,
                               customize: function ( win ) {
                             $(win.document.body)
-                                .prepend('<center><h4>Coach Class Record</h4></center>')
+                                .prepend('<center><h4>Client Measurements Record</h4></center>')
                                 .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
 
                             $(win.document.body).find('h3').css('font-family','Impact'); 
