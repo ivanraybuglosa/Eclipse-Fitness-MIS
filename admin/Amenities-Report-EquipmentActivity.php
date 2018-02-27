@@ -166,7 +166,7 @@
                               title: '',
                               responsive: true,
                               footer: true,
-                    customize: function ( win ) {
+                 customize: function ( win ) {
                     $(win.document.body)
                         .prepend('<left><h4>433-0000</h4></left>')
                         .prepend('<left><h4>La Salle Avenue, Bacolod City</h4></left>')

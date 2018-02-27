@@ -170,8 +170,10 @@ if (!isset($_SESSION['loggedIn'])) {
                 className: '',
                 customize: function ( win ) {
                     $(win.document.body)
-                        .prepend('<center><h4>Session List Report</h4></center>')
-                        .prepend('<center><h3>Eclipse Healing and Body Design Center</h3></center>')
+                        .prepend('<left><h4>433-0000</h4></left>')
+                        .prepend('<left><h4>La Salle Avenue, Bacolod City</h4></left>')
+                        .prepend('<left><h4>Session List Report</h4></left>')
+                        .prepend('<left><h3>Eclipse Healing and Body Design Center</h3></left>')
 
                     $(win.document.body).find('h3').css('font-family','Impact'); 
  
@@ -179,7 +181,7 @@ if (!isset($_SESSION['loggedIn'])) {
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' )
 
-                    $(win.document.body.innerHTML += "<br><br><center><div><label>Printed By: ____________  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Signed By:____________</label></div></center>")
+                    $(win.document.body.innerHTML += "<br><br><center><div><label>Date Printed: ____________  &nbsp; &nbsp; &nbsp; Printed By:____________ &nbsp; &nbsp; &nbsp; &nbsp; Signed By: ____________</label></div></center>")
                 }
 
             }
