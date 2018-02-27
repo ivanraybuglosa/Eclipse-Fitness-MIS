@@ -1,0 +1,89 @@
+$gold: #FFB900;
+$coral: #FC636B;
+$brightCoral: #FF6D92;
+
+#page {
+  $opacity: 90%;
+  align-items: center;
+  background: linear-gradient(
+                  to top right,
+                  mix($coral, white, $opacity) 10%,
+                  mix($brightCoral, white, $opacity) 65%,
+                  mix($gold, white, $opacity) 125%);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 1s;
+}
+
+
+#phrase_box {  
+  display: flex;
+  flex-flow: column;
+  height: 150px;
+  overflow: hidden;
+  width: 260px;
+}
+
+#phrases {
+  animation: slide-phrases-upward 20s;
+}
+
+#footer {
+  bottom: 30px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+}
+
+@keyframes slide-phrases-upward {
+  @for $i from 0 through 20 {
+    #{$i * 5%} {
+      transform: translateY($i * -50px);
+    }
+  }
+}
+
+@for $i from 0 through 20 {
+  #loadingCheckCircleSVG-#{$i} {
+    animation: fill-to-white 5000ms;
+    animation-delay: ($i - 1.5) * 1s;
+    fill: white;
+    opacity: 0;
+  }
+}
+@keyframes fill-to-white {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@for $i from 0 through 20 {
+  #loadingCheckSVG-#{$i} {
+    animation: fill-to-coral 5000ms;
+    animation-delay: ($i - 1.5) * 1s;    
+  }
+}
+@keyframes fill-to-coral {
+  0% {
+    fill: white;
+  }
+  10% {
+    fill: $brightCoral;
+  }
+  100% {
+    fill: $brightCoral;
+  }
+}

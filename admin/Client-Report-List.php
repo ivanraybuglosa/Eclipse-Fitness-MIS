@@ -11,7 +11,7 @@
                  </div>
 
                  <div class="col-md-6">
-                <a href="Client-Report-WalkinList.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-memberlist" data-type="success"><strong>WALK-IN</strong></a>
+                <a href="Client-Report-WalkinList.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-memberlist" data-type="success"><strong>WALK-IN LIST</strong></a>
                  </div>
 
                  <div class="col-md-6">

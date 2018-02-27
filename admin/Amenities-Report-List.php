@@ -11,7 +11,7 @@
                  </div>
 
                  <div class="col-md-6">
-                <a href="Amenities-Report-TowelActivity.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachlist" data-type="success"><strong>TOWEL SUPPLY AND LAUNDRY</strong></a>
+                <a href="Amenities-Report-TowelActivity.php" class="btn bg-blue btn-block waves-effect" role="button" name="btn-coachlist" data-type="success"><strong>SUPPLY AND LAUNDRY</strong></a>
                  </div>
 
                  <div class="col-md-6">
@@ -45,7 +45,7 @@
                  </div>
 
                  <div class="col-md-6">
-                <a href="Amenities-Trend-TowelInAndOut.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-clientattendance" data-type="success"><strong>TOWEL SUPPLY AND LAUNDRY</strong></a>
+                <a href="Amenities-Trend-TowelInAndOut.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-clientattendance" data-type="success"><strong> SUPPLY AND LAUNDRY</strong></a>
                  </div>
 
                  <div class="col-md-6">
