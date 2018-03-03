@@ -5,7 +5,7 @@ if (!isset($_SESSION['loggedIn'])) {
         $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
         echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
     }
- include("includes/header.php"); 
+ include("includes/header.php");
  ?>
 
     <section class="content">
@@ -14,8 +14,8 @@ if (!isset($_SESSION['loggedIn'])) {
                 <h2>Amenity Reports</h2>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    
-                           
+
+
                             <ol class="breadcrumb">
                                 <li>
                                     <a href="index.php">
@@ -30,6 +30,49 @@ if (!isset($_SESSION['loggedIn'])) {
         </div>
         <?php include("Amenities-Report-List.php"); ?>
     </section>
+    <script type="text/javascript">
+
+    function showTime(){
+      var date = new Date();
+      var h = date.getHours();
+      var m = date.getMinutes();
+      var s = date.getSeconds();
+      var day = date.getDate();
+      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var session = "AM";
+
+      if(h == 0){
+        h = 12;
+      }
+      if(h > 12){
+        h = h - 12;
+        session = "PM";
+      }
+
+      h = (h < 10) ? "0" + h : h;
+      m = (m < 10) ? "0" + m : m;
+      s = (s < 10) ? "0" + s : s;
+
+      //date
+      var date = new Date();
+      var mon = date.getMonth();
+      var day = date.getDate();
+      var yr = date.getFullYear();
+      var monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ];
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+
+      var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
+      document.getElementById("clock").innerHTML = time;
+
+
+
+
+      setTimeout(showTime, 1000);
+    }
+    showTime();
+    </script>
     <?php include("includes/footer.php"); ?>
 
     <!-- Jquery DataTable Plugin Js -->
