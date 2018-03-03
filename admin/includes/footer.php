@@ -1,3 +1,47 @@
+<script type="text/javascript">
+
+function showTime(){
+  var date = new Date();
+  var h = date.getHours();
+  var m = date.getMinutes();
+  var s = date.getSeconds();
+  var day = date.getDate();
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var session = "AM";
+
+  if(h == 0){
+    h = 12;
+  }
+  if(h > 12){
+    h = h - 12;
+    session = "PM";
+  }
+
+  h = (h < 10) ? "0" + h : h;
+  m = (m < 10) ? "0" + m : m;
+  s = (s < 10) ? "0" + s : s;
+
+  //date
+  var date = new Date();
+  var mon = date.getMonth();
+  var day = date.getDate();
+  var yr = date.getFullYear();
+  var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December" ];
+  var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+
+  var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
+  document.getElementById("clock").innerHTML = time;
+
+
+
+
+  setTimeout(showTime, 1000);
+}
+
+
+</script>
     <!-- Jquery Core Js -->
 
     <script src="../assets/plugins/jquery/jquery.min.js"></script>
@@ -5,7 +49,7 @@
     <!-- Bootstrap Core Js -->
     <script src="../assets/plugins/bootstrap/js/bootstrap.js"></script>
 
-    
+
 
 
     <!-- Select Plugin Js -->
@@ -64,7 +108,3 @@
 
     <!-- Sparkline Chart Plugin Js -->
     <script src="../assets/plugins/jquery-sparkline/jquery.sparkline.js"></script>
-
-
-    
-

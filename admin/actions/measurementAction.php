@@ -8,23 +8,23 @@ $year = date("Y", strtotime("+8 HOURS"));
 $tblName = 'measurements';
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
-        $weight = $_POST['weight'];
-        if($weight < 18.5){
+        $bmi = $_POST['bodyMassIndex'];
+        if($bmi < 18.5){
             $class = "Underweight";
-        }else if($weight > 18.4 && $weight < 25){
+        }else if($bmi > 18.4 && $bmi < 25){
             $class = "Normal Weight";
-        }else if($weight > 24.9 && $weight < 30){
+        }else if($bmi > 24.9 && $bmi < 30){
             $class = "Overweight";
-        }else if($weight > 29.9 && $weight < 35){
+        }else if($bmi > 29.9 && $bmi < 35){
             $class = "Class I Obesity";
-        }else if($weight > 34.9 && $weight < 40){
+        }else if($bmi > 34.9 && $bmi < 40){
             $class = "Class II Obesity";
-        }else if($weight > 40){
+        }else if($bmi > 39){
             $class = "Class III Obesity";
         }else{
             $class ="Undefined";
         }
-    
+
 
         $userData = array(
             'M_Weight' => $_POST['weight'],
@@ -55,7 +55,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $insert = $pdo->insert($tblName,$userData);
 
 
-                    
+
             $id = $_POST['TL_Code'];
             $client = $_POST['CLIENT_ID'];
                 echo "<script>alert('Client Measurement Successfully Saved!');window.location.href='../PT-ContractsInfo.php?id=".$id."&amp;client=$client ';</script>";
@@ -64,25 +64,25 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $client = $_POST['CLIENT_ID'];
             echo "<script>alert('Client Measurement cannot be measured more than once!');window.location.href='../PT-ContractsInfo.php?id=".$id."&amp;client=$client ';</script>";
         }
-        
-        
+
+
     }elseif($_REQUEST['action_type'] == 'modifyInitial'){
-        $weight = $_POST['weight'];
-        if($weight < 18.5){
-            $class = "Underweight";
-        }else if($weight > 18.4 && $weight < 25){
-            $class = "Normal Weight";
-        }else if($weight > 24.9 && $weight < 30){
-            $class = "Overweight";
-        }else if($weight > 29.9 && $weight < 35){
-            $class = "Class I Obesity";
-        }else if($weight > 34.9 && $weight < 40){
-            $class = "Class II Obesity";
-        }else if($weight > 40){
-            $class = "Class III Obesity";
-        }else{
-            $class ="Undefined";
-        }
+      $bmi = $_POST['bodyMassIndex'];
+      if($bmi < 18.5){
+          $class = "Underweight";
+      }else if($bmi > 18.4 && $bmi < 25){
+          $class = "Normal Weight";
+      }else if($bmi > 24.9 && $bmi < 30){
+          $class = "Overweight";
+      }else if($bmi > 29.9 && $bmi < 35){
+          $class = "Class I Obesity";
+      }else if($bmi > 34.9 && $bmi < 40){
+          $class = "Class II Obesity";
+      }else if($bmi > 39){
+          $class = "Class III Obesity";
+      }else{
+          $class ="Undefined";
+      }
         $userData = array(
             'M_Weight' => $_POST['weight'],
             'M_SkeletalMass' => $_POST['skeletalMass'],
@@ -112,22 +112,22 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $client = $_POST['CLIENT_ID'];
                 echo "<script>alert('Client Initial Measurement Successfully Modified!');window.location.href='../PT-ContractsInfo.php?id=".$id."&amp;client=$client ';</script>";
     }elseif($_REQUEST['action_type'] == 'modifyFinal'){
-        $weight = $_POST['weight'];
-        if($weight < 18.5){
-            $class = "Underweight";
-        }else if($weight > 18.4 && $weight < 25){
-            $class = "Normal Weight";
-        }else if($weight > 24.9 && $weight < 30){
-            $class = "Overweight";
-        }else if($weight > 29.9 && $weight < 35){
-            $class = "Class I Obesity";
-        }else if($weight > 34.9 && $weight < 40){
-            $class = "Class II Obesity";
-        }else if($weight > 40){
-            $class = "Class III Obesity";
-        }else{
-            $class ="Undefined";
-        }
+      $bmi = $_POST['bodyMassIndex'];
+      if($bmi < 18.5){
+          $class = "Underweight";
+      }else if($bmi > 18.4 && $bmi < 25){
+          $class = "Normal Weight";
+      }else if($bmi > 24.9 && $bmi < 30){
+          $class = "Overweight";
+      }else if($bmi > 29.9 && $bmi < 35){
+          $class = "Class I Obesity";
+      }else if($bmi > 34.9 && $bmi < 40){
+          $class = "Class II Obesity";
+      }else if($bmi > 39){
+          $class = "Class III Obesity";
+      }else{
+          $class ="Undefined";
+      }
 
         $userData = array(
             'M_Weight' => $_POST['weight'],
@@ -156,6 +156,6 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $id = $_POST['TL_Code'];
             $client = $_POST['CLIENT_ID'];
                 echo "<script>alert('Client Final Measurement Successfully Saved!');window.location.href='../PT-ContractsInfo.php?id=".$id."&amp;client=$client ';</script>";
-        
+
     }
 }
