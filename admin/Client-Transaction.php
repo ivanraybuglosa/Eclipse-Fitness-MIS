@@ -38,26 +38,15 @@ include("includes/header.php"); ?>
       <h2>Unpaid Transactions</h2>
     </div>
     <div class="body">
-
-      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-
         <div class="row">
           <div class="col-sm-12">
             <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
               <thead>
-                <tr role="row">
+                <tr>
 
-                  <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 150px;">Client Name</th>
-
-                  <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Transaction Type</th>
-
-
-                  <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Transaction Date</th>
-
-
-                  <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">Bill</th>
-
-                  <th class="center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 40px;">Action</th>
+                  <th>Client Name</th>
+                  <th>Bill</th>
+                  <th>Action</th>
 
 
                 </tr>
@@ -77,9 +66,7 @@ include("includes/header.php"); ?>
 
                     <tr>
                       <td><?php $firstname = $tr['CLIENT_FirstName']; $lastname = $tr['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
-                      <td><?php echo $tr['TR_Type']; ?></td>
-                      <td><?php echo date("F j, Y", strtotime($tr['TR_TransactionDate'])) ?></td>
-                      <td><?php echo $tr['TR_Bill']; ?></td>
+                      <td><?php echo $tr['bill']; ?></td>
 
                       <td>
                         <button data-toggle="modal" data-target="#payment-<?php echo $tr['TR_ID']; ?>"  class="btn bg-red" >CHECKOUT</button>
@@ -96,11 +83,10 @@ include("includes/header.php"); ?>
                                   <div class="card">
                                     <div class="header">
                                       <h2>Payment Form</h2>
-                                      <h2 class="pull-right" style="margin-top:-18px;">Remaining Balance:
+                                      <h2 class="pull-right" style="margin-top:-18px;">Unpaid Balance:
                                         <?php
-                                        $remaining = $pdo->getRemaining($tr['TR_ID']);
-                                        $bill = $pdo->getBill($tr['TR_ID']);
-                                        echo $bill - $remaining;
+                                        $bill = $pdo->getBill($tr['CLIENT_ID']);
+                                        echo $bill;
 
                                         ?></h2>
                                       </div>
@@ -118,67 +104,61 @@ include("includes/header.php"); ?>
                                             <div class="form-group" >
                                               <label>Amount Paid</label>
                                               <div class="form-line">
-                                                <input type="number" min="0"
-                                                max="<?php $remaining = $pdo->getRemaining($tr['TR_ID']);
-                                                $bill = $pdo->getBill($tr['TR_ID']);
-                                                echo $bill - $remaining;?>" name="paymentAmount" class="form-control" placeholder="Amount"/>
+                                                <input type="number" min="<?php
+                                                $bill = $pdo->getBill($tr['CLIENT_ID']);
+                                                echo $bill?>"
+                                                max="<?php
+                                                $bill = $pdo->getBill($tr['CLIENT_ID']);
+                                                echo $bill?>" name="paymentAmount" class="form-control" placeholder="Amount"/>
                                               </div>
                                             </div>
                                           </div>
                                           <div class="col-lg-2">
                                             <input type="hidden" name="TR_ID" value="<?php echo $tr['TR_ID']?>"/>
+                                            <input type="hidden" name="CLIENT_ID" value="<?php echo $tr['CLIENT_ID']?>"/>
                                             <input type="hidden" name="action_type" value="add"/>
                                             <button type="submit" name ="submit" class="btn pull-right bg-green btn-block" data-type='success' style="margin-top:20px;">PAY</button>
                                           </div>
                                         </div>
-
                                       </div>
                                     </div>
-
                                     <div class="card">
                                       <div class="header">
-                                        <h2>Payment History</h2>
-
+                                        <h2>Unpaid Transactions</h2>
                                       </div>
                                       <div class="body">
                                         <div class="row clearfix">
-                                          <div class="table-responsive">
-                                            <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
-                                              <thead>
-                                                <tr>
-                                                  <th><center>Cash Received</center></th>
-                                                  <th><center>Amount Paid</center></th>
-                                                  <th><center>Date</center></th>
-                                                  <th><center>Time</center></th>
+                                          <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
+                                            <thead>
+                                              <tr>
+                                                <th><center>Transaction Type</center></th>
+                                                <th><center>Bill</center></th>
+                                                <th><center>Date</center></th>
+                                                <!-- <th><center>Time</center></th> -->
 
 
-                                                </tr>
-                                              </thead>
+                                              </tr>
+                                            </thead>
 
-                                              <tbody>
-                                                <?php
-                                                $pdo = new dbConnect();
-                                                $pays = $pdo->payHistory($tr['TR_ID'],array("order_by" => "Pay_ID DESC"));
-                                                if(!empty($pays)){
-                                                  $count = 0;
-                                                  foreach($pays as $pay){
-                                                    ?>
-                                                    <tr>
-                                                      <td><?php echo $pay['Pay_cash'] ?></td>
-                                                      <td><?php echo $pay['Pay_amount'] ?></td>
-                                                      <td><?php echo date("F j, Y", strtotime($pay['Pay_date'])) ?></td>
-                                                      <td><?php echo date("g:i A", strtotime($pay['Pay_time'])) ?></td>
+                                            <tbody>
+                                              <?php
+                                              $pdo = new dbConnect();
+                                              $pays = $pdo->payHistory($tr['CLIENT_ID'], array("order_by" => "TR_ID DESC"));
+                                              if(!empty($pays)){
+                                                $count = 0;
+                                                foreach($pays as $pay){
+                                                  ?>
+                                                  <tr>
+                                                    <td><?php echo $pay['TR_Type'] ?></td>
+                                                    <td><?php echo $pay['TR_Bill'] ?></td>
+                                                    <td><?php echo date("F j, Y", strtotime($pay['TR_TransactionDate'])) ?></td>
 
 
-                                                    </tr>
-                                                  <?php }} ?>
-                                                </tbody>
-                                              </table>
-                                            </div>
+                                                  </tr>
+                                                <?php }} ?>
+                                              </tbody>
+                                            </table>
                                           </div>
-
-
-
                                         </div>
                                       </div>
                                     </div>
@@ -212,7 +192,6 @@ include("includes/header.php"); ?>
 
 
                   </table>
-                </div>
               </div>
             </div>
           </div>
