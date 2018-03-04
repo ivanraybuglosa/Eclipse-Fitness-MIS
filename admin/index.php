@@ -10,16 +10,12 @@ include("includes/header.php"); ?>
 
 
 <section class="content">
-  <div class="container-fluid">
-    <div class="block-header">
-      <center><h2><label>Eclipse Dashboard</label></h2></center>
-    </div>
-  </div>
+  
 
 
   <!-- Widgets -->
 
-        
+
 
 
   <?php

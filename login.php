@@ -1,7 +1,7 @@
 <?php
     require_once('dbConnectLogin.php');
     require_once('dbConnect.php');
-    
+
 
  ?>
 <!DOCTYPE html>
@@ -15,8 +15,11 @@
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"> -->
+
+    <!-- Local Fonts and Icons -->
+    <link href="material-design-icons-master/iconfont/material-icons.css" rel="stylesheet"/>
 
     <!-- Bootstrap Core Css -->
     <link href="assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -66,7 +69,7 @@
                  while($check = $sta->fetch_array()){
                     $u = $check['username'];
                     $p = $check['password'];
-              
+
                 $username = $_POST['username'];
                 $password = md5($_POST['password']);
                 $stmt = $pdo->prepare("SELECT * FROM users WHERE username=? AND password=?");
@@ -96,28 +99,28 @@
                         mysqli_query($connect, "UPDATE users SET  stat= '1' WHERE username = '$username' AND password = '$password' ") or die(mysqli_error($connect));
                         ?>
                         <script>alert('Successful Login!');window.location.href='admin/index.php';</script>
-                        
+
                         <?php }elseif ($type == "coach") {  mysqli_query($connect, "UPDATE users SET  stat= '1' WHERE username = '$username' AND password = '$password' ") or die(mysqli_error($connect));?>
 
                       <script>alert('Successful Login!');window.location.href='coach/index.php';</script>
 
                         <?php }  elseif($type =="receptionist") {
-                           
+
                             ?>
                               <script>alert('Successful Login!');window.location.href='receptionist/index.php';</script>
-                                
-                        <?php 
+
+                        <?php
                         } elseif($u != $username || $p != $password) { ?>
 
                         <script>alert('Login Failed!Incorrect information!');window.location.href='login.php';</script>
                 <?php     }
-                } 
+                }
             }
         }
                 ?>
 
                 <!-- Scripts for expiry checking of membership and personal training -->
-                
+
                 <form id="sign_in" method="POST" >
                     <div class="msg">Sign in to start your session</div>
                     <div class="input-group">
@@ -149,7 +152,7 @@
 </div>
 </div>
 </div>
-    
+
 
     <!-- Jquery Core Js -->
     <script src="assets/plugins/jquery/jquery.min.js"></script>
