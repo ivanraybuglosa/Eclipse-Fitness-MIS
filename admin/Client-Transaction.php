@@ -106,38 +106,32 @@ include("includes/header.php"); ?>
                                       </div>
                                       <div class="body">
                                         <div class="row clearfix">
-                                          <div class="col-lg-4">
+                                          <div class="col-lg-5">
                                             <div class="form-group" >
-                                              <label>Amount</label>
+                                              <label>Amount Received</label>
                                               <div class="form-line">
-                                                <input type="number" min="0" name="paymentAmount" class="form-control" placeholder="Amount"/>
+                                                <input type="number" min="0" name="receivedAmount" class="form-control" placeholder="Amount"/>
                                               </div>
                                             </div>
                                           </div>
-                                          <div class="col-lg-4">
-                                            <div class="form-group">
-                                              <label>Date</label>
+                                          <div class="col-lg-5">
+                                            <div class="form-group" >
+                                              <label>Amount Paid</label>
                                               <div class="form-line">
-                                                <input type="date" name="paymentDate" class="form-control" />
+                                                <input type="number" min="0"
+                                                max="<?php $remaining = $pdo->getRemaining($tr['TR_ID']);
+                                                $bill = $pdo->getBill($tr['TR_ID']);
+                                                echo $bill - $remaining;?>" name="paymentAmount" class="form-control" placeholder="Amount"/>
                                               </div>
                                             </div>
                                           </div>
-                                          <div class="col-lg-4">
-                                            <div class="form-group">
-                                              <label>Time</label>
-                                              <div class="form-line">
-                                                <input type="time" min="8:00" max="20:00" name="paymentTime" class="form-control" />
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-lg-12">
+                                          <div class="col-lg-2">
                                             <input type="hidden" name="TR_ID" value="<?php echo $tr['TR_ID']?>"/>
                                             <input type="hidden" name="action_type" value="add"/>
-                                            <button type="submit" name ="submit" class="btn pull-right bg-green" data-type='success'>SUBMIT</button>
+                                            <button type="submit" name ="submit" class="btn pull-right bg-green btn-block" data-type='success' style="margin-top:20px;">PAY</button>
                                           </div>
                                         </div>
+
                                       </div>
                                     </div>
 
@@ -152,7 +146,8 @@ include("includes/header.php"); ?>
                                             <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
                                               <thead>
                                                 <tr>
-                                                  <th><center>Amount</center></th>
+                                                  <th><center>Cash Received</center></th>
+                                                  <th><center>Amount Paid</center></th>
                                                   <th><center>Date</center></th>
                                                   <th><center>Time</center></th>
 
@@ -169,6 +164,7 @@ include("includes/header.php"); ?>
                                                   foreach($pays as $pay){
                                                     ?>
                                                     <tr>
+                                                      <td><?php echo $pay['Pay_cash'] ?></td>
                                                       <td><?php echo $pay['Pay_amount'] ?></td>
                                                       <td><?php echo date("F j, Y", strtotime($pay['Pay_date'])) ?></td>
                                                       <td><?php echo date("g:i A", strtotime($pay['Pay_time'])) ?></td>

@@ -61,25 +61,42 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../assets/css/themes/all-themes.css" rel="stylesheet" />
-
     <style type="text/css">
         @font-face {
             font-family: TickingTimebomBB;
         }
-
+        .reveal-if-active {
+                  opacity: 0;
+                  max-height: 0;
+                  overflow: hidden;
+                  font-size: 16px;
+                  -webkit-transform: scale(0.8);
+                          transform: scale(0.8);
+                  -webkit-transition: 0.5s;
+                  transition: 0.5s;
+                }
+                .reveal-if-active label {
+                  display: block;
+                  margin: 0 0 3px 0;
+                }
+                .reveal-if-active input[type=text] {
+                  width: 100%;
+                }
+                input[type="radio"]:checked ~ .reveal-if-active, input[type="checkbox"]:checked ~ .reveal-if-active {
+                  opacity: 1;
+                  max-height: 100px;
+                  padding: 10px 20px;
+                  -webkit-transform: scale(1);
+                          transform: scale(1);
+                  overflow: visible;
+                }
 
 
 #clock{
-    font-size:30px;
+    font-size:25px;
+
     color:#7FFF00;
-    padding-bottom:-200px;
-    text-align:center;
-
-
 }
-
-
-
 
 
 
@@ -115,71 +132,19 @@
     <!-- #END# Overlay For Sidebars -->
 
     <!-- Top Bar -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                  <img src="../logo.png" class="pull-left" style="height: 15%; width: 15%; margin-right: 20px;">
-                <a class="navbar-brand col-light-green" href="index.php"> MANAGEMENT INFORMATION SYSTEM
+                <a class="navbar-brand" style="color:#7FFF00;" href="index.php"> MANAGEMENT INFORMATION SYSTEM
                 </a>
-                <div id="clock"></div>
-
-
-
             </div>
+            <div id="clock" class="pull-right" style="margin-top:-55px;"></div>
+
         </div>
     </nav>
-
-
-    <!-- <script type="text/javascript">
-
-        function showTime(){
-            var date = new Date();
-            var h = date.getHours();
-            var m = date.getMinutes();
-            var s = date.getSeconds();
-            var day = date.getDate();
-            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            var session = "AM";
-
-            if(h == 0){
-                h = 12;
-            }
-            if(h > 12){
-                h = h - 12;
-                session = "PM";
-            }
-
-            h = (h < 10) ? "0" + h : h;
-            m = (m < 10) ? "0" + m : m;
-            s = (s < 10) ? "0" + s : s;
-
-
-            //Datetime
-            // var date = new Date();
-            var mon = date.getMonth();
-            var day = date.getDate();
-            var yr = date.getFullYear();
-            var monthNames = ["January", "February", "March", "April", "May", "June",
-                              "July", "August", "September", "October", "November", "December" ];
-            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-            var finalDATE = monthNames[date.getMonth()] + " "+day+ ","+yr
-
-            var time = h + ":" + m + ":" + s + " " + session+ "  -  " + monthNames[date.getMonth()] + " "+day+ ","+yr+"("days[date.getDay()")"];
-            document.getElementById("clock").innerHTML = time;
-
-
-
-
-            setTimeout(showTime, 1000);
-        }
-        showTime();
-
-
-
-    </script> -->
     <!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
@@ -201,7 +166,6 @@
                 </div>
             </div>
             <!-- #User Info -->
-
             <!-- Menu -->
             <div class="menu" style="height: 85%;">
                 <ul class="list">
@@ -347,9 +311,21 @@
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
-
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <div class="body">
+                            <div class="alert bg-blue alert-dismissable" style="margin:5px;">
+                                Coach Mark Benjamin just started a personal training contract!
+                            </div>
+                            <div class="alert bg-blue" style="margin:5px;">
+                                Zumba Class is starting in 10 minutes!
+                            </div>
+                            <div class="alert bg-blue" style="margin:5px;">
+                                A spinning class is scheduled
+                            </div>
+                        </div>
+        </aside>
 
 
         <!-- #END# Right Sidebar -->
-        <?php include("includes/footer.php"); ?>
     </section>
