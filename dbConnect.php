@@ -879,7 +879,7 @@ class dbConnect{
     }
 
     public function transClient($conditions= array()){
-        $sql = "SELECT * FROM transaction INNER JOIN client on transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_Status = 'unpaid' ";
+        $sql = "SELECT CLIENT_FirstName,CLIENT_LastName,TR_ID,transaction.CLIENT_ID,TR_Type,SUM(TR_Bill) as bill FROM transaction INNER JOIN client on transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_Status = 'unpaid' GROUP BY CLIENT_ID";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -1487,8 +1487,8 @@ class dbConnect{
         return $result;
     }
 
-    public function payHistory($code,$conditions = array()){
-        $sql ="SELECT * FROM payment WHERE TR_ID = '".$code."' ";
+    public function payHistory($client,$conditions = array()){
+        $sql ="SELECT * FROM transaction WHERE CLIENT_ID = '".$client."' AND TR_Status = 'Unpaid' ";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -1619,14 +1619,31 @@ class dbConnect{
     }
 
     public function getBill($id){
-        $sql = "SELECT TR_Bill FROM transaction WHERE TR_ID ='".$id."' ";
+        $sql = "SELECT SUM(TR_Bill) as bill FROM transaction WHERE CLIENT_ID ='".$id."' AND TR_Status = 'Unpaid' ";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
-        $result = $var['TR_Bill'];
+        $result = $var['bill'];
         return $result;
     }
 
+		public function transact($id){
+        $sql = "SELECT TR_ID FROM transaction WHERE CLIENT_ID ='".$id."' AND TR_Status = 'Unpaid' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['TR_ID'];
+        return $result;
+    }
+
+		public function payID($cash,$date,$time){
+				$sql = "SELECT Pay_ID FROM payment WHERE Pay_cash = '".$cash."' AND Pay_date = '".$date."' AND Pay_time = '".$time."' ";
+				$query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['Pay_ID'];
+        return $result;
+		}
 
 
 
