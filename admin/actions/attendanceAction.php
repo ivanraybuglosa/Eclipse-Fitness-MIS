@@ -37,13 +37,6 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'A_status' => $regstat
             );
 
-
-
-
-
-
-
-
             $check = $pdo->checkAttendance($_POST['clientName'],$date);
             $available = $pdo->previousAvailable();
             $borrowed = $pdo->previousBorrowed();

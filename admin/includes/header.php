@@ -93,7 +93,7 @@
 
 
 #clock{
-    font-size:25px;
+    font-size:20px;
 
     color:#7FFF00;
 }
@@ -111,7 +111,7 @@
 
 <body class="theme-black">
     <!-- Page Loader -->
-  <!-- <div class="page-loader-wrapper">
+  <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
                 <div class="spinner-layer pl-red">
@@ -125,7 +125,7 @@
             </div>
             <p>Please wait...</p>
         </div>
-    </div> -->
+    </div>
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
@@ -141,7 +141,7 @@
                 <a class="navbar-brand" style="color:#7FFF00;" href="index.php"> MANAGEMENT INFORMATION SYSTEM
                 </a>
             </div>
-            <div id="clock" class="pull-right" style="margin-top:-55px;"></div>
+            <div id="clock" class="pull-right" style="margin-top:-50px;"></div>
 
         </div>
     </nav>
