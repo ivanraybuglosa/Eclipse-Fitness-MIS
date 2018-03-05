@@ -13,36 +13,16 @@ $year = date("Y", strtotime("+8 HOURS"));
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
   if($_REQUEST['action_type'] == 'add'){
 
-    $userData = array(
-      'Pay_cash' => $_POST['receivedAmount'],
-      'Pay_amount' => $_POST['paymentAmount'],
-      'Pay_change' => $_POST['receivedAmount'] - $_POST['paymentAmount'],
-      'Pay_date' => $date,
-      'Pay_time' => $time,
-      'month' => $month,
-      'year' => $year
-
-    );
-    $insert = $pdo->insert($tblName2,$userData);
-    $id = $pdo->payID($_POST['receivedAmount'],$date,$time);
-
-    $pays = $pdo->payHistory($_POST['CLIENT_ID'], array("order_by" => "TR_ID DESC"));
-      if(!empty($pays)){
-        $count = 0;
-        foreach($pays as $pay){
           $userData2 = array(
-            'TR_status' => 'paid',
-            'Pay_ID' => $id
+            'TR_status' => 'paid'
           );
           $condition = array(
-            'TR_Status' => 'Unpaid',
-            'CLIENT_ID' => $_POST['CLIENT_ID']
+            'TR_ID' => $_POST['TR_ID']
             );
           $update = $pdo->update('transaction',$userData2,$condition);
-        }
-      }
 
-    echo "<script>alert('Payment successfully saved!');window.location.href='../Client-Transaction.php';</script>";
+
+    echo "<script>alert('Client Transaction successfully checked out!');window.location.href='../Client-Transaction.php';</script>";
 
   }
 }

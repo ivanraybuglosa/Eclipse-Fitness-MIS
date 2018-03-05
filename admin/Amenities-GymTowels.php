@@ -33,461 +33,298 @@ include("includes/header.php"); ?>
       <div class="card">
         <div class="header">
           <h2>Towels</h2>
+
+          <button type="button" data-toggle="modal" data-target="#activity" class="btn btn-primary waves-effect pull-right" style="margin-top:-27px; padding-right:30px; padding-left:30px;">
+            <i class="material-icons">extension</i>
+            <span>TOWELS</span>
+          </button>
         </div>
         <div class="body">
-          <div class="row">
-            <div class="col-sm-4">
-              <a type="button" data-toggle="modal" data-target="#supply" class="btn btn-success waves-effect btn-block">SUPPLY<a>
-              </div>
-              <div class="col-sm-4">
-                <a type="button" data-toggle="modal" data-target="#laundry" class="btn btn-success waves-effect btn-block">LAUNDRY<a>
-                </div>
-                <div class="col-sm-4">
-                  <a type="button" data-toggle="modal" data-target="#delivered" class="btn btn-success waves-effect btn-block">DELIVERED<a>
-                  </div>
-                </div>
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                  <div class="row">
-                    <div class="col-sm-12">
-                    <table  class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Delivered</th>
-                          <th>Borrowed</th>
-                          <th>Returned</th>
-                          <th>Unreturned</th>
-                          <th>Laundry</th>
-                          <th>Available</th>
-                          <th>On-hand</th>
 
 
-
-                        </tr>
-                      </thead>
-                    </table>
-                  </div>
-                </div>
-
-                </div>
-
-
-              </div>
-            </div>
-
-            <!-- MODAL FOR Supply -->
-            <div class="modal fade" id="supply" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                  <center>
-                    <div class="modal-header">
-                      <div class="block-header">
-                        <h2><strong>Supply Brand New Towels</strong></h2>
-                      </div>
+          <div class="body table-responsive">
+            <?php
+            $pdo = new dbConnect();
+            date_default_timezone_set('Asia/Manila');
+            $available = $pdo->previousAvailable();
+            $towels = $pdo->towels(date("Y-m-d"),array("order_by" => "TI_Code"));
+            if(!empty($towels)){
+              $count = 0;
+              foreach($towels as $towel){
+                $count++;
+                ?>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="info-box bg-blue hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">devices</i>
                     </div>
-                    <div class="modal-body">
-                    <form method="post" action="actions/profileAction.php" />
-                    <div class="col-sm-12">
-                    <div class="form-group form-float">
-                      <div class="form-line">
-                        <input type="number" class="form-control" name="supply" required>
-                        <label class="form-label">Supply Brand New Towels </label>
-                      </div>
+                    <div class="content">
+                      <div class="text">BORROWED</div>
+                      <div class="number"><?php echo $towel['TI_Borrowed']?></div>
                     </div>
                   </div>
                 </div>
-
-                <div class="modal-footer">
-
-                    <input type="hidden" name="action_type" value="supply">
-                      <button name ="submit" type="submit" class="btn  bg-green">SUPPLY</button>
-                    </form>
-                    <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
-                  </div>
-
-                </center>
-              </div>
-            </div>
-          </div>
-
-          <!-- END OF MODAL FOR Supply -->
-          <!-- MODAL FOR Supply -->
-          <div class="modal fade" id="laundry" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-sm" role="document">
-              <div class="modal-content">
-                <center>
-                  <div class="modal-header">
-                    <div class="block-header">
-                      <h2><strong>Laundry Used Towels</strong></h2>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="info-box bg-blue hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">devices</i>
                     </div>
-                  </div>
-                  <div class="modal-body">
-                  <form method="post" action="actions/profileAction.php" />
-                  <div class="col-sm-12">
-                  <div class="form-group form-float">
-                    <div class="form-line">
-                      <input type="number" class="form-control" name="contactNumber" required>
-                      <label class="form-label">Laundry Towels </label>
+                    <div class="content">
+                      <div class="text">RETURNED</div>
+                      <div class="number"><?php echo $towel['TI_Returned']?></div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-               <div class="modal-footer">
-                 <input type="hidden" name="action_type" value="laundry" />
-                    <button name="submit" type="submit" class="btn  bg-green">LAUNDRY</button>
-                  </form>
-                  <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  <div class="info-box bg-blue hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">devices</i>
+                    </div>
+                    <div class="content">
+                      <div class="text">SUPPLIED</div>
+                      <div class="number"><?php echo $towel['supply']?></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  <div class="info-box bg-blue hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">devices</i>
+                    </div>
+                    <div class="content">
+                      <div class="text">LAUNDRY</div>
+                      <div class="number"><?php echo $towel['laundry']?></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  <div class="info-box bg-blue hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">devices</i>
+                    </div>
+                    <div class="content">
+                      <div class="text">DELIVERED </div>
+                      <div class="number"><?php echo $towel['delivered']?></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="info-box bg-blue hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">devices</i>
+                    </div>
+                    <div class="content">
+                      <div class="text">AVAILABLE</div>
+                      <div class="number"><?php echo $towel['TI_Available']?></div>
+                    </div>
+                  </div>
                 </div>
 
-              </center>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="info-box bg-blue hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">devices</i>
+                    </div>
+                    <div class="content">
+                      <div class="text">TOTAL</div>
+                      <div class="number">92%</div>
+                    </div>
+                  </div>
+                </div>
+
+
+              <?php }} ?>
+
+
+
+
             </div>
           </div>
         </div>
 
-        <!-- END OF MODAL FOR Laundry -->
         <!-- MODAL FOR Supply -->
-        <div class="modal fade" id="delivered" tabindex="-1" role="dialog">
+        <div class="modal fade" id="activity" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
               <center>
-                <form method="post" action="actions/profileAction.php" />
                 <div class="modal-header">
                   <div class="block-header">
-                    <h2><strong>Delivered Towels From Laundry</strong></h2>
+                    <h2><strong>TOWEL ACTIVITY</strong></h2>
                   </div>
                 </div>
+                  </center>
                 <div class="modal-body">
-
-                <div class="col-sm-12">
-                <div class="form-group form-float">
-                  <div class="form-line">
-                    <input type="number" class="form-control" name="delivered" required>
-                    <label class="form-label">Enter Delivered Amount of Towels </label>
+                  <form method="post" action="actions/towelInventoryAction.php" />
+                  <div class="col-sm-12">
+                    <div class="form-group form-float">
+                      <div class="form-line">
+                        <input type="number" class="form-control" name="towelAmount" required>
+                        <label class="form-label">Towel Amount </label>
+                      </div>
+                    </div>
                   </div>
+                  <div class="col-md-12">
+                    <label style="margin-top: 9px;">Towel Activity</label>
+                  </div>
+                  <div class="col-md-12">
+                    <input type="radio" value="Supply" name="activity" id="supply" class="with-gap" required>
+                    <label for="supply">Supply</label>
+                    </div>
+                    <div class="col-md-12">
+                  <input type="radio"  value="Delivered" name="activity" id="delivered" class="with-gap" required>
+                  <label for="delivered">Delivered</label>
+                  </div>
+                  <div class="col-md-12">
+                  <input type="radio"  value="Laundry" name="activity" id="laundry" class="with-gap" required>
+                  <label for="laundry">Laundry</label>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+
+                <input type="hidden" name="action_type" value="add">
+                <button name ="submit" type="submit" class="btn  bg-green">SUBMIT</button>
+              </form>
+              <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+
+      <div class="header">
+        <h2>
+          Equipment
+        </h2>
+      </div>
+      <div class="body">
+        <form action="actions/equipmentsAction.php" method="POST">
+          <div class="row clearfix">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label>Equipment</label>
+                <div class="form-line">
+                  <select class="form-control show-tick" data-live-search="true" name="type" required>
+                    <option value="SQUAT RACK">SQUAT RACK</option>
+                    <option value="BARBELLS">BARBELLS</option>
+                    <option value="BENCH PRESS">BENCH PRESS</option>
+                    <option value="INCLINE BENCH PRESS">INCLINE BENCH PRESS</option>
+                    <option value="HAMMER STRENGTH MACHINE">HAMMER STRENGTH MACHINE</option>
+                    <option value="CABLES AND PULLEYS">CABLES AND PULLEYS</option>
+                    <option value="DUMBBELLS">DUMBBELLS</option>
+                    <option value="PULLUP BAR">PULLUP BAR</option>
+                    <option value="LAT PULLDOWN MACHINE">LAT PULLDOWN MACHINE</option>
+                    <option value="LEG EXTENSION MACHINE">LEG EXTENSION MACHINE</option>
+                    <option value="LEG CURL MACHINE">LEG CURL MACHINE</option>
+                    <option value="HYPER EXTENSION BENCH">HYPER EXTENSION BENCH</option>
+                    <option value="DIPPING BARS">DIPPING BARS</option>
+                    <option value="SMITH MACHINE">SMITH MACHINE</option>
+                    <option value="PREACHER BENCH">PREACHER BENCH</option>
+                    <option value="ABDOMINAL BENCH">ABDOMINAL BENCH</option>
+                    <option value="LEG PRESS MACHINE">LEG PRESS MACHINE</option>
+                    <option value="HACK SQUAT MACHINE">HACK SQUAT MACHINE</option>
+                    <option value="CALF MACHINE">CALF MACHINE</option>
+                    <option value="LEG ADDUCTION MACHINE">LEG ADDUCTION MACHINE</option>
+                    <option value="KETTLEBELLS">KETTLEBELLS</option>
+                    <option value="WALL BALL">WALL BALL</option>
+                    <option value="FOAM ROLLER">FOAM ROLLER</option>
+                    <option value="STABILITY BALL">STABILITY BALL</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label>Model</label>
+                <div class="form-line">
+                  <input type="text" name="model" class="form-control" placeholder="Model" required/>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label>Quantity</label>
+                <div class="form-line">
+                  <input type="number" required min="0" name="quantity" class="form-control" placeholder="Quantity" required />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label>Delivery Date</label>
+                <div class="form-line">
+                  <input type="date" required="true" name="deliveryDate" class="form-control" required/>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label>Delivery Time</label>
+                <div class="form-line">
+                  <input type="time" name="deliveryTime" min="07:00" max="22:00" class="form-control" required/>
                 </div>
               </div>
             </div>
 
-            <div class="modal-footer">
-                <input type="hidden" name="action_type" value="delivered" />
-                  <button name ="submit"  value="Member" type="submit" class="btn  bg-green">SUBMIT</button>
-                </form>
-                <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
-              </div>
 
-            </center>
+            <div class="col-lg-12">
+              <input type="hidden" name="action_type" value="add"/>
+              <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" style="padding:10px; margin-bottom:10px;">SUBMIT</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
-
-      <!-- END OF MODAL FOR DELIVERED -->
-
-              <!-- <div class="card">
-
-              <div class="header">
-              <h2>
-              Towels
-            </h2>
-
-            <div class="col-auto pull-left">
-            <form method="POST" action="actions/towelInventoryAction.php">
-            <div class="row container-fluid">
-            <div class="col-sm-12" style="margin-top: 60px;">
-            <div class="form-group">
-            <div class="form-line">
-            <input type="text" min="1" name="supply" class="form-control" placeholder="Supply Towels" />
-          </div>
-        </div>
-        <input type="hidden" name="action_type" value="add"/>
-        <button type="submit" name ="submit" class="btn btn-success waves-effect" style="margin-top:-20px;">
-        <span style="padding: 5px;">SUPPLY</span>
-      </button>
-
-
-
     </div>
-  </div>
-</form>
-<form method="POST" action="actions/towelInventoryAction.php">
-<div class="col-sm-12" style="margin-top: 20px;">
-<div class="form-group">
-<div class="form-line">
-<input type="number" name="laundry" class="form-control" />
-</div>
-</div>
+
+  </section>
 
 
-<input type="hidden" name="action_type" value="delivered"/>
-<button name ="submit" type="submit" class="btn bg-red waves-effect" style="margin-top:-20px;">
-<span>DELIVERED</span>
-</button>
-</div>
+  <script type="text/javascript">
 
-</form>
-<form method="POST" action="actions/towelInventoryAction.php">
-<div class="col-sm-12" style="margin-top: 20px;">
-<div class="form-group">
-<div class="form-line">
-<input type="number" name="laundry" class="form-control" />
-</div>
-</div>
+  function showTime(){
+    var date = new Date();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    var day = date.getDate();
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var session = "AM";
+
+    if(h == 0){
+      h = 12;
+    }
+    if(h > 12){
+      h = h - 12;
+      session = "PM";
+    }
+
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+
+    //date
+    var date = new Date();
+    var mon = date.getMonth();
+    var day = date.getDate();
+    var yr = date.getFullYear();
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
-<input type="hidden" name="action_type" value="laundry"/>
-<button name ="submit" type="submit" class="btn bg-red waves-effect" style="margin-top:-20px;">
-<span>LAUNDRY</span>
-</button>
-</div>
-
-</form>
-</div>
-
-</div>
-
-
-
-
-<div class="body table-responsive">
-<?php
-$pdo = new dbConnect();
-$available = $pdo->previousAvailable();
-$towels = $pdo->towels(date("Y-m-d"),array("order_by" => "TI_Code"));
-if(!empty($towels)){
-$count = 0;
-foreach($towels as $towel){
-$count++;
-?>
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<div class="info-box-3 bg-green hover-zoom-effect">
-<div class="icon">
-<i class="material-icons">add</i>
-</div>
-<div class="content">
-<div class="text">Supplied (Brand New)</div>
-<div class="number"><?php echo $towel["supply"] ?></div>
-</div>
-</div>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<div class="info-box-3 bg-red hover-zoom-effect">
-<div class="icon">
-<i class="material-icons">receipt</i>
-</div>
-<div class="content">
-<div class="text">Laundry</div>
-<div class="number"><?php echo $towel["laundry"] ?>  </div>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-<div class="info-box-3 bg-green hover-zoom-effect">
-<div class="icon">
-<i class="material-icons">sort</i>
-</div>
-<div class="content">
-
-<div class="text">Available</div>
-<div class="number"><?php echo $available ?></div>
-
-</div>
-</div>
-</div>
-
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-<div class="info-box-3 bg-green hover-zoom-effect">
-<div class="icon">
-<i class="material-icons">remove</i>
-</div>
-<div class="content">
-<div class="text">Borrowed</div>
-<div class="number"><?php echo $towel["TI_Borrowed"] ?></div>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-<div class="info-box-3 bg-green hover-zoom-effect">
-<div class="icon">
-<i class="material-icons">assignment_returned</i>
-</div>
-<div class="content">
-<div class="text">Returned</div>
-<div class="number"><?php echo $towel["TI_Returned"] ?></div>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-<div class="info-box-3 bg-green hover-zoom-effect">
-<div class="icon">
-<i class="material-icons">assignment_returned</i>
-</div>
-<div class="content">
-<div class="text">Delivered</div>
-<div class="number"><?php echo $towel["TI_Returned"] ?></div>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-<div class="info-box-3 bg-green hover-zoom-effect">
-<div class="icon">
-<i class="material-icons">assignment_returned</i>
-</div>
-<div class="content">
-<div class="text">Total Borrowed</div>
-<div class="number"><?php echo $towel["TI_Returned"] ?></div>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-<div class="info-box-3 bg-green hover-zoom-effect">
-<div class="icon">
-<i class="material-icons">assignment_returned</i>
-</div>
-<div class="content">
-<div class="text">Total Towels</div>
-<div class="number"><?php echo $towel["TI_Returned"] ?></div>
-</div>
-</div>
-</div>
-<?php }} ?>
+    var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
+    document.getElementById("clock").innerHTML = time;
 
 
 
 
-</div>
-</div> -->
-
-<div class="card">
-
-  <div class="header">
-    <h2>
-      Equipment
-    </h2>
-  </div>
-  <div class="body">
-    <form action="actions/equipmentsAction.php" method="POST">
-      <div class="row clearfix">
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label>Equipment</label>
-            <div class="form-line">
-              <select class="form-control show-tick" data-live-search="true" name="type" required>
-                <option value="SQUAT RACK">SQUAT RACK</option>
-                <option value="BARBELLS">BARBELLS</option>
-                <option value="BENCH PRESS">BENCH PRESS</option>
-                <option value="INCLINE BENCH PRESS">INCLINE BENCH PRESS</option>
-                <option value="HAMMER STRENGTH MACHINE">HAMMER STRENGTH MACHINE</option>
-                <option value="CABLES AND PULLEYS">CABLES AND PULLEYS</option>
-                <option value="DUMBBELLS">DUMBBELLS</option>
-                <option value="PULLUP BAR">PULLUP BAR</option>
-                <option value="LAT PULLDOWN MACHINE">LAT PULLDOWN MACHINE</option>
-                <option value="LEG EXTENSION MACHINE">LEG EXTENSION MACHINE</option>
-                <option value="LEG CURL MACHINE">LEG CURL MACHINE</option>
-                <option value="HYPER EXTENSION BENCH">HYPER EXTENSION BENCH</option>
-                <option value="DIPPING BARS">DIPPING BARS</option>
-                <option value="SMITH MACHINE">SMITH MACHINE</option>
-                <option value="PREACHER BENCH">PREACHER BENCH</option>
-                <option value="ABDOMINAL BENCH">ABDOMINAL BENCH</option>
-                <option value="LEG PRESS MACHINE">LEG PRESS MACHINE</option>
-                <option value="HACK SQUAT MACHINE">HACK SQUAT MACHINE</option>
-                <option value="CALF MACHINE">CALF MACHINE</option>
-                <option value="LEG ADDUCTION MACHINE">LEG ADDUCTION MACHINE</option>
-                <option value="KETTLEBELLS">KETTLEBELLS</option>
-                <option value="WALL BALL">WALL BALL</option>
-                <option value="FOAM ROLLER">FOAM ROLLER</option>
-                <option value="STABILITY BALL">STABILITY BALL</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label>Model</label>
-            <div class="form-line">
-              <input type="text" name="model" class="form-control" placeholder="Model" required/>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="form-group">
-            <label>Quantity</label>
-            <div class="form-line">
-              <input type="number" required min="0" name="quantity" class="form-control" placeholder="Quantity" required />
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="form-group">
-            <label>Delivery Date</label>
-            <div class="form-line">
-              <input type="date" required="true" name="deliveryDate" class="form-control" required/>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="form-group">
-            <label>Delivery Time</label>
-            <div class="form-line">
-              <input type="time" name="deliveryTime" min="07:00" max="22:00" class="form-control" required/>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-lg-12">
-          <input type="hidden" name="action_type" value="add"/>
-          <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" style="padding:10px; margin-bottom:10px;">SUBMIT</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-</section>
-
-
-<script type="text/javascript">
-
-function showTime(){
-  var date = new Date();
-  var h = date.getHours();
-  var m = date.getMinutes();
-  var s = date.getSeconds();
-  var day = date.getDate();
-  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  var session = "AM";
-
-  if(h == 0){
-    h = 12;
+    setTimeout(showTime, 1000);
   }
-  if(h > 12){
-    h = h - 12;
-    session = "PM";
-  }
-
-  h = (h < 10) ? "0" + h : h;
-  m = (m < 10) ? "0" + m : m;
-  s = (s < 10) ? "0" + s : s;
-
-  //date
-  var date = new Date();
-  var mon = date.getMonth();
-  var day = date.getDate();
-  var yr = date.getFullYear();
-  var monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December" ];
-  var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-
-  var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
-  document.getElementById("clock").innerHTML = time;
-
-
-
-
-  setTimeout(showTime, 1000);
-}
-showTime();
+  showTime();
 </script>
 <?php include("includes/footer.php"); ?>
 <!-- Custom Js -->

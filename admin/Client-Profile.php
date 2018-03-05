@@ -59,10 +59,10 @@ include("includes/header.php"); ?>
         <div class="col-md-4">
           <div class="form-group">
             <label style="margin-top: 9px;">Gender: </label>
-            <input type="radio" value="Male" name="gender" id="male" class="with-gap" required\">
+            <input type="radio" value="Male" name="gender" id="male" class="with-gap" required>
             <label for="male">Male</label>
 
-            <input type="radio"  value="Female" name="gender" id="female" class="with-gap" required">
+            <input type="radio"  value="Female" name="gender" id="female" class="with-gap" required>
             <label for="female" class="m-l-20">Female</label>
           </div>
         </div>

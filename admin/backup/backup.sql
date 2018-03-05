@@ -275,7 +275,7 @@ CREATE TABLE `backuphistory` (
   `backup_date` date NOT NULL,
   `backup_time` time NOT NULL,
   PRIMARY KEY (`backup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 INSERT INTO backuphistory VALUES("2","Export","2018-01-27","02:14:00"); 
 INSERT INTO backuphistory VALUES("3","Import","2018-01-27","02:19:00"); 
@@ -289,6 +289,7 @@ INSERT INTO backuphistory VALUES("15","Export","2018-02-06","11:53:00");
 INSERT INTO backuphistory VALUES("16","Import","2018-02-06","05:01:00"); 
 INSERT INTO backuphistory VALUES("17","Import","2018-02-06","05:01:00"); 
 INSERT INTO backuphistory VALUES("18","Import","2018-02-06","08:00:00"); 
+INSERT INTO backuphistory VALUES("19","Export","2018-03-05","16:26:52"); 
 
 
 
@@ -567,7 +568,7 @@ CREATE TABLE `measurements` (
   `month` text NOT NULL,
   `year` int(4) NOT NULL,
   PRIMARY KEY (`M_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=208 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=latin1;
 
 INSERT INTO measurements VALUES("69","40","150","4","1","1","15","4","2","3","2","5","3","4","2","3","2","5","2018-02-07","Initial","Class III Obesity","Feb","2018"); 
 INSERT INTO measurements VALUES("70","40","50","3","2","1","2","2","3","2","1","3","2","3","2","5","4","3","2018-02-07","Final","Class III Obesity","Feb","2018"); 
@@ -682,6 +683,7 @@ INSERT INTO measurements VALUES("179","138","50","12","15","32","12","15","32","
 INSERT INTO measurements VALUES("180","138","80","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-04-10","Final","ClassIIIObesity","Apr","2018"); 
 INSERT INTO measurements VALUES("181","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0000-00-00","","","","0"); 
 INSERT INTO measurements VALUES("182","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0000-00-00","","","","0"); 
+INSERT INTO measurements VALUES("208","111","18","10","20","1","40","23","22","23","131","232","221","332","111","221","321","332","2018-03-05","Final","Class III Obesity","Mar","2018"); 
 
 
 
