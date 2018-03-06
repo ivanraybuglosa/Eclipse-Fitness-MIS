@@ -216,9 +216,9 @@ include("includes/header.php"); ?>
                     <!--Client Firstname + Lastname Merged -->
                     <td>
                       <?php
-                      $firstname = $client['CLIENT_FirstName'];
-                      $midname = $client['CLIENT_MiddleName'];
-                      $lastname = $client['CLIENT_LastName'];
+                      $firstname = ucfirst($client['CLIENT_FirstName']);
+                      $midname = ucfirst($client['CLIENT_MiddleName']);
+                      $lastname = ucfirst($client['CLIENT_LastName']);
                       $fullname = $firstname ." ". $midname." ". $lastname;
                       echo $fullname ; ?></td>
 
