@@ -34,9 +34,9 @@ include("includes/header.php"); ?>
         <div class="header">
           <h2>Towels</h2>
 
-          <button type="button" data-toggle="modal" data-target="#activity" class="btn btn-primary waves-effect pull-right" style="margin-top:-27px; padding-right:30px; padding-left:30px;">
-            <i class="material-icons">extension</i>
-            <span>TOWELS</span>
+          <button type="button" data-toggle="modal" data-target="#activity" class="btn btn-success waves-effect pull-right" style="margin-top:-27px; padding-right:30px; padding-left:30px;">
+            <i class="material-icons">menu</i>
+            <span>TOWEL ACTIVITY</span>
           </button>
         </div>
         <div class="body">
@@ -48,87 +48,88 @@ include("includes/header.php"); ?>
             date_default_timezone_set('Asia/Manila');
             $available = $pdo->previousAvailable();
             $towels = $pdo->towels(date("Y-m-d"),array("order_by" => "TI_Code"));
+            $available = $pdo->previousAvailable();
             if(!empty($towels)){
               $count = 0;
               foreach($towels as $towel){
                 $count++;
                 ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                  <div class="info-box bg-blue hover-zoom-effect">
+                  <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
-                      <i class="material-icons">devices</i>
+                      <i class="material-icons">keyboard_arrow_right</i>
                     </div>
                     <div class="content">
                       <div class="text">BORROWED</div>
-                      <div class="number"><?php echo $towel['TI_Borrowed']?></div>
+                      <div class="number"><?php if(empty($towel['TI_Borrowed'])){echo "0";}else{echo $towel['TI_Borrowed']; }?></div>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                  <div class="info-box bg-blue hover-zoom-effect">
+                  <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
-                      <i class="material-icons">devices</i>
+                      <i class="material-icons">keyboard_arrow_left</i>
                     </div>
                     <div class="content">
                       <div class="text">RETURNED</div>
-                      <div class="number"><?php echo $towel['TI_Returned']?></div>
+                      <div class="number"><?php if(empty($towel['TI_Returned'])){echo "0";}else{echo $towel['TI_Returned'];}?></div>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                  <div class="info-box bg-blue hover-zoom-effect">
+                  <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
-                      <i class="material-icons">devices</i>
+                      <i class="material-icons">add</i>
                     </div>
                     <div class="content">
                       <div class="text">SUPPLIED</div>
-                      <div class="number"><?php echo $towel['supply']?></div>
+                      <div class="number"><?php if(empty($towel['supply'])){echo "0";}else{echo $towel['supply']; }?></div>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                  <div class="info-box bg-blue hover-zoom-effect">
+                  <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
-                      <i class="material-icons">devices</i>
+                      <i class="material-icons">arrow_upward</i>
                     </div>
                     <div class="content">
                       <div class="text">LAUNDRY</div>
-                      <div class="number"><?php echo $towel['laundry']?></div>
+                      <div class="number"><?php if(empty($towel['laundry'])){ echo "0";}else{echo $towel['laundry']; }?></div>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                  <div class="info-box bg-blue hover-zoom-effect">
+                  <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
-                      <i class="material-icons">devices</i>
+                      <i class="material-icons">arrow_downward</i>
                     </div>
                     <div class="content">
                       <div class="text">DELIVERED </div>
-                      <div class="number"><?php echo $towel['delivered']?></div>
+                      <div class="number"><?php if(empty($towel['delivered'])){echo "0";}else{echo $towel['delivered'];}?></div>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                  <div class="info-box bg-blue hover-zoom-effect">
+                  <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
-                      <i class="material-icons">devices</i>
+                      <i class="material-icons">check</i>
                     </div>
                     <div class="content">
                       <div class="text">AVAILABLE</div>
-                      <div class="number"><?php echo $towel['TI_Available']?></div>
+                      <div class="number"><?php if(empty($available)){echo "0";}else{echo $available; } ?></div>
                     </div>
                   </div>
                 </div>
 
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                  <div class="info-box bg-blue hover-zoom-effect">
+                  <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
-                      <i class="material-icons">devices</i>
+                      <i class="material-icons">store</i>
                     </div>
                     <div class="content">
                       <div class="text">TOTAL</div>
-                      <div class="number">92%</div>
+                      <div class="number"><?php echo $available + ($towel['TI_Borrowed'] + $towel['TI_Returned']) + $towel['laundry']?></div>
                     </div>
                   </div>
                 </div>
