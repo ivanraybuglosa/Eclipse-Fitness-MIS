@@ -297,6 +297,110 @@ include("includes/header.php"); ?>
     </div>
 
     <div class="card">
+      <div class="header">
+        <h2>Suggested Exercises</h2>
+      </div>
+      <div class="body">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 1</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/1.gif" alt="exercise1" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 2</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/2.gif" alt="exercise2" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 3</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/3.gif" alt="exercise3" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 4</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/4.gif" alt="exercise4" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 5</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/5.gif" alt="exercise5" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 6</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/6.gif" alt="exercise6" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 7</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/7.gif" alt="exercise7" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 8</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/8.gif" alt="exercise8" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="header bg-green">
+                <h2>Exercise 9</h2>
+              </div>
+              <div class="body">
+                <img src="exercises/9.gif" alt="exercise9" style="height:100%; width:100%">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="card">
       <div class="header" style="background:silver;">
         <h2>Personal Training Session</h2>
       </div>
@@ -1364,7 +1468,7 @@ include("includes/header.php"); ?>
                                 var monthNames = ["January", "February", "March", "April", "May", "June",
                                 "July", "August", "September", "October", "November", "December" ];
                                 var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                                
+
 
                                 var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
                                 document.getElementById("clock").innerHTML = time;
