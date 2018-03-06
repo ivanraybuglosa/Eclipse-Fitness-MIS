@@ -296,369 +296,222 @@ include("includes/header.php"); ?>
       </div>
     </div>
 
-    <div class="card">
-      <div class="header">
-        <h2>Suggested Exercises</h2>
-      </div>
-      <div class="body">
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 1</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/1.gif" alt="exercise1" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 2</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/2.gif" alt="exercise2" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 3</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/3.gif" alt="exercise3" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 4</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/4.gif" alt="exercise4" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 5</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/5.gif" alt="exercise5" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 6</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/6.gif" alt="exercise6" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 7</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/7.gif" alt="exercise7" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 8</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/8.gif" alt="exercise8" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="header bg-green">
-                <h2>Exercise 9</h2>
-              </div>
-              <div class="body">
-                <img src="exercises/9.gif" alt="exercise9" style="height:100%; width:100%">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-    </div>
-    <div class="card">
-      <div class="header" style="background:silver;">
-        <h2>Personal Training Session</h2>
-      </div>
-      <form method="post" action="actions/trainingSessionAction.php">
-        <div class="body">
-          <div class="row clearfix">
-            <div class="col-md-4">
-              <div class="input-group">
-                <div class="form-line">
-                  <h5 class="pull-left">Session Date</h5>
-                  <input type="date" name="date" class="form-control"/>
+
+
+    <div class="modal fade" id="exercises" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <center>
+            <div class="modal-body">
+              <div class="card">
+                <div class="header">
+                  <h2>Suggested Exercises</h2>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="input-group">
-                <div class="form-line">
-                  <h5 class="pull-left">Start Time</h5>
-                  <input type="time" name="st" class="form-control" placeholder="Start Time" min="07:00" max="22:00"/>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="input-group">
-                <div class="form-line">
-                  <h5 class="pull-left">End Time</h5>
-                  <input type="time" name="et" class="form-control" placeholder="End Time" min="07:00" max="22:00"/>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-md-4">
-              <div class="input-group">
-                <div class="form-line">
-                  <h5 class="pull-left">Exercise</h5>
-                  <input type="text" name="exercise" class="form-control" placeholder="Enter Session Exercise"/>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-
-              <div class="input-group">
-                <div class="form-line">
-                  <h5 class="pull-left">Sets</h5>
-                  <input type="number" name="sets" class="form-control" placeholder=" " min="0" max="10"/>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-
-              <div class="input-group">
-                <div class="form-line">
-                  <h5 class="pull-left">Repetitions</h5>
-                  <input type="number" name="reps" class="form-control" placeholder=" " min="0" max="500" />
-                </div>
-              </div>
-            </div>
-            <div class="pull-right">
-
-              <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
-              <input type="hidden" name="client" value="<?php echo $pt['CLIENT_ID']?>">
-              <input type="hidden" name="packageType" value="<?php echo $pt['TP_PackageType']?>">
-              <input type="hidden" name="coach" value="<?php echo $pt['COACH_ID']?>">
-              <input type="hidden" name="action_type" value="add"/>
-              <button type="submit" name="submit" id="submit" class="btn bg-green pull-left btn-success" style="margin-right:20px; margin-top:35px;">SUBMIT </button>
-            </div>
-
-          </form>
-        </div>
-      </div>
-    </div>
-    <?php
-    $id = $_GET['id'];
-    $pdo = new dbConnect();
-    $measurements = $pdo->measurementInitial($id,array('order_by'=>'M_Code ASC'));
-    if(!empty($measurements)){
-      $count = 0;
-      foreach($measurements as $measurement){
-        $count++;
-        ?>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <form method="post" action="actions/measurementAction.php" >
-                <div class="header" style="background:silver;">
-                  <h2>Body Mass Index and Measurements(Initial)</h2>
-                </div>
-
-                <div class="body container-fluid">
-                  <div class="row clearfix">
-                    <div class="col-md-3">
-                      <label for="age">Weight(lbs.)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="weight" min="0" class="form-control" value="<?php echo $measurement['M_Weight']?>">
+                <div class="body">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 1</h2>
+                        </div>
+                        <div class="body">
+                          <img src="exercises/1.gif" alt="exercise1" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="age">Skeletal Mass(kg)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="skeletalMass" min="0" class="form-control" value="<?php echo $measurement['M_SkeletalMass']?>" >
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 2</h2>
+                        </div>
+                        <div class="body">
+                          <img src="exercises/2.gif" alt="exercise2" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="age">Body Fat Mass(%)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="bodyFatMass" min="0" class="form-control" value="<?php echo $measurement['M_BodyFatMass']?>">
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 3</h2>
                         </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <label for="age">Fat Free Mass(%)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="fatFreeMass" min="0" class="form-control" value="<?php echo $measurement['M_FatFreeMass']?>" >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <label for="age">Body Mass Index(%)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="bodyMassIndex" min="0" class="form-control"  value="<?php echo $measurement['M_BodyMassIndex']?>">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <label for="age">Percent Body Fat(%)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="percentBodyFat" min="0" class="form-control" value="<?php echo $measurement['M_PercentBodyFat']?>">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <label for="age">Waist-Hip Ratio(cm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="waistHipRatio" min="0" class="form-control"  value="<?php echo $measurement['M_WaistHipRatio']?>">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <label for="age">Basal-Metabolism(J/(h. kg)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="basalMetabolism" min="0" class="form-control" value="<?php echo $measurement['M_BasalMetabolicRate']?>">
+                        <div class="body">
+                          <img src="exercises/3.gif" alt="exercise3" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="row clearfix">
-
-                    <div class="col-md-3">
-                      <label for="age">Left Upper Arm(cm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="leftUpperArm" min="0" class="form-control"  value="<?php echo $measurement['M_LeftUpperArm']?>" >
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 4</h2>
+                        </div>
+                        <div class="body">
+                          <img src="exercises/4.gif" alt="exercise4" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="age">Right Upper Arm(cm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="rightUpperArm" min="0" class="form-control" value="<?php echo $measurement['M_RightUpperArm']?>" >
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 5</h2>
+                        </div>
+                        <div class="body">
+                          <img src="exercises/5.gif" alt="exercise5" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="age">Chest(cm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="chest" min="0" class="form-control" value="<?php echo $measurement['M_Chest']?>">
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 6</h2>
+                        </div>
+                        <div class="body">
+                          <img src="exercises/6.gif" alt="exercise6" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="age">Waist(cm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="waist" min="0" class="form-control"  value="<?php echo $measurement['M_Waist']?>">
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 7</h2>
+                        </div>
+                        <div class="body">
+                          <img src="exercises/7.gif" alt="exercise7" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="age">Hip(cm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="hip" min="0" class="form-control" value="<?php echo $measurement['M_Hips']?>">
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 8</h2>
+                        </div>
+                        <div class="body">
+                          <img src="exercises/8.gif" alt="exercise8" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="age">Left Upper Thigh(cm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="leftUpperThigh" min="0" class="form-control" value="<?php echo $measurement['M_LeftUpperThigh']?>" >
+                    <div class="col-sm-4">
+                      <div class="card">
+                        <div class="header bg-green">
+                          <h2>Exercise 9</h2>
+                        </div>
+                        <div class="body">
+                          <img src="exercises/9.gif" alt="exercise9" style="height:100%; width:100%">
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="age">Right Upper Thigh(cm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="rightUpperThigh" min="0" class="form-control" value="<?php echo $measurement['M_RightUpperThigh']?>" >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <label for="age">Resting Heart Rate(bpm)</label>
-                      <div class="form-group">
-                        <div class="form-line">
-                          <input type="text" name="restingHeartRate" min="0" class="form-control" value="<?php echo $measurement['M_RestingHR']?>">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
-                      <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
-                      <input type="hidden" name="M_Code" value="<?php echo $measurement['M_Code']?>">
-                      <input type="hidden" name="type" value="Initial">
-                      <input type="hidden" name="action_type" value="modifyInitial">
-                      <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" data-type='success'>&nbsp; MODIFY &nbsp;</button>
-                    </div>
-
                   </div>
                 </div>
-              <?php }} ?>
+              </div>
+            </div>
+            <div class="modal-footer">
+
+              <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+      <div class="card">
+        <div class="header" style="background:silver;">
+          <h2>Personal Training Session</h2>
+          <button type="button" data-toggle="modal" data-target="#exercises" class="btn bg-green pull-right btn-success" style="margin-top:-22px">SUGGESTED EXERCISES </button>
+        </div>
+        <form method="post" action="actions/trainingSessionAction.php">
+          <div class="body">
+            <div class="row clearfix">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <div class="form-line">
+                    <h5 class="pull-left">Session Date</h5>
+                    <input type="date" name="date" class="form-control"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <div class="form-line">
+                    <h5 class="pull-left">Start Time</h5>
+                    <input type="time" name="st" class="form-control" placeholder="Start Time" min="07:00" max="22:00"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <div class="form-line">
+                    <h5 class="pull-left">End Time</h5>
+                    <input type="time" name="et" class="form-control" placeholder="End Time" min="07:00" max="22:00"/>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+                <div class="input-group">
+                  <div class="form-line">
+                    <h5 class="pull-left">Exercise</h5>
+                    <input type="text" name="exercise" class="form-control" placeholder="Enter Session Exercise"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+
+                <div class="input-group">
+                  <div class="form-line">
+                    <h5 class="pull-left">Sets</h5>
+                    <input type="number" name="sets" class="form-control" placeholder=" " min="0" max="10"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+
+                <div class="input-group">
+                  <div class="form-line">
+                    <h5 class="pull-left">Repetitions</h5>
+                    <input type="number" name="reps" class="form-control" placeholder=" " min="0" max="500" />
+                  </div>
+                </div>
+              </div>
+              <div class="pull-right">
+
+                <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
+                <input type="hidden" name="client" value="<?php echo $pt['CLIENT_ID']?>">
+                <input type="hidden" name="packageType" value="<?php echo $pt['TP_PackageType']?>">
+                <input type="hidden" name="coach" value="<?php echo $pt['COACH_ID']?>">
+                <input type="hidden" name="action_type" value="add"/>
+                <button type="submit" name="submit" id="submit" class="btn bg-green pull-left btn-success" style="margin-right:20px; margin-top:35px;">SUBMIT </button>
+              </div>
+
             </form>
           </div>
         </div>
       </div>
-
       <?php
       $id = $_GET['id'];
       $pdo = new dbConnect();
-      $measurements = $pdo->measurementFinal($id,array('order_by'=>'M_Code ASC'));
+      $measurements = $pdo->measurementInitial($id,array('order_by'=>'M_Code ASC'));
       if(!empty($measurements)){
         $count = 0;
         foreach($measurements as $measurement){
           $count++;
           ?>
-
           <div class="row">
             <div class="col-md-12">
               <div class="card">
                 <form method="post" action="actions/measurementAction.php" >
                   <div class="header" style="background:silver;">
-                    <h2>Body Mass Index and Measurements(Final)</h2>
+                    <h2>Body Mass Index and Measurements(Initial)</h2>
                   </div>
 
-                  <div class="body">
+                  <div class="body container-fluid">
                     <div class="row clearfix">
                       <div class="col-md-3">
                         <label for="age">Weight(lbs.)</label>
@@ -791,16 +644,16 @@ include("includes/header.php"); ?>
                           </div>
                         </div>
                       </div>
-                      <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
-                      <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
-                      <input type="hidden" name="M_Code" value="<?php echo $measurement['M_Code']?>">
-                      <input type="hidden" name="type" value="Final">
-                      <input type="hidden" name="action_type" value="modifyFinal"/>
                       <div class="col-md-12">
-                        <button type="submit" class="btn  waves-effect btn-success pull-right" data-type='success'>&nbsp; MODIFY &nbsp;</button>
+                        <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
+                        <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
+                        <input type="hidden" name="M_Code" value="<?php echo $measurement['M_Code']?>">
+                        <input type="hidden" name="type" value="Initial">
+                        <input type="hidden" name="action_type" value="modifyInitial">
+                        <button type="submit" name="submit" class="btn  waves-effect btn-success pull-right" data-type='success'>&nbsp; MODIFY &nbsp;</button>
                       </div>
-                    </div>
 
+                    </div>
                   </div>
                 <?php }} ?>
               </form>
@@ -808,474 +661,468 @@ include("includes/header.php"); ?>
           </div>
         </div>
 
-        <script type="text/javascript">
-        window.onload = function () {
-          <?php
-          $id = $_GET['id'];
-          $pdo = new dbConnect();
-          $initialMeasurements = $pdo->measurementInitial($id,array('order_by'=>'M_Code ASC'));
-          if(!empty($initialMeasurements)){
-            $count = 0;
-            foreach($initialMeasurements as $initialMeasurement){
-              $count++;
-              ?>
-              <?php
-              $id = $_GET['id'];
-              $pdo = new dbConnect();
-              $finalMeasurements = $pdo->measurementFinal($id,array('order_by'=>'M_Code ASC'));
-              if(!empty($finalMeasurements)){
-                $count = 0;
-                foreach($finalMeasurements as $finalMeasurement){
-                  $count++;
-                  ?>
+        <?php
+        $id = $_GET['id'];
+        $pdo = new dbConnect();
+        $measurements = $pdo->measurementFinal($id,array('order_by'=>'M_Code ASC'));
+        if(!empty($measurements)){
+          $count = 0;
+          foreach($measurements as $measurement){
+            $count++;
+            ?>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <form method="post" action="actions/measurementAction.php" >
+                    <div class="header" style="background:silver;">
+                      <h2>Body Mass Index and Measurements(Final)</h2>
+                    </div>
+
+                    <div class="body">
+                      <div class="row clearfix">
+                        <div class="col-md-3">
+                          <label for="age">Weight(lbs.)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="weight" min="0" class="form-control" value="<?php echo $measurement['M_Weight']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Skeletal Mass(kg)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="skeletalMass" min="0" class="form-control" value="<?php echo $measurement['M_SkeletalMass']?>" >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Body Fat Mass(%)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="bodyFatMass" min="0" class="form-control" value="<?php echo $measurement['M_BodyFatMass']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Fat Free Mass(%)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="fatFreeMass" min="0" class="form-control" value="<?php echo $measurement['M_FatFreeMass']?>" >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Body Mass Index(%)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="bodyMassIndex" min="0" class="form-control"  value="<?php echo $measurement['M_BodyMassIndex']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Percent Body Fat(%)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="percentBodyFat" min="0" class="form-control" value="<?php echo $measurement['M_PercentBodyFat']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Waist-Hip Ratio(cm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="waistHipRatio" min="0" class="form-control"  value="<?php echo $measurement['M_WaistHipRatio']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Basal-Metabolism(J/(h. kg)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="basalMetabolism" min="0" class="form-control" value="<?php echo $measurement['M_BasalMetabolicRate']?>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row clearfix">
+
+                        <div class="col-md-3">
+                          <label for="age">Left Upper Arm(cm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="leftUpperArm" min="0" class="form-control"  value="<?php echo $measurement['M_LeftUpperArm']?>" >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Right Upper Arm(cm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="rightUpperArm" min="0" class="form-control" value="<?php echo $measurement['M_RightUpperArm']?>" >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Chest(cm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="chest" min="0" class="form-control" value="<?php echo $measurement['M_Chest']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Waist(cm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="waist" min="0" class="form-control"  value="<?php echo $measurement['M_Waist']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Hip(cm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="hip" min="0" class="form-control" value="<?php echo $measurement['M_Hips']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Left Upper Thigh(cm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="leftUpperThigh" min="0" class="form-control" value="<?php echo $measurement['M_LeftUpperThigh']?>" >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Right Upper Thigh(cm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="rightUpperThigh" min="0" class="form-control" value="<?php echo $measurement['M_RightUpperThigh']?>" >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Resting Heart Rate(bpm)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="restingHeartRate" min="0" class="form-control" value="<?php echo $measurement['M_RestingHR']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
+                        <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
+                        <input type="hidden" name="M_Code" value="<?php echo $measurement['M_Code']?>">
+                        <input type="hidden" name="type" value="Final">
+                        <input type="hidden" name="action_type" value="modifyFinal"/>
+                        <div class="col-md-12">
+                          <button type="submit" class="btn  waves-effect btn-success pull-right" data-type='success'>&nbsp; MODIFY &nbsp;</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  <?php }} ?>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <script type="text/javascript">
+          window.onload = function () {
+            <?php
+            $id = $_GET['id'];
+            $pdo = new dbConnect();
+            $initialMeasurements = $pdo->measurementInitial($id,array('order_by'=>'M_Code ASC'));
+            if(!empty($initialMeasurements)){
+              $count = 0;
+              foreach($initialMeasurements as $initialMeasurement){
+                $count++;
+                ?>
+                <?php
+                $id = $_GET['id'];
+                $pdo = new dbConnect();
+                $finalMeasurements = $pdo->measurementFinal($id,array('order_by'=>'M_Code ASC'));
+                if(!empty($finalMeasurements)){
+                  $count = 0;
+                  foreach($finalMeasurements as $finalMeasurement){
+                    $count++;
+                    ?>
 
 
-                  var data = {
-                    "weight": [
+                    var data = {
+                      "weight": [
 
-                      {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_Weight'] ?> },
-                      {label: "Final Measurement",y: <?php echo $finalMeasurement['M_Weight'] ?> }
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_Weight'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_Weight'] ?> }
 
-                    ],
-                    "skeletalMass": [
-                      {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_SkeletalMass'] ?> },
-                      {label: "Final Measurement",y: <?php echo $finalMeasurement['M_SkeletalMass'] ?> }
-                    ],
-                    "bodyFatMass" : [
-                      {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_BodyFatMass'] ?> },
-                      {label: "Final Measurement",y: <?php echo $finalMeasurement['M_BodyFatMass'] ?> }
-                    ],
-                    "fatFreeMass" : [
-                      {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_FatFreeMass'] ?> },
-                      {label: "Final Measurement",y: <?php echo $finalMeasurement['M_FatFreeMass'] ?> }
-                    ],
-                    "bodyMassIndex": [
-                      {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_FatFreeMass'] ?> },
-                      {label: "Final Measurement",y: <?php echo $finalMeasurement['M_FatFreeMass'] ?> }
-                    ],
-                    "percentBodyFat": [
-                      {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_PercentBodyFat'] ?> },
-                      {label: "Final Measurement",y: <?php echo $finalMeasurement['M_PercentBodyFat'] ?> }
-                    ],
-                    "waistHipRatio": [
-                      {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_WaistHipRatio'] ?> },
-                      {label: "Final Measurement",y: <?php echo $finalMeasurement['M_WaistHipRatio'] ?> }
-                    ],
-                    "basalMetabolicRate": [
-                      {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_BasalMetabolicRate'] ?> },
-                      {label: "Final Measurement",y: <?php echo $finalMeasurement['M_BasalMetabolicRate'] ?> }
-                    ],
-                  }
-                  var dataPoints = [];
-                  var bmi = new CanvasJS.Chart("bmi", {
-                    title:{
-                      text: "Body Mass Index Difference"
-                    },
-                    axisY:{
-                      valueFormatString: "###.##"
-                    },
-
-                    data: [  //array of dataSeries
-                      { //dataSeries - first quarter
-                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                        type: "bar",
-
-                        dataPoints: dataPoints
-
-                      }]
-                    }); //dataSeries - second quarter
-
-                    $( "#select" ).change(function() {
-                      bmi.options.data[0].dataPoints = [];
-                      var e = document.getElementById("select");
-                      var selected = e.options[e.selectedIndex].value;
-                      dps = data[selected];
-                      for(var i in dps) {
-
-                        bmi.options.data[0].dataPoints.push({label: dps[i].label, y: dps[i].y});
-                      }
-                      bmi.render();
-                    });
-
-
-                    <?php }}?>
-                    <?php }} ?>
-                    var bmd = new CanvasJS.Chart("bmd", {
+                      ],
+                      "skeletalMass": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_SkeletalMass'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_SkeletalMass'] ?> }
+                      ],
+                      "bodyFatMass" : [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_BodyFatMass'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_BodyFatMass'] ?> }
+                      ],
+                      "fatFreeMass" : [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_FatFreeMass'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_FatFreeMass'] ?> }
+                      ],
+                      "bodyMassIndex": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_FatFreeMass'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_FatFreeMass'] ?> }
+                      ],
+                      "percentBodyFat": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_PercentBodyFat'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_PercentBodyFat'] ?> }
+                      ],
+                      "waistHipRatio": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_WaistHipRatio'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_WaistHipRatio'] ?> }
+                      ],
+                      "basalMetabolicRate": [
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_BasalMetabolicRate'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_BasalMetabolicRate'] ?> }
+                      ],
+                    }
+                    var dataPoints = [];
+                    var bmi = new CanvasJS.Chart("bmi", {
                       title:{
-                        text: "Body Measurement Difference"
+                        text: "Body Mass Index Difference"
                       },
-                      legend: {
-                        horizontalAlign: "center", // left, center ,right
-                        verticalAlign: "top",  // top, center, bottom
+                      axisY:{
+                        valueFormatString: "###.##"
                       },
-                      <?php
-                      $id = $_GET['id'];
-                      $pdo = new dbConnect();
-                      $measurements = $pdo->measurementInitial($id,array('order_by'=>'M_Code ASC'));
-                      if(!empty($measurements)){
-                        $count = 0;
-                        foreach($measurements as $measurement){
-                          $count++;
-                          ?>
-                          data: [  //array of dataSeries
-                            { //dataSeries - first quarter
-                              /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                              type: "column",
-                              showInLegend: true,
-                              legendText: "Initial Measurement",
-                              name: "Initial Measurement",
-                              dataPoints: [
-                                { label: "LeftUpperArm", y: <?php echo $measurement['M_LeftUpperArm']?> },
-                                { label: "RightUpperArm", y: <?php echo $measurement['M_RightUpperArm']?> },
-                                { label: "Chest", y: <?php echo $measurement['M_Chest']?> },
-                                { label: "Waist", y: <?php echo $measurement['M_Waist']?>},
-                                { label: "Hips", y: <?php echo $measurement['M_Hips']?> },
-                                { label: "Left Upper Thigh", y: <?php echo $measurement['M_LeftUpperThigh']?> },
-                                { label: "Right Upper high", y: <?php echo $measurement['M_LeftUpperThigh']?> },
-                                { label: "RestingHR", y: <?php echo $measurement['M_RestingHR']?>}
-                              ]
-                              <?php }} ?>
-                            },
-                            { //dataSeries - second quarter
-                              <?php
-                              $id = $_GET['id'];
-                              $pdo = new dbConnect();
-                              $measurements = $pdo->measurementFinal($id,array('order_by'=>'M_Code ASC'));
-                              if(!empty($measurements)){
-                                $count = 0;
-                                foreach($measurements as $measurement){
-                                  $count++;
-                                  ?>
-                                  type: "column",
-                                  showInLegend: true,
-                                  legendText: "Final Measurement",
-                                  name: "Final Measurement",
-                                  dataPoints: [
-                                    { label: "LeftUpperArm", y: <?php echo $measurement['M_LeftUpperArm']?> },
-                                    { label: "RightUpperArm", y: <?php echo $measurement['M_RightUpperArm']?> },
-                                    { label: "Chest", y: <?php echo $measurement['M_Chest']?> },
-                                    { label: "Waist", y: <?php echo $measurement['M_Waist']?>},
-                                    { label: "Hips", y: <?php echo $measurement['M_Hips']?> },
-                                    { label: "Left Upper Thigh", y: <?php echo $measurement['M_LeftUpperThigh']?> },
-                                    { label: "Right Upper high", y: <?php echo $measurement['M_LeftUpperThigh']?> },
-                                    { label: "RestingHR", y: <?php echo $measurement['M_RestingHR']?>}
-                                  ]
-                                }
+
+                      data: [  //array of dataSeries
+                        { //dataSeries - first quarter
+                          /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                          type: "bar",
+
+                          dataPoints: dataPoints
+
+                        }]
+                      }); //dataSeries - second quarter
+
+                      $( "#select" ).change(function() {
+                        bmi.options.data[0].dataPoints = [];
+                        var e = document.getElementById("select");
+                        var selected = e.options[e.selectedIndex].value;
+                        dps = data[selected];
+                        for(var i in dps) {
+
+                          bmi.options.data[0].dataPoints.push({label: dps[i].label, y: dps[i].y});
+                        }
+                        bmi.render();
+                      });
+
+
+                      <?php }}?>
+                      <?php }} ?>
+                      var bmd = new CanvasJS.Chart("bmd", {
+                        title:{
+                          text: "Body Measurement Difference"
+                        },
+                        legend: {
+                          horizontalAlign: "center", // left, center ,right
+                          verticalAlign: "top",  // top, center, bottom
+                        },
+                        <?php
+                        $id = $_GET['id'];
+                        $pdo = new dbConnect();
+                        $measurements = $pdo->measurementInitial($id,array('order_by'=>'M_Code ASC'));
+                        if(!empty($measurements)){
+                          $count = 0;
+                          foreach($measurements as $measurement){
+                            $count++;
+                            ?>
+                            data: [  //array of dataSeries
+                              { //dataSeries - first quarter
+                                /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                                type: "column",
+                                showInLegend: true,
+                                legendText: "Initial Measurement",
+                                name: "Initial Measurement",
+                                dataPoints: [
+                                  { label: "LeftUpperArm", y: <?php echo $measurement['M_LeftUpperArm']?> },
+                                  { label: "RightUpperArm", y: <?php echo $measurement['M_RightUpperArm']?> },
+                                  { label: "Chest", y: <?php echo $measurement['M_Chest']?> },
+                                  { label: "Waist", y: <?php echo $measurement['M_Waist']?>},
+                                  { label: "Hips", y: <?php echo $measurement['M_Hips']?> },
+                                  { label: "Left Upper Thigh", y: <?php echo $measurement['M_LeftUpperThigh']?> },
+                                  { label: "Right Upper high", y: <?php echo $measurement['M_LeftUpperThigh']?> },
+                                  { label: "RestingHR", y: <?php echo $measurement['M_RestingHR']?>}
+                                ]
                                 <?php }} ?>
-                              ]
-                            });
+                              },
+                              { //dataSeries - second quarter
+                                <?php
+                                $id = $_GET['id'];
+                                $pdo = new dbConnect();
+                                $measurements = $pdo->measurementFinal($id,array('order_by'=>'M_Code ASC'));
+                                if(!empty($measurements)){
+                                  $count = 0;
+                                  foreach($measurements as $measurement){
+                                    $count++;
+                                    ?>
+                                    type: "column",
+                                    showInLegend: true,
+                                    legendText: "Final Measurement",
+                                    name: "Final Measurement",
+                                    dataPoints: [
+                                      { label: "LeftUpperArm", y: <?php echo $measurement['M_LeftUpperArm']?> },
+                                      { label: "RightUpperArm", y: <?php echo $measurement['M_RightUpperArm']?> },
+                                      { label: "Chest", y: <?php echo $measurement['M_Chest']?> },
+                                      { label: "Waist", y: <?php echo $measurement['M_Waist']?>},
+                                      { label: "Hips", y: <?php echo $measurement['M_Hips']?> },
+                                      { label: "Left Upper Thigh", y: <?php echo $measurement['M_LeftUpperThigh']?> },
+                                      { label: "Right Upper high", y: <?php echo $measurement['M_LeftUpperThigh']?> },
+                                      { label: "RestingHR", y: <?php echo $measurement['M_RestingHR']?>}
+                                    ]
+                                  }
+                                  <?php }} ?>
+                                ]
+                              });
 
 
-                            bmd.render();
-                          }
-                          </script>
+                              bmd.render();
+                            }
+                            </script>
 
-                          <?php
-                          $id = $_GET['id'];
-                          $pdo = new dbConnect();
-                          $IClasses = $pdo->measurementClassInitial($id,array('order_by' => 'M_Code ASC'));
-                          if(!empty($IClasses)){
-                            $count = 0;
-                            foreach($IClasses as $IClass){
-                              $count++;
-                              ?>
+                            <?php
+                            $id = $_GET['id'];
+                            $pdo = new dbConnect();
+                            $IClasses = $pdo->measurementClassInitial($id,array('order_by' => 'M_Code ASC'));
+                            if(!empty($IClasses)){
+                              $count = 0;
+                              foreach($IClasses as $IClass){
+                                $count++;
+                                ?>
 
-                              <?php
-                              $id = $_GET['id'];
-                              $pdo = new dbConnect();
-                              $Fclasses = $pdo->measurementClassFinal($id,array('order_by' => 'M_Code ASC'));
-                              if(!empty($Fclasses)){
-                                $count = 0;
-                                foreach($Fclasses as $Fclass){
-                                  $count++;
-                                  ?>
+                                <?php
+                                $id = $_GET['id'];
+                                $pdo = new dbConnect();
+                                $Fclasses = $pdo->measurementClassFinal($id,array('order_by' => 'M_Code ASC'));
+                                if(!empty($Fclasses)){
+                                  $count = 0;
+                                  foreach($Fclasses as $Fclass){
+                                    $count++;
+                                    ?>
 
-                                  <div class="card">
-                                    <div class="header">
-                                      <h2>Body Mass Index Measurement Difference</h2>
+                                    <div class="card">
+                                      <div class="header">
+                                        <h2>Body Mass Index Measurement Difference</h2>
+
+                                      </div>
+                                      <div class="body">
+
+                                        <div class="col-md-3">
+                                          <select class="form-control show-tick" id="select" name="measurements">
+                                            <option value=" " selected="selected">-Choose Measurement-</option>
+                                            <option value="weight" >Weight</option>
+                                            <option value="skeletalMass">Skeletal Mass</option>
+                                            <option value="bodyFatMass">Body Fat Mass</option>
+                                            <option value="fatFreeMass">Fat Free Mass</option>
+                                            <option value="bodyMassIndex">Body Mass Index</option>
+                                            <option value="percentBodyFat">Percent Body Fat</option>
+                                            <option value="waistHipRatio">Waist Hip Ratio</option>
+                                            <option value="basalMetabolicRate">Basal Metabolic Rate</option>
+
+                                          </select>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <div id="bmi" style="width: 100%; height: 400px"></div>
+                                        </div>
+                                        <br>
+
+                                        <div class="container-fluid">
+                                          <table class="table table-bordered table-striped table-hover  dataTable" id="DataTables_Table_0">
+                                            <thead>
+
+                                              <tr>
+                                                <th><center>Underweight</center></th>
+                                                <th><center>Normal Weight</center></th>
+                                                <th><center>Overweight</center></th>
+                                                <th><center>Class I obesity</center></th>
+                                                <th><center>Class II obesity</center></th>
+                                                <th><center>Class III obesity</center></th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <td><center>18.5(Kg)</center></td>
+                                              <td><center>18.5–24.9(Kg)</center></td>
+                                              <td><center>25.0–29.9(Kg)</center></td>
+                                              <td><center>30.0–34.9(Kg)</center></td>
+                                              <td><center>35.0–39.9(Kg)</center></td>
+                                              <td><center>≥ 40.0(Kg)</center></td>
+                                            </tbody>
+
+                                          </table>
+                                        </div>
+
+
+
+                                        <h4 id="initial">Initial BMI Classification: <?php echo $IClass['M_Classification']?></h4>
+
+
+                                        <h4 id="final">Final BMI Classification: <?php echo $Fclass['M_Classification']?></h4>
+
+
+
+
+
+
+
+                                      </div>
+                                    </div>
+
+
+
+                                    <div class="card">
+                                      <div class="header">
+                                        <h2>Body Measurement Difference</h2>
+                                      </div>
+                                      <div class="body">
+                                        <div class="col-s-12">
+                                          <div id="bmd" style="width: 100%; height: 400px"></div>
+                                        </div>
+
+
+                                      </div>
 
                                     </div>
-                                    <div class="body">
-
-                                      <div class="col-md-3">
-                                        <select class="form-control show-tick" id="select" name="measurements">
-                                          <option value=" " selected="selected">-Choose Measurement-</option>
-                                          <option value="weight" >Weight</option>
-                                          <option value="skeletalMass">Skeletal Mass</option>
-                                          <option value="bodyFatMass">Body Fat Mass</option>
-                                          <option value="fatFreeMass">Fat Free Mass</option>
-                                          <option value="bodyMassIndex">Body Mass Index</option>
-                                          <option value="percentBodyFat">Percent Body Fat</option>
-                                          <option value="waistHipRatio">Waist Hip Ratio</option>
-                                          <option value="basalMetabolicRate">Basal Metabolic Rate</option>
-
-                                        </select>
-                                      </div>
-                                      <div class="col-md-12">
-                                        <div id="bmi" style="width: 100%; height: 400px"></div>
-                                      </div>
-                                      <br>
-
-                                      <div class="container-fluid">
-                                        <table class="table table-bordered table-striped table-hover  dataTable" id="DataTables_Table_0">
-                                          <thead>
-
-                                            <tr>
-                                              <th><center>Underweight</center></th>
-                                              <th><center>Normal Weight</center></th>
-                                              <th><center>Overweight</center></th>
-                                              <th><center>Class I obesity</center></th>
-                                              <th><center>Class II obesity</center></th>
-                                              <th><center>Class III obesity</center></th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <td><center>18.5(Kg)</center></td>
-                                            <td><center>18.5–24.9(Kg)</center></td>
-                                            <td><center>25.0–29.9(Kg)</center></td>
-                                            <td><center>30.0–34.9(Kg)</center></td>
-                                            <td><center>35.0–39.9(Kg)</center></td>
-                                            <td><center>≥ 40.0(Kg)</center></td>
-                                          </tbody>
-
-                                        </table>
-                                      </div>
-
-
-
-                                      <h4 id="initial">Initial BMI Classification: <?php echo $IClass['M_Classification']?></h4>
-
-
-                                      <h4 id="final">Final BMI Classification: <?php echo $Fclass['M_Classification']?></h4>
-
-
-
-
-
-
-
-                                    </div>
-                                  </div>
-
-
-
-                                  <div class="card">
-                                    <div class="header">
-                                      <h2>Body Measurement Difference</h2>
-                                    </div>
-                                    <div class="body">
-                                      <div class="col-s-12">
-                                        <div id="bmd" style="width: 100%; height: 400px"></div>
-                                      </div>
-
-
-                                    </div>
-
-                                  </div>
+                                  <?php }}?>
                                 <?php }}?>
-                              <?php }}?>
 
 
 
 
 
-                              <!-- END OF CLIENT PROFILE MEMBERSHIP DETAILS -->
+                                <!-- END OF CLIENT PROFILE MEMBERSHIP DETAILS -->
 
-                              <!-- START OF CLIENT ACTIVITY LOG -->
-
-
+                                <!-- START OF CLIENT ACTIVITY LOG -->
 
 
-                              <!-- MODAL FOR ENROLLING FOR PERSONAL TRAINING -->
-                              <form method="post" action="actions/measurementAction.php">
-                                <div class="modal fade" id="initialMeasurement" tabindex="-1" role="dialog">
-                                  <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                      <center>
-                                        <div class="modal-header">
-                                          <div class="block-header">
-                                            <h2><strong>Initial Body Mass Index and Body Measurements</strong></h2>
-                                          </div>
-                                        </div>
-                                        <div class="modal-body">
-                                          <div class="row">
-                                            <div class="col-md-12">
 
-                                              <form method="post" action="actions/measurementAction.php" >
-
-                                                <div class="body">
-                                                  <div class="row clearfix">
-                                                    <div class="col-md-3">
-                                                      <label for="age">Weight(kg)</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="weight" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Skeletal Mass(kg)</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="skeletalMass" min="0" class="form-control"  required >
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Body Fat Mass(%)</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="bodyFatMass" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Fat Free Mass(%)</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="fatFreeMass" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Body Mass Index(kg)</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="bodyMassIndex" min="0" class="form-control" required >
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Percent Body Fat(%)</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="percentBodyFat" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Waist-Hip Ratio(cm)</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="waistHipRatio" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Basal-Metabolism</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="basalMetabolism" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div class="row clearfix">
-
-                                                    <div class="col-md-3">
-                                                      <label for="age">Left Upper Arm</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="leftUpperArm" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Right Upper Arm</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="rightUpperArm" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Chest</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="chest" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Waist</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="waist" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Hip</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="hip" min="0" class="form-control" required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Left Upper Thigh</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="leftUpperThigh" min="0" class="form-control" required >
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Right Upper Thigh</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="rightUpperThigh" min="0" class="form-control"  required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                      <label for="age">Resting Heart Rate</label>
-                                                      <div class="form-group">
-                                                        <div class="form-line">
-                                                          <input type="number" name="restingHeartRate" min="0" class="form-control"  required>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-
-                                                  </div>
-                                                </div>
-
-                                              </div>
-                                            </div>
-
-                                          </div>
-                                          <div class="modal-footer">
-                                            <input type="hidden" name="type" value="Initial">
-                                            <input type="hidden" name="date" value="<?php echo date("Y-m-d")?>">
-                                            <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
-                                            <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
-                                            <input type="hidden" name="action_type" value="add" />
-                                            <button  name="InitialSubmit" type="submit" class="btn  bg-green">SUBMIT</button>
-
-                                            <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
-                                          </form>
-                                        </div>
-                                      </center>
-                                    </div>
-                                  </div>
-                                </div>
 
                                 <!-- MODAL FOR ENROLLING FOR PERSONAL TRAINING -->
                                 <form method="post" action="actions/measurementAction.php">
-                                  <div class="modal fade" id="finalMeasurement" tabindex="-1" role="dialog">
+                                  <div class="modal fade" id="initialMeasurement" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-lg" role="document">
                                       <div class="modal-content">
                                         <center>
                                           <div class="modal-header">
                                             <div class="block-header">
-                                              <h2><strong>Final Body Mass Index and Body Measurements</strong></h2>
+                                              <h2><strong>Initial Body Mass Index and Body Measurements</strong></h2>
                                             </div>
                                           </div>
                                           <div class="modal-body">
                                             <div class="row">
                                               <div class="col-md-12">
 
-                                                <form method="post" id="FinalMeasurement" action="actions/measurementAction.php" >
+                                                <form method="post" action="actions/measurementAction.php" >
 
                                                   <div class="body">
                                                     <div class="row clearfix">
@@ -1291,7 +1138,7 @@ include("includes/header.php"); ?>
                                                         <label for="age">Skeletal Mass(kg)</label>
                                                         <div class="form-group">
                                                           <div class="form-line">
-                                                            <input type="number" name="skeletalMass" min="0" class="form-control" required>
+                                                            <input type="number" name="skeletalMass" min="0" class="form-control"  required >
                                                           </div>
                                                         </div>
                                                       </div>
@@ -1390,7 +1237,7 @@ include("includes/header.php"); ?>
                                                         <label for="age">Left Upper Thigh</label>
                                                         <div class="form-group">
                                                           <div class="form-line">
-                                                            <input type="number" name="leftUpperThigh" min="0" class="form-control"  required>
+                                                            <input type="number" name="leftUpperThigh" min="0" class="form-control" required >
                                                           </div>
                                                         </div>
                                                       </div>
@@ -1398,7 +1245,7 @@ include("includes/header.php"); ?>
                                                         <label for="age">Right Upper Thigh</label>
                                                         <div class="form-group">
                                                           <div class="form-line">
-                                                            <input type="number" name="rightUpperThigh" min="0" class="form-control" required>
+                                                            <input type="number" name="rightUpperThigh" min="0" class="form-control"  required>
                                                           </div>
                                                         </div>
                                                       </div>
@@ -1406,7 +1253,7 @@ include("includes/header.php"); ?>
                                                         <label for="age">Resting Heart Rate</label>
                                                         <div class="form-group">
                                                           <div class="form-line">
-                                                            <input type="number" name="restingHeartRate" min="0" class="form-control" required>
+                                                            <input type="number" name="restingHeartRate" min="0" class="form-control"  required>
                                                           </div>
                                                         </div>
                                                       </div>
@@ -1419,12 +1266,12 @@ include("includes/header.php"); ?>
 
                                             </div>
                                             <div class="modal-footer">
-                                              <input type="hidden" name="type" value="Final">
+                                              <input type="hidden" name="type" value="Initial">
                                               <input type="hidden" name="date" value="<?php echo date("Y-m-d")?>">
                                               <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
                                               <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
                                               <input type="hidden" name="action_type" value="add" />
-                                              <button onsubmit="removeFinal();" name="submit" id="btnFinal"  type="submit" class="btn  bg-green">SUBMIT</button>
+                                              <button  name="InitialSubmit" type="submit" class="btn  bg-green">SUBMIT</button>
 
                                               <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
                                             </form>
@@ -1434,79 +1281,253 @@ include("includes/header.php"); ?>
                                     </div>
                                   </div>
 
-                                  <!-- END OF MODAL FOR PT -->
-                                <?php  }} ?>
-                              </section>
-                              <script type="text/javascript">
+                                  <!-- MODAL FOR ENROLLING FOR PERSONAL TRAINING -->
+                                  <form method="post" action="actions/measurementAction.php">
+                                    <div class="modal fade" id="finalMeasurement" tabindex="-1" role="dialog">
+                                      <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                          <center>
+                                            <div class="modal-header">
+                                              <div class="block-header">
+                                                <h2><strong>Final Body Mass Index and Body Measurements</strong></h2>
+                                              </div>
+                                            </div>
+                                            <div class="modal-body">
+                                              <div class="row">
+                                                <div class="col-md-12">
 
-                              function showTime(){
-                                var date = new Date();
-                                var h = date.getHours();
-                                var m = date.getMinutes();
-                                var s = date.getSeconds();
-                                var day = date.getDate();
-                                var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                                var session = "AM";
+                                                  <form method="post" id="FinalMeasurement" action="actions/measurementAction.php" >
 
-                                if(h == 0){
-                                  h = 12;
+                                                    <div class="body">
+                                                      <div class="row clearfix">
+                                                        <div class="col-md-3">
+                                                          <label for="age">Weight(kg)</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="weight" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Skeletal Mass(kg)</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="skeletalMass" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Body Fat Mass(%)</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="bodyFatMass" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Fat Free Mass(%)</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="fatFreeMass" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Body Mass Index(kg)</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="bodyMassIndex" min="0" class="form-control" required >
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Percent Body Fat(%)</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="percentBodyFat" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Waist-Hip Ratio(cm)</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="waistHipRatio" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Basal-Metabolism</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="basalMetabolism" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="row clearfix">
+
+                                                        <div class="col-md-3">
+                                                          <label for="age">Left Upper Arm</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="leftUpperArm" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Right Upper Arm</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="rightUpperArm" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Chest</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="chest" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Waist</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="waist" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Hip</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="hip" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Left Upper Thigh</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="leftUpperThigh" min="0" class="form-control"  required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Right Upper Thigh</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="rightUpperThigh" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                          <label for="age">Resting Heart Rate</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="number" name="restingHeartRate" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+
+                                                      </div>
+                                                    </div>
+
+                                                  </div>
+                                                </div>
+
+                                              </div>
+                                              <div class="modal-footer">
+                                                <input type="hidden" name="type" value="Final">
+                                                <input type="hidden" name="date" value="<?php echo date("Y-m-d")?>">
+                                                <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>">
+                                                <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>">
+                                                <input type="hidden" name="action_type" value="add" />
+                                                <button onsubmit="removeFinal();" name="submit" id="btnFinal"  type="submit" class="btn  bg-green">SUBMIT</button>
+
+                                                <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
+                                              </form>
+                                            </div>
+                                          </center>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <!-- END OF MODAL FOR PT -->
+                                  <?php  }} ?>
+                                </section>
+                                <script type="text/javascript">
+
+                                function showTime(){
+                                  var date = new Date();
+                                  var h = date.getHours();
+                                  var m = date.getMinutes();
+                                  var s = date.getSeconds();
+                                  var day = date.getDate();
+                                  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                                  var session = "AM";
+
+                                  if(h == 0){
+                                    h = 12;
+                                  }
+                                  if(h > 12){
+                                    h = h - 12;
+                                    session = "PM";
+                                  }
+
+                                  h = (h < 10) ? "0" + h : h;
+                                  m = (m < 10) ? "0" + m : m;
+                                  s = (s < 10) ? "0" + s : s;
+
+                                  //date
+                                  var date = new Date();
+                                  var mon = date.getMonth();
+                                  var day = date.getDate();
+                                  var yr = date.getFullYear();
+                                  var monthNames = ["January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December" ];
+                                  var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+
+                                  var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
+                                  document.getElementById("clock").innerHTML = time;
+
+
+
+
+                                  setTimeout(showTime, 1000);
                                 }
-                                if(h > 12){
-                                  h = h - 12;
-                                  session = "PM";
-                                }
-
-                                h = (h < 10) ? "0" + h : h;
-                                m = (m < 10) ? "0" + m : m;
-                                s = (s < 10) ? "0" + s : s;
-
-                                //date
-                                var date = new Date();
-                                var mon = date.getMonth();
-                                var day = date.getDate();
-                                var yr = date.getFullYear();
-                                var monthNames = ["January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December" ];
-                                var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-
-                                var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
-                                document.getElementById("clock").innerHTML = time;
+                                showTime();
+                                </script>
+                                <?php include("includes/footer.php"); ?>
 
 
 
+                                <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+                                <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+                                <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+                                <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+                                <script src="../assets/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+                                <script src="../assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+                                <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+                                <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+                                <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
-                                setTimeout(showTime, 1000);
-                              }
-                              showTime();
-                              </script>
-                              <?php include("includes/footer.php"); ?>
+                                <!-- Custom Js -->
+                                <script src="../assets/js/admin.js"></script>
+                                <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
 
+                                <script src="../assets/plugins/chartjs/Chart.bundle.js"></script>
+                                <script src="canvas/jquery.min.js"></script>
+                                <script src="canvas/jquery.canvasjs.min.js"></script>
 
+                                <script src="../assets/js/pages/charts/attendance_chart.js"></script>
+                                <script src="../assets/js/pages/charts/chartjsnew.js"></script>
 
-                              <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
-                              <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-                              <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-                              <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-                              <script src="../assets/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-                              <script src="../assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-                              <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-                              <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-                              <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+                                <!-- Demo Js -->
+                                <script src="../assets/js/demo.js"></script>
+                              </body>
 
-                              <!-- Custom Js -->
-                              <script src="../assets/js/admin.js"></script>
-                              <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
-
-                              <script src="../assets/plugins/chartjs/Chart.bundle.js"></script>
-                              <script src="canvas/jquery.min.js"></script>
-                              <script src="canvas/jquery.canvasjs.min.js"></script>
-
-                              <script src="../assets/js/pages/charts/attendance_chart.js"></script>
-                              <script src="../assets/js/pages/charts/chartjsnew.js"></script>
-
-                              <!-- Demo Js -->
-                              <script src="../assets/js/demo.js"></script>
-                            </body>
-
-                            </html>
+                              </html>
