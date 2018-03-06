@@ -275,7 +275,7 @@ CREATE TABLE `backuphistory` (
   `backup_date` date NOT NULL,
   `backup_time` time NOT NULL,
   PRIMARY KEY (`backup_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 INSERT INTO backuphistory VALUES("2","Export","2018-01-27","02:14:00"); 
 INSERT INTO backuphistory VALUES("3","Import","2018-01-27","02:19:00"); 
@@ -289,6 +289,7 @@ INSERT INTO backuphistory VALUES("15","Export","2018-02-06","11:53:00");
 INSERT INTO backuphistory VALUES("16","Import","2018-02-06","05:01:00"); 
 INSERT INTO backuphistory VALUES("17","Import","2018-02-06","05:01:00"); 
 INSERT INTO backuphistory VALUES("18","Import","2018-02-06","08:00:00"); 
+INSERT INTO backuphistory VALUES("19","Export","2018-03-05","16:26:52"); 
 
 
 
@@ -380,7 +381,7 @@ CREATE TABLE `clientassignment` (
   `month` char(3) NOT NULL,
   `year` char(4) NOT NULL,
   PRIMARY KEY (`CA_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
 
 INSERT INTO clientassignment VALUES("110","68","45","2018-02-07","36","Feb","2018"); 
 INSERT INTO clientassignment VALUES("111","69","45","2018-02-09","36","Feb","2018"); 
@@ -567,7 +568,7 @@ CREATE TABLE `measurements` (
   `month` text NOT NULL,
   `year` int(4) NOT NULL,
   PRIMARY KEY (`M_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=latin1;
 
 INSERT INTO measurements VALUES("69","40","150","4","1","1","15","4","2","3","2","5","3","4","2","3","2","5","2018-02-07","Initial","Class III Obesity","Feb","2018"); 
 INSERT INTO measurements VALUES("70","40","50","3","2","1","2","2","3","2","1","3","2","3","2","5","4","3","2018-02-07","Final","Class III Obesity","Feb","2018"); 
@@ -581,7 +582,7 @@ INSERT INTO measurements VALUES("78","43","33","333","3","3","3","3","3","3","3"
 INSERT INTO measurements VALUES("79","90","1","1111110","1","1","1","1","1","1","1","11","12","1","1","1","1","1","2018-02-13","Initial","Underweight","Feb","2018"); 
 INSERT INTO measurements VALUES("80","90","111","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","2018-02-13","Final","Class III Obesity","Feb","2018"); 
 INSERT INTO measurements VALUES("81","88","120","12","15","32","12","15","32","32","32","11","22","33","21","22","31","31","2018-01-01","Initial","ClassIIIObesity","Jan","2018"); 
-INSERT INTO measurements VALUES("82","88","65","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-01-02","Final","Overweight","Jan","2018"); 
+INSERT INTO measurements VALUES("82","88","65","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-01-02","Final","Overweigh","Jan","2018"); 
 INSERT INTO measurements VALUES("83","89","120","12","15","32","12","15","32","32","32","11","22","33","21","22","31","31","2018-01-03","Initial","ClassIIIObesity","Jan","2018"); 
 INSERT INTO measurements VALUES("84","89","65","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-01-04","Final","Overweigh","Jan","2018"); 
 INSERT INTO measurements VALUES("85","90","120","12","15","32","12","15","32","32","32","11","22","33","21","22","31","31","2018-01-05","Initial","ClassIIIObesity","Jan","2018"); 
@@ -591,7 +592,7 @@ INSERT INTO measurements VALUES("88","91","80","17","18","30","22","20","20","20
 INSERT INTO measurements VALUES("89","92","60","12","15","32","12","15","32","32","32","11","22","33","21","22","31","31","2018-01-09","Initial","ClassIIIObesity","Jan","2018"); 
 INSERT INTO measurements VALUES("90","92","80","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-01-10","Final","Overweigh","Jan","2018"); 
 INSERT INTO measurements VALUES("91","93","120","12","15","32","12","15","32","32","32","11","22","33","21","22","31","31","2018-01-11","Initial","ClassIIIObesity","Jan","2018"); 
-INSERT INTO measurements VALUES("92","93","65","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-01-12","Final","Overweight","Jan","2018"); 
+INSERT INTO measurements VALUES("92","93","65","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-01-12","Final","Overweigh","Jan","2018"); 
 INSERT INTO measurements VALUES("93","94","60","12","15","32","12","15","32","32","32","11","22","33","21","22","31","31","2018-01-13","Initial","ClassIIIObesity","Jan","2018"); 
 INSERT INTO measurements VALUES("94","94","80","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-01-14","Final","Overweigh","Jan","2018"); 
 INSERT INTO measurements VALUES("95","95","120","12","15","32","12","15","32","32","32","11","22","33","21","22","31","31","2018-01-15","Initial","ClassIIIObesity","Jan","2018"); 
@@ -682,6 +683,7 @@ INSERT INTO measurements VALUES("179","138","50","12","15","32","12","15","32","
 INSERT INTO measurements VALUES("180","138","80","17","18","30","22","20","20","20","31","12","29","31","22","31","41","41","2018-04-10","Final","ClassIIIObesity","Apr","2018"); 
 INSERT INTO measurements VALUES("181","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0000-00-00","","","","0"); 
 INSERT INTO measurements VALUES("182","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0000-00-00","","","","0"); 
+INSERT INTO measurements VALUES("208","111","18","10","20","1","40","23","22","23","131","232","221","332","111","221","321","332","2018-03-05","Final","Class III Obesity","Mar","2018"); 
 
 
 
@@ -693,7 +695,7 @@ CREATE TABLE `membership` (
   `MS_Duration` varchar(9) NOT NULL,
   `MS_Price` int(5) NOT NULL,
   PRIMARY KEY (`MS_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 INSERT INTO membership VALUES("1","Regular","3","5697"); 
 INSERT INTO membership VALUES("6","Regular","6","10794"); 
@@ -1037,7 +1039,7 @@ CREATE TABLE `traininglog` (
   `TL_ClientPerformance` text NOT NULL,
   `TL_TrainingStatus` text NOT NULL,
   PRIMARY KEY (`TL_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=latin1;
 
 INSERT INTO traininglog VALUES("88","23","69","10","2018-02-18","2018-02-11","Feb","2018","","","On-Going"); 
 INSERT INTO traininglog VALUES("89","23","72","10","2018-02-18","2018-02-11","Feb","2018","","","On-Going"); 
@@ -1164,7 +1166,7 @@ CREATE TABLE `traininglogsession` (
   `month` text NOT NULL,
   `year` int(4) NOT NULL,
   PRIMARY KEY (`TLS_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=latin1;
 
 INSERT INTO traininglogsession VALUES("118","88","2018-02-13","13:01:00.0000","14:02:00.0000","push-up","2","1","Feb","2018"); 
 INSERT INTO traininglogsession VALUES("119","89","2018-02-08","13:01:00.0000","13:00:00.0000","chestup","1","11","Feb","2018"); 
@@ -1284,7 +1286,7 @@ CREATE TABLE `trainingpackage` (
   `TP_Price` int(6) NOT NULL,
   `TP_Validity` int(3) NOT NULL,
   PRIMARY KEY (`TP_Code`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 INSERT INTO trainingpackage VALUES("10","1","Senior","600","7"); 
 INSERT INTO trainingpackage VALUES("11","1","Junior","500","7"); 
@@ -1310,7 +1312,7 @@ CREATE TABLE `transaction` (
   `month` varchar(10) NOT NULL,
   PRIMARY KEY (`TR_ID`),
   KEY `TR_ID` (`TR_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=latin1;
 
 INSERT INTO transaction VALUES("1","1","Membership","5697","2017-10-11","unpaid","2017","Jan"); 
 INSERT INTO transaction VALUES("2","2","Membership","5697","2017-07-04","unpaid","2017","Feb"); 

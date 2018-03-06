@@ -87,7 +87,7 @@ include("includes/header.php");
 
   if(isset($_POST["export"])) {
 
-    $message2 = '<label class="text-success">Database Successfully Exported to C:\xampp\htdocs\UpdatedEclipse\admin\backup</label>';
+    $message2 = '<label class="text-success">Database Successfully Exported to C:\xampp\htdocs\EclipseMIS\admin\backup</label>';
 
     $tables = array();
     $result = mysqli_query($conn, "SHOW TABLES");
@@ -126,7 +126,7 @@ include("includes/header.php");
     fclose($handle);
     date_default_timezone_set('Asia/Manila');
     $date = date('Y-m-d');
-    $time = date('g:i A');
+    $time=date("H:i:s");
 
     $conn->query("INSERT INTO `backuphistory` VALUES('', 'Export', '$date', '$time')") or die(mysqli_error());
 

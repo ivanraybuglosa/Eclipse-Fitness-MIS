@@ -37,13 +37,6 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'A_status' => $regstat
             );
 
-
-
-
-
-
-
-
             $check = $pdo->checkAttendance($_POST['clientName'],$date);
             $available = $pdo->previousAvailable();
             $borrowed = $pdo->previousBorrowed();
@@ -77,7 +70,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                             'TI_Borrowed' => ($_POST['towel'] + $borrowed),
                             'TI_Available' => ($available - $_POST['towel'])
                         );
-                        $condition = array("TI_Available" => $available);
+                        $condition = array("TI_Date" => $date);
                         $update = $pdo->update($tableTowel,$userData7,$condition);
 
 

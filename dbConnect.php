@@ -1149,6 +1149,8 @@ class dbConnect{
     }
 
 
+
+
     public function getReturned(){
         $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code LIMIT 1";
         $query = $this->db->prepare($sql);
@@ -1176,12 +1178,41 @@ class dbConnect{
         return $result;
     }
 
+		public function previousLaundry($date){
+        $sql = "SELECT SUM(TI_Laundry) as laundry FROM towelinventory WHERE TI_Date = '".$date."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['laundry'];
+        return $result;
+    }
+
+
+
     public function previousReturned(){
         $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
         $result = $var['TI_Returned'];
+        return $result;
+    }
+
+		public function available($date){
+        $sql = "SELECT SUM(TI_Supplied) as supplied FROM towelinventory WHERE TI_DATE = '".$date."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['supplied'];
+        return $result;
+    }
+
+		public function previousOnhand(){
+        $sql = "SELECT TI_Onhand FROM towelinventory ORDER BY TI_Code LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['TI_Onhand'];
         return $result;
     }
 
@@ -1195,7 +1226,7 @@ class dbConnect{
     }
 
     public function towels($date,$conditions = array()){
-        $sql = "SELECT SUM(TI_Supplied) as supply, SUM(TI_Laundry) as laundry, TI_Borrowed, TI_Returned FROM towelinventory WHERE TI_Date = '".$date."'  ";
+        $sql = "SELECT *,SUM(TI_Supplied) as supply, SUM(TI_Laundry) as laundry, SUM(TI_Delivered) as delivered FROM towelinventory WHERE TI_Date = '".$date."'  ";
         $query = $this->db->prepare($sql);
         $query->execute();
 

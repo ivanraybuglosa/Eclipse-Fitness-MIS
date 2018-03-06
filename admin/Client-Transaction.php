@@ -38,239 +38,141 @@ include("includes/header.php"); ?>
       <h2>Unpaid Transactions</h2>
     </div>
     <div class="body">
-        <div class="row">
-          <div class="col-sm-12">
-            <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
-              <thead>
-                <tr>
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
+            <thead>
+              <tr>
 
-                  <th>Client Name</th>
-                  <th>Bill</th>
-                  <th>Action</th>
-
-
-                </tr>
-              </thead>
-              <!-- WALK-IN QUERY TRANSACTONS -->
-              <tbody>
-                <?php
-                $pdo = new dbConnect();
-                $trs = $pdo->transClient(array("order_by" => "TR_ID DESC"));
-                if(!empty($trs)){
-                  $count = 0;
-                  foreach($trs as $tr){
-                    $count++;
-
-                    ?>
+                <th>Client Name</th>
+                <th>Bill</th>
+                <th>Action</th>
 
 
-                    <tr>
-                      <td><?php $firstname = $tr['CLIENT_FirstName']; $lastname = $tr['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
-                      <td><?php echo $tr['bill']; ?></td>
+              </tr>
+            </thead>
+            <!-- WALK-IN QUERY TRANSACTONS -->
+            <tbody>
+              <?php
+              $pdo = new dbConnect();
+              $trs = $pdo->transClient(array("order_by" => "TR_ID DESC"));
+              if(!empty($trs)){
+                $count = 0;
+                foreach($trs as $tr){
+                  $count++;
 
-                      <td>
-                        <button data-toggle="modal" data-target="#payment-<?php echo $tr['TR_ID']; ?>"  class="btn bg-red" >CHECKOUT</button>
-
-                        <div class="modal fade" id="payment-<?php echo $tr['TR_ID']; ?>" tabindex="-1" role="dialog">
-                          <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-
-                              <form method="post" action="actions/transactionAction.php">
-                                <div class="modal-header">
-                                  <h3 class="modal-title"><center><?php $firstname = $tr['CLIENT_FirstName']; $lastname = $tr['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?>'s <?php echo $tr['TR_Type']?> Transaction</center></h3>
-                                </div>
-                                <div class="modal-body">
-                                  <div class="card">
-                                    <div class="header">
-                                      <h2>Payment Form</h2>
-                                      <h2 class="pull-right" style="margin-top:-18px;">Unpaid Balance:
-                                        <?php
-                                        $bill = $pdo->getBill($tr['CLIENT_ID']);
-                                        echo $bill;
-
-                                        ?></h2>
-                                      </div>
-                                      <div class="body">
-                                        <div class="row clearfix">
-                                          <div class="col-lg-5">
-                                            <div class="form-group" >
-                                              <label>Amount Received</label>
-                                              <div class="form-line">
-                                                <input type="number" min="0" name="receivedAmount" class="form-control" placeholder="Amount"/>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-lg-5">
-                                            <div class="form-group" >
-                                              <label>Amount Paid</label>
-                                              <div class="form-line">
-                                                <input type="number" min="<?php
-                                                $bill = $pdo->getBill($tr['CLIENT_ID']);
-                                                echo $bill?>"
-                                                max="<?php
-                                                $bill = $pdo->getBill($tr['CLIENT_ID']);
-                                                echo $bill?>" name="paymentAmount" class="form-control" placeholder="Amount"/>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-lg-2">
-                                            <input type="hidden" name="TR_ID" value="<?php echo $tr['TR_ID']?>"/>
-                                            <input type="hidden" name="CLIENT_ID" value="<?php echo $tr['CLIENT_ID']?>"/>
-                                            <input type="hidden" name="action_type" value="add"/>
-                                            <button type="submit" name ="submit" class="btn pull-right bg-green btn-block" data-type='success' style="margin-top:20px;">PAY</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="card">
-                                      <div class="header">
-                                        <h2>Unpaid Transactions</h2>
-                                      </div>
-                                      <div class="body">
-                                        <div class="row clearfix">
-                                          <table class="table table-bordered table-striped table-hover dataTable js-basic-example">
-                                            <thead>
-                                              <tr>
-                                                <th><center>Transaction Type</center></th>
-                                                <th><center>Bill</center></th>
-                                                <th><center>Date</center></th>
-                                                <!-- <th><center>Time</center></th> -->
+                  ?>
 
 
-                                              </tr>
-                                            </thead>
+                  <tr>
+                    <td><?php $firstname = $tr['CLIENT_FirstName']; $lastname = $tr['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
+                    <td><?php echo $tr['bill']; ?></td>
 
-                                            <tbody>
-                                              <?php
-                                              $pdo = new dbConnect();
-                                              $pays = $pdo->payHistory($tr['CLIENT_ID'], array("order_by" => "TR_ID DESC"));
-                                              if(!empty($pays)){
-                                                $count = 0;
-                                                foreach($pays as $pay){
-                                                  ?>
-                                                  <tr>
-                                                    <td><?php echo $pay['TR_Type'] ?></td>
-                                                    <td><?php echo $pay['TR_Bill'] ?></td>
-                                                    <td><?php echo date("F j, Y", strtotime($pay['TR_TransactionDate'])) ?></td>
-
-
-                                                  </tr>
-                                                <?php }} ?>
-                                              </tbody>
-                                            </table>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="modal-footer">
-
-                                      <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>
-
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-
-                          </td>
-                          <!--   </form> -->
+                    <td>
+                      <form method="post" action="actions/transactionAction.php">
+                        <input type="hidden" name="TR_ID" value="<?php echo $tr['TR_ID']?>">
+                        <input type="hidden" name="action_type" value="add">
+                        <button class="btn bg-red" >CHECKOUT</button>
+                      </form>
+                    </td>
+                    <!--   </form> -->
 
 
 
-                        </tr>
-                      <?php } }else{ ?>
+                  </tr>
+                <?php } }else{ ?>
 
-                        <tr><td colspan="6">No transaction(s) found......</td></tr>
+                  <tr><td colspan="6">No transaction(s) found......</td></tr>
 
-                      <?php } ?>
+                <?php } ?>
 
-                    </tbody>
-
-
-                    <!-- #END# Hover Rows -->
+              </tbody>
 
 
+              <!-- #END# Hover Rows -->
 
-                  </table>
-              </div>
-            </div>
+
+
+            </table>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
 
 
-    </section>
-    <script type="text/javascript">
+</section>
+<script type="text/javascript">
 
-    function showTime(){
-      var date = new Date();
-      var h = date.getHours();
-      var m = date.getMinutes();
-      var s = date.getSeconds();
-      var day = date.getDate();
-      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      var session = "AM";
+function showTime(){
+  var date = new Date();
+  var h = date.getHours();
+  var m = date.getMinutes();
+  var s = date.getSeconds();
+  var day = date.getDate();
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var session = "AM";
 
-      if(h == 0){
-        h = 12;
-      }
-      if(h > 12){
-        h = h - 12;
-        session = "PM";
-      }
+  if(h == 0){
+    h = 12;
+  }
+  if(h > 12){
+    h = h - 12;
+    session = "PM";
+  }
 
-      h = (h < 10) ? "0" + h : h;
-      m = (m < 10) ? "0" + m : m;
-      s = (s < 10) ? "0" + s : s;
+  h = (h < 10) ? "0" + h : h;
+  m = (m < 10) ? "0" + m : m;
+  s = (s < 10) ? "0" + s : s;
 
-      //date
-      var date = new Date();
-      var mon = date.getMonth();
-      var day = date.getDate();
-      var yr = date.getFullYear();
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December" ];
-      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-
-      var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
-      document.getElementById("clock").innerHTML = time;
+  //date
+  var date = new Date();
+  var mon = date.getMonth();
+  var day = date.getDate();
+  var yr = date.getFullYear();
+  var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December" ];
+  var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
-
-
-      setTimeout(showTime, 1000);
-    }
-    showTime();
-    </script>
-
-    <?php include("includes/footer.php"); ?>
-
-    <!-- Custom Js -->
-    <script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-    <script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-    <script src="../assets/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="../assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-    <script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-
-    <!-- Bootstrap Material Datetime Picker Plugin Js -->
-    <script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-
-    <!-- Custom Js -->
-    <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/pages/tables/jquery-datatable.js"></script>
-    <script src="../assets/js/pages/forms/basic-form-elements.js"></script>
-
-    <!-- Demo Js -->
-    <script src="../assets/js/demo.js"></script>
+  var time = h + ":" + m + ":" + s + " " + session+ "  -  "+ monthNames[date.getMonth()] + " "+day+ ","+yr + "(" + days[date.getDay()] + ")";
+  document.getElementById("clock").innerHTML = time;
 
 
 
-  </body>
 
-  </html>
+  setTimeout(showTime, 1000);
+}
+showTime();
+</script>
+
+<?php include("includes/footer.php"); ?>
+
+<!-- Custom Js -->
+<script src="../assets/plugins/jquery-datatable/jquery.dataTables.js"></script>
+<script src="../assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+<script src="../assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+<script src="../assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+<script src="../assets/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+<script src="../assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+<script src="../assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+<script src="../assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+<script src="../assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+<!-- Bootstrap Material Datetime Picker Plugin Js -->
+<script src="../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+<!-- Custom Js -->
+<script src="../assets/js/admin.js"></script>
+<script src="../assets/js/pages/tables/jquery-datatable.js"></script>
+<script src="../assets/js/pages/forms/basic-form-elements.js"></script>
+
+<!-- Demo Js -->
+<script src="../assets/js/demo.js"></script>
+
+
+
+</body>
+
+</html>
