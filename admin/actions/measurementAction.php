@@ -2,10 +2,13 @@
 session_start();
 include('../../dbConnect.php'); ;
 $pdo = new dbConnect();
+date_default_timezone_set("Asia/Manila");
 $month = date("M", strtotime("+8 HOURS"));
 $year = date("Y", strtotime("+8 HOURS"));
 
 $tblName = 'measurements';
+$weight = $_POST['weight'];
+$height = $_POST['height'];
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
         $bmi = $_POST['bodyMassIndex'];
@@ -27,11 +30,12 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
 
         $userData = array(
-            'M_Weight' => $_POST['weight'],
+            'M_Weight' => $weight,
+            'M_Height' => $height,
             'M_SkeletalMass' => $_POST['skeletalMass'],
             'M_BodyFatMass' => $_POST['bodyFatMass'],
             'M_FatFreeMass' => $_POST['fatFreeMass'],
-            'M_BodyMassIndex' => $_POST['bodyMassIndex'],
+            'M_BodyMassIndex' => $weight/pow($height,2),
             'M_PercentBodyFat' => $_POST['percentBodyFat'],
             'M_WaistHipRatio' => $_POST['waistHipRatio'],
             'M_BasalMetabolicRate' => $_POST['basalMetabolism'],
@@ -67,7 +71,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
 
     }elseif($_REQUEST['action_type'] == 'modifyInitial'){
-      $bmi = $_POST['bodyMassIndex'];
+      $bmi = $weight/pow($height,2);
       if($bmi < 18.5){
           $class = "Underweight";
       }else if($bmi > 18.4 && $bmi < 25){
@@ -84,11 +88,12 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
           $class ="Undefined";
       }
         $userData = array(
-            'M_Weight' => $_POST['weight'],
+            'M_Weight' => $weight,
+            'M_Height' => $height,
             'M_SkeletalMass' => $_POST['skeletalMass'],
             'M_BodyFatMass' => $_POST['bodyFatMass'],
             'M_FatFreeMass' => $_POST['fatFreeMass'],
-            'M_BodyMassIndex' => $_POST['bodyMassIndex'],
+            'M_BodyMassIndex' => $bmi,
             'M_PercentBodyFat' => $_POST['percentBodyFat'],
             'M_WaistHipRatio' => $_POST['waistHipRatio'],
             'M_BasalMetabolicRate' => $_POST['basalMetabolism'],
@@ -112,7 +117,9 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $client = $_POST['CLIENT_ID'];
                 echo "<script>alert('Client Initial Measurement Successfully Modified!');window.location.href='../PT-ContractsInfo.php?id=".$id."&amp;client=$client ';</script>";
     }elseif($_REQUEST['action_type'] == 'modifyFinal'){
-      $bmi = $_POST['bodyMassIndex'];
+
+
+      $bmi = $weight/pow($height,2);
       if($bmi < 18.5){
           $class = "Underweight";
       }else if($bmi > 18.4 && $bmi < 25){
@@ -130,11 +137,12 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
       }
 
         $userData = array(
-            'M_Weight' => $_POST['weight'],
+            'M_Weight' => $weight,
+            'M_Height' => $height,
             'M_SkeletalMass' => $_POST['skeletalMass'],
             'M_BodyFatMass' => $_POST['bodyFatMass'],
             'M_FatFreeMass' => $_POST['fatFreeMass'],
-            'M_BodyMassIndex' => $_POST['bodyMassIndex'],
+            'M_BodyMassIndex' => $bmi,
             'M_PercentBodyFat' => $_POST['percentBodyFat'],
             'M_WaistHipRatio' => $_POST['waistHipRatio'],
             'M_BasalMetabolicRate' => $_POST['basalMetabolism'],

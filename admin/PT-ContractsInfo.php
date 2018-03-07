@@ -514,10 +514,18 @@ include("includes/header.php"); ?>
                   <div class="body container-fluid">
                     <div class="row clearfix">
                       <div class="col-md-3">
-                        <label for="age">Weight(lbs.)</label>
+                        <label for="age">Weight(kg)</label>
                         <div class="form-group">
                           <div class="form-line">
                             <input type="text" name="weight" min="0" class="form-control" value="<?php echo $measurement['M_Weight']?>">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="age">Height(m)</label>
+                        <div class="form-group">
+                          <div class="form-line">
+                            <input type="text" name="height" min="0" class="form-control" value="<?php echo $measurement['M_Height']?>">
                           </div>
                         </div>
                       </div>
@@ -545,14 +553,14 @@ include("includes/header.php"); ?>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-3">
+                      <!-- <div class="col-md-3">
                         <label for="age">Body Mass Index(%)</label>
                         <div class="form-group">
                           <div class="form-line">
                             <input type="text" name="bodyMassIndex" min="0" class="form-control"  value="<?php echo $measurement['M_BodyMassIndex']?>">
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="col-md-3">
                         <label for="age">Percent Body Fat(%)</label>
                         <div class="form-group">
@@ -682,10 +690,18 @@ include("includes/header.php"); ?>
                     <div class="body">
                       <div class="row clearfix">
                         <div class="col-md-3">
-                          <label for="age">Weight(lbs.)</label>
+                          <label for="age">Weight(kg)</label>
                           <div class="form-group">
                             <div class="form-line">
                               <input type="text" name="weight" min="0" class="form-control" value="<?php echo $measurement['M_Weight']?>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="age">Height(m)</label>
+                          <div class="form-group">
+                            <div class="form-line">
+                              <input type="text" name="height" min="0" class="form-control" value="<?php echo $measurement['M_Height']?>">
                             </div>
                           </div>
                         </div>
@@ -713,14 +729,14 @@ include("includes/header.php"); ?>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                           <label for="age">Body Mass Index(%)</label>
                           <div class="form-group">
                             <div class="form-line">
                               <input type="text" name="bodyMassIndex" min="0" class="form-control"  value="<?php echo $measurement['M_BodyMassIndex']?>">
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
                           <label for="age">Percent Body Fat(%)</label>
                           <div class="form-group">
@@ -871,8 +887,8 @@ include("includes/header.php"); ?>
                         {label: "Final Measurement",y: <?php echo $finalMeasurement['M_FatFreeMass'] ?> }
                       ],
                       "bodyMassIndex": [
-                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_FatFreeMass'] ?> },
-                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_FatFreeMass'] ?> }
+                        {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_BodyMassIndex'] ?> },
+                        {label: "Final Measurement",y: <?php echo $finalMeasurement['M_BodyMassIndex'] ?> }
                       ],
                       "percentBodyFat": [
                         {label: "Initial Measurement", y: <?php echo $initialMeasurement['M_PercentBodyFat'] ?> },
@@ -1064,10 +1080,44 @@ include("includes/header.php"); ?>
 
 
 
-                                        <h4 id="initial">Initial BMI Classification: <?php echo $IClass['M_Classification']?></h4>
+                                        <h4 id="initial">Initial Body Mass Index Measurement: <?php echo $IClass['M_BodyMassIndex']?> kg/m2 -
+                                          <span class="label
+                                            <?php
+                                              if($IClass['M_Classification'] == "Underweight"){
+                                                echo "bg-red";
+                                              }elseif($IClass['M_Classification'] == "Normal Weight"){
+                                                echo "bg-green";
+                                              }elseif($IClass['M_Classification'] == "Overweight"){
+                                                echo "bg-yellow";
+                                              }elseif($IClass['M_Classification'] == "Class I Obesity"){
+                                                echo "bg-orange";
+                                              }elseif($IClass['M_Classification'] == "Class II Obesity"){
+                                                echo "bg-amber";
+                                              }elseif($IClass['M_Classification'] == "Class III Obesity"){
+                                                echo "bg-red";
+                                              }
+
+                                            ?>"><?php echo $IClass['M_Classification']?></span></h4>
 
 
-                                        <h4 id="final">Final BMI Classification: <?php echo $Fclass['M_Classification']?></h4>
+                                        <h4 id="final">Final BMI Classification: <?php echo $Fclass['M_BodyMassIndex']?> kg/m2 -
+                                          <span class="label
+                                          <?php
+                                            if($IClass['M_Classification'] == "Underweight"){
+                                              echo "bg-red";
+                                            }elseif($Fclass['M_Classification'] == "Normal Weight"){
+                                              echo "bg-green";
+                                            }elseif($Fclass['M_Classification'] == "Overweight"){
+                                              echo "bg-yellow";
+                                            }elseif($Fclass['M_Classification'] == "Class I Obesity"){
+                                              echo "bg-orange";
+                                            }elseif($Fclass['M_Classification'] == "Class II Obesity"){
+                                              echo "bg-amber";
+                                            }elseif($Fclass['M_Classification'] == "Class III Obesity"){
+                                              echo "bg-red";
+                                            }
+
+                                          ?>"><?php echo $Fclass['M_Classification']?></span></h4>
 
 
 
@@ -1135,6 +1185,14 @@ include("includes/header.php"); ?>
                                                         </div>
                                                       </div>
                                                       <div class="col-md-3">
+                                                        <label for="age">Height(m)</label>
+                                                        <div class="form-group">
+                                                          <div class="form-line">
+                                                            <input type="text" name="height" min="0" class="form-control" required>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="col-md-3">
                                                         <label for="age">Skeletal Mass(kg)</label>
                                                         <div class="form-group">
                                                           <div class="form-line">
@@ -1158,14 +1216,14 @@ include("includes/header.php"); ?>
                                                           </div>
                                                         </div>
                                                       </div>
-                                                      <div class="col-md-3">
+                                                      <!-- <div class="col-md-3">
                                                         <label for="age">Body Mass Index(kg)</label>
                                                         <div class="form-group">
                                                           <div class="form-line">
                                                             <input type="number" name="bodyMassIndex" min="0" class="form-control" required >
                                                           </div>
                                                         </div>
-                                                      </div>
+                                                      </div> -->
                                                       <div class="col-md-3">
                                                         <label for="age">Percent Body Fat(%)</label>
                                                         <div class="form-group">
@@ -1309,6 +1367,14 @@ include("includes/header.php"); ?>
                                                           </div>
                                                         </div>
                                                         <div class="col-md-3">
+                                                          <label for="age">Height(m)</label>
+                                                          <div class="form-group">
+                                                            <div class="form-line">
+                                                              <input type="text" name="height" min="0" class="form-control" required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-3">
                                                           <label for="age">Skeletal Mass(kg)</label>
                                                           <div class="form-group">
                                                             <div class="form-line">
@@ -1316,14 +1382,14 @@ include("includes/header.php"); ?>
                                                             </div>
                                                           </div>
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <!-- <div class="col-md-3">
                                                           <label for="age">Body Fat Mass(%)</label>
                                                           <div class="form-group">
                                                             <div class="form-line">
                                                               <input type="number" name="bodyFatMass" min="0" class="form-control" required>
                                                             </div>
                                                           </div>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-md-3">
                                                           <label for="age">Fat Free Mass(%)</label>
                                                           <div class="form-group">
