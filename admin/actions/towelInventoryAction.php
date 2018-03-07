@@ -62,7 +62,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
              'TI_Available' => $available,
              'TI_Borrowed' => $borrowed,
              'TI_Returned' => ($_POST['towelAmount'] - $returned),
-             'TI_Onhand' => $onhand
+             'TI_Onhand' =>  $available + ($borrowed + $returned) + $laundry
              );
 
              $condition = array('TI_Date' => $date);
@@ -70,12 +70,12 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
 
              echo "<script>alert('Laundry towels Successfully Saved!');window.location.href='../Amenities-GymTowels.php';</script>";
-           }
-          // }else{
-          //   //Towel Laundried is greater than returned towels
-          //    echo "<script>alert('Towel Laundry Failed!');window.location.href='../Amenities-GymTowels.php';</script>";
-          //
-          // }
+
+          }else{
+            //Towel Laundried is greater than returned towels
+             echo "<script>alert('Towel Laundry Failed!');window.location.href='../Amenities-GymTowels.php';</script>";
+
+          }
         }elseif($activity == 'Delivered'){
           $userData2 = array(
              'TI_Delivered' => $_POST['towelAmount'],
@@ -94,7 +94,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
              'TI_Borrowed' => $borrowed,
              'TI_Returned' => $returned,
              'TI_Laundry' => ($_POST['towelAmount'] - $laundry),
-             // Add onhand here
+             'TI_Onhand' => $available + ($borrowed + $returned) + $laundry
              );
 
              $condition = array('TI_Date' => $date);
@@ -103,10 +103,10 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
              echo "<script>alert('Laundry towels Successfully Saved!');window.location.href='../Amenities-GymTowels.php';</script>";
            }
-          // }else{
-          //    echo "<script>alert('Towel Laundry Failed!');window.location.href='../Amenities-GymTowels.php';</script>";
-          //
-          // }
+          else{
+             echo "<script>alert('Towel Delivery Failed!');window.location.href='../Amenities-GymTowels.php';</script>";
+
+          }
         }
 
       }
