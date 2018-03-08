@@ -481,15 +481,7 @@ include("includes/header.php"); ?>
 
         </div>
       </div>
-      <!-- Transfer text value into exercises input -->
-      <script type="text/javascript">
-      $(document).ready(function(){
-        $("a.clickable").click(function(event){
-          event.preventDefault();
-          $("input#textbox").val($(this).html());
-        });
-      });
-    </script>
+
 
 
 
@@ -1641,6 +1633,15 @@ window.onload = function () {
               }
               showTime();
               </script>
+              <!-- Transfer text value into exercises input -->
+              <!-- <script type="text/javascript">
+              $(document).ready(function(){
+                $("a.clickable").click(function(event){
+                  event.preventDefault();
+                  $("input#textbox").val($(this).html());
+                });
+              });
+            </script> -->
               <?php include("includes/footer.php"); ?>
 
 

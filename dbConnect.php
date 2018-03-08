@@ -1250,7 +1250,7 @@ class dbConnect{
     }
 
     public function towelSupplied($conditions = array()){
-        $sql = "SELECT * FROM towelinventory";
+        $sql = "SELECT * FROM towelinventory WHERE TI_Supplied IS NOT NULL OR TI_Laundry IS NOT NULL OR TI_Delivered IS NOT NULL";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -1274,7 +1274,7 @@ class dbConnect{
     }
 
     public function equipmentRows($conditions = array()){
-        $sql = "SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code";
+        $sql = "SELECT * FROM equipmentinventory INNER JOIN equipment ON equipmentinventory.E_Code = equipment.E_Code GROUP BY equipment.E_Model";
         $query = $this->db->prepare($sql);
         $query->execute();
 
