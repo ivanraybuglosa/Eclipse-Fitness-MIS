@@ -879,7 +879,7 @@ class dbConnect{
     }
 
     public function transClient($conditions= array()){
-        $sql = "SELECT CLIENT_FirstName,CLIENT_LastName,TR_ID,transaction.CLIENT_ID,TR_Type,SUM(TR_Bill) as bill FROM transaction INNER JOIN client on transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_Status = 'unpaid' GROUP BY CLIENT_ID";
+        $sql = "SELECT * FROM transaction INNER JOIN client on transaction.CLIENT_ID = client.CLIENT_ID WHERE TR_Status = 'unpaid'";
         $query = $this->db->prepare($sql);
         $query->execute();
 
