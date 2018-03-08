@@ -45,6 +45,8 @@ include("includes/header.php"); ?>
               <tr>
 
                 <th>Client Name</th>
+                <th>Transaction</th>
+                <th>Date</th>
                 <th>Bill</th>
                 <th>Action</th>
 
@@ -66,7 +68,9 @@ include("includes/header.php"); ?>
 
                   <tr>
                     <td><?php $firstname = $tr['CLIENT_FirstName']; $lastname = $tr['CLIENT_LastName']; $fullname=$firstname." ".$lastname; echo $fullname ; ?></td>
-                    <td><?php echo $tr['bill']; ?></td>
+                    <td><?php echo $tr['TR_Type']; ?></td>
+                    <td><?php echo date("F j, Y",strtotime($tr['TR_TransactionDate'])) ?></td>
+                    <td><?php echo $tr['TR_Bill']; ?></td>
 
                     <td>
                       <form method="post" action="actions/transactionAction.php">
