@@ -49,7 +49,7 @@ include("includes/header.php"); ?>
           </div>
 
           <div class="col-md-4">
-            <select class="form-control show-tick" data-live-search="true" name="clientName">
+            <select class="form-control show-tick" data-live-search="true" id="clientName" name="clientName">
               <option value="null">Choose Client</option>
               <?php
               $pdo = new dbConnect();
@@ -192,6 +192,8 @@ include("includes/header.php"); ?>
 
           <script>
 
+            document.getElementById('clientName').value = "<?php echo $_POST['clientName'];?>";
+
           $(document).ready(function() {
             $('#transhistory').DataTable( {
               dom: 'Bfrtip',
@@ -204,7 +206,7 @@ include("includes/header.php"); ?>
                 className: '',
                 customize: function ( win ) {
                   $(win.document.body)
-                  .prepend('<left><h4>433-0000</h4></left>')
+                  .prepend('<left><h4>703-1503</h4></left>')
                   .prepend('<left><h4>La Salle Avenue, Bacolod City</h4></left>')
                   .prepend('<left><h4>Transaction History Report</h4></left>')
                   .prepend('<left><h3>Eclipse Healing and Body Design Center</h3></left>')

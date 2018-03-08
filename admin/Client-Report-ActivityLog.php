@@ -50,7 +50,7 @@ include("includes/header.php"); ?>
           </div>
 
           <div class="col-md-4">
-            <select class="form-control show-tick" data-live-search="true" name="clientName">
+            <select class="form-control show-tick" data-live-search="true" id="clientName" name="clientName">
               <option value="null">Choose Client</option>
               <?php
               $pdo = new dbConnect();
@@ -64,8 +64,9 @@ include("includes/header.php"); ?>
                   <option id = "<?php echo $clients['CLIENT_ID']; ?>" value="<?php echo $clients['CLIENT_ID']; ?>">
                     <?php
                     $firstname = $clients['CLIENT_FirstName'];
+                    $middlename = $clients['CLIENT_MiddleName'];
                     $lastname = $clients['CLIENT_LastName'];
-                    $fullname=$firstname." ".$lastname;
+                    $fullname=$firstname." ".$middlename." ".$lastname;
                     echo $fullname ;
                     ?>
                   </option>
@@ -203,7 +204,7 @@ include("includes/header.php"); ?>
                 className: '',
                 customize: function ( win ) {
                   $(win.document.body)
-                  .prepend('<left><h4>433-0000</h4></left>')
+                  .prepend('<left><h4>703-1503</h4></left>')
                   .prepend('<left><h4>La Salle Avenue, Bacolod City</h4></left>')
                   .prepend('<left><h4>Client Activity Report</h4></left>')
                   .prepend('<left><h3>Eclipse Healing and Body Design Center</h3></left>')
@@ -229,6 +230,8 @@ include("includes/header.php"); ?>
 
       </section>
       <script type="text/javascript">
+
+      document.getElementById('clientName').value = "<?php echo $_POST['clientName'];?>";
 
       function showTime(){
         var date = new Date();

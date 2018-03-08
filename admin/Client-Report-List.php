@@ -62,7 +62,7 @@
           </div>
 
           <div class="col-md-6">
-            <a href="Client-Trend-GeneralRevenue.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-topclients" data-type="success"><strong>GENERAL </strong></a>
+            <a href="Client-Trend-GeneralRevenue.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-topclients" data-type="success"><strong>GENERAL REVENUE</strong></a>
           </div>
 
           <div class="col-md-6">

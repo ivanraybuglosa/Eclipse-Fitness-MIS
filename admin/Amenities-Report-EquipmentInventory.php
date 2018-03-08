@@ -185,7 +185,7 @@ $(document).ready(function() {
       className: '',
       customize: function ( win ) {
         $(win.document.body)
-        .prepend('<left><h4>433-0000</h4></left>')
+        .prepend('<left><h4>703-1503</h4></left>')
         .prepend('<left><h4>La Salle Avenue, Bacolod City</h4></left>')
         .prepend('<left><h4>Equipment Inventory Report</h4></left>')
         .prepend('<left><h3>Eclipse Healing and Body Design Center</h3></left>')
