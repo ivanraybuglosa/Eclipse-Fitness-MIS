@@ -54,6 +54,41 @@ include("includes/header.php"); ?>
               foreach($towels as $towel){
                 $count++;
                 ?>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  <div class="info-box bg-green hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">add</i>
+                    </div>
+                    <div class="content">
+                      <div class="text">SUPPLIED</div>
+                      <div class="number"><?php if(empty($towel['supply'])){echo "0";}else{echo $towel['supply']; }?></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  <div class="info-box bg-green hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">check</i>
+                    </div>
+                    <div class="content">
+                      <div class="text">AVAILABLE</div>
+                      <div class="number"><?php if(empty($available)){echo "0";}else{echo $available; } ?></div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  <div class="info-box bg-green hover-zoom-effect">
+                    <div class="icon">
+                      <i class="material-icons">store</i>
+                    </div>
+                    <div class="content">
+                      <div class="text">TOTAL</div>
+                      <div class="number"><?php echo $available + ($towel['TI_Borrowed'] + $towel['TI_Returned']) + $towel['laundry']?></div>
+                    </div>
+                  </div>
+                </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
@@ -76,18 +111,8 @@ include("includes/header.php"); ?>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                  <div class="info-box bg-green hover-zoom-effect">
-                    <div class="icon">
-                      <i class="material-icons">add</i>
-                    </div>
-                    <div class="content">
-                      <div class="text">SUPPLIED</div>
-                      <div class="number"><?php if(empty($towel['supply'])){echo "0";}else{echo $towel['supply']; }?></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
                       <i class="material-icons">arrow_upward</i>
@@ -98,7 +123,7 @@ include("includes/header.php"); ?>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="info-box bg-green hover-zoom-effect">
                     <div class="icon">
                       <i class="material-icons">arrow_downward</i>
@@ -109,30 +134,7 @@ include("includes/header.php"); ?>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                  <div class="info-box bg-green hover-zoom-effect">
-                    <div class="icon">
-                      <i class="material-icons">check</i>
-                    </div>
-                    <div class="content">
-                      <div class="text">AVAILABLE</div>
-                      <div class="number"><?php if(empty($available)){echo "0";}else{echo $available; } ?></div>
-                    </div>
-                  </div>
-                </div>
 
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                  <div class="info-box bg-green hover-zoom-effect">
-                    <div class="icon">
-                      <i class="material-icons">store</i>
-                    </div>
-                    <div class="content">
-                      <div class="text">TOTAL</div>
-                      <div class="number"><?php echo $available + ($towel['TI_Borrowed'] + $towel['TI_Returned']) + $towel['laundry']?></div>
-                    </div>
-                  </div>
-                </div>
 
 
               <?php }} ?>
