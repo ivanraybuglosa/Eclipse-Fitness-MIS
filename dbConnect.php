@@ -1152,7 +1152,7 @@ class dbConnect{
 
 
     public function getReturned(){
-        $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code LIMIT 1";
+        $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code DESC LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
@@ -1190,7 +1190,7 @@ class dbConnect{
 
 
     public function previousReturned(){
-        $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code LIMIT 1";
+        $sql = "SELECT TI_Returned FROM towelinventory ORDER BY TI_Code DESC LIMIT 1";
         $query = $this->db->prepare($sql);
         $query->execute();
         $var = $query->fetch();
