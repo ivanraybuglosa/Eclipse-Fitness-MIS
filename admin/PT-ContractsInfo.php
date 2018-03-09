@@ -328,7 +328,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-3">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 2</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Machine Seated Shoulder Press</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/2.gif" alt="exercise2" style="height:100%; width:100%">
@@ -338,7 +338,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-3">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 6</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Shoulder Raise</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/6.gif" alt="exercise6" style="height:100%; width:100%">
@@ -348,7 +348,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-3">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 8</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Assisted Triceps Dips</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/8.gif" alt="exercise8" style="height:100%; width:100%">
@@ -358,7 +358,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 9</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Upright Row</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/9.gif" alt="exercise9" style="height:100%; width:100%">
@@ -399,7 +399,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-3">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 3</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Deadlift</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/3.gif" alt="exercise3" style="height:100%; width:100%">
@@ -409,7 +409,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-3">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 4</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Calf Raise</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/4.gif" alt="exercise4" style="height:100%; width:100%">
@@ -419,7 +419,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-3">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 5</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Military Press</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/5.gif" alt="exercise5" style="height:100%; width:100%">
@@ -429,7 +429,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-3">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 12</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Bent-over Rows</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/12.gif" alt="exercise12" style="height:100%; width:100%">
@@ -439,7 +439,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 7</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Dumbbell Pushups</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/7.gif" alt="exercise7" style="height:100%; width:100%">
@@ -449,7 +449,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 10</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Flyes</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/10.gif" alt="exercise10" style="height:100%; width:100%">
@@ -460,7 +460,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 14</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Contralateral Limb Raises</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/14.gif" alt="exercise14" style="height:100%; width:100%">
