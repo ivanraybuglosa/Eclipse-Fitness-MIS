@@ -318,7 +318,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-3">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 1</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Lateral Raise</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/1.gif" alt="exercise1" style="height:100%; width:100%">
@@ -368,7 +368,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 11</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Crunches</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/11.gif" alt="exercise11" style="height:100%; width:100%">
@@ -378,7 +378,7 @@ include("includes/header.php"); ?>
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="header bg-green">
-                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Exercise 15</a></h2>
+                              <h2><a href="#" data-dismiss="modal" class="clickable" style="text-decoration:none; color:black;">Incline Dumbbell Benchpress</a></h2>
                             </div>
                             <div class="body">
                               <img src="exercises/15.gif" alt="exercise14" style="height:100%; width:100%">
@@ -1169,7 +1169,7 @@ window.onload = function () {
                                 <h4 id="final">Final BMI Classification: <?php echo $Fclass['M_BodyMassIndex']?> kg/m2 -
                                   <span class="label
                                   <?php
-                                  if($IClass['M_Classification'] == "Underweight"){
+                                  if($Fclass['M_Classification'] == "Underweight"){
                                     echo "bg-red";
                                   }elseif($Fclass['M_Classification'] == "Normal Weight"){
                                     echo "bg-green";
@@ -1634,14 +1634,14 @@ window.onload = function () {
               showTime();
               </script>
               <!-- Transfer text value into exercises input -->
-              <!-- <script type="text/javascript">
+              <script type="text/javascript">
               $(document).ready(function(){
                 $("a.clickable").click(function(event){
                   event.preventDefault();
                   $("input#textbox").val($(this).html());
                 });
               });
-            </script> -->
+            </script>
               <?php include("includes/footer.php"); ?>
 
 
