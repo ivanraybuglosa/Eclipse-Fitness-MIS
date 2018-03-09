@@ -204,8 +204,6 @@ include("includes/header.php"); ?>
 
                 <script>
 
-                  document.getElementById('clientName').value = "<?php echo $_POST['clientName'];?>";
-
                 $(document).ready(function() {
                   $('#contracthistory').DataTable( {
                     dom: 'Bfrtip',
@@ -242,6 +240,8 @@ include("includes/header.php"); ?>
               </script>
               <?php include("includes/footer.php"); ?>
               <script type="text/javascript">
+
+                document.getElementById('clientName').value = "<?php echo $_POST['clientName'];?>";
 
               function showTime(){
                 var date = new Date();

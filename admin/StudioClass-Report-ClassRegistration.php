@@ -209,6 +209,8 @@ include("includes/header.php"); ?>
 </section>
 <script type="text/javascript">
 
+document.getElementById('className').value = "<?php echo $_POST['className'];?>";
+
 function showTime(){
   var date = new Date();
   var h = date.getHours();

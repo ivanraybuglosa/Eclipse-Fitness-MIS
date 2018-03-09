@@ -32,7 +32,29 @@ include_once("actions/SC-Trend-LeastClass-Action.php"); ?>
       <h2>Least Favorite Classes</h2>
     </div>
     <div class="body">
+      <select id="filteryear" class="validate[required] select form-control show-tick" style="margin-top: -25px; width: 30%;" data-live-search="true">
+        <option>Select Year...</option>
+        <?php
+        for($year=2013; $year<=2025; $year++){
+          ?>
+          <option value="<?php echo $year ?>">
+            <?php echo $year; ?>
+          </option>
+          <?php
+        }
+        ?>
+      </select>
 
+      <script>
+      $(document).ready(function(){
+        $("#filteryear").on('change', function(){
+          var year=$(this).val();
+          window.location.href = 'StudioClass-Trend-LeastClass.php?year='+year;
+        });
+      });
+      </script>
+    </div>
+    <div class="body">
       <div class="col-s-12">
         <div id="leastclass" style="width: 100%; height: 400px"></div>
       </div>

@@ -139,8 +139,6 @@ include("includes/header.php"); ?>
     </section>
 
     <script>
-
-      document.getElementById('clientName').value = "<?php echo $_POST['clientName'];?>";
       
     $(document).ready(function() {
       $('#clientmeasure').DataTable( {
@@ -175,6 +173,8 @@ include("includes/header.php"); ?>
   } );
   </script>
   <script type="text/javascript">
+
+    document.getElementById('clientName').value = "<?php echo $_POST['clientName'];?>";
 
   function showTime(){
     var date = new Date();

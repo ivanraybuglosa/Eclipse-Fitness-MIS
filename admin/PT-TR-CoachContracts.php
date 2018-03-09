@@ -136,8 +136,6 @@ include("includes/header.php"); ?>
       </div>
       <script>
 
-        document.getElementById('coachName').value = "<?php echo $_POST['coachName'];?>";
-
       $(document).ready(function() {
         $('#coachcontracts').DataTable( {
           dom: 'Bfrtip',
@@ -173,6 +171,8 @@ include("includes/header.php"); ?>
   </section>
   <script type="text/javascript">
 
+  document.getElementById('coachName').value = "<?php echo $_POST['coachName'];?>";
+  
   function showTime(){
     var date = new Date();
     var h = date.getHours();

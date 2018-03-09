@@ -65,18 +65,18 @@ var chart = new CanvasJS.Chart("sessionfrequency", {
         type: "line",
         lineColor: "red",       
         dataPoints: [
-            { y: <?php echo $fjan['total'] ?>, label: "Jan"},
-            { y: <?php echo $ffeb['total'] ?>, label: "Feb"},
-            { y: <?php echo $fmar['total'] ?>, label: "Mar"},
-            { y: <?php echo $fapr['total'] ?>, label: "Apr"},
-            { y: <?php echo $fmay['total'] ?>, label: "May"},
-            { y: <?php echo $fjune['total'] ?>, label: "Jun"},
-            { y: <?php echo $fjul['total'] ?>, label: "Jul"},
-            { y: <?php echo $faug['total'] ?>, label: "Aug"},
-            { y: <?php echo $fsept['total'] ?>, label: "Sep"},
-            { y: <?php echo $foct['total'] ?>, label: "Oct"},
-            { y: <?php echo $fnov['total'] ?>, label: "Nov"},
-            { y: <?php echo $fdec['total'] ?>, label: "Dec"}
+            { y: <?php echo $fjan['total'] ?>, label: "Jan", indexLabel: "<?php echo $fjan['total'] ?>"},
+            { y: <?php echo $ffeb['total'] ?>, label: "Feb", indexLabel: "<?php echo $ffeb['total'] ?>"},
+            { y: <?php echo $fmar['total'] ?>, label: "Mar", indexLabel: "<?php echo $fmar['total'] ?>"},
+            { y: <?php echo $fapr['total'] ?>, label: "Apr", indexLabel: "<?php echo $fapr['total'] ?>"},
+            { y: <?php echo $fmay['total'] ?>, label: "May", indexLabel: "<?php echo $fmay['total'] ?>"},
+            { y: <?php echo $fjune['total'] ?>, label: "Jun", indexLabel: "<?php echo $fjune['total'] ?>"},
+            { y: <?php echo $fjul['total'] ?>, label: "Jul", indexLabel: "<?php echo $fjul['total'] ?>"},
+            { y: <?php echo $faug['total'] ?>, label: "Aug", indexLabel: "<?php echo $faug['total'] ?>"},
+            { y: <?php echo $fsept['total'] ?>, label: "Sep", indexLabel: "<?php echo $fsept['total'] ?>"},
+            { y: <?php echo $foct['total'] ?>, label: "Oct", indexLabel: "<?php echo $foct['total'] ?>"},
+            { y: <?php echo $fnov['total'] ?>, label: "Nov", indexLabel: "<?php echo $fnov['total'] ?>"},
+            { y: <?php echo $fdec['total'] ?>, label: "Dec", indexLabel: "<?php echo $fdec['total'] ?>"}
         ]
     }]
 });

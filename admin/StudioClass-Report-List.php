@@ -45,7 +45,7 @@
           </div>
 
           <div class="col-md-6">
-            <a href="StudioClass-Trend-TopClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success"><strong>TOP PARTICIPANTS</strong></a>
+            <a href="StudioClass-Trend-TopClients.php" class="btn bg-green btn-block waves-effect" role="button" name="btn-signup" data-type="success"><strong>TOP 5 PARTICIPANTS</strong></a>
           </div>
 
         </div>

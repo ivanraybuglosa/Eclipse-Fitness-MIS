@@ -8,7 +8,7 @@ if(isset($_GET['year']))
     $year=$_GET['year'];
 }
 
-$topc = $conn->query("SELECT CLIENT_ID, COUNT(*) as total FROM clientassignment WHERE year = '$year' GROUP BY CLIENT_ID ORDER BY total DESC LIMIT 10") or die(mysqli_error());
+$topc = $conn->query("SELECT CLIENT_ID, COUNT(*) as total FROM clientassignment WHERE year = '$year' GROUP BY CLIENT_ID ORDER BY total DESC LIMIT 5") or die(mysqli_error());
  ?>
 
 <script>
@@ -23,11 +23,6 @@ var chart = new CanvasJS.Chart("activeclients", {
     },
     data: [{
         type: "column",
-        yValueFormatString: "#''",
-        indexLabelFontColor: "black",
-        indexLabelFontSize: 15,
-        indexLabel: "{label} - {y}",
-        //reversed: true, // Reverses the pyramid
         dataPoints: [
         <?php
         while($ftopc = $topc->fetch_array()) { 
@@ -35,7 +30,7 @@ var chart = new CanvasJS.Chart("activeclients", {
             $client = $conn->query("SELECT * FROM client WHERE CLIENT_ID = '$cname' ") or die(mysqli_error());
             $fclient = $client->fetch_array();
             ?>
-            { y: <?php echo $ftopc['total'] ?>, label: "<?php echo $fclient['CLIENT_FirstName'] ?> <?php echo $fclient['CLIENT_LastName'] ?> " },
+            { y: <?php echo $ftopc['total'] ?>, label: "<?php echo $fclient['CLIENT_FirstName'] ?> <?php echo $fclient['CLIENT_LastName'] ?> ", indexLabel: "<?php echo $ftopc['total'] ?>" },
         <?php
         }
         ?>

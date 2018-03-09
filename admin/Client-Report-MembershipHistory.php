@@ -42,7 +42,7 @@ include("includes/header.php"); ?>
               <div class="form-line">
                 <h5 class="pull-left">Client Name</h5>
 
-                <select class="form-control show-tick" data-live-search="true" name="clientName">
+                <select class="form-control show-tick" data-live-search="true" id="clientName" name="clientName">
                   <option value="null">Choose Client</option>
                   <?php
                   $pdo = new dbConnect();
@@ -69,7 +69,6 @@ include("includes/header.php"); ?>
               </div>
             </div>
           </div>
-
           <div class="col-md-3" style="margin-top: 30px;">
             <input type="hidden" name="action_type" value="check"/>
             <button type="submit" name= "check" id="check" class="btn bg-teal btn-block btn-lg waves-effect">Filter</button>
@@ -207,6 +206,8 @@ include("includes/header.php"); ?>
 
     </section>
     <script type="text/javascript">
+
+    document.getElementById('clientName').value = "<?php echo $_POST['clientName'];?>";
 
     function showTime(){
       var date = new Date();
