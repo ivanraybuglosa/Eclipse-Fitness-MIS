@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedIn'])) {
 include("includes/header.php"); ?>
 <?php
 $id = $_GET['id'];
-
+$coachID = $_GET['coach'];
 
 $pdo = new dbConnect();
 $scs = $pdo->getStudioClass($id,array('order_by'=>'SCS_Code ASC'));
@@ -140,9 +140,10 @@ if(!empty($scs)){
             </form>
           </div>
           <div class="card">
-            <div class="header">
+            <div class="header"> <a href="actions/sendTextMessage.php?id=<?php echo $id ?>" class="btn  waves-effect btn-success pull-right" data-type='success'> <i class="material-icons">textsms</i></a>
               <h2><?php echo $sc['SC_Name']?> Participants</h2>
 
+             
             </div>
 
 
@@ -248,10 +249,12 @@ if(!empty($scs)){
                                   <input type="hidden" name="SCS_Code" value="<?php echo $sc['SCS_Code']?>">
                                   <input type="hidden" name="CA_Code" value="<?php echo $ca['CA_Code']?>">
                                   <input type="hidden" name="action_type" value="delete"/>
-                                  <td><center><button name="submit" type="submit" class="btn bg-red">Cancel</button></center></td>
-                                </form>
-                              </tr>
+                                  <td><center><a href="actions/deletePartAction.php?caID=<?php echo $ca['CA_Code']?>&amp;SCS_Code=<?php echo $sc['SCS_Code'] ?>" class="btn bg-red" >Cancel</a></td>
+                
 
+                                
+                              </tr>
+                          </form>
                             <?php } }else{ ?>
 
                               <tr><td colspan="6">No Participant(s) found......</td></tr>
@@ -275,7 +278,6 @@ if(!empty($scs)){
       </section>
       <!-- Card 1 -->
       <script type="text/javascript">
-
       function showTime(){
         var date = new Date();
         var h = date.getHours();

@@ -57,7 +57,7 @@ include("includes/header.php"); ?>
                 <?php
 
                 $pdo = new dbConnect();
-                $penalties = $pdo->getRows('penalty',array("order_by" => "P_ID"));
+                $penalties = $pdo->getRows('penalties',array("order_by" => "P_ID"));
                 if(!empty($penalties)){
                   $count = 0;
                   foreach($penalties as $penalty){

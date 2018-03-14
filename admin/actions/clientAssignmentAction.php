@@ -83,20 +83,8 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
             }
         }
-
-
-        
-        
     
-    }elseif($_REQUEST['action_type'] == 'delete'){
-            if(!empty($_POST['CA_Code'])){
-            $condition = array('CA_Code' => $_POST['CA_Code']);
-            $delete = $pdo->delete($tblName1,$condition);
-            $id = $_POST['SCS_Code'];
-                        echo "<script>alert('Participant successfully removed from the list! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";
-                    
-            }
-        }
+    }
 }
 
 //Dont touch this code//

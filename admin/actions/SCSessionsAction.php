@@ -64,10 +64,6 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                     echo "<script>alert('Studio Class Schedule Failed! ');window.location.href='../StudioClass-Sessions.php';</script>";
                                     
                 }
-                $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-        $_SESSION['statusMsg'] = $statusMsg;           
-        
-        
         //edit feature not working yet//
     }elseif($_REQUEST['action_type'] == 'edit'){
             $userData = array(
@@ -82,8 +78,6 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $update1 = $pdo->update('studioclasssession',$userData,$condition1);
             $id = $_POST['SCS_Code'];
             echo "<script>alert('Studio Class Session Information Successfully Modified! ');window.location.href='../StudioClass-Schedule.php?id=".$id. "';</script>";
-                                    $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-                                    $_SESSION['statusMsg'] = $statusMsg;
-                    $statusMsg = $insert?'Studio Class data has been inserted successfully.':'Some problem occurred, please try again.';
-        }
+                                 
+}
 }

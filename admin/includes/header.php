@@ -141,7 +141,7 @@
                 <a class="navbar-brand" style="color:#7FFF00;" href="index.php"> MANAGEMENT INFORMATION SYSTEM
                 </a>
             </div>
-            <div id="clock" class="pull-right" style="margin-top:-50px;"></div>
+            <div id="clock" class="pull-right" style="margin-top:20px;"></div>
 
         </div>
     </nav>

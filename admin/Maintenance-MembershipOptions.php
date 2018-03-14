@@ -55,7 +55,7 @@ include("includes/header.php"); ?>
             <div class="form-group form-float">
               <div class="form-line">
                 <input type="text" name="price" class="form-control"  required>
-                <label class="form-label">Price(Per Month)</label>
+                <label class="form-label">Total Price</label>
               </div>
             </div>
           </div>
@@ -67,14 +67,6 @@ include("includes/header.php"); ?>
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
 
   <div class="card">
     <div class="header">
