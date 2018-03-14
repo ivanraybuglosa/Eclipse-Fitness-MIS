@@ -4,11 +4,13 @@ include '../../dbConnect.php';
 $pdo = new dbConnect();
 $tblName = 'client';
 $tblName2 = 'membership';
-$today = date("Y-m-d");
+
 $tableMem = 'membershiptype';
 $tblName3 = 'transaction';
-$year = date("Y");
-$month = date("M");
+$month = date("M", strtotime("+8 HOURS"));
+$year = date("Y", strtotime("+8 HOURS"));
+date_default_timezone_set('Asia/Manila');
+$today = date("Y-m-d");
 $id = 'MS_Code';
 
     

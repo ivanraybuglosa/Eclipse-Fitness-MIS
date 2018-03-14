@@ -11,14 +11,14 @@
 
     <!-- Google Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"> -->
 
     <!-- Local Fonts and Icons -->
     <link href="../material-design-icons-master/iconfont/material-icons.css" rel="stylesheet"/>
 
     <script src="canvas/jquery.min.js"></script>
-    
+
     <script src="canvas/jquery.canvasjs.min.js"></script>
     <!-- Bootstrap Select Css -->
     <link href="../assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
@@ -36,21 +36,21 @@
     <link href="../assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Wait Me Css -->
-    <link href="../assets/plugins/waitme/waitMe.css" rel="stylesheet" />    
+    <link href="../assets/plugins/waitme/waitMe.css" rel="stylesheet" />
 
     <!-- Sweetalert Css -->
     <link href="../assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
-    
+
     <!-- Morris Chart Css-->
     <link href="../assets/plugins/morrisjs/morris.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="../assets/css/style.css" rel="stylesheet">
-    
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 
-    
-    <!-- Dropzone Css -->       
+
+    <!-- Dropzone Css -->
 
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
@@ -58,7 +58,7 @@
     <link href="../assets/plugins/dropzone/dropzone.css" rel="stylesheet">
         <!-- JQuery DataTable Css -->
     <link href="../assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-   
+
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../assets/css/themes/all-themes.css" rel="stylesheet" />
     <style type="text/css">
@@ -90,48 +90,20 @@
                           transform: scale(1);
                   overflow: visible;
                 }
-        
-        .clockdate-wrapper {
-    background-color: #333;
-    padding:0px;
-    height: 100px;
-    width:1000px;
-    text-align:center;
-    border-radius:5px;
-    padding-bottom: 15px;
-            
-    
-    
-}
+
+
 #clock{
-    background-color:#333;
-    
-    font-family: ;
-    font-size:30px;
-    text-shadow:0px 0px 1px #fff;
+    font-size:20px;
+
     color:#7FFF00;
-    padding: 5px;
 }
-#clock span {
-    color:#888;
-    text-shadow:0px 0px 1px #333;
-    font-size:10px;
-    position:relative;
-    top:-27px;
-    left:-10px;
-}
-#date {
-    letter-spacing:5px;
-    font-size:15px;
-    font-family:arial,sans-serif;
-    color:#00FF00;
-}
-        
+
+
 
     </style>
 
     <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
 <!-- Inline CSS based on choices in "Settings" tab -->
 <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
@@ -139,7 +111,7 @@
 
 <body class="theme-black">
     <!-- Page Loader -->
-  <!-- <div class="page-loader-wrapper">
+  <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
                 <div class="spinner-layer pl-red">
@@ -153,12 +125,12 @@
             </div>
             <p>Please wait...</p>
         </div>
-    </div> -->
+    </div>
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
-   
+
     <!-- Top Bar -->
     <nav class="navbar">
         <div class="container-fluid">
@@ -166,10 +138,11 @@
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                  <img src="../logo.png" class="pull-left" style="height: 15%; width: 15%; margin-right: 20px;">
-                <a class="navbar-brand col-light-green" href="index.php"> MANAGEMENT INFORMATION SYSTEM
+                <a class="navbar-brand" style="color:#7FFF00;" href="index.php"> MANAGEMENT INFORMATION SYSTEM
                 </a>
             </div>
-            
+            <div id="clock" class="pull-right" style="margin-top:20px;"></div>
+
         </div>
     </nav>
     <!-- #Top Bar -->
@@ -182,34 +155,12 @@
                     <img src="../assets/images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container pull-right">
-                   <?php 
-                         include "dbConnect.php";
-                         $sta = $connect->query("SELECT * FROM `coach` INNER JOIN `users` on coach.userID = users.userID WHERE `stat` = '1' ") or die(mysqli_error());
-                    while($user = $sta->fetch_array()){ ?>
-                  
-                 
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: 25px;"><?php echo $user ['Coach_LastName'] ." ,". $user['Coach_FirstName']?> </div>
-                <?php } ?>
 
+                      <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: 25px;">COACH</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                        <?php
-                        include "dbConnect.php";
-                        if(isset($_POST['submit'])){
-                           $sta = $connect->query("SELECT userID FROM users WHERE `stat` = '1' ") or die(mysqli_error());
-                            while($user = $sta->fetch_array()){
-                           $user1 = $user['userID'];
-
-                            mysqli_query($connect, "UPDATE users SET  `stat`= '0' WHERE `userID` = '$user1' ") or die(mysqli_error($connect));
-                        echo "<script>alert('Successfully Log-Out');window.location.href='../logout.php';</script>";
-                         }
-
-                        }
-                        ?>
                         <ul class="dropdown-menu pull-right">
-                            <form method="post">
-                            <li><a href="../logout.php"><i class="material-icons">input</i><button type="submit" name=submit>Sign Out</button></a></li>
-                            </form>
+                            <li><a href="../logout.php"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -226,7 +177,6 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                   
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle";>
                             <i class="material-icons">event_note</i>
@@ -238,7 +188,7 @@
                                 <i class="material-icons">alarm_add</i>
                                 <span style="margin-top:8px;">Sessions</span>
                                 </a>
-                                                      
+                                
                             </li>
                         </ul>
                     </li>
@@ -249,7 +199,7 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                
+
                                 <a href="PT-ContractsFinal.php">
                                 <i class="material-icons">perm_contact_calendar</i>
                                 <span style="margin-top:8px;">Contracts</span>
@@ -258,40 +208,27 @@
                                 <i class="material-icons">view_list</i>
                                 <span style="margin-top:8px;">Personal Training Reports</span>
                                 </a>
-                                                         
+
                             </li>
                         </ul>
                     </li>
-                   
-                  
+                    
                 </ul>
-                
+
             </div>
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2017 - 2018 <a href="javascript:void(0);">Phantom Dice</a> 
+                    &copy; 2017 - 2018 <a href="javascript:void(0);">Phantom Dice</a>
                 </div>
             </div>
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
         <!-- Right Sidebar -->
-        <aside id="rightsidebar" class="right-sidebar">
-            <div class="body">
-                            <div class="alert bg-blue alert-dismissable" style="margin:5px;">
-                                Coach Mark Benjamin just started a personal training contract!
-                            </div>
-                            <div class="alert bg-blue" style="margin:5px;">
-                                Zumba Class is starting in 10 minutes!
-                            </div>
-                            <div class="alert bg-blue" style="margin:5px;">
-                                A spinning class is scheduled
-                            </div>
-                        </div>
-        </aside>                       
-                         
-  
+        
+
+
         <!-- #END# Right Sidebar -->
     </section>

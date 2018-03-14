@@ -1676,6 +1676,45 @@ class dbConnect{
         return $result;
 		}
 
+        public function sendMessage($id){
+            $sql = "SELECT * FROM client INNER JOIN clientassignment ON client.CLIENT_ID = clientassignment.CLIENT_ID INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN coach ON coach.COACH_ID = studioclasssession.COACH_ID INNER JOIN studioclass ON studioclass.SC_Code = studioclasssession.SC_Code WHERE studioclasssession.SCS_Code = '".$id."'";
+            $query = $this->db->prepare($sql);
+            $query->execute();
+             include "admin/smsGateway.php";
+             $smsGateway = new SmsGateway('ivanraybuglosa@gmail.com', 'huaweilenovo');
+             $deviceID = 82782;
+                while($var = $query->fetch()){
+                    $result = $var['CLIENT_ContactNumber'];
+                    $str = preg_replace('/^./', '', $result);
+                    $number = '+63'.$str;
+                    $clientName =$var['CLIENT_FirstName']. " " .$var['CLIENT_LastName'];
+                    $scName = $var['SC_Name'];
+                    $SCSdate = $var['SCS_Date'];
+                    $date = date('F d Y', strtotime($SCSdate));
+                    $SCS_StartTime = $var['SCS_StartTime'];
+                    $time = date('g:i A',strtotime($SCS_StartTime));
+                    $message ="Hi $clientName, This is Eclipse Gym, we would like to remind you of your $scName class on $date, $time. Thank You!";
+                    $smsGateway->sendMessageToNumber($number, $message, $deviceID);
+                }
+                //Coach message
+                $sqlCoach = "SELECT * FROM client INNER JOIN clientassignment ON client.CLIENT_ID = clientassignment.CLIENT_ID INNER JOIN studioclasssession ON clientassignment.SCS_Code = studioclasssession.SCS_Code INNER JOIN coach ON coach.COACH_ID = studioclasssession.COACH_ID INNER JOIN studioclass ON studioclass.SC_Code = studioclasssession.SC_Code WHERE studioclasssession.SCS_Code = '".$id."' GROUP BY coach.COACH_ID";
+                $query = $this->db->prepare($sqlCoach);
+                $query->execute();
+                $var1 = $query->fetch();
+                    $result = $var1['Coach_ContactNumber'];
+                    $str = preg_replace('/^./', '', $result);
+                    $number = '+63'.$str;
+                    $coachName =$var1['Coach_FirstName'];
+                    $scName = $var1['SC_Name'];
+                    $SCSdate = $var1['SCS_Date'];
+                    $date = date('F d Y', strtotime($SCSdate));
+                    $SCS_StartTime = $var1['SCS_StartTime'];
+                    $time = date('g:i A',strtotime($SCS_StartTime));
+                    $message ="Hi Coach $coachName, This is Eclipse Gym, we would like to remind you of your $scName class on $date, $time. Thank You!";
+                    $smsGateway->sendMessageToNumber($number, $message, $deviceID);
+    
+            }
+    
 
 
 
