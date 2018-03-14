@@ -11,7 +11,7 @@ $weight = $_POST['weight'];
 $height = $_POST['height'];
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
-        $bmi = $_POST['bodyMassIndex'];
+        $bmi = $weight/pow($height,2);
         if($bmi < 18.5){
             $class = "Underweight";
         }else if($bmi > 18.4 && $bmi < 25){
@@ -19,11 +19,11 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         }else if($bmi > 24.9 && $bmi < 30){
             $class = "Overweight";
         }else if($bmi > 29.9 && $bmi < 35){
-            $class = "Class I Obesity";
+            $class = "Class I obesity";
         }else if($bmi > 34.9 && $bmi < 40){
-            $class = "Class II Obesity";
+            $class = "Class II obesity";
         }else if($bmi > 39){
-            $class = "Class III Obesity";
+            $class = "Class III obesity";
         }else{
             $class ="Undefined";
         }
@@ -79,11 +79,11 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
       }else if($bmi > 24.9 && $bmi < 30){
           $class = "Overweight";
       }else if($bmi > 29.9 && $bmi < 35){
-          $class = "Class I Obesity";
+          $class = "Class I obesity";
       }else if($bmi > 34.9 && $bmi < 40){
-          $class = "Class II Obesity";
+          $class = "Class II obesity";
       }else if($bmi > 39){
-          $class = "Class III Obesity";
+          $class = "Class III obesity";
       }else{
           $class ="Undefined";
       }
@@ -127,11 +127,11 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
       }else if($bmi > 24.9 && $bmi < 30){
           $class = "Overweight";
       }else if($bmi > 29.9 && $bmi < 35){
-          $class = "Class I Obesity";
+          $class = "Class I obesity";
       }else if($bmi > 34.9 && $bmi < 40){
-          $class = "Class II Obesity";
+          $class = "Class II obesity";
       }else if($bmi > 39){
-          $class = "Class III Obesity";
+          $class = "Class III obesity";
       }else{
           $class ="Undefined";
       }

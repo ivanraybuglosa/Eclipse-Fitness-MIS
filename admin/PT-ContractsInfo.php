@@ -296,10 +296,7 @@ include("includes/header.php"); ?>
       </div>
     </div>
 
-
-
-
-    <div class="modal fade" id="exercises" tabindex="-1" role="dialog">
+ <div class="modal fade" id="exercises" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <center>
@@ -481,10 +478,6 @@ include("includes/header.php"); ?>
 
         </div>
       </div>
-
-
-
-
 
     <div class="card">
       <div class="header" style="background:silver;">
@@ -1155,11 +1148,11 @@ window.onload = function () {
                                   echo "bg-green";
                                 }elseif($IClass['M_Classification'] == "Overweight"){
                                   echo "bg-yellow";
-                                }elseif($IClass['M_Classification'] == "Class I Obesity"){
+                                }elseif($IClass['M_Classification'] == "Class I obesity"){
                                   echo "bg-orange";
-                                }elseif($IClass['M_Classification'] == "Class II Obesity"){
+                                }elseif($IClass['M_Classification'] == "Class II obesity"){
                                   echo "bg-amber";
-                                }elseif($IClass['M_Classification'] == "Class III Obesity"){
+                                }elseif($IClass['M_Classification'] == "Class III obesity"){
                                   echo "bg-red";
                                 }
 
@@ -1175,11 +1168,11 @@ window.onload = function () {
                                     echo "bg-green";
                                   }elseif($Fclass['M_Classification'] == "Overweight"){
                                     echo "bg-yellow";
-                                  }elseif($Fclass['M_Classification'] == "Class I Obesity"){
+                                  }elseif($Fclass['M_Classification'] == "Class I obesity"){
                                     echo "bg-orange";
-                                  }elseif($Fclass['M_Classification'] == "Class II Obesity"){
+                                  }elseif($Fclass['M_Classification'] == "Class II obesity"){
                                     echo "bg-amber";
-                                  }elseif($Fclass['M_Classification'] == "Class III Obesity"){
+                                  }elseif($Fclass['M_Classification'] == "Class III obesity"){
                                     echo "bg-red";
                                   }
 
@@ -1211,17 +1204,6 @@ window.onload = function () {
                               </div>
                             <?php }}?>
                           <?php }}?>
-
-
-
-
-
-                          <!-- END OF CLIENT PROFILE MEMBERSHIP DETAILS -->
-
-                          <!-- START OF CLIENT ACTIVITY LOG -->
-
-
-
 
                           <!-- MODAL FOR ENROLLING FOR PERSONAL TRAINING -->
                           <form method="post" action="actions/measurementAction.php">
@@ -1448,14 +1430,14 @@ window.onload = function () {
                                                 </div>
                                               </div>
                                             </div>
-                                            <!-- <div class="col-md-3">
+                                            <div class="col-md-3">
                                             <label for="age">Body Fat Mass(%)</label>
                                             <div class="form-group">
                                             <div class="form-line">
                                             <input type="number" name="bodyFatMass" min="0" class="form-control" required>
                                           </div>
                                         </div>
-                                      </div> -->
+                                      </div>
                                       <div class="col-md-3">
                                         <label for="age">Fat Free Mass(%)</label>
                                         <div class="form-group">
@@ -1464,14 +1446,7 @@ window.onload = function () {
                                           </div>
                                         </div>
                                       </div>
-                                      <div class="col-md-3">
-                                        <label for="age">Body Mass Index(kg)</label>
-                                        <div class="form-group">
-                                          <div class="form-line">
-                                            <input type="number" name="bodyMassIndex" min="0" class="form-control" required >
-                                          </div>
-                                        </div>
-                                      </div>
+                                      
                                       <div class="col-md-3">
                                         <label for="age">Percent Body Fat(%)</label>
                                         <div class="form-group">
