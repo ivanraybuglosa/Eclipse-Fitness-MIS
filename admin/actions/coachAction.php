@@ -6,9 +6,17 @@ $tblName = 'coach';
 $tblName2 = 'users';
 $id = "userID";
 
+$user = $_SESSION['username'];
+$pass = $_SESSION['password'];
+date_default_timezone_set('Asia/Manila');
+$date = date("Y-m-d");
+$time=date("H:i:s");
+$userid = $pdo->getUserID($user,$pass);
 
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
+        $last = $_POST['LastName'],
+        $first = $_POST['FirstName'],
        $username = $_POST['cusername'];
         $userData2 = array(
             'username' => $_POST['cusername'],
@@ -17,7 +25,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         );
 
         $insert2 = $pdo->insert($tblName2,$userData2);
-         $returnedVal = $pdo->selectID($id,$tblName2,$username);
+        $returnedVal = $pdo->selectID($id,$tblName2,$username);
         $userData = array(
              
             'Coach_LastName' => $_POST['LastName'],
@@ -30,10 +38,21 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'userID' => $returnedVal
         );
         $insert = $pdo->insert($tblName,$userData);
-         echo "<script>alert('Coach Information Successfully Saved!');window.location.href='../PT-Coaches.php';</script>";
+        $desc = ' '.$first. ' '.$last.' has been as a coach ';
+            $log = array (
+                'userID' => $userid,
+                'log_activity' => 'Coach Registration',
+                'log_description' => $desc,
+                'log_date' => $date,
+                'log_time' => $time
+            );  
+            $insert = $pdo->insert('log',$log);
+        echo "<script>alert('Coach Information Successfully Saved!');window.location.href='../PT-Coaches.php';</script>";
          
     
     }elseif($_REQUEST['action_type'] == 'edit'){
+        $last = $_POST['LastName'],
+        $first = $_POST['FirstName'],
             $userData = array(
             'Coach_LastName' => $_POST['LastName'],
             'Coach_FirstName' => $_POST['FirstName'],
@@ -52,6 +71,16 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $condition2 = array('userID' => $_POST['userID']);
             $update1 = $pdo->update($tblName,$userData,$condition1);
             $update2 = $pdo->update($tblName2,$userData2,$condition2);
+
+            $desc = ' '.$first. ' '.$last.'\'s coach information has been modified';
+                $log = array (
+                    'userID' => $userid,
+                    'log_activity' => 'Coach Registration',
+                    'log_description' => $desc,
+                    'log_date' => $date,
+                    'log_time' => $time
+                );  
+                $insert = $pdo->insert('log',$log);
             echo "<script>alert('Coach Information Successfully Modified!');window.location.href='../PT-Coaches.php';</script>";
        
         

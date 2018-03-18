@@ -1,7 +1,6 @@
 <?php
-include "../dbConnect.php";
-session_start();
-
+include("../dbConnect.php");
+include("auth.php");
 include("includes/header.php");
 ?>
 

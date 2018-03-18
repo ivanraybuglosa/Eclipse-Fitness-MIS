@@ -3,6 +3,9 @@ session_start();
 include '../../dbConnect.php';
 $pdo = new dbConnect();
 
+
+$user = $_SESSION['username'];
+$pass = $_SESSION['password'];
 $tblName1 = 'studioclasssession';
 $tblName2 = 'coach';
 $id = "COACH_ID";
@@ -18,6 +21,12 @@ $month = date("M", strtotime("+8 HOURS"));
 $year = date("Y", strtotime("+8 HOURS"));
 $stime = $_POST['sessionSTime'];
 $etime = $_POST['sessionETime'];
+
+date_default_timezone_set('Asia/Manila');
+$date = date("Y-m-d");
+$time=date("H:i:s");
+
+$userid = $pdo->getUserID($user,$pass);
 
 
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
@@ -55,6 +64,17 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                     );
                     $insert = $pdo->insert('activitylog', $userData2);
                     $insert = $pdo->insert($tblName1,$userData);
+
+                    
+                    $first = $pdo->getSC($_POST['SCName']);
+                    $desc = ' '.$first. ' session has been scheduled';
+                    $log = array (
+                        'userID' => $userid,
+                        'log_activity' => 'Studio Class Scheduling',
+                        'log_description' => $desc,
+                        'log_date' => $date,
+                        'log_time' => $time
+                    );     
                     echo "<script>alert('Studio Class Successfully Scheduled');window.location.href='../StudioClass-Sessions.php';</script>";
 
 
@@ -76,6 +96,18 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             );
             $condition1 = array('SCS_Code' => $_POST['SCS_Code']);
             $update1 = $pdo->update('studioclasssession',$userData,$condition1);
+
+            $first = $pdo->getSC($_POST['SCName']);
+                    $desc = ' '.$first. ' session schedule has been modified';
+                    $log = array (
+                        'userID' => $userid,
+                        'log_activity' => 'Studio Class Schedule Modification',
+                        'log_description' => $desc,
+                        'log_date' => $date,
+                        'log_time' => $time
+                    );     
+                    $insert = $pdo->insert('log',$log);
+
             $id = $_POST['SCS_Code'];
             echo "<script>alert('Studio Class Session Information Successfully Modified! ');window.location.href='../StudioClass-Schedule.php?id=".$id. "';</script>";
                                  

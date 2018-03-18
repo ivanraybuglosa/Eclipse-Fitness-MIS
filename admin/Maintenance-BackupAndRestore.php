@@ -1,11 +1,6 @@
 <?php
-include "../dbConnect.php";
-session_start();
-if (!isset($_SESSION['loggedIn'])) {
-  $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
-  echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
-}
-
+include("../dbConnect.php");
+include("auth.php");
 include("includes/header.php");
 ?>
 
@@ -35,6 +30,13 @@ include("includes/header.php");
   set_time_limit(0);
   $message = '';
   $message2 = '';
+  $pdo = new dbConnect();
+    $user = $_SESSION['username'];
+    $pass = $_SESSION['password'];
+    date_default_timezone_set('Asia/Manila');
+    $date = date("Y-m-d");
+    $time=date("H:i:s");
+    $userid = $pdo->getUserID($user,$pass);
   if(isset($_POST["import"])) {
     if($_FILES["database"]["name"] != '')
     {
@@ -77,10 +79,15 @@ include("includes/header.php");
       $message = '<label class="text-danger">Please select SQL File</label>';
     }
 
-    date_default_timezone_set('Asia/Manila');
-    $date = date('Y-m-d');
-    $time = date('g:i s');
-
+    $desc = 'An Import database has been initiated';
+                $log = array (
+                    'userID' => $userid,
+                    'log_activity' => 'Backup and Restore',
+                    'log_description' => $desc,
+                    'log_date' => $date,
+                    'log_time' => $time
+                );  
+                $insert = $pdo->insert('log',$log);
     $conn->query("INSERT INTO `backuphistory` VALUES('', 'Import', '$date', '$time')") or die(mysqli_error());
   }
 
@@ -124,9 +131,19 @@ include("includes/header.php");
     $handle = fopen('backup/backup.sql', 'w+');
     fwrite($handle, $return);
     fclose($handle);
-    date_default_timezone_set('Asia/Manila');
-    $date = date('Y-m-d');
-    $time=date("H:i:s");
+    
+
+
+   
+    $desc = 'An Export database has been initiated';
+                $log = array (
+                    'userID' => $userid,
+                    'log_activity' => 'Backup and Restore',
+                    'log_description' => $desc,
+                    'log_date' => $date,
+                    'log_time' => $time
+                );  
+                $insert = $pdo->insert('log',$log);
 
     $conn->query("INSERT INTO `backuphistory` VALUES('', 'Export', '$date', '$time')") or die(mysqli_error());
 

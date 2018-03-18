@@ -1,11 +1,6 @@
 <?php
-include "../dbConnect.php";
-session_start();
-if (!isset($_SESSION['loggedIn'])) {
-  $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
-  echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
-}
-
+include("../dbConnect.php");
+include("auth.php");
 include("includes/header.php"); ?>
 
 <section class="content">
@@ -75,6 +70,7 @@ include("includes/header.php"); ?>
                     <td>
                       <form method="post" action="actions/transactionAction.php">
                         <input type="hidden" name="TR_ID" value="<?php echo $tr['TR_ID']?>">
+                        <input type="hidden" name="CLIENT_ID" value="<?php echo $tr['CLIENT_ID']?>">
                         <input type="hidden" name="action_type" value="add">
                         <button class="btn bg-red" >CHECKOUT</button>
                       </form>

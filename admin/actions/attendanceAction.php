@@ -2,32 +2,33 @@
 <?php
 session_start();
 include '../../dbConnect.php';
-$pdo = new dbConnect();
 
+$pdo = new dbConnect();
+$user = $_SESSION['username'];
+$pass = $_SESSION['password'];
 $tblName1 = 'attendance';
 $tblName2 = 'client';
 $tableName3='transaction';
 $tableName4 ='towels';
 $tableTowel = 'towelinventory';
 
-$firstname = 'CLIENT_FirstName';
-$lastname = 'CLIENT_LastName';
-$fullname = $firstname. " " .$lastname;
-$column1 = $fullname;
 $month = date("M", strtotime("+8 HOURS"));
 $year = date("Y", strtotime("+8 HOURS"));
 date_default_timezone_set('Asia/Manila');
 $date = date("Y-m-d");
-$time=date("H:i:s", strtotime("+7 HOURS"));
+$time=date("H:i:s");
 
-
+$client = $_POST['clientName'];
+$userid = $pdo->getUserID($user,$pass);
+$first = $pdo->getClientFirst($client);
 
   //working
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
-        $regstat = $pdo->regStat($_POST['clientName']);
+        $regstat = $pdo->regStat($client);
+        
             $userData = array(
-            'CLIENT_ID' => $_POST['clientName'],
+            'CLIENT_ID' => $client,
             'A_TowelQty' => $_POST['towel'],
             'A_LockerKey' => $_POST['Locker'],
             'A_TimeIn' => $time,
@@ -37,6 +38,16 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'A_status' => $regstat
             );
 
+            $desc = ' '.$first. ' has been timed in';
+                $log = array (
+                    'userID' => $userid,
+                    'log_activity' => 'Client Time-in',
+                    'log_description' => $desc,
+                    'log_date' => $date,
+                    'log_time' => $time
+                );           
+                $insert = $pdo->insert('log',$log);
+                
             $check = $pdo->checkAttendance($_POST['clientName'],$date);
             $available = $pdo->previousAvailable();
             $borrowed = $pdo->previousBorrowed();
@@ -63,6 +74,8 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
                         //insert time-in information to attendance
                         $insert = $pdo->insert($tblName1,$userData);
+                        $insert = $pdo->insert('log',$log);
+
                         echo "<script>alert('Client Time-in Success! ');window.location.href='../attendance.php';</script>";
                         //update towel information
 
@@ -108,6 +121,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         //working
 
     }elseif($_REQUEST['action_type'] == 'edit'){
+        
             $userData = array(
             'A_TowelQty' => $_POST['modifiedTowel'],
             'A_LockerKey' => $_POST['modifiedLocker']
@@ -116,6 +130,15 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             if($locker <> $_POST['modifiedLocker']){
                 $condition = array('A_Code' => $_POST['A_Code']);
                 $update = $pdo->update($tblName1,$userData,$condition);
+                $desc = ' '.$first.'\'s attendance information has been modified ';
+                $log = array (
+                    'userID' => $userid,
+                    'log_activity' => 'Attendance Information Modification',
+                    'log_description' => $desc,
+                    'log_date' => $date,
+                    'log_time' => $time
+                );  
+                $insert = $pdo->insert('log',$log);
 
                 echo "<script>alert('Client Attendance Information Successfully Modified!');window.location.href='../attendance.php';</script>";
 
@@ -141,24 +164,34 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
         );
 
+        $desc = ' '.$first.'\'s has been timed out ';
+            $log = array (
+                'userID' => $userid,
+                'log_activity' => 'Client Time out',
+                'log_description' => $desc,
+                'log_date' => $date,
+                'log_time' => $time
+            );  
+            $insert = $pdo->insert('log',$log);
+
 
         $towels = $pdo->checkTowels($_POST['A_Code']);
         if($towels <> $_POST['returnedTowel'] && $_POST['key'] == 'Unreturned'){
             $lostQty = $towels - $_POST['returnedTowel'];
             $penaltyPrice = $pdo->penaltyPrice('Lost Towel(s)');
                 $userData1 = array(
-                'CLIENT_ID' => $_POST['CLIENT_ID'],
+                'CLIENT_ID' => $_POST['clientName'],
                 'TR_Type' => 'Lost Towel(s) ',
                 'TR_Bill' => $penaltyPrice * $lostQty,
                 'TR_Status' => 'unpaid',
                 'TR_TransactionDate' => $date,
                 'year' => $year,
                 'month' => $month
-                );
+        );
 
                 $fee = $pdo->penaltyPrice('Lost Locker Key');
                 $userData5 = array(
-                    'CLIENT_ID' => $_POST['CLIENT_ID'],
+                    'CLIENT_ID' => $_POST['clientName'],
                     'TR_Type' => 'Lost Locker Key',
                     'TR_Bill' => $fee,
                     'TR_Status' => 'unpaid',
@@ -181,7 +214,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             $lostQty = $towels - $_POST['returnedTowel'];
             $penaltyPrice = $pdo->penaltyPrice('Lost Towel(s)');
                 $userData1 = array(
-                'CLIENT_ID' => $_POST['CLIENT_ID'],
+                'CLIENT_ID' => $_POST['clientName'],
                 'TR_Type' => 'Lost Towel(s) ',
                 'TR_Bill' => $penaltyPrice * $lostQty,
                 'TR_Status' => 'unpaid',
@@ -205,7 +238,7 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         }elseif($towels == $_POST['returnedTowel'] && $_POST['key'] == 'Unreturned'){
             $fee = $pdo->penaltyPrice('Lost Locker Key');
                 $userData5 = array(
-                    'CLIENT_ID' => $_POST['CLIENT_ID'],
+                    'CLIENT_ID' => $_POST['clientName'],
                     'TR_Type' => 'Lost Locker Key',
                     'TR_Bill' => $fee,
                     'TR_Status' => 'unpaid',

@@ -1714,8 +1714,35 @@ class dbConnect{
                     $smsGateway->sendMessageToNumber($number, $message, $deviceID);
     
             }
-    
 
+    public function getUserID($username,$password){
+        $sql = "SELECT userID FROM users WHERE username = '".$username."' AND password = '".$password."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['userID'];
+        return $result;
+    }
+
+    public function getClientFirst($clientID){
+        $sql = "SELECT CONCAT(CLIENT_FirstName, ' ', CLIENT_LastName) as client FROM client WHERE CLIENT_ID = '".$clientID."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['client'];
+        return $result;
+    }
+
+    public function getSC($scCode){
+        $sql = "SELECT SC_Name FROM studioclass WHERE SC_Code = '".$scCode."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['SC_Name'];
+        return $result;
+        
+    }
+    
 
 
 

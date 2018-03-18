@@ -9,6 +9,13 @@ $year = date("Y", strtotime("+8 HOURS"));
 $tblName = 'measurements';
 $weight = $_POST['weight'];
 $height = $_POST['height'];
+$user = $_SESSION['username'];
+$pass = $_SESSION['password'];
+$userid = $pdo->getUserID($user,$pass);
+date_default_timezone_set('Asia/Manila');
+$date = date("Y-m-d");
+$time=date("H:i:s");
+$first = $pdo->getClientFirst($_POST['CLIENT_ID']);
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
         $bmi = $weight/pow($height,2);
@@ -58,7 +65,15 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
         if($checkInitial <> $_POST['TL_Code'] || empty($checkInitial)){
             $insert = $pdo->insert($tblName,$userData);
 
-
+            $desc = ' '.$first.'\'s has been measured';
+                $log = array (
+                    'userID' => $userid,
+                    'log_activity' => 'Personal Training Measurement ',
+                    'log_description' => $desc,
+                    'log_date' => $date,
+                    'log_time' => $time
+                );  
+                $insert = $pdo->insert('log',$log);
 
             $id = $_POST['TL_Code'];
             $client = $_POST['CLIENT_ID'];
@@ -112,7 +127,16 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
          $condition1 = array('M_Code' => $_POST['M_Code']);
             $update = $pdo->update($tblName,$userData,$condition1);
-            $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
+
+            $desc = ' '.$first.'\'s measurements has been modified ';
+                $log = array (
+                    'userID' => $userid,
+                    'log_activity' => 'Personal Training Initial Measurement Modification ',
+                    'log_description' => $desc,
+                    'log_date' => $date,
+                    'log_time' => $time
+                );  
+                $insert = $pdo->insert('log',$log);
             $id = $_POST['TL_Code'];
             $client = $_POST['CLIENT_ID'];
                 echo "<script>alert('Client Initial Measurement Successfully Modified!');window.location.href='../PT-ContractsInfo.php?id=".$id."&amp;client=$client ';</script>";
@@ -161,6 +185,17 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
             $condition1 = array('M_Code' => $_POST['M_Code']);
             $update = $pdo->update($tblName,$userData,$condition1);
+            
+            $desc = ' '.$first.'\'s measurements has been modified ';
+                $log = array (
+                    'userID' => $userid,
+                    'log_activity' => 'Personal Training Final Measurement Modification ',
+                    'log_description' => $desc,
+                    'log_date' => $date,
+                    'log_time' => $time
+                );  
+                $insert = $pdo->insert('log',$log);
+            
             $id = $_POST['TL_Code'];
             $client = $_POST['CLIENT_ID'];
                 echo "<script>alert('Client Final Measurement Successfully Saved!');window.location.href='../PT-ContractsInfo.php?id=".$id."&amp;client=$client ';</script>";
