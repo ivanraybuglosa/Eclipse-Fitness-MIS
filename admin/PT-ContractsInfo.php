@@ -1,11 +1,6 @@
 <?php
-include "../dbConnect.php";
-session_start();
-if (!isset($_SESSION['loggedIn'])) {
-  $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
-  echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
-}
-
+include("../dbConnect.php");
+include("auth.php");
 include("includes/header.php"); ?>
 <section class="content">
   <div class="container-fluid">
@@ -185,6 +180,7 @@ include("includes/header.php"); ?>
 
               <div class="modal-footer">
                 <input type="hidden" name="TL_Code" value="<?php echo $pt['TL_Code']?>"/>
+                <input type="hidden" name="CLIENT_ID" value="<?php echo $pt['CLIENT_ID']?>"/>
                 <input type="hidden" name="action_type" value="healthcondition"/>
                 <button name ="submit"  value="submit" type="submit" class="btn  bg-green">SUBMIT</button>
               </form>

@@ -16,6 +16,13 @@ $packageType = $_POST['packageType'];
 $month = date("M", strtotime("+8 HOURS"));
 $year = date("Y", strtotime("+8 HOURS"));
 
+date_default_timezone_set('Asia/Manila');
+$date1 = date("Y-m-d");
+$time =date("H:i:s");
+$user = $_SESSION['username'];
+$pass = $_SESSION['password'];
+$userid = $pdo->getUserID($user,$pass);
+
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
 
@@ -73,6 +80,17 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
 
                                         $insert = $pdo->insert($table1,$userData);
                                         $insert2 = $pdo->insert($table3,$userData3);
+
+                                        $desc = 'A personal training session has been added ';
+                                        $log = array (
+                                            'userID' => $userid,
+                                            'log_activity' => 'Personal Training Session',
+                                            'log_description' => $desc,
+                                            'log_date' => $date1,
+                                            'log_time' => $time
+                                        );  
+                                        $insert = $pdo->insert('log',$log);
+
                                         $id = $_POST['TL_Code'];
                                         echo "<script>alert('Client Personal Training Session successfully saved');window.location.href='../PT-ContractsInfo.php?id=".$id." '</script>";
                                     

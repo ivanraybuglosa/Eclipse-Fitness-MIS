@@ -1,11 +1,6 @@
 <?php
-include "../dbConnect.php";
-session_start();
-if (!isset($_SESSION['loggedIn'])) {
-  $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
-  echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
-}
-
+include("../dbConnect.php");
+include("auth.php");
 include("includes/header.php"); ?>
 <?php
 $id = $_GET['id'];
@@ -249,7 +244,7 @@ if(!empty($scs)){
                                   <input type="hidden" name="SCS_Code" value="<?php echo $sc['SCS_Code']?>">
                                   <input type="hidden" name="CA_Code" value="<?php echo $ca['CA_Code']?>">
                                   <input type="hidden" name="action_type" value="delete"/>
-                                  <td><center><a href="actions/deletePartAction.php?caID=<?php echo $ca['CA_Code']?>&amp;SCS_Code=<?php echo $sc['SCS_Code'] ?>" class="btn bg-red" >Cancel</a></td>
+                                  <td><center><a href="actions/deletePartAction.php?caID=<?php echo $ca['CA_Code']?>&amp;SCS_Code=<?php echo $sc['SCS_Code'] ?>&amp;CLIENT_ID=<?php echo $ca['CLIENT_ID']?>" class="btn bg-red" >Cancel</a></td>
                 
 
                                 

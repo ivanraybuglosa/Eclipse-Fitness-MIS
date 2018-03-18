@@ -1,10 +1,6 @@
 <?php
-include "../dbConnect.php";
-session_start();
-if (!isset($_SESSION['loggedIn'])) {
-  $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
-  echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
-}
+include("../dbConnect.php");
+include("auth.php");
 include("includes/header.php"); ?>
 
 <section class="content">
@@ -138,7 +134,7 @@ include("includes/header.php"); ?>
                 </div>
               </div>
               <div class="col-md-4">
-                <label for="lastname">Last Name</label>
+                <label for="lastname">Middle Name</label>
                 <div class="form-group">
                   <div class="form-line">
                     <input type="text" name="midName" class="form-control" value="<?php echo $client['CLIENT_MiddleName']; ?>">

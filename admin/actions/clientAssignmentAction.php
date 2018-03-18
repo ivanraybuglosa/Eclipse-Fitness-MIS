@@ -17,6 +17,13 @@ $id = 'CLIENT_ID';
 $id2 = 'SCS_Code';
 
 
+date_default_timezone_set('Asia/Manila');
+$date = date("Y-m-d");
+$time=date("H:i:s");
+$user = $_SESSION['username'];
+$pass = $_SESSION['password'];
+$userid = $pdo->getUserID($user,$pass);
+
 $date = date('Y-m-d');
 $year = date('Y');
 $month = date('M');
@@ -70,6 +77,17 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
                             );  
                     
                             $insert1 = $pdo->insert($tblName4,$userData2);
+
+                            $first = $pdo->getClientFirst($_POST['clientname']);
+                                $desc = ' '.$first. ' has been registered for a studio class session';
+                                $log = array (
+                                    'userID' => $userid,
+                                    'log_activity' => 'Studio Class Participant',
+                                    'log_description' => $desc,
+                                    'log_date' => $date,
+                                    'log_time' => $time
+                                );
+                                $insert = $pdo->insert('log',$log);   
                         }else{
                             $id = $_POST['SCS_Code'];
                             echo "<script>alert('Client has already been registered for this session! ');window.location.href='../StudioClass-Schedule.php?id=".$id."';</script>";

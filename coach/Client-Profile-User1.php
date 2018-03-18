@@ -154,14 +154,6 @@
                                <label for="female" class="m-l-20">Female</label>
                             </div>
                         </div>
-                        <!-- <div class="col-md-4">
-                            <label for="email">User Account</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" name="userAccount" class="form-control" value="<?php echo $client['CLIENT_userAccount']; ?>">
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-md-4">
                             <label for="email">Email Address</label>
                             <div class="form-group">

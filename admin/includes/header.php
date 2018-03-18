@@ -294,6 +294,9 @@
                                         <a href="Maintenance-Users.php">Users</a>
                                     </li>
                                     <li>
+                                        <a href="Maintenance-ActivityLog.php">Activity Log</a>
+                                    </li>
+                                    <li>
                                         <a href="Maintenance-BackupAndRestore.php">Backup and Restore</a>
                                     </li>
                         </ul>

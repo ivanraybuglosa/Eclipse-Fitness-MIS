@@ -1714,8 +1714,60 @@ class dbConnect{
                     $smsGateway->sendMessageToNumber($number, $message, $deviceID);
     
             }
-    
 
+    public function getUserID($username,$password){
+        $sql = "SELECT userID FROM users WHERE username = '".$username."' AND password = '".$password."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['userID'];
+        return $result;
+    }
+
+    public function getClientFirst($clientID){
+        $sql = "SELECT CONCAT(CLIENT_FirstName, ' ', CLIENT_LastName) as client FROM client WHERE CLIENT_ID = '".$clientID."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['client'];
+        return $result;
+    }
+
+    public function getSC($scCode){
+        $sql = "SELECT SC_Name FROM studioclass WHERE SC_Code = '".$scCode."' ";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $var = $query->fetch();
+        $result = $var['SC_Name'];
+        return $result;
+        
+    }
+
+    public function userActs($conditions = array()){
+        $sql = "SELECT * FROM log INNER JOIN users ON log.userID = users.userID";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+
+    }
+    
 
 
 

@@ -1,10 +1,6 @@
 <?php
 include("../dbConnect.php");
-session_start();
-if (!isset($_SESSION['loggedIn'])) {
-  $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
-  echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
-}
+include("auth.php");
 include("includes/header.php");
 
 ?>
@@ -121,7 +117,7 @@ include("includes/header.php");
           </div>
 
           <input type="hidden" name="action_type" value="add"/>
-          <button name ="submit"  type="submit" class="btn bg-green pull-right">SAVE</button>
+          <button name ="submit"  type="submit" class="btn bg-green pull-right">SUBMIT</button>
 
         </div>
       </form>

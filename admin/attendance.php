@@ -1,12 +1,7 @@
 
 <?php
-include "../dbConnect.php";
-session_start();
-if (!isset($_SESSION['loggedIn'])) {
-  $_SESSION['redirectURL'] = $_SERVER['REQUEST_URI'];
-  echo "<script>alert('Unauthorized access!Please login! ');window.location.href='../login.php';</script>";
-}
-
+include("../dbConnect.php");
+include("auth.php");
 include("includes/header.php"); ?>
 
 
@@ -228,7 +223,7 @@ include("includes/header.php"); ?>
 
                           </center>
                           <div class="modal-footer">
-                            <input type="hidden" name="CLIENT_ID" value="<?php echo $attend['CLIENT_ID'];?>"/>
+                            <input type="hidden" name="clientName" value="<?php echo $attend['CLIENT_ID'];?>"/>
                             <input type="hidden" name="A_Code" value="<?php echo $attend['A_Code'];?>"/>
                             <input type="hidden" name="action_type" value="out"/>
                             <button type="submit" name="submit" class="btn  bg-green">TIME-OUT</button>
@@ -270,7 +265,7 @@ include("includes/header.php"); ?>
                           <div class="modal-footer">
                             <form method="post" action="actions/attendanceAction.php">
                               <input type="hidden" name="A_Code" value="<?php echo $attend['A_Code'] ?>"/>
-
+                              <input type="hidden" name="clientName" value="<?php echo $attend['CLIENT_ID'] ?>"/>
                               <input type="hidden" name="action_type" value="edit"/>
                               <button name="submit" type="submit" class="btn bg-green">SAVE CHANGES</button>
                               <button type="button" class="btn  bg-red" data-dismiss="modal">CLOSE</button>

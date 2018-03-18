@@ -4,6 +4,14 @@ include '../../dbConnect.php';
 $pdo = new dbConnect();
 $tblName = 'trainingpackage';
 
+
+$user = $_SESSION['username'];
+$pass = $_SESSION['password'];
+date_default_timezone_set('Asia/Manila');
+$date = date("Y-m-d");
+$time=date("H:i:s");
+$userid = $pdo->getUserID($user,$pass);
+
 if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
     if($_REQUEST['action_type'] == 'add'){
         $userData = array(
@@ -14,9 +22,19 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             'TP_Validity' => $_POST['validity']
         );
         $insert = $pdo->insert($tblName,$userData);
+
+        $desc = 'A new training package has been added';
+            $log = array (
+                'userID' => $userid,
+                'log_activity' => 'Training Package Registration',
+                'log_description' => $desc,
+                'log_date' => $date,
+                'log_time' => $time
+            );  
+            $insert = $pdo->insert('log',$log);
+
         echo "<script>alert('Training Package Information Successfully Saved!');window.location.href='../Maintenance-TrainingPackage.php';</script>";
-         $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;   
+        
         
     }elseif($_REQUEST['action_type'] == 'edit'){
             $userData = array(
@@ -28,17 +46,18 @@ if(isset($_REQUEST['action_type']) && !empty($_REQUEST['action_type'])){
             );
             $condition = array('TP_Code' => $_POST['tpCode']);
             $update = $pdo->update($tblName,$userData,$condition);
+            $desc = 'A training package has been modified';
+            $log = array (
+                'userID' => $userid,
+                'log_activity' => 'Training Package Modification',
+                'log_description' => $desc,
+                'log_date' => $date,
+                'log_time' => $time
+            );  
+            $insert = $pdo->insert('log',$log);
+
             echo "<script>alert('Training Package Information Successfully Modified!');window.location.href='../Maintenance-TrainingPackage.php';</script>";
-         $statusMsg = $update?'User data has been updated successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;   
+         
         
-    }elseif($_REQUEST['action_type'] == 'delete'){
-        if(!empty($_GET['TP_Code'])){
-            $condition = array('TP_Code' => $_GET['TP_Code']);
-            $delete = $db->delete($tblName,$condition);
-            $statusMsg = $delete?'Training Package data has been deleted successfully.':'Some problem occurred, please try again.';
-            $_SESSION['statusMsg'] = $statusMsg;
-            header("Location:../Maintenance-TrainingPackage.php");
-        }
     }
 }
