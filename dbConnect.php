@@ -1742,6 +1742,31 @@ class dbConnect{
         return $result;
         
     }
+
+    public function userActs($conditions = array()){
+        $sql = "SELECT * FROM log INNER JOIN users ON log.userID = users.userID";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
+            switch($conditions['return_type']){
+                case 'count':
+                    $data = $query->rowCount();
+                    break;
+                case 'single':
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    break;
+                default:
+                    $data = '';
+            }
+        }else{
+            if($query->rowCount() > 0){
+                $data = $query->fetchAll();
+            }
+        }
+        return !empty($data)?$data:false;
+
+    }
     
 
 
