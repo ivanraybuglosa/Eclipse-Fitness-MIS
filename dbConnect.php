@@ -1744,8 +1744,8 @@ class dbConnect{
     }
 
     public function userActs($conditions = array()){
-        $sql = "SELECT * FROM log INNER JOIN users ON log.userID = users.userID";
-        $query = $this->db->prepare($sql);
+        $sql = "SELECT * FROM log INNER JOIN users ON log.userID = users.userID ORDER BY log_id DESC";
+        $query = $this->db->prepare($sql); 
         $query->execute();
 
         if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
